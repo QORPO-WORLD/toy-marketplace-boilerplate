@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    background-color: hsl(var(--background));
+  }
   body {
     font-family: var(--font-main);
   }
