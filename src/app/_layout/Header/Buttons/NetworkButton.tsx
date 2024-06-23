@@ -3,7 +3,7 @@
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { SUPPORTED_NETWORKS } from '~/config/networks/config';
 import { useIsClient } from '~/hooks/ui/useIsClient';
-import { NetworkSelectorModalContent } from '~/modals/NetworkSelectorModal';
+import { NetworkSelectModalContent } from '~/modals/NetworkSelectModal';
 import { getThemeManagerElement } from '~/utils/theme';
 
 import { Button, Dialog } from 'system';
@@ -44,7 +44,7 @@ export const NetworkButton = () => {
           container={getThemeManagerElement()}
           title="Switch Network"
         >
-          <NetworkSelectorModalContent />
+          <NetworkSelectModalContent />
         </Dialog.BaseContent>
       </Dialog.Root>
     );

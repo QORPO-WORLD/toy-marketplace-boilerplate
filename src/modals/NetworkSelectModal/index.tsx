@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { NetworkIcon } from "~/components/NetworkLabel";
+import { NetworkIcon } from '~/components/NetworkLabel';
 
-import { Box, Button, Flex, Text } from "system";
-import { useAccount, useSwitchChain } from "wagmi";
+import { Box, Button, Flex, Text } from 'system';
+import { useAccount, useSwitchChain } from 'wagmi';
 
 export const NetworkSelectModalContent = () => {
   const { chains, switchChainAsync } = useSwitchChain();
@@ -13,7 +13,7 @@ export const NetworkSelectModalContent = () => {
     try {
       await switchChainAsync({ chainId });
     } catch (err) {
-      console.error("failed to switch network", err);
+      console.error('failed to switch network', err);
     }
   };
 
