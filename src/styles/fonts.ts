@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 
 // TODO: after this https://github.com/vercel/next.js/pull/53608 we can use this and set a css variable,
 // Currently it fails hydration, since the name is hashed
@@ -44,5 +44,5 @@ import { Inter } from 'next/font/google'
 export const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
-})
+  variable: '--font-inter',
+});
