@@ -11,7 +11,7 @@
   }
 
   .privacy-policy-page-container {
-    @apply text-foreground/60 mx-auto my-12 flex flex-col items-start gap-6 px-6;
+    @apply mx-auto my-12 flex flex-col items-start gap-6 px-6 text-foreground/60;
     max-width: 1200px;
 
     a {
@@ -21,13 +21,13 @@
     & > p {
       @apply text-foreground/60;
       strong {
-        @apply text-foreground/80 font-semibold;
+        @apply font-semibold text-foreground/80;
       }
     }
   }
 
   .terms-of-use-page-container {
-    @apply text-foreground/60 mx-auto my-12 flex flex-col items-start gap-6 px-6;
+    @apply mx-auto my-12 flex flex-col items-start gap-6 px-6 text-foreground/60;
     max-width: 1200px;
 
     a {
@@ -41,7 +41,7 @@
     & > p {
       @apply text-foreground/50;
       strong {
-        @apply text-foreground/80 font-semibold;
+        @apply font-semibold text-foreground/80;
       }
     }
   }
@@ -103,7 +103,7 @@
 
   // google 3d model viewer
   model-viewer {
-    --poster-color: "transparent" --progress-mask: "transparent";
+    --poster-color: 'transparent' --progress-mask: 'transparent';
   }
 }
 
@@ -120,7 +120,7 @@
   position: relative;
 
   &:after {
-    content: "";
+    content: '';
     background: hsl(var(--foreground) / 0.1);
 
     width: 100%;
@@ -188,7 +188,7 @@
 /* UTILITIES */
 @layer utilities {
   .loading {
-    @apply bg-foreground/10 animate-pulse select-none rounded-sm text-transparent;
+    @apply animate-pulse select-none rounded-sm bg-foreground/10 text-transparent;
     content-visibility: auto;
     & * {
       @apply invisible text-transparent;
@@ -196,7 +196,7 @@
   }
 
   .loading-box {
-    @apply shadow-foreground/60 animate-pulse select-none rounded-sm text-transparent shadow-sm;
+    @apply animate-pulse select-none rounded-sm text-transparent shadow-sm shadow-foreground/60;
     content-visibility: auto;
     & * {
       @apply invisible text-transparent;
@@ -222,7 +222,7 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  .main-layout:has(.publisher-landing-floating-header) {
+  .main-layout:has(.landing-floating-header) {
     --orderCartRightOffset: 0px;
   }
 }

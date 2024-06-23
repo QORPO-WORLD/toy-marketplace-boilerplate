@@ -1,4 +1,4 @@
-import { Flex, Text } from "system";
+import { Flex, Text } from 'system';
 
 export default function NotFound() {
   return (
@@ -13,4 +13,4 @@ export default function NotFound() {
   );
 }
 
-export const runtime = "edge";
+export const runtime = 'edge';
