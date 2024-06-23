@@ -1,5 +1,6 @@
 import { classNames } from '~/config/classNames';
 
+import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { HeaderLogo } from './HeaderLogo';
 import { Grid, cn } from 'system';
@@ -22,10 +23,11 @@ export const Header = () => {
 
       <Grid.Child name="." />
 
-      {/* <Grid.Child name="inventory-button" className="bg-background/30">
+      <Grid.Child name="inventory-button" className="bg-background/30">
         <InventoryButton />
       </Grid.Child>
 
+      {/* 
       <Grid.Child name="wallet-button" className="bg-background/30">
         <WalletButton />
       </Grid.Child>

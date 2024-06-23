@@ -98,10 +98,8 @@ export const CollectionCard = ({
             >
               {contractType && <Badge variant="muted">{contractType}</Badge>}
 
-              {/* <BadgesOrderbook
-                collectionAddress={collectionAddress}
-                chainId={chainId}
-              /> */}
+              {/* TODO: Add after currency endpoint is ready 
+              <Badges collectionAddress={collectionAddress} chainId={chainId} /> */}
             </Flex>
           </ScrollArea.Base>
         </Flex>
