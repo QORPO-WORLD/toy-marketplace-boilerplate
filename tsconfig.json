@@ -26,7 +26,13 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "$collectable/*": [
+        "./src/app/collectible/[chainParam]/[collectionId]/[tokenId]/[tab]/*"
+      ],
+      "$collection/*": [
+        "./src/app/collection/[chainParam]/[collectionId]/[mode]/*"
+      ]
     }
   },
   "include": [
