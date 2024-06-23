@@ -1,50 +1,50 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { cn } from "../css/utils";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from '../css/utils';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 const buttonVariants = cva(
   [
-    "btn",
-    "flex w-fit items-center justify-center gap-2 rounded-md transition-all",
-    "pre-wrap whitespace-nowrap text-sm",
-    "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-    "disabled:pointer-events-none disabled:opacity-50",
+    'btn',
+    'flex w-fit items-center justify-center gap-2 rounded-md transition-all',
+    'pre-wrap whitespace-nowrap text-sm',
+    'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    'disabled:pointer-events-none disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
         default:
-          "btn-primary bg-primary text-primary-foreground hover:bg-primary/90",
+          'btn-primary bg-primary text-primary-foreground hover:bg-primary/90',
         secondary:
-          "btn-secondary bg-secondary/20 text-secondary-foreground hover:bg-secondary/30",
-        muted: "bg-foreground/10 text-foreground/90 hover:bg-foreground/20",
+          'btn-secondary bg-secondary/20 text-secondary-foreground hover:bg-secondary/30',
+        muted: 'bg-foreground/10 text-foreground/90 hover:bg-foreground/20',
         destructive:
-          "bg-destructive/70 text-destructive-foreground hover:bg-destructive/60",
-        warning: "bg-warning/70 text-warning-foreground hover:bg-warning/60",
-        success: "bg-success/70 text-success-foreground hover:bg-success/60",
-        pink: "bg-pink text-pink-foreground hover:bg-pink/90",
+          'bg-destructive/70 text-destructive-foreground hover:bg-destructive/60',
+        warning: 'bg-warning/70 text-warning-foreground hover:bg-warning/60',
+        success: 'bg-success/70 text-success-foreground hover:bg-success/60',
+        pink: 'bg-pink text-pink-foreground hover:bg-pink/90',
         outline:
-          "border border-border text-foreground/70 hover:border-foreground/30 hover:text-foreground",
+          'border border-border text-foreground/70 hover:border-foreground/30 hover:text-foreground',
 
         ghost:
-          "text-foreground/70 hover:bg-foreground/10 hover:text-foreground",
-        link: "text-foreground underline-offset-4 hover:underline",
+          'text-foreground/70 hover:bg-foreground/10 hover:text-foreground',
+        link: 'text-foreground underline-offset-4 hover:underline',
         primaryLink:
-          "text-secondary-foreground underline-offset-4 hover:underline",
-        none: "",
+          'text-secondary-foreground underline-offset-4 hover:underline',
+        none: '',
       },
       size: {
-        xs: "h-7 px-2 text-xs font-medium",
-        sm: "h-9 px-3 text-sm font-bold",
-        default: "h-10 px-3.5 text-sm font-bold",
-        lg: "text-md h-14 px-5 font-bold",
+        xs: 'h-7 px-2 text-xs font-medium',
+        sm: 'h-9 px-3 text-sm font-bold',
+        default: 'h-10 px-3.5 text-sm font-bold',
+        lg: 'text-md h-14 px-5 font-bold',
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
     },
   },
 );
@@ -72,7 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild ? Slot : 'button';
 
     return (
       <Comp
@@ -93,7 +93,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 export { Button, buttonVariants };
 

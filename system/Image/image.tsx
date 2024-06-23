@@ -1,9 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
-"use client";
+'use client';
 
-import { forwardRef, memo } from "react";
+import { forwardRef, memo } from 'react';
 
-import { cn } from "../css/utils";
+import { cn } from '../css/utils';
+
+/* eslint-disable jsx-a11y/alt-text */
+
+/* eslint-disable jsx-a11y/alt-text */
 
 export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   src?: string;
@@ -19,7 +23,7 @@ export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   loading?: boolean;
 }
 
-export const placeholderImgUrl = "/images/placeholder.png";
+export const placeholderImgUrl = '/images/placeholder.png';
 
 export const BaseImage = memo(
   forwardRef<HTMLImageElement, ImageProps>(
@@ -40,11 +44,11 @@ export const BaseImage = memo(
       // const [loaded, setLoaded] = useState(disableFadeIn ? true : false)
 
       return (
-        <div className={cn("rounded-md", containerClassName)}>
+        <div className={cn('rounded-md', containerClassName)}>
           <img
             ref={ref}
             className={cn(
-              "h-full w-full rounded-[inherit] object-contain",
+              'h-full w-full rounded-[inherit] object-contain',
               // 'opacity-0 transition-opacity duration-300',
               className,
             )}

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Image, cn } from "system";
+import { Image, cn } from 'system';
 
 type BannerImageProps = {
   src?: string;
@@ -10,7 +10,7 @@ type BannerImageProps = {
 export const BannerImage = ({ src, className }: BannerImageProps) => (
   <Image.Base
     src={src}
-    containerClassName={cn("h-full rounded-none", className)}
+    containerClassName={cn('h-full rounded-none', className)}
     className="object-cover"
     fallbackSrc=""
   />

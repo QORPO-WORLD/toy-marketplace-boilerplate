@@ -1,17 +1,17 @@
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
 const config = {
   plugins: [
-    "prettier-plugin-tailwindcss",
-    "@trivago/prettier-plugin-sort-imports",
+    'prettier-plugin-tailwindcss',
+    '@trivago/prettier-plugin-sort-imports',
   ],
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'all',
   importOrder: [
-    "^react(.*)",
-    "<THIRD_PARTY_MODULES>",
-    "~/(.*)",
-    "$.*",
-    "^[./]",
+    '^react(.*)',
+    '<THIRD_PARTY_MODULES>',
+    '~/(.*)',
+    '$.*',
+    '^[./]',
   ],
   importOrderSeparation: true,
 };

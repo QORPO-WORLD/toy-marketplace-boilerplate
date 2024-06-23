@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { cn } from "../css/utils";
-import { Slot } from "@radix-ui/react-slot";
+import { cn } from '../css/utils';
+import { Slot } from '@radix-ui/react-slot';
 
 type GridStyleProps = {
   templateRows?: string;
@@ -39,7 +39,7 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
         as,
         {
           ref,
-          className: cn("grid", className),
+          className: cn('grid', className),
           style: {
             ...(template ? { gridTemplate: template } : {}),
             ...(templateAreas ? { gridTemplateAreas: templateAreas } : {}),
@@ -55,12 +55,12 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       );
     }
 
-    const Comp = asChild ? Slot : "div";
+    const Comp = asChild ? Slot : 'div';
 
     return (
       <Comp
         ref={ref}
-        className={cn("grid", className)}
+        className={cn('grid', className)}
         style={{
           ...(template ? { gridTemplate: template } : {}),
           ...(templateAreas ? { gridTemplateAreas: templateAreas } : {}),
@@ -76,7 +76,7 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
   },
 );
 
-Grid.displayName = "Grid";
+Grid.displayName = 'Grid';
 interface GridChildProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string;
   children?: React.ReactNode;
@@ -100,4 +100,4 @@ export const GridChild = React.forwardRef<HTMLDivElement, GridChildProps>(
   },
 );
 
-GridChild.displayName = "GridChild";
+GridChild.displayName = 'GridChild';

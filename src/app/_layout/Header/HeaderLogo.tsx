@@ -1,8 +1,8 @@
-import { Logo } from "~/components/Logo";
-import { getMarketConfig } from "~/config/marketplace";
-import { truncateAtMiddle } from "~/utils/helpers";
+import { Logo } from '~/components/Logo';
+import { getMarketConfig } from '~/config/marketplace';
+import { truncateAtMiddle } from '~/utils/helpers';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 export async function HeaderLogo() {
   const marketConfig = await getMarketConfig();
