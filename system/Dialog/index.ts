@@ -6,8 +6,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogClose
-} from './dialog'
+  DialogClose,
+} from './dialog';
 
 export const Dialog = {
   Root: DialogRoot,
@@ -17,5 +17,5 @@ export const Dialog = {
   Description: DialogDescription,
   Header: DialogHeader,
   Footer: DialogFooter,
-  Close: DialogClose
-}
+  Close: DialogClose,
+};

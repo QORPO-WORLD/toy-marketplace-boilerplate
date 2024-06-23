@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import * as React from 'react'
+import * as React from 'react';
 
-import { cn } from '../css/utils'
+import { cn } from '../css/utils';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 
-const Tabs = TabsPrimitive.Root
+const Tabs = TabsPrimitive.Root;
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
@@ -16,12 +16,12 @@ const TabsList = React.forwardRef<
     className={cn(
       'inline-flex h-fit w-full items-center gap-4 text-muted-foreground',
       'border-b border-b-border',
-      className
+      className,
     )}
     {...props}
   />
-))
-TabsList.displayName = TabsPrimitive.List.displayName
+));
+TabsList.displayName = TabsPrimitive.List.displayName;
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
@@ -37,12 +37,12 @@ const TabsTrigger = React.forwardRef<
       'disabled:pointer-events-none disabled:opacity-50',
       'border-b border-b-transparent data-[state=active]:border-b-foreground data-[state=active]:text-foreground',
       'sm:py-2',
-      className
+      className,
     )}
     {...props}
   />
-))
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
+));
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
@@ -52,11 +52,11 @@ const TabsContent = React.forwardRef<
     ref={ref}
     className={cn(
       'mt-2 ring-offset-background focus-visible:outline-none',
-      className
+      className,
     )}
     {...props}
   />
-))
-TabsContent.displayName = TabsPrimitive.Content.displayName
+));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export { Tabs, TabsList, TabsTrigger, TabsContent };

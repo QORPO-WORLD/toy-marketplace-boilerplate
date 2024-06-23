@@ -1,5 +1,5 @@
-import { BaseSwitch } from './switch'
+import { BaseSwitch } from './switch';
 
 export const Switch = {
-  Base: BaseSwitch
-}
+  Base: BaseSwitch,
+};

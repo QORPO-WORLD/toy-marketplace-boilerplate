@@ -1,11 +1,4 @@
-'use client'
-import {
-  Trigger,
-  Item,
-  Sub,
-  SubTrigger,
-  DropdownMenuItemIndicator
-} from '@radix-ui/react-dropdown-menu'
+'use client';
 
 import {
   DropdownMenu as DropdownMenuRoot,
@@ -19,8 +12,15 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuSubContent,
-  DropdownMenuRadioItem
-} from './dropdownMenu'
+  DropdownMenuRadioItem,
+} from './dropdownMenu';
+import {
+  Trigger,
+  Item,
+  Sub,
+  SubTrigger,
+  DropdownMenuItemIndicator,
+} from '@radix-ui/react-dropdown-menu';
 
 export const DropdownMenu = {
   BaseContent: DropdownMenuContent,
@@ -44,5 +44,5 @@ export const DropdownMenu = {
 
   TriggerUnStyled: Trigger,
   SubTriggerUnStyled: SubTrigger,
-  ItemUnStyled: Item
-}
+  ItemUnStyled: Item,
+};

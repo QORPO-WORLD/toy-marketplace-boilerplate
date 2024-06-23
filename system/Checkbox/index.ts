@@ -1,5 +1,5 @@
-import { Checkbox as BaseCheckbox } from './checkbox'
+import { Checkbox as BaseCheckbox } from './checkbox';
 
 export const Checkbox = {
-  Base: BaseCheckbox
-}
+  Base: BaseCheckbox,
+};

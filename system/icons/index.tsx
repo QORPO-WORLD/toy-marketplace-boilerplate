@@ -1,4 +1,4 @@
-type IconProps = React.ButtonHTMLAttributes<HTMLOrSVGElement>
+type IconProps = React.ButtonHTMLAttributes<HTMLOrSVGElement>;
 
 export const WalletIcon = (props: IconProps) => (
   <svg
@@ -16,7 +16,7 @@ export const WalletIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const SunIcon = (props: IconProps) => (
   <svg
@@ -66,7 +66,7 @@ export const SunIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const GlobeIcon = (props: IconProps) => (
   <svg
@@ -84,7 +84,7 @@ export const GlobeIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ProfileIcon = (props: IconProps) => (
   <svg
@@ -102,7 +102,7 @@ export const ProfileIcon = (props: IconProps) => (
       strokeWidth="0.857143"
     />
   </svg>
-)
+);
 
 export const CartIcon = (props: IconProps) => (
   <svg
@@ -118,7 +118,7 @@ export const CartIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const SearchIcon = (props: IconProps) => (
   <svg
@@ -136,7 +136,7 @@ export const SearchIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ChevronDownIcon = (props: IconProps) => (
   <svg
@@ -154,7 +154,7 @@ export const ChevronDownIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const CubeIcon = (props: IconProps) => (
   <svg
@@ -171,7 +171,7 @@ export const CubeIcon = (props: IconProps) => (
       strokeWidth="1.5"
     />
   </svg>
-)
+);
 
 export const CloseIcon = (props: IconProps) => (
   <svg
@@ -189,7 +189,7 @@ export const CloseIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const LoadingIcon = ({ className, ...otherProps }: IconProps) => (
   <svg
@@ -210,7 +210,7 @@ export const LoadingIcon = ({ className, ...otherProps }: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ChevronRightIcon = (props: IconProps) => (
   <svg
@@ -228,7 +228,7 @@ export const ChevronRightIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const AddIcon = (props: IconProps) => (
   <svg
@@ -246,7 +246,7 @@ export const AddIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ChevronUpIcon = (props: IconProps) => (
   <svg
@@ -264,7 +264,7 @@ export const ChevronUpIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ShareIcon = (props: IconProps) => (
   <svg
@@ -290,7 +290,7 @@ export const ShareIcon = (props: IconProps) => (
       strokeWidth="1.28571"
     />
   </svg>
-)
+);
 
 export const CopyIcon = (props: IconProps) => (
   <svg
@@ -308,7 +308,7 @@ export const CopyIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const LinkIcon = (props: IconProps) => (
   <svg
@@ -332,7 +332,7 @@ export const LinkIcon = (props: IconProps) => (
       strokeLinecap="round"
     />
   </svg>
-)
+);
 
 export const ArrowUpIcon = (props: IconProps) => (
   <svg
@@ -348,7 +348,7 @@ export const ArrowUpIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ArrowDownIcon = (props: IconProps) => (
   <svg
@@ -364,7 +364,7 @@ export const ArrowDownIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const EyeIcon = (props: IconProps) => (
   <svg
@@ -386,7 +386,7 @@ export const EyeIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const TransferIcon = (props: IconProps) => (
   <svg
@@ -406,7 +406,7 @@ export const TransferIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const MenuIcon = (props: IconProps) => (
   <svg
@@ -421,7 +421,7 @@ export const MenuIcon = (props: IconProps) => (
     <path d="M4 10.5L16 10.5V9.5H4V10.5Z" fill="currentColor" />
     <path d="M4 6.5L16 6.5V5.5H4V6.5Z" fill="currentColor" />
   </svg>
-)
+);
 
 export const RefreshIcon = (props: IconProps) => (
   <svg
@@ -439,7 +439,7 @@ export const RefreshIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const DiscordIcon = (props: IconProps) => (
   <svg
@@ -455,7 +455,7 @@ export const DiscordIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const TwitterIcon = (props: IconProps) => (
   <svg
@@ -471,7 +471,7 @@ export const TwitterIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const ChevronLeftIcon = (props: IconProps) => (
   <svg
@@ -489,7 +489,7 @@ export const ChevronLeftIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const CollapseIcon = (props: IconProps) => (
   <svg
@@ -511,7 +511,7 @@ export const CollapseIcon = (props: IconProps) => (
       fill="currentColor"
     />
   </svg>
-)
+);
 
 export const CaretIcon = (props: IconProps) => {
   return (
@@ -528,8 +528,8 @@ export const CaretIcon = (props: IconProps) => {
         fill="currentcolor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const VerifiedIcon = (props: IconProps) => {
   return (
@@ -546,8 +546,8 @@ export const VerifiedIcon = (props: IconProps) => {
         fill="#0080F1"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const CheckmarkIcon = (props: IconProps) => {
   return (
@@ -564,8 +564,8 @@ export const CheckmarkIcon = (props: IconProps) => {
         fill="currentcolor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const ListIcon = (props: IconProps) => {
   return (
@@ -620,8 +620,8 @@ export const ListIcon = (props: IconProps) => {
         strokeLinecap="square"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const GridIcon = (props: IconProps) => {
   return (
@@ -658,8 +658,8 @@ export const GridIcon = (props: IconProps) => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const SubtractIcon = (props: IconProps) => {
   return (
@@ -681,8 +681,8 @@ export const SubtractIcon = (props: IconProps) => {
         fill="currentcolor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const DisconnectIcon = (props: IconProps) => {
   return (
@@ -713,8 +713,8 @@ export const DisconnectIcon = (props: IconProps) => {
         fill="currentColor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const SettingsIcon = (props: IconProps) => {
   return (
@@ -731,8 +731,8 @@ export const SettingsIcon = (props: IconProps) => {
         fill="currentcolor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const BugIcon = (props: IconProps) => {
   return (
@@ -748,8 +748,8 @@ export const BugIcon = (props: IconProps) => {
         d="M10.5621 4.14773C11.0262 4.05083 11.5071 3.99989 12 3.99989C12.4929 3.99989 12.9738 4.05083 13.4379 4.14773L15.1213 2.46436L16.5355 3.87857L15.4859 4.92822C16.7177 5.63698 17.7135 6.70984 18.3264 7.99989H21V9.99989H18.9291C18.9758 10.3265 19 10.6604 19 10.9999V11.9999H21V13.9999H19V14.9999C19 15.3394 18.9758 15.6733 18.9291 15.9999H21V17.9999H18.3264C17.2029 20.3648 14.7924 21.9999 12 21.9999C9.2076 21.9999 6.7971 20.3648 5.67363 17.9999H3V15.9999H5.07089C5.02417 15.6733 5 15.3394 5 14.9999V13.9999H3V11.9999H5V10.9999C5 10.6604 5.02417 10.3265 5.07089 9.99989H3V7.99989H5.67363C6.28647 6.70984 7.28227 5.63698 8.51412 4.92822L7.46447 3.87857L8.87868 2.46436L10.5621 4.14773ZM12 5.99989C9.23858 5.99989 7 8.23847 7 10.9999V14.9999C7 17.7613 9.23858 19.9999 12 19.9999C14.7614 19.9999 17 17.7613 17 14.9999V10.9999C17 8.23847 14.7614 5.99989 12 5.99989ZM9 13.9999H15V15.9999H9V13.9999ZM9 9.99989H15V11.9999H9V9.99989Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const InformationIcon = (props: IconProps) => {
   return (
@@ -765,8 +765,8 @@ export const InformationIcon = (props: IconProps) => {
         d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const PencilIcon = (props: IconProps) => {
   return (
@@ -782,8 +782,8 @@ export const PencilIcon = (props: IconProps) => {
         d="M15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89H6.41421L15.7279 9.57629ZM17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786L17.1421 8.16207ZM7.24264 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L7.24264 20.89Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const SendPlaneIcon = (props: IconProps) => {
   return (
@@ -799,8 +799,8 @@ export const SendPlaneIcon = (props: IconProps) => {
         d="M21.7264 2.95706L16.2732 22.0433C16.1222 22.5718 15.7976 22.5958 15.5561 22.1127L10.9998 13.0002L1.92266 9.36931C1.41298 9.16544 1.41929 8.86034 1.9567 8.6812L21.0429 2.31913C21.5714 2.14297 21.8745 2.43878 21.7264 2.95706ZM19.0351 5.0966L6.81197 9.17097L12.4486 11.4256L15.4893 17.507L19.0351 5.0966Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const GasIcon = (props: IconProps) => {
   return (
@@ -816,8 +816,8 @@ export const GasIcon = (props: IconProps) => {
         d="M14 19H15V21H2V19H3V4C3 3.44772 3.44772 3 4 3H13C13.5523 3 14 3.44772 14 4V12H16C17.1046 12 18 12.8954 18 14V18C18 18.5523 18.4477 19 19 19C19.5523 19 20 18.5523 20 18V11H18C17.4477 11 17 10.5523 17 10V6.41421L15.3431 4.75736L16.7574 3.34315L21.7071 8.29289C21.9024 8.48816 22 8.74408 22 9V18C22 19.6569 20.6569 21 19 21C17.3431 21 16 19.6569 16 18V14H14V19ZM5 19H12V13H5V19ZM5 5V11H12V5H5Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const GearIcon = (props: IconProps) => {
   return (
@@ -833,8 +833,8 @@ export const GearIcon = (props: IconProps) => {
         d="M8.68735 4.00008L11.294 1.39348C11.6845 1.00295 12.3176 1.00295 12.7082 1.39348L15.3148 4.00008H19.0011C19.5533 4.00008 20.0011 4.4478 20.0011 5.00008V8.68637L22.6077 11.293C22.9982 11.6835 22.9982 12.3167 22.6077 12.7072L20.0011 15.3138V19.0001C20.0011 19.5524 19.5533 20.0001 19.0011 20.0001H15.3148L12.7082 22.6067C12.3176 22.9972 11.6845 22.9972 11.294 22.6067L8.68735 20.0001H5.00106C4.44877 20.0001 4.00106 19.5524 4.00106 19.0001V15.3138L1.39446 12.7072C1.00393 12.3167 1.00393 11.6835 1.39446 11.293L4.00106 8.68637V5.00008C4.00106 4.4478 4.44877 4.00008 5.00106 4.00008H8.68735ZM6.00106 6.00008V9.5148L3.51578 12.0001L6.00106 14.4854V18.0001H9.51578L12.0011 20.4854L14.4863 18.0001H18.0011V14.4854L20.4863 12.0001L18.0011 9.5148V6.00008H14.4863L12.0011 3.5148L9.51578 6.00008H6.00106ZM12.0011 16.0001C9.79192 16.0001 8.00106 14.2092 8.00106 12.0001C8.00106 9.79094 9.79192 8.00008 12.0011 8.00008C14.2102 8.00008 16.0011 9.79094 16.0011 12.0001C16.0011 14.2092 14.2102 16.0001 12.0011 16.0001ZM12.0011 14.0001C13.1056 14.0001 14.0011 13.1047 14.0011 12.0001C14.0011 10.8955 13.1056 10.0001 12.0011 10.0001C10.8965 10.0001 10.0011 10.8955 10.0011 12.0001C10.0011 13.1047 10.8965 14.0001 12.0011 14.0001Z"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const MarketplaceIcon = (props: IconProps) => {
   return (
@@ -853,8 +853,8 @@ export const MarketplaceIcon = (props: IconProps) => {
         fill="currentColor"
       />
     </svg>
-  )
-}
+  );
+};
 
 export const YoutubeIcon = (props: IconProps) => {
   return (
@@ -873,8 +873,8 @@ export const YoutubeIcon = (props: IconProps) => {
       <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
       <path d="m10 15 5-3-5-3z" />
     </svg>
-  )
-}
+  );
+};
 
 export const InstagramIcon = (props: IconProps) => {
   return (
@@ -894,8 +894,8 @@ export const InstagramIcon = (props: IconProps) => {
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
-  )
-}
+  );
+};
 
 export const TiktokIcon = (props: IconProps) => {
   return (
@@ -911,8 +911,8 @@ export const TiktokIcon = (props: IconProps) => {
     >
       <path d="M41,4H9C6.243,4,4,6.243,4,9v32c0,2.757,2.243,5,5,5h32c2.757,0,5-2.243,5-5V9C46,6.243,43.757,4,41,4z M37.006,22.323 c-0.227,0.021-0.457,0.035-0.69,0.035c-2.623,0-4.928-1.349-6.269-3.388c0,5.349,0,11.435,0,11.537c0,4.709-3.818,8.527-8.527,8.527 s-8.527-3.818-8.527-8.527s3.818-8.527,8.527-8.527c0.178,0,0.352,0.016,0.527,0.027v4.202c-0.175-0.021-0.347-0.053-0.527-0.053 c-2.404,0-4.352,1.948-4.352,4.352s1.948,4.352,4.352,4.352s4.527-1.894,4.527-4.298c0-0.095,0.042-19.594,0.042-19.594h4.016 c0.378,3.591,3.277,6.425,6.901,6.685V22.323z"></path>
     </svg>
-  )
-}
+  );
+};
 
 export const LoaderIcon = (props: IconProps) => (
   <svg
@@ -929,7 +929,7 @@ export const LoaderIcon = (props: IconProps) => (
   >
     <path d="M21 12a9 9 0 1 1-6.219-8.56" />
   </svg>
-)
+);
 
 export const CalendarIcon = (props: IconProps) => (
   <svg
@@ -949,4 +949,4 @@ export const CalendarIcon = (props: IconProps) => (
     <rect width="18" height="18" x="3" y="4" rx="2" />
     <path d="M3 10h18" />
   </svg>
-)
+);

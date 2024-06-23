@@ -4,8 +4,8 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-  ControlledSelect
-} from './select'
+  ControlledSelect,
+} from './select';
 
 export const Select = {
   Root: SelectRoot,
@@ -13,5 +13,5 @@ export const Select = {
   Value: SelectValue,
   Options: SelectContent,
   Option: SelectItem,
-  Control: ControlledSelect
-}
+  Control: ControlledSelect,
+};

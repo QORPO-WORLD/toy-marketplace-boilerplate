@@ -6,8 +6,8 @@ import {
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow
-} from './table'
+  TableRow,
+} from './table';
 
 export const Table = {
   Root: TableRoot,
@@ -17,5 +17,5 @@ export const Table = {
   Footer: TableFooter,
   Head: TableHead,
   Header: TableHeader,
-  Row: TableRow
-}
+  Row: TableRow,
+};

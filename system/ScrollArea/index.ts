@@ -1,5 +1,5 @@
-import { ScrollArea as BaseScrollArea } from './scrollArea'
+import { ScrollArea as BaseScrollArea } from './scrollArea';
 
 export const ScrollArea = {
-  Base: BaseScrollArea
-}
+  Base: BaseScrollArea,
+};

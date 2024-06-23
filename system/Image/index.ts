@@ -1,5 +1,5 @@
-import { BaseImage } from './image'
+import { BaseImage } from './image';
 
 export const Image = {
-  Base: BaseImage
-}
+  Base: BaseImage,
+};

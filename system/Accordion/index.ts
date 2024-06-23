@@ -2,12 +2,12 @@ import {
   Accordion as AccordionRoot,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger
-} from './accordion'
+  AccordionTrigger,
+} from './accordion';
 
 export const Accordion = {
   Root: AccordionRoot,
   Item: AccordionItem,
   Trigger: AccordionTrigger,
-  Content: AccordionContent
-}
+  Content: AccordionContent,
+};

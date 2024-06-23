@@ -1,6 +1,6 @@
-import { Grid as GridRoot, GridChild } from './grid'
+import { Grid as Root, GridChild } from "./grid";
 
 export const Grid = {
-  Root: GridRoot,
-  Child: GridChild
-}
+  Root: Root,
+  Child: GridChild,
+};

@@ -1,3 +1,3 @@
-import { Slider as BaseSlider } from './slider'
+import { Slider as BaseSlider } from './slider';
 
-export const Slider = BaseSlider
+export const Slider = BaseSlider;

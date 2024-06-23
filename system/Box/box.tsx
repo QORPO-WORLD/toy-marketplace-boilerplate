@@ -1,9 +1,7 @@
-import { cn } from '../css/utils'
-
-export type BoxProps = React.HTMLAttributes<HTMLDivElement>
+export type BoxProps = React.HTMLAttributes<HTMLDivElement>;
 
 const Box = ({ ...props }: BoxProps) => {
-  return <div {...props} />
-}
+  return <div {...props} />;
+};
 
-export { Box }
+export { Box };

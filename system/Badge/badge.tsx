@@ -1,13 +1,13 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import * as React from 'react'
+import * as React from 'react';
 
-import { cn } from '../css/utils'
+import { cn } from '../css/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 const badgeVariants = cva(
   [
     'badge',
     'rounded-radius inline-flex h-fit w-fit items-center border-transparent font-light font-medium transition-colors',
-    'pre-wrap whitespace-nowrap'
+    'pre-wrap whitespace-nowrap',
   ],
   {
     variants: {
@@ -18,26 +18,26 @@ const badgeVariants = cva(
         destructive: 'bg-destructive text-destructive-foreground',
         muted: 'bg-foreground/10 text-foreground/70',
         outline: 'border border-border bg-transparent text-foreground/70',
-        outlinePrimary: 'border border-primary bg-transparent text-primary'
+        outlinePrimary: 'border border-primary bg-transparent text-primary',
       },
       size: {
         default: 'rounded-md px-2.5 py-1.5 text-xs',
         sm: 'py-0.75 px-1 text-xs',
         md: 'rounded-lg px-3 py-2 text-sm',
-        lg: 'rounded-lg px-4 py-3 text-sm'
-      }
+        lg: 'rounded-lg px-4 py-3 text-sm',
+      },
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default'
-    }
-  }
-)
+      size: 'default',
+    },
+  },
+);
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
-  loading?: boolean
+  loading?: boolean;
 }
 
 function Badge({
@@ -52,11 +52,11 @@ function Badge({
       className={cn(
         badgeVariants({ variant, size }),
         loading ? 'loading' : '',
-        className
+        className,
       )}
       {...props}
     />
-  )
+  );
 }
 
-export { Badge, badgeVariants }
+export { Badge, badgeVariants };

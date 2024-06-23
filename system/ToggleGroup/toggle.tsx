@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import * as TogglePrimitive from '@radix-ui/react-toggle-group'
-import { cva, type VariantProps } from 'class-variance-authority'
-import * as React from 'react'
+import * as React from 'react';
 
-import { cn } from '../css/utils'
+import { cn } from '../css/utils';
+import * as TogglePrimitive from '@radix-ui/react-toggle-group';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 const ToggleGroupRoot = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
@@ -15,9 +15,9 @@ const ToggleGroupRoot = React.forwardRef<
     className={cn('flex rounded-md border border-border', className)}
     {...props}
   />
-))
+));
 
-ToggleGroupRoot.displayName = TogglePrimitive.Root.displayName
+ToggleGroupRoot.displayName = TogglePrimitive.Root.displayName;
 
 const toggleVariants = cva(
   [
@@ -25,27 +25,27 @@ const toggleVariants = cva(
     'hover:bg-muted hover:text-muted-foreground',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     'data-[state=on]:bg-foreground/20 data-[state=on]:text-foreground/80',
-    'ring-offset-background disabled:pointer-events-none disabled:opacity-50'
+    'ring-offset-background disabled:pointer-events-none disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
         default: 'bg-transparent text-foreground/50',
         outline:
-          'border border-input bg-transparent hover:bg-foreground/10 hover:text-foreground'
+          'border border-input bg-transparent hover:bg-foreground/10 hover:text-foreground',
       },
       size: {
         default: 'h-10 px-3',
         sm: 'h-9 px-2.5',
-        lg: 'h-11 px-5'
-      }
+        lg: 'h-11 px-5',
+      },
     },
     defaultVariants: {
       variant: 'default',
-      size: 'default'
-    }
-  }
-)
+      size: 'default',
+    },
+  },
+);
 
 const ToggleItem = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Item>,
@@ -57,8 +57,8 @@ const ToggleItem = React.forwardRef<
     className={cn(toggleVariants({ variant, size, className }))}
     {...props}
   />
-))
+));
 
-ToggleItem.displayName = TogglePrimitive.Item.displayName
+ToggleItem.displayName = TogglePrimitive.Item.displayName;
 
-export { ToggleGroupRoot, ToggleItem, toggleVariants }
+export { ToggleGroupRoot, ToggleItem, toggleVariants };

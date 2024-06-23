@@ -1,9 +1,8 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { ToastContainer as Toastify } from 'react-toastify'
-
-import 'react-toastify/dist/ReactToastify.css'
+import React from 'react';
+import { ToastContainer as Toastify } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const ToastContainer = () => {
   return (
@@ -13,5 +12,5 @@ export const ToastContainer = () => {
       theme="dark"
       icon={false}
     />
-  )
-}
+  );
+};

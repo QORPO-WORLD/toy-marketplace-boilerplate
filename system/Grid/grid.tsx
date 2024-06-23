@@ -1,22 +1,22 @@
-import { Slot } from '@radix-ui/react-slot'
-import React, { createElement } from 'react'
+import React from "react";
 
-import { cn } from '../css/utils'
+import { cn } from "../css/utils";
+import { Slot } from "@radix-ui/react-slot";
 
 type GridStyleProps = {
-  templateRows?: string
-  templateColumns?: string
-  templateAreas?: string
-  template?: string
-}
+  templateRows?: string;
+  templateColumns?: string;
+  templateAreas?: string;
+  template?: string;
+};
 
 export interface GridProps
   extends React.HTMLAttributes<HTMLDivElement>,
     GridStyleProps {
-  as?: string
-  asChild?: boolean
+  as?: string;
+  asChild?: boolean;
 
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
@@ -24,7 +24,6 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
     const {
       as,
       asChild,
-
       children,
       className,
       template,
@@ -33,67 +32,72 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
       templateRows,
       style,
       ...otherProps
-    } = props
+    } = props;
 
     if (as) {
-      return createElement(as, {
-        ref,
-        className: cn('grid', className),
-        style: {
-          ...(template ? { gridTemplate: template } : {}),
-          ...(templateAreas ? { gridTemplateAreas: templateAreas } : {}),
-          ...(templateColumns ? { gridTemplateColumns: templateColumns } : {}),
-          ...(templateRows ? { gridTemplateRows: templateRows } : {}),
-
-          ...style
+      return React.createElement(
+        as,
+        {
+          ref,
+          className: cn("grid", className),
+          style: {
+            ...(template ? { gridTemplate: template } : {}),
+            ...(templateAreas ? { gridTemplateAreas: templateAreas } : {}),
+            ...(templateColumns
+              ? { gridTemplateColumns: templateColumns }
+              : {}),
+            ...(templateRows ? { gridTemplateRows: templateRows } : {}),
+            ...style,
+          },
+          ...otherProps,
         },
-        ...otherProps,
-        children
-      })
+        children,
+      );
     }
 
-    const Comp = asChild ? Slot : 'div'
+    const Comp = asChild ? Slot : "div";
 
     return (
       <Comp
         ref={ref}
-        className={cn('grid', className)}
+        className={cn("grid", className)}
         style={{
           ...(template ? { gridTemplate: template } : {}),
           ...(templateAreas ? { gridTemplateAreas: templateAreas } : {}),
           ...(templateColumns ? { gridTemplateColumns: templateColumns } : {}),
           ...(templateRows ? { gridTemplateRows: templateRows } : {}),
-
-          ...style
+          ...style,
         }}
         {...otherProps}
       >
         {children}
       </Comp>
-    )
-  }
-)
+    );
+  },
+);
 
+Grid.displayName = "Grid";
 interface GridChildProps extends React.HTMLAttributes<HTMLDivElement> {
-  name?: string
-  children?: React.ReactNode
+  name?: string;
+  children?: React.ReactNode;
 }
-
 export const GridChild = React.forwardRef<HTMLDivElement, GridChildProps>(
   (props, ref) => {
-    const { children, name: id, style, ...otherProps } = props
+    const { children, name: id, style, ...otherProps } = props;
 
     return (
       <div
         ref={ref}
         style={{
           gridArea: id,
-          ...style
+          ...style,
         }}
         {...otherProps}
       >
         {children}
       </div>
-    )
-  }
-)
+    );
+  },
+);
+
+GridChild.displayName = "GridChild";
