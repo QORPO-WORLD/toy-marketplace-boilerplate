@@ -1,8 +1,8 @@
-import { classNames } from "~/config/classNames";
+import { classNames } from '~/config/classNames';
 
-import { NetworkButton } from "./Buttons/NetworkButton";
-import { HeaderLogo } from "./HeaderLogo";
-import { Grid, cn } from "system";
+import { NetworkButton } from './Buttons/NetworkButton';
+import { HeaderLogo } from './HeaderLogo';
+import { Grid, cn } from 'system';
 
 export const Header = () => {
   return (
@@ -10,7 +10,7 @@ export const Header = () => {
       as="header"
       className={cn(
         classNames.header,
-        "h-[--headerHeight] gap-2 bg-background p-2 pt-2",
+        'h-[--headerHeight] gap-2 bg-background p-2 pt-2',
       )}
       template={`
       [row1-start] "logo search . inventory-button wallet-button order-button network-button" auto [row1-end]
