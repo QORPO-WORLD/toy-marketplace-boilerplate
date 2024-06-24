@@ -1,10 +1,10 @@
 'use client';
 
 import { NetworkIcon } from '~/components/NetworkLabel';
+import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
 import { SUPPORTED_NETWORKS } from '~/config/networks/config';
 import { useIsClient } from '~/hooks/ui/useIsClient';
-import { NetworkSelectModalContent } from '~/modals/NetworkSelectModal';
-import { getThemeManagerElement } from '~/utils/theme';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog } from '$ui';
 import { useAccount } from 'wagmi';

@@ -3,10 +3,10 @@
 import type { ComponentProps } from 'react';
 
 import ENSName from '~/components/ENSName';
-import { getThemeManagerElement } from '~/utils/theme';
 
 import { Button, Dialog, WalletIcon } from '$ui';
 import { useAccount } from 'wagmi';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 export const AccountButton = (props: ComponentProps<typeof Button>) => {
   const { address } = useAccount();

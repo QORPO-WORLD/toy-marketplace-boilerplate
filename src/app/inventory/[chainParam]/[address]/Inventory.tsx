@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 
 import { Spinner } from '~/components/Spinner';
 import { ConnectButton } from '~/components/buttons/ConnectButton';
+import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
 import { getChainId } from '~/config/networks';
 import { Routes } from '~/lib/routes';
-import { NetworkSelectModalContent } from '~/modals/NetworkSelectModal';
-import { getThemeManagerElement } from '~/utils/theme';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, Image, Text } from '$ui';
 import { InventoryTabs } from './_components/Tabs';

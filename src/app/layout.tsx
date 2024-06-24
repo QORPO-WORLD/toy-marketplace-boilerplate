@@ -1,6 +1,6 @@
+import { classNames } from '~/config/classNames';
 import { getMarketConfig } from '~/config/marketplace';
 import '~/styles/globals.scss';
-import { THEME_MANAGER_CLASSNAME } from '~/utils/theme';
 
 import { cn } from '$ui';
 import getWagmiCookieState from '../config/networks/wagmi/getWagmiCookie';
@@ -29,7 +29,7 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <body className={cn(THEME_MANAGER_CLASSNAME, inter.className)}>
+      <body className={cn(classNames.themeManager, inter.className)}>
         <Providers wagmiInitState={wagmiInitState} marketConfig={marketConfig}>
           <Layout>{children}</Layout>
         </Providers>

@@ -7,7 +7,7 @@ import {
   onTransactionConfirmationModelClose,
   transactionState,
 } from '~/lib/stores/Transaction';
-import { getThemeManagerElement } from '~/utils/theme';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Grid, Dialog, cn } from '$ui';
 import { OrderCart } from '../../modules/Cart';

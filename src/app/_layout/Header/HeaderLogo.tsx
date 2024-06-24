@@ -1,6 +1,6 @@
 import { Logo } from '~/components/Logo';
 import { getMarketConfig } from '~/config/marketplace';
-import { truncateAtMiddle } from '~/utils/helpers';
+import { truncateAtMiddle } from '~/lib/utils/helpers';
 
 import Link from 'next/link';
 
