@@ -2,8 +2,8 @@
 
 import { metadataQueries } from '~/queries';
 
+import { Badge } from '$ui';
 import { useQuery } from '@tanstack/react-query';
-import { Badge } from 'system';
 
 interface Props {
   chainId: number;

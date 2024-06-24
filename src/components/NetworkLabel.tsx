@@ -1,7 +1,7 @@
 import { classNames } from '~/config/classNames';
 import { getCurrencyIconUrl, getPresentableChainName } from '~/config/networks';
 
-import { Avatar, Button } from 'system';
+import { Avatar, Button } from '$ui';
 
 /* ************* NETWORK LABEL ***************** */
 type NetworkLabelStyleProps = {

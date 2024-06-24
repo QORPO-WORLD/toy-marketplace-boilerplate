@@ -2,7 +2,7 @@
 
 import { DEFAULT_NETWORK } from '~/config/consts';
 
-import { Button } from 'system';
+import { Button } from '$ui';
 import { useSwitchChain } from 'wagmi';
 
 interface Props {

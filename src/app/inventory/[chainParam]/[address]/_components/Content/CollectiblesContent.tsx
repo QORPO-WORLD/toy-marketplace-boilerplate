@@ -19,9 +19,6 @@ import {
 } from '~/stores/Inventory';
 import { configState, marketConfig$ } from '~/stores/marketConfig';
 
-import { getInvetoryCardData } from './helpers';
-import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
-import Fuse from 'fuse.js';
 import {
   Accordion,
   Avatar,
@@ -32,7 +29,10 @@ import {
   ScrollArea,
   Text,
   cn,
-} from 'system';
+} from '$ui';
+import { getInvetoryCardData } from './helpers';
+import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
+import Fuse from 'fuse.js';
 import { useSnapshot } from 'valtio';
 
 type InventoryCollectiblesContent = {

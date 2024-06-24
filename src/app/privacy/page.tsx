@@ -1,5 +1,6 @@
-import React from 'react'
-import { Text, Box, cn } from 'system'
+import React from 'react';
+
+import { Text, Box, cn } from '$ui';
 
 async function PrivacyPolicy() {
   return (
@@ -761,9 +762,9 @@ async function PrivacyPolicy() {
         </p>
       </div>
     </Box>
-  )
+  );
 }
 
-export default PrivacyPolicy
+export default PrivacyPolicy;
 
-export const runtime = 'edge'
+export const runtime = 'edge';

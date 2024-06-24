@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const MarketConfigSchema = z.object({
   hasCustomConfig: z.boolean().optional(),
@@ -26,12 +26,12 @@ export const MarketConfigSchema = z.object({
   disableLiquidityProviderTools: z.boolean().optional(),
   walletOptions: z.array(
     z.enum([
-      "sequence",
-      "metamask",
-      "walletconnect",
-      "coinbase",
-      "injected",
-      "ledger",
+      'sequence',
+      'metamask',
+      'walletconnect',
+      'coinbase',
+      'injected',
+      'ledger',
     ]),
   ),
   collections: z.array(
@@ -45,8 +45,8 @@ export const MarketConfigSchema = z.object({
     }),
   ),
   landingPageLayout: z.union([
-    z.literal("default"),
-    z.literal("big_left_banner"),
-    z.literal("floating_header"),
+    z.literal('default'),
+    z.literal('big_left_banner'),
+    z.literal('floating_header'),
   ]),
 });

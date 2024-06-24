@@ -1,4 +1,4 @@
-import { Flex, Grid, Text, cn } from 'system';
+import { Flex, Grid, Text, cn } from '$ui';
 
 type InfoGridProps = {
   className?: string;

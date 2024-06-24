@@ -2,7 +2,7 @@
 
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 
-import { Image, cn } from 'system';
+import { Image, cn } from '$ui';
 
 const defaultDesktopLogoUrl = '/sequence-logo.png';
 const defaultMobileLogoUrl = '/logo/152x152.png';

@@ -2,7 +2,7 @@
 
 import { NetworkIcon } from '~/components/NetworkLabel';
 
-import { Box, Button, Flex, Text } from 'system';
+import { Box, Button, Flex, Text } from '$ui';
 import { useAccount, useSwitchChain } from 'wagmi';
 
 export const NetworkSelectModalContent = () => {

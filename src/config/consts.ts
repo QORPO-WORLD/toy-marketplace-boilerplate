@@ -15,6 +15,9 @@ export const PLATFORM_FEE_RECIPIENT_AVALANCHE_OPTIMISM =
 
 export const DEFAULT_NETWORK = ChainId.POLYGON;
 
+export const ORDERBOOK_CONTRACT_ADDRESS =
+  '0xB537a160472183f2150d42EB1c3DD6684A55f74c';
+
 const SERVICES = {
   sequenceApi: 'https://api.sequence.app',
   metadata: 'https://metadata.sequence.app',

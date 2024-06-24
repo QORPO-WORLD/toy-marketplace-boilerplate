@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from 'system';
+import { cn } from '$ui';
 
 interface SpinnerProps {
   className?: string;

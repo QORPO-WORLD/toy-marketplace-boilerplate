@@ -27,6 +27,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
+      "$ui/*": ["./src/components/ui/*"],
       "$collectable/*": [
         "./src/app/collectible/[chainParam]/[collectionId]/[tokenId]/[tab]/*"
       ],

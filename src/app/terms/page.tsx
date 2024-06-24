@@ -1,11 +1,12 @@
-import React from 'react'
-import { Text } from 'system'
+import React from 'react';
 
-const VERSION = '2.0'
-const LAST_REVISED_ON = 'June 15, 2022'
-const WEBSITE_URL = 'https://sequence.market'
+import { Text } from '$ui';
+
+const VERSION = '2.0';
+const LAST_REVISED_ON = 'June 15, 2022';
+const WEBSITE_URL = 'https://sequence.market';
 const UNSUPPORTED_COUNTRIES_LIST_URL =
-  'https://support.sequence.xyz/en/article/sequence-list-of-restricted-regions-1eked2s/'
+  'https://support.sequence.xyz/en/article/sequence-list-of-restricted-regions-1eked2s/';
 
 async function TermsOfUse() {
   return (
@@ -863,9 +864,9 @@ async function TermsOfUse() {
         .
       </p>{' '}
     </div>
-  )
+  );
 }
 
-export default TermsOfUse
+export default TermsOfUse;
 
-export const runtime = 'edge'
+export const runtime = 'edge';
