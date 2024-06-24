@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 
 import { is3dModel, isHtml, isVideo } from '~/utils/helpers';
 
+import { Box, Dialog, Image, cn } from '$ui';
 import dynamic from 'next/dynamic';
-import { Box, Dialog, Image, cn } from 'system';
 
 const ModelViewer = dynamic(() => import('./ModelViewer'), {
   ssr: false,

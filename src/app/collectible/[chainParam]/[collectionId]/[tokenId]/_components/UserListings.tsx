@@ -14,8 +14,8 @@ import { _addToCart_ } from '~/stores';
 import { CartType } from '~/stores/cart/types';
 import { defaultSelectionQuantity } from '~/utils/quantity';
 
+import { toast } from '$ui';
 import { useQueryClient } from '@tanstack/react-query';
-import { toast } from 'system';
 import { useWalletClient } from 'wagmi';
 
 interface ListingsProps {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, cn } from 'system';
+import { Image, cn } from '$ui';
 
 type BannerImageProps = {
   src?: string;

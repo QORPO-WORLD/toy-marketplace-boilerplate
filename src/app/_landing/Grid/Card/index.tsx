@@ -7,9 +7,9 @@ import { metadataQueries } from '~/queries';
 import { Routes } from '~/routes';
 import { isVideo } from '~/utils/helpers';
 
+import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { useQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
-import { Avatar, Badge, Flex, ScrollArea, Text, cn } from 'system';
 import { placeholderImgUrl } from 'system/Image/image';
 
 type CollectionCard = MarketConfig['collections'][0];
@@ -26,7 +26,8 @@ export const CollectionCard = ({
     }),
   );
 
-  const image = data?.extensions.ogImage ?? bannerUrl ?? placeholderImgUrl;
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const image = data?.extensions.ogImage || bannerUrl || placeholderImgUrl;
   const description = data?.extensions.description;
   const name = data?.name;
   const symbol = data?.symbol;

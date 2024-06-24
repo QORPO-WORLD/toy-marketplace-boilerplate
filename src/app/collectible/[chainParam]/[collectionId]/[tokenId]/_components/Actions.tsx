@@ -16,8 +16,8 @@ import { CartType } from '~/stores/cart/types';
 import { defaultSelectionQuantity } from '~/utils/quantity';
 import { getThemeManagerElement } from '~/utils/theme';
 
+import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { SortOrder } from '@0xsequence/indexer';
-import { Button, Dialog, Flex, ScrollArea, Text } from 'system';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {

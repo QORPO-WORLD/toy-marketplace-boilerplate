@@ -4,7 +4,7 @@ import { getNetworkConfigAndClients } from '~/api';
 import ENSName from '~/components/ENSName';
 import { InfoGrid } from '~/components/InfoGrid';
 
-import { Box, Button, LinkIcon, cn } from 'system';
+import { Box, Button, LinkIcon, cn } from '$ui';
 
 export const CollectibleAddresses = ({
   contractAddress,

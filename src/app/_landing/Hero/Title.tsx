@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Text, cn } from 'system';
+import { Box, Text, cn } from '$ui';
 
 type TitleProps = {
   title: string;

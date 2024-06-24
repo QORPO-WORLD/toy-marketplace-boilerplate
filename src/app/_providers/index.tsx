@@ -7,6 +7,7 @@ import { createWagmiConfig } from '~/config/networks/wagmi';
 import { env } from '~/env';
 import { getQueryClient } from '~/queries/getQueryClient';
 
+import { ToastProvider, Tooltip } from '$ui';
 import {
   KitProvider,
   defaultSignInOptions,
@@ -15,7 +16,6 @@ import {
 import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ToastProvider, Tooltip } from 'system';
 import { WagmiProvider, type State } from 'wagmi';
 
 export default function Providers({

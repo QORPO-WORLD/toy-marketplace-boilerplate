@@ -1,12 +1,12 @@
 import { Logo } from '~/components/Logo';
 import { type MarketConfig } from '~/config/marketplace';
 
+import { Box, Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
 import { Description } from '../Hero/Description';
 import { Socials } from '../Hero/Socials';
 import { Title } from '../Hero/Title';
-import { Box, Flex, cn } from 'system';
 
 export const FloatingBanner = ({
   collections,

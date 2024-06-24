@@ -3,8 +3,8 @@
 import { InfoGrid } from '~/components/InfoGrid';
 import { formatAttributes, formatProperties } from '~/utils/utils';
 
+import { Box } from '$ui';
 import type { TokenMetadata } from '@0xsequence/metadata';
-import { Box } from 'system';
 
 interface CollectiblePropertiesProps {
   properties?: TokenMetadata['properties'];

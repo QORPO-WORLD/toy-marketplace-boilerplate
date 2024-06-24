@@ -1,4 +1,4 @@
-import { Flex, Text } from 'system';
+import { Flex, Text } from '$ui';
 
 export default function NotFound() {
   return (

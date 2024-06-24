@@ -1,8 +1,8 @@
 'use client';
 
+import { Box, Flex, cn } from '$ui';
 import { CollectibleInfo } from '../_components/Info';
 import { useCollectableData } from '../_hooks/useCollectableData';
-import { Box, Flex, cn } from 'system';
 
 export default function Sidebar() {
   const {

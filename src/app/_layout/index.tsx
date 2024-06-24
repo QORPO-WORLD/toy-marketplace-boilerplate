@@ -1,8 +1,8 @@
 import { classNames } from '~/config/classNames';
 
+import { Grid, cn } from '$ui';
 import { Footer } from './Footer';
 import { Header } from './Header';
-import { Grid, cn } from 'system';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

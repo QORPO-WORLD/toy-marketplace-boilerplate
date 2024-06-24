@@ -1,5 +1,5 @@
+import { Flex, cn } from '$ui';
 import Sidebar from './_layout/Sidebar';
-import { Flex, cn } from 'system';
 
 const CollectableLayout = ({ children }: { children: React.ReactNode }) => {
   return (

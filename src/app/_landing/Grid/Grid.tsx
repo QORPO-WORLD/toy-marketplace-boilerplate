@@ -2,8 +2,8 @@ import { memo } from 'react';
 
 import type { MarketConfig } from '~/config/marketplace';
 
+import { Grid, cn } from '$ui';
 import { CollectionCard } from './Card';
-import { Grid, cn } from 'system';
 
 type CollectionGridProps = {
   className?: string;

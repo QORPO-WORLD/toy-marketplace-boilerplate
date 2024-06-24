@@ -2,12 +2,12 @@ import { getMarketConfig } from '~/config/marketplace';
 import '~/styles/globals.scss';
 import { THEME_MANAGER_CLASSNAME } from '~/utils/theme';
 
+import { cn } from '$ui';
 import getWagmiCookieState from '../config/networks/wagmi/getWagmiCookie';
 import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
 import Providers from './_providers';
 import type { Metadata } from 'next';
-import { cn } from 'system';
 
 export default async function RootLayout({
   children,

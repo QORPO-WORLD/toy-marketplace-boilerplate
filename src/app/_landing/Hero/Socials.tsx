@@ -12,7 +12,7 @@ import {
   TwitterIcon,
   YoutubeIcon,
   cn,
-} from 'system';
+} from '$ui';
 
 type SocialsProps = {
   socials: MarketConfig['socials'];

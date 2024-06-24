@@ -2,8 +2,8 @@
 
 import React from 'react';
 
+import { Flex, cn } from '$ui';
 import Markdown from 'markdown-to-jsx';
-import { Flex, cn } from 'system';
 
 interface CollectibleDescriptionProps {
   description?: string;

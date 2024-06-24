@@ -13,11 +13,11 @@ import { Spinner } from '~/components/Spinner';
 import { useCollectibleBalance, useCollectibleMetadata } from '~/hooks/data';
 import { formatDisplay, truncateAtMiddle } from '~/utils/helpers';
 
+import { AddIcon, Avatar, Button, Flex, ScrollArea, Table, Text } from '$ui';
 import type { TokenMetadata } from '@0xsequence/metadata';
 import type { InfiniteData } from '@tanstack/react-query';
 import type { BigNumber } from 'ethers';
 import NextLink from 'next/link';
-import { AddIcon, Avatar, Button, Flex, ScrollArea, Table, Text } from 'system';
 import { format as timeAgo } from 'timeago.js';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';

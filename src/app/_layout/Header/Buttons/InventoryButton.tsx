@@ -2,8 +2,8 @@
 
 import { Routes } from '~/routes';
 
+import { Button, CubeIcon } from '$ui';
 import Link from 'next/link';
-import { Button, CubeIcon } from 'system';
 import { useAccount } from 'wagmi';
 
 export function InventoryButton() {

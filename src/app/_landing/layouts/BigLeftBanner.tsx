@@ -2,12 +2,12 @@
 
 import { type MarketConfig } from '~/config/marketplace';
 
+import { Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
 import { Description } from '../Hero/Description';
 import { Socials } from '../Hero/Socials';
 import { Title } from '../Hero/Title';
-import { Flex, cn } from 'system';
 
 export const BigLeftBanner = ({
   collections,

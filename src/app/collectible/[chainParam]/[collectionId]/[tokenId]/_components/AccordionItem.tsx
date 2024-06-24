@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { Accordion } from 'system';
+import { Accordion } from '$ui';
 
 type CollectibleAccordionItemProps = {
   id: string;

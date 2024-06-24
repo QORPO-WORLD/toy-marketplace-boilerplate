@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from 'system';
+import { Flex, Image, Text } from '$ui';
 
 export const CollectionCardSkeleton = () => {
   return (

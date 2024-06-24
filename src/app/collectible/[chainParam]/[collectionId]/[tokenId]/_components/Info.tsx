@@ -10,9 +10,9 @@ import {
   truncateAtMiddle,
 } from '~/utils/helpers';
 
+import { Avatar, Badge, Flex, Text, cn } from '$ui';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Avatar, Badge, Flex, Text, cn } from 'system';
 import { useAccount } from 'wagmi';
 
 type CollectibleInfoProps = {
@@ -107,7 +107,6 @@ export const CollectibleInfo = ({
             <span>{userTokenBalance}</span>&nbsp;Owned
           </Badge>
         </Flex> */}
-      )}
     </Flex>
   );
 };

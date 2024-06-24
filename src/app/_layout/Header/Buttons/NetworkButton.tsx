@@ -6,7 +6,7 @@ import { useIsClient } from '~/hooks/ui/useIsClient';
 import { NetworkSelectModalContent } from '~/modals/NetworkSelectModal';
 import { getThemeManagerElement } from '~/utils/theme';
 
-import { Button, Dialog } from 'system';
+import { Button, Dialog } from '$ui';
 import { useAccount } from 'wagmi';
 
 export const NetworkButton = () => {

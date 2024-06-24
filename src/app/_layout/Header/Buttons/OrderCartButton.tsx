@@ -1,6 +1,8 @@
 'use client';
 
-import { Button, Box, cn, CartIcon, Text } from 'system';
+import { useState } from 'react';
+
+import { Button, Box, cn, CartIcon, Text } from '$ui';
 
 export const OrderCartButton = () => {
   return (

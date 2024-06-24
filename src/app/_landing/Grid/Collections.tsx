@@ -2,9 +2,9 @@ import { type MarketConfig } from '~/config/marketplace';
 import { metadataQueries } from '~/queries';
 import { getQueryClient } from '~/queries/getQueryClient';
 
+import { Flex, Text } from '$ui';
 import { CollectionsGrid } from './Grid';
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
-import { Flex, Text } from 'system';
 
 type LandingCollectionsProps = {
   collections: MarketConfig['collections'];

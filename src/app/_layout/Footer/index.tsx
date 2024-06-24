@@ -2,8 +2,8 @@
 
 import { classNames } from '~/config/classNames';
 
+import { Button, Flex, GasIcon, Text, cn } from '$ui';
 import NextLink from 'next/link';
-import { Button, Flex, GasIcon, Text, cn } from 'system';
 import { useEstimateFeesPerGas, useAccount } from 'wagmi';
 
 export const Footer = () => {

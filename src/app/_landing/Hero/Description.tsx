@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, cn } from 'system';
+import { Text, cn } from '$ui';
 
 type DescriptionProps = {
   description: string;

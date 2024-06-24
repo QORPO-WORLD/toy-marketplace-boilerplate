@@ -1,5 +1,5 @@
+import { Box } from '$ui';
 import '@google/model-viewer';
-import { Box } from 'system';
 
 const ModelViewer = ({ fileSrc, src }: { fileSrc: string; src?: string }) => {
   return (
