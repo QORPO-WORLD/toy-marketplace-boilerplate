@@ -1,6 +1,6 @@
 'use client';
 
-import { Routes } from '~/routes';
+import { Routes } from '~/lib/routes';
 
 import { Button, CubeIcon } from '$ui';
 import Link from 'next/link';

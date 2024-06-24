@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { formatDecimals } from '~/api';
-import type { CartItem } from '~/stores';
+import type { CartItem } from '~/lib/stores';
 
 import {
   AddIcon,

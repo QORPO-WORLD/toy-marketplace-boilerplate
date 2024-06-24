@@ -4,13 +4,13 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 import { useWalletBalances } from '~/hooks/data';
-import { marketConfig$ } from '~/stores/marketConfig';
+import { marketConfig$ } from '~/lib/stores/marketConfig';
 import { compareAddress } from '~/utils/address';
 
+import { Tabs, Flex, Text, Grid } from '$ui';
 import { InventoryCollectiblesContent } from './Content/CollectiblesContent';
 import { InventoryFilters } from './Filters';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { Tabs, Flex, Text, Grid } from 'system';
 
 type InventoryTabsProps = {
   chainId: number;

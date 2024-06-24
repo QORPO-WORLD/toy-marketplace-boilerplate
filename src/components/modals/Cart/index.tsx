@@ -18,8 +18,8 @@ import {
   overrideCart,
   resetCart,
   toggleCart,
-} from '~/stores';
-import { transactionState } from '~/stores/Transaction';
+} from '~/lib/stores';
+import { transactionState } from '~/lib/stores/Transaction';
 
 import { Button, Flex, Text, Box, cn, CollapseIcon } from '$ui';
 import { OrderRenderer } from './type';

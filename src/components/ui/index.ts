@@ -1,3 +1,6 @@
+import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 export { Text } from './Text';
 export { Button } from './Button';
 export { Box } from './Box';
@@ -30,4 +33,6 @@ export { Portal } from './Portal';
 
 export * from './icons';
 
-export { cn } from './css/utils';
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

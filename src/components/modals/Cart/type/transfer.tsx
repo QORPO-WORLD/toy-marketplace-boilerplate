@@ -1,6 +1,6 @@
 'use client';
 
-import { cartState } from '~/stores';
+import { cartState } from '~/lib/stores';
 
 import { OrderButtons } from '../components/actions/OrderButtons';
 import { TransferOrderItem } from '../components/items/TransferOrderItem';

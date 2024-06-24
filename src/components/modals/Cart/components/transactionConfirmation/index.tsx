@@ -6,7 +6,7 @@ import { getNetworkConfigAndClients } from '~/api';
 import { OrderItemType } from '~/api/types/order';
 import { useCollectibleMetadata } from '~/hooks/data';
 import useElementDimensions from '~/hooks/ui/useElementDimentions';
-import type { CartItem } from '~/stores';
+import type { CartItem } from '~/lib/stores';
 import {
   formatDecimals,
   formatDisplay,

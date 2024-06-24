@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import { Slot } from '@radix-ui/react-slot';
 
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {

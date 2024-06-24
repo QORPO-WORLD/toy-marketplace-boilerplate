@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { type VariantProps, cva } from 'class-variance-authority';
 

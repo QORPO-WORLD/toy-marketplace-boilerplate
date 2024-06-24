@@ -1,6 +1,6 @@
 import { getChainId } from '~/config/networks';
-import { metadataQueries } from '~/queries';
-import { Routes } from '~/routes';
+import { metadataQueries } from '~/lib/queries';
+import { Routes } from '~/lib/routes';
 
 import { useQuery } from '@tanstack/react-query';
 

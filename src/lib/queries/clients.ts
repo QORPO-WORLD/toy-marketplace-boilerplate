@@ -1,8 +1,9 @@
-import { SequenceAPIClient } from "@0xsequence/api";
-import { SequenceIndexer } from "@0xsequence/indexer";
-import { SequenceMetadata } from "@0xsequence/metadata";
-import { getChain } from "~/config/networks";
-import { env } from "~/env";
+import { getChain } from '~/config/networks';
+import { env } from '~/env';
+
+import { SequenceAPIClient } from '@0xsequence/api';
+import { SequenceIndexer } from '@0xsequence/indexer';
+import { SequenceMetadata } from '@0xsequence/metadata';
 
 const SEQUENCE_ACCESS_KEY = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY;
 

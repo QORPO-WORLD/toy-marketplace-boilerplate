@@ -1,3 +1,4 @@
+import { DEFAULT_NETWORK } from '~/config/consts';
 import { getChainName } from '~/config/networks';
 
 import { makeRoute } from './utils/makeRoute';
@@ -26,17 +27,13 @@ const tab = ['details', 'listings'] as const;
 const CollectibleTabEnum = z.enum(tab);
 
 const orderbookTab = [...tab, 'offers'] as const;
-export const orderbookCollectibleTabEnum = z.enum(orderbookTab);
+export const collectibleTabEnum = z.enum(orderbookTab);
 
 const collectibleParams = z.object({
   chainParam,
   collectionId,
   tokenId: z.string(),
-  tab: CollectibleTabEnum,
-});
-
-const orderbookCollectibleParams = collectibleParams.extend({
-  tab: orderbookCollectibleTabEnum,
+  // tab: CollectibleTabEnum,
 });
 
 const chainToName = (chainParam: number | string) => {
@@ -62,10 +59,10 @@ export const Routes = {
   ),
 
   //collectible
-  orderbookCollectible: makeRoute(
-    ({ chainParam, collectionId, tokenId, tab }) =>
-      `/collectible/${chainToName(chainParam)}/${collectionId}/${tokenId}/${tab}`,
-    orderbookCollectibleParams,
+  collectible: makeRoute(
+    ({ chainParam, collectionId, tokenId }) =>
+      `/collectible/${chainToName(chainParam)}/${collectionId}/${tokenId}`,
+    collectibleParams,
   ),
 
   // inventory
@@ -73,7 +70,7 @@ export const Routes = {
     if (isConnected && address && chainParam) {
       return `/inventory/${getChainName(chainParam)}/${address}`;
     } else {
-      return `/inventory/${getChainName(137)}/connect`;
+      return `/inventory/${getChainName(DEFAULT_NETWORK)}/connect`;
     }
   }, inventoryParams),
 

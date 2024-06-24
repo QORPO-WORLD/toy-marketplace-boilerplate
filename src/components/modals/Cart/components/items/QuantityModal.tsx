@@ -6,8 +6,8 @@ import { useRef, useState } from 'react';
 import type { OrderItemType } from '~/api';
 import { PoolAvatar } from '~/components/Avatars';
 import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
-import type { CartItem, CollectibleMetadata } from '~/stores';
-import { editQuantity } from '~/stores';
+import type { CartItem, CollectibleMetadata } from '~/lib/stores';
+import { editQuantity } from '~/lib/stores';
 import { formatDecimals } from '~/utils/helpers';
 import { getThemeManagerElement } from '~/utils/theme';
 

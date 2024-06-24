@@ -3,9 +3,12 @@ import {
   type CollectionArgs,
   fetchCollectionMetadata,
   fetchCollectionsMetadata,
+  fetchTokenMetadata,
 } from './fetchers';
-import { getQueryClient } from './getQueryClient';
-import { type GetContractInfoReturn } from '@0xsequence/metadata';
+import {
+  type GetTokenMetadataArgs,
+  type GetContractInfoReturn,
+} from '@0xsequence/metadata';
 import { queryOptions } from '@tanstack/react-query';
 
 type BatchCollectionReturn = ReturnType<typeof fetchCollectionsMetadata>;
@@ -23,14 +26,20 @@ export const metadataQueries = {
     queryOptions({
       queryKey: [...metadataQueries.collections(), args],
       queryFn: () => fetchCollectionMetadata(args),
-      initialData: () => {
-        const queryClient = getQueryClient();
-        const data = queryClient.getQueryData([
-          ...metadataQueries.batchCollections(),
-        ]);
-        return data?.find(
-          (col: BatchCollectionReturn) => col?.[args.collectionId],
-        ) as GetContractInfoReturn['contractInfo'];
-      },
+      // initialData: () => {
+      //   const queryClient = getQueryClient();
+      //   const data = queryClient.getQueryData([
+      //     ...metadataQueries.batchCollections(),
+      //   ]);
+      //   return data?.find(
+      //     (col: BatchCollectionReturn) => col?.[args.collectionId],
+      //   ) as GetContractInfoReturn['contractInfo'];
+      // },
+    }),
+  collectables: () => [...metadataQueries.all(), 'collectable'],
+  collectible: (args: GetTokenMetadataArgs) =>
+    queryOptions({
+      queryKey: [...metadataQueries.collectables(), args],
+      queryFn: () => fetchTokenMetadata(args),
     }),
 };

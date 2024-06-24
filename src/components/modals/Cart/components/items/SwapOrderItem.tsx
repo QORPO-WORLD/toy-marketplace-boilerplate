@@ -5,8 +5,8 @@ import { CurrencyAvatar } from '~/components/Avatars';
 import { classNames } from '~/config/classNames';
 import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
 import { useExchange } from '~/hooks/data';
-import type { CartItem } from '~/stores';
-import { editQuantity, removeFromCart } from '~/stores';
+import type { CartItem } from '~/lib/stores';
+import { editQuantity, removeFromCart } from '~/lib/stores';
 
 import {
   Grid,

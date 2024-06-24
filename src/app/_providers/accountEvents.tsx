@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { resetCart } from '~/stores';
+import { resetCart } from '~/lib/stores';
 
 import { type GetAccountReturnType } from '@wagmi/core';
 import { watchAccount } from '@wagmi/core';

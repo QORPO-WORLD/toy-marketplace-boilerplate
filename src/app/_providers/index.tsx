@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { type MarketConfig } from '~/config/marketplace';
 import { createWagmiConfig } from '~/config/networks/wagmi';
 import { env } from '~/env';
-import { getQueryClient } from '~/queries/getQueryClient';
+import { getQueryClient } from '~/lib/queries/getQueryClient';
 
 import { ToastProvider, Tooltip } from '$ui';
 import {

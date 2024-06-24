@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { ChevronRightIcon } from 'system/icons';
 

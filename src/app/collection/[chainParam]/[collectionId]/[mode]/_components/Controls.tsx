@@ -1,6 +1,6 @@
 'use client';
 
-import { Routes } from '~/routes';
+import { Routes } from '~/lib/routes';
 
 import { BaseCollectionControls } from '../../../_components';
 import useCollectionParams from '../../../_hooks/useCollectionParams';

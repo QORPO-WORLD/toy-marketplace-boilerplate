@@ -3,8 +3,8 @@
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
 import { type MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/queries';
-import { Routes } from '~/routes';
+import { metadataQueries } from '~/lib/queries';
+import { Routes } from '~/lib/routes';
 import { isVideo } from '~/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';

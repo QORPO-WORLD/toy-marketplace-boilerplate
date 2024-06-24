@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import { Slot } from '@radix-ui/react-slot';
 
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {

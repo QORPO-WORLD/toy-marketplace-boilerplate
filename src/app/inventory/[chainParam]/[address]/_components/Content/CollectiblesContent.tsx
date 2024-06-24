@@ -9,15 +9,15 @@ import { useViewType } from '~/components/ViewTypeToggle/useViewType';
 import { useCollectionUserBalances } from '~/hooks/balances/useCollectionUserBalances';
 import { useCollectionMetadata } from '~/hooks/data';
 import { useCollectionType } from '~/hooks/utils/useCollectionType';
-import { AddToCartButton } from '~/modules/CollectableGrid/AddToCartButton';
-import type { CollectibleCardData } from '~/modules/CollectableGrid/CollectableCard';
-import { CollectibleCard } from '~/modules/CollectableGrid/CollectableCard';
 import {
   inventoryState,
   getCollectionId,
   setSearchResultAmountByCollection,
-} from '~/stores/Inventory';
-import { configState, marketConfig$ } from '~/stores/marketConfig';
+} from '~/lib/stores/Inventory';
+import { configState, marketConfig$ } from '~/lib/stores/marketConfig';
+import { AddToCartButton } from '~/modules/CollectableGrid/AddToCartButton';
+import type { CollectibleCardData } from '~/modules/CollectableGrid/CollectableCard';
+import { CollectibleCard } from '~/modules/CollectableGrid/CollectableCard';
 
 import {
   Accordion,

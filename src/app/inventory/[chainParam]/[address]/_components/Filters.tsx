@@ -9,10 +9,10 @@ import {
   clearInventorySearchText,
   inventoryState,
   setInventorySearchText,
-} from '~/stores/Inventory';
+} from '~/lib/stores/Inventory';
 
+import { Flex, Input, Text } from '$ui';
 import _debounce from 'lodash.debounce';
-import { Flex, Input, Text } from 'system';
 import { useSnapshot } from 'valtio';
 
 type InventoryFiltersProps = {

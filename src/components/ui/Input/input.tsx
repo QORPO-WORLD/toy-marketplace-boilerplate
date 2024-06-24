@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { type Control, Controller, type FieldValues } from 'react-hook-form';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import { CloseIcon, LoadingIcon, SearchIcon } from '../icons';
 import { type VariantProps, cva } from 'class-variance-authority';
 

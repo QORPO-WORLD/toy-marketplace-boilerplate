@@ -2,11 +2,11 @@
 
 import { classNames } from '~/config/classNames';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import { cartState, setCartOpen } from '~/stores';
+import { cartState, setCartOpen } from '~/lib/stores';
 import {
   onTransactionConfirmationModelClose,
   transactionState,
-} from '~/stores/Transaction';
+} from '~/lib/stores/Transaction';
 import { getThemeManagerElement } from '~/utils/theme';
 
 import { Grid, Dialog, cn } from '$ui';

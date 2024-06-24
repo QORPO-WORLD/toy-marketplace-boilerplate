@@ -10,9 +10,9 @@ import {
   useCollectionMetadata,
 } from '~/hooks/data';
 import { useOrderbookTopOrders } from '~/hooks/orderbook';
+import { _addToCart_ } from '~/lib/stores';
+import { CartType } from '~/lib/stores/cart/types';
 import { OrderModalContent } from '~/modals/OrderModalContent';
-import { _addToCart_ } from '~/stores';
-import { CartType } from '~/stores/cart/types';
 import { defaultSelectionQuantity } from '~/utils/quantity';
 import { getThemeManagerElement } from '~/utils/theme';
 

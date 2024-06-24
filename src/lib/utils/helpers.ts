@@ -1,7 +1,7 @@
-import type { CollectibleFilterState } from "~/stores/collectible/types";
+import type { CollectibleFilterState } from '~/lib/stores/collectible/types';
 
-import type { BigNumber, BigNumberish } from "ethers";
-import { formatUnits } from "ethers/lib/utils";
+import type { BigNumber, BigNumberish } from 'ethers';
+import { formatUnits } from 'ethers/lib/utils';
 
 export const truncateAtMiddle = (text: string, truncateAt: number) => {
   let finalText = text;
@@ -9,24 +9,24 @@ export const truncateAtMiddle = (text: string, truncateAt: number) => {
   if (text.length >= truncateAt) {
     finalText =
       text.slice(0, truncateAt / 2) +
-      "..." +
+      '...' +
       text.slice(text.length - truncateAt / 2, text.length);
   }
 
   return finalText;
 };
 
-export const compareAddress = (a = "", b = "") => {
+export const compareAddress = (a = '', b = '') => {
   return a.toLowerCase() === b.toLowerCase();
 };
 
 export const truncateEnd = (text: string | undefined, truncateAt: number) => {
-  if (!text) return "";
+  if (!text) return '';
 
   let finalText = text;
 
   if (text.length >= truncateAt) {
-    finalText = text.slice(0, truncateAt) + "...";
+    finalText = text.slice(0, truncateAt) + '...';
   }
 
   return finalText;
@@ -42,13 +42,13 @@ enum ValueType {
 export const formatDisplay = (_val: number | string): string => {
   if (isNaN(Number(_val))) {
     console.error(`display format error ${_val} is not a number`);
-    return "NaN";
+    return 'NaN';
   }
 
   const val = Number(_val);
 
   if (val === 0) {
-    return "0";
+    return '0';
   }
 
   let valMode: ValueType;
@@ -63,39 +63,39 @@ export const formatDisplay = (_val: number | string): string => {
     valMode = ValueType.MIXED;
   }
 
-  let notation: Intl.NumberFormatOptions["notation"] = undefined;
+  let notation: Intl.NumberFormatOptions['notation'] = undefined;
   let config: Pick<
     Intl.NumberFormatOptions,
-    "maximumFractionDigits" | "maximumSignificantDigits"
+    'maximumFractionDigits' | 'maximumSignificantDigits'
   >;
 
   switch (valMode) {
     case ValueType.VERY_LARGE:
-      notation = "compact";
+      notation = 'compact';
       config = {
         maximumFractionDigits: 4,
       };
       break;
     case ValueType.VERY_TINY:
-      notation = "scientific";
+      notation = 'scientific';
       config = {
         maximumFractionDigits: 4,
       };
       break;
     case ValueType.FRACTION:
-      notation = "standard";
+      notation = 'standard';
       config = {
         maximumSignificantDigits: 4,
       };
       break;
     default:
-      notation = "standard";
+      notation = 'standard';
       config = {
         maximumFractionDigits: 2,
       };
   }
 
-  return Intl.NumberFormat("en-US", {
+  return Intl.NumberFormat('en-US', {
     notation,
     ...config,
   }).format(val);
@@ -107,16 +107,16 @@ export const formatDecimals = (
 ): string => {
   // sanitize extremety formats such as "1e+99",
   // convert to hex before feeding into any BigNumber instance
-  if (typeof bn === "number" || typeof bn === "string") {
+  if (typeof bn === 'number' || typeof bn === 'string') {
     const n = Number(bn);
-    if (isNaN(n)) return "NaN";
-    bn = "0x" + n.toString(16); // hex
+    if (isNaN(n)) return 'NaN';
+    bn = '0x' + n.toString(16); // hex
   }
 
   const formatted = formatUnits(bn, decimals);
 
   // formatUnits always returns with 1 decimal precision
-  if (formatted.endsWith(".0")) {
+  if (formatted.endsWith('.0')) {
     // Dont display decimal precision if its a whole number
     return formatted.slice(0, -2);
   } else {
@@ -158,7 +158,7 @@ export const BigIntMin = (a: bigint, b: bigint) => {
 
 export const BigIntCast = (n: string | undefined) => {
   try {
-    if (typeof n === "undefined") return n;
+    if (typeof n === 'undefined') return n;
     const val = BigInt(n);
     return val;
   } catch {
@@ -167,22 +167,22 @@ export const BigIntCast = (n: string | undefined) => {
 };
 
 export const textClassName = (isEmpty: boolean) =>
-  `${isEmpty ? "italic" : ""} text-${
-    isEmpty ? "foreground/50" : "foreground"
-  } font-${isEmpty ? "light" : "normal"}}`;
+  `${isEmpty ? 'italic' : ''} text-${
+    isEmpty ? 'foreground/50' : 'foreground'
+  } font-${isEmpty ? 'light' : 'normal'}}`;
 
 export const isHtml = (fileName: string) => {
-  const isHtml = /.*\.(html\?.+|html)$/.test(fileName.toLowerCase());
+  const isHtml = /.*\.(html\?.+|html)$/.test(fileName?.toLowerCase());
   return isHtml;
 };
 
 export const isVideo = (fileName: string) => {
-  const isVideo = /.*\.(mp4|ogg|webm)$/.test(fileName.toLowerCase());
+  const isVideo = /.*\.(mp4|ogg|webm)$/.test(fileName?.toLowerCase());
   return isVideo;
 };
 
 export const is3dModel = (fileName: string) => {
-  const isGltf = /.*\.gltf$/.test(fileName.toLowerCase());
+  const isGltf = /.*\.gltf$/.test(fileName?.toLowerCase());
   return isGltf;
 };
 

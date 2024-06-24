@@ -4,8 +4,8 @@ import { OrderItemType } from '~/api';
 import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
 import type { CollectiblesListProps } from '~/app/(page)/(marketplace)/collection/[chainParam]/[collectionId]/orderbook/[mode]/_components/Content/Collectibles/Grid/OrderbookTypes';
 import { useCartItem } from '~/hooks/cart/useCartItem';
-import { _addToCart_ } from '~/stores';
-import type { AddToCartData } from '~/stores/cart/types';
+import { _addToCart_ } from '~/lib/stores';
+import type { AddToCartData } from '~/lib/stores/cart/types';
 
 import { Button } from '$ui';
 

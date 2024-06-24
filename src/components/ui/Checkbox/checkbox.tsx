@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 
 const Checkbox = React.forwardRef<

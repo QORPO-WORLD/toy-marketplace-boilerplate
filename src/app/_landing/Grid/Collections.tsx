@@ -1,6 +1,6 @@
 import { type MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/queries';
-import { getQueryClient } from '~/queries/getQueryClient';
+import { metadataQueries } from '~/lib/queries';
+import { getQueryClient } from '~/lib/queries/getQueryClient';
 
 import { Flex, Text } from '$ui';
 import { CollectionsGrid } from './Grid';

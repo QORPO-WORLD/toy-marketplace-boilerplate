@@ -26,9 +26,9 @@ import { useOrderbookApprovals } from '~/hooks/orderbook/useOrderbookApprovals';
 import type { OrderbookFormData } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookFormData } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
+import { getMarketplaceFeePercentage } from '~/lib/stores/marketConfig';
 import { transactionNotification } from '~/modals/Notifications/transactionNotification';
 import { getFrontEndFeeAmount } from '~/sdk/niftyswap-v2';
-import { getMarketplaceFeePercentage } from '~/stores/marketConfig';
 import type {
   CreateRequestParams,
   GenerateStepsOrderbookOrder,

@@ -1,10 +1,10 @@
 import { formatDecimals } from '~/api';
 import { OrderItemType } from '~/api/types';
 import { type MarketConfig } from '~/config/marketplace';
+import type { AddToCartData } from '~/lib/stores/cart/types';
+import { CartType } from '~/lib/stores/cart/types';
 import type { AddToCartButtonProps } from '~/modules/CollectableGrid/AddToCartButton';
 import type { Badge } from '~/modules/CollectableGrid/CollectableCard';
-import type { AddToCartData } from '~/stores/cart/types';
-import { CartType } from '~/stores/cart/types';
 import { defaultSelectionQuantity } from '~/utils/quantity';
 
 import type { TokenBalance } from '@0xsequence/indexer';

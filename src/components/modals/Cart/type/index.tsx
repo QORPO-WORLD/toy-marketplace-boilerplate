@@ -3,7 +3,7 @@
 import { memo } from 'react';
 
 import { OrderItemType } from '~/api/types/order';
-import { cartState } from '~/stores';
+import { cartState } from '~/lib/stores';
 
 import { OrderbookOrderComponents } from './orderbook';
 import { TransferOrderComponents } from './transfer';

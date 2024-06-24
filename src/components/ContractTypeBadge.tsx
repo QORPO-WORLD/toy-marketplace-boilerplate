@@ -1,6 +1,6 @@
 'use client';
 
-import { metadataQueries } from '~/queries';
+import { metadataQueries } from '~/lib/queries';
 
 import { Badge } from '$ui';
 import { useQuery } from '@tanstack/react-query';

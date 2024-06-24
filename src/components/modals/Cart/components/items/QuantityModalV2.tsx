@@ -4,8 +4,8 @@ import type { FormEvent } from 'react';
 import { useState } from 'react';
 
 import { PoolAvatar } from '~/components/Avatars';
-import type { CartItem } from '~/stores';
-import { editQuantity } from '~/stores';
+import type { CartItem } from '~/lib/stores';
+import { editQuantity } from '~/lib/stores';
 import { formatDecimals } from '~/utils/helpers';
 import { getThemeManagerElement } from '~/utils/theme';
 

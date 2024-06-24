@@ -1,13 +1,8 @@
-/* eslint-disable jsx-a11y/alt-text */
 'use client';
 
 import { forwardRef, memo } from 'react';
 
-import { cn } from '../css/utils';
-
-/* eslint-disable jsx-a11y/alt-text */
-
-/* eslint-disable jsx-a11y/alt-text */
+import { cn } from '$ui';
 
 export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   src?: string;
@@ -45,6 +40,7 @@ export const BaseImage = memo(
 
       return (
         <div className={cn('rounded-md', containerClassName)}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             ref={ref}
             className={cn(

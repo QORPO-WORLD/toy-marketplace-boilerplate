@@ -1,6 +1,6 @@
+import { Flex } from '$ui';
 import Inventory from './Inventory';
 import type { Metadata } from 'next';
-import { Flex } from 'system';
 
 const InventoryPage = async ({
   params,

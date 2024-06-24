@@ -4,8 +4,8 @@ import { CurrencyAvatar } from '~/components/Avatars';
 import { getPlatformFeeRecipient } from '~/config';
 import { useOrderSummaryData } from '~/hooks/cart/useOrderSummaryData';
 import { useExchange } from '~/hooks/data';
-import { cartState } from '~/stores';
-import { getMarketplaceFeePercentage } from '~/stores/marketConfig';
+import { cartState } from '~/lib/stores';
+import { getMarketplaceFeePercentage } from '~/lib/stores/marketConfig';
 import { formatDecimals, formatDisplay } from '~/utils/helpers';
 
 import {

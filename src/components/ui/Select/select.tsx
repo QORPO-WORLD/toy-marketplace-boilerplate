@@ -4,9 +4,11 @@
 import * as React from 'react';
 import { Controller } from 'react-hook-form';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { ChevronDownIcon } from 'system/icons';
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
 

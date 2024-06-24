@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import { CloseIcon } from '../icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 

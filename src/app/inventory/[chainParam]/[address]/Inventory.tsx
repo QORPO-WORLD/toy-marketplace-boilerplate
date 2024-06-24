@@ -3,16 +3,16 @@
 import { useEffect } from 'react';
 
 import { Spinner } from '~/components/Spinner';
+import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { getChainId } from '~/config/networks';
+import { Routes } from '~/lib/routes';
 import { NetworkSelectModalContent } from '~/modals/NetworkSelectModal';
-import { ConnectButton } from '~/modules/ConnectButton';
-import { Routes } from '~/routes';
 import { getThemeManagerElement } from '~/utils/theme';
 
+import { Button, Dialog, Flex, Image, Text } from '$ui';
 import { InventoryTabs } from './_components/Tabs';
 import { ethers } from 'ethers';
 import { useRouter } from 'next/navigation';
-import { Button, Dialog, Flex, Image, Text } from 'system';
 import { useAccount, useEnsAddress } from 'wagmi';
 
 const Inventory = ({

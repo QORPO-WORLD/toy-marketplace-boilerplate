@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as SwitchPrimitives from '@radix-ui/react-switch';
 import { type VariantProps, cva } from 'class-variance-authority';
 

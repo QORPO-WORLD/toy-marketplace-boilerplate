@@ -5,9 +5,9 @@ import { CurrencyAvatar } from '~/components/Avatars';
 import { classNames } from '~/config/classNames';
 import { useCollectionMetadata } from '~/hooks/data';
 import { useCollectionType } from '~/hooks/utils/useCollectionType';
+import type { CartItem } from '~/lib/stores';
+import { editQuantity, removeFromCart } from '~/lib/stores';
 import type { OrderRequest } from '~/sdk/orderbook/clients/Orderbook';
-import type { CartItem } from '~/stores';
-import { editQuantity, removeFromCart } from '~/stores';
 
 import {
   Button,

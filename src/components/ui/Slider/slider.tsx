@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '../css/utils';
+import { cn } from '$ui';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 
 const Slider = React.forwardRef<
