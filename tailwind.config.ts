@@ -4,7 +4,7 @@ import { type Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 export default {
-  content: ['./src/**/*.tsx', './system/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: ['./src/**/*.tsx'],
   theme: {
     extend: {
       colors: {
