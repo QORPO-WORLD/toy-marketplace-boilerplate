@@ -1,18 +1,11 @@
-import { decodeUrl } from './syncUrl';
-import type { SortType } from './types';
 import { CollectibleFilterState } from './types';
 import { proxy } from 'valtio';
 
 export const defaultCollectibleFilter = CollectibleFilterState.parse({});
 
-const initCollectibleFilter =
-  typeof window !== 'undefined'
-    ? decodeUrl(window.location.href)
-    : defaultCollectibleFilter;
-
 // STORE
 export const collectibleFilterState = proxy<CollectibleFilterState>({
-  ...initCollectibleFilter,
+  ...defaultCollectibleFilter,
 });
 
 // METHODS
@@ -26,10 +19,6 @@ export const setIncludeUserOrders = (state: boolean) =>
   (collectibleFilterState.includeUserOrders = state);
 export const setSearchText = (text: string) =>
   (collectibleFilterState.searchText = text);
-
-export const updateSortType = (sortType: SortType) => {
-  collectibleFilterState.sortBy = sortType;
-};
 
 export const clearSearchText = () => (collectibleFilterState.searchText = '');
 export const clearFilterOptions = () => {

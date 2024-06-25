@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 import {
   collectibleFilterState,
   updateSelectedPropertyFilter,
-} from '~/lib/stores/collectible';
+} from '~/lib/stores/collectible/Collectible';
 
 import { Accordion, Flex, Input, Text, ScrollArea, Checkbox, Label } from '$ui';
 import type { FilterProps } from './PropertyFilters';

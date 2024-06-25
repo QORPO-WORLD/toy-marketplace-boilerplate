@@ -1,17 +1,14 @@
 'use client';
 
-import type { ComponentProps } from 'react';
-import { useEffect } from 'react';
+import { useState, type ComponentProps } from 'react';
 
 import { classNames } from '~/config/classNames';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { metadataQueries } from '~/lib/queries';
-import { toggleCollectionSidebar, uiState } from '~/lib/stores/UI';
-import { setShowAvailableOnly } from '~/lib/stores/collectible';
-import { SortType } from '~/lib/stores/collectible/types';
-import { getThemeManagerElement } from '~/lib/utils/theme';
 
+// import { setShowAvailableOnly } from '~/lib/stores/collectible';
+// import { getThemeManagerElement } from '~/lib/utils/theme';
 import {
   Text,
   Button,
@@ -111,25 +108,6 @@ const CollectionSidebarContent = ({
   //   filterOptions.delete(includeUserOrdersToggle);
   // }
 
-  // useEffect(() => {
-  //   if (mode === 'buy' || mode === 'sell') {
-  //     updateSortType(SortType.PRICE_ASC);
-  //   } else {
-  //     updateSortType(SortType.CREATED_AT_DESC);
-  //   }
-  // }, [mode]);
-
-  const sortOptions = [
-    {
-      label: 'PRICE ASCENDING',
-      value: SortType.PRICE_ASC,
-    },
-    {
-      label: 'PRICE DESCENDING',
-      value: SortType.PRICE_DESC,
-    },
-  ];
-
   const addresses = [
     {
       label: 'Collection',
@@ -220,7 +198,11 @@ const CollectionSidebarContent = ({
 };
 
 function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
-  const { isCollectionSidebarOpen } = useSnapshot(uiState);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleState = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   return (
     <Portal>
@@ -229,18 +211,18 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
           className="!rounded-[inherit]"
           variant="muted"
           label="SHOW SIDEBAR"
-          onClick={toggleCollectionSidebar}
+          onClick={toggleState}
         />
       </Box>
 
       <Box
         onClick={(e) => {
           if (e.target === e.currentTarget) {
-            toggleCollectionSidebar();
+            toggleState();
           }
         }}
         className={cn(
-          isCollectionSidebarOpen
+          isOpen
             ? 'visible left-0 bg-background/50 backdrop-blur-sm'
             : 'invisible left-[-100vw] bg-transparent backdrop-blur-0',
           'fixed top-14 z-30 h-[calc(100vh-3.5rem)] w-screen transition-all',

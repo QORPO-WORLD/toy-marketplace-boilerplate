@@ -3,7 +3,10 @@
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 
-import { collectibleFilterState, updateSelectedPropertyFilter } from '~/lib/stores/collectible';
+import {
+  collectibleFilterState,
+  updateSelectedPropertyFilter,
+} from '~/lib/stores/collectible/Collectible';
 
 import { Button, Accordion, Flex, Input, Text } from '$ui';
 import type { FilterProps } from './PropertyFilters';
