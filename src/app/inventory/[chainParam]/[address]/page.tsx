@@ -1,3 +1,5 @@
+import { getMarketConfig } from '~/config/marketplace';
+
 import { Flex } from '$ui';
 import Inventory from './Inventory';
 import type { Metadata } from 'next';
@@ -7,6 +9,7 @@ const InventoryPage = async ({
 }: {
   params: { chainParam: string; address: string };
 }) => {
+  const marketConfig = await getMarketConfig();
   return (
     <Flex
       className="mx-auto h-full w-full max-w-[1400px] flex-col gap-24 py-12"
@@ -17,6 +20,7 @@ const InventoryPage = async ({
       <Inventory
         chainParam={params.chainParam}
         queryAccountAddress={params.address}
+        marketConfig={marketConfig}
       />
     </Flex>
   );

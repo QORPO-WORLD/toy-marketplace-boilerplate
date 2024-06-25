@@ -2,17 +2,16 @@
 
 import React, { useEffect } from 'react';
 
+import {
+  CollectibleCard,
+  type CollectibleCardData,
+} from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/CollectableCard';
 import { PoolAvatar } from '~/components/Avatars';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { useViewType } from '~/components/ViewTypeToggle/useViewType';
+import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
-import {
-  inventoryState,
-  getCollectionId,
-  setSearchResultAmountByCollection,
-} from '~/lib/stores/Inventory';
-import { marketConfig$ } from '~/lib/stores/marketConfig';
 
 import {
   Accordion,
@@ -25,6 +24,11 @@ import {
   Text,
   cn,
 } from '$ui';
+import {
+  inventoryState,
+  getCollectionId,
+  setSearchResultAmountByCollection,
+} from '../Inventory';
 import { getInvetoryCardData } from './helpers';
 import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
@@ -78,6 +82,7 @@ const CollectionSection = ({
   accountAddress,
   balance,
   allCollectionIds,
+  marketConfig,
 }: CollectionSectionProps) => {
   const {
     data: collectionUserBalanceResp,
@@ -106,8 +111,6 @@ const CollectionSection = ({
   );
 
   const { searchText } = useSnapshot(inventoryState);
-
-  const marketConfig = marketConfig$.get();
 
   const { isGridView } = useViewType();
 

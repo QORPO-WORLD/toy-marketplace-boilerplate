@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Spinner } from '~/components/Spinner';
 import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
+import type { MarketConfig } from '~/config/marketplace';
 import { getChainId } from '~/config/networks';
 import { Routes } from '~/lib/routes';
 import { getThemeManagerElement } from '~/lib/utils/theme';
@@ -18,9 +19,11 @@ import { useAccount, useEnsAddress } from 'wagmi';
 const Inventory = ({
   chainParam,
   queryAccountAddress,
+  marketConfig,
 }: {
   chainParam: string;
   queryAccountAddress: string;
+  marketConfig: MarketConfig;
 }) => {
   const {
     isConnected,
@@ -112,7 +115,11 @@ const Inventory = ({
   }
 
   return (
-    <InventoryTabs chainId={chainId} inventoryAddress={inventoryAddress} />
+    <InventoryTabs
+      chainId={chainId}
+      inventoryAddress={inventoryAddress}
+      marketConfig={marketConfig}
+    />
   );
 };
 

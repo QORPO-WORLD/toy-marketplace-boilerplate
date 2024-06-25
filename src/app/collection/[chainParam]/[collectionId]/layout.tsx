@@ -38,7 +38,6 @@ const Layout = async ({
           marketConfig={marketConfig}
         />
       }
-      details={<></>}
       controls={
         <CollectionControls
           chainId={chainId}

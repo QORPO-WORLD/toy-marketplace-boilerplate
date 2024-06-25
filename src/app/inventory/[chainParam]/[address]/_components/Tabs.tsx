@@ -3,8 +3,8 @@
 import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
+import type { MarketConfig } from '~/config/marketplace';
 import { indexerQueries } from '~/lib/queries';
-import { marketConfig$ } from '~/lib/stores/marketConfig';
 import { compareAddress } from '~/lib/utils/helpers';
 
 import { Tabs, Flex, Text, Grid } from '$ui';
@@ -17,6 +17,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 type InventoryTabsProps = {
   chainId: number;
   inventoryAddress: string;
+  marketConfig: MarketConfig;
 };
 
 const inventoryTabsList = {
@@ -26,8 +27,8 @@ const inventoryTabsList = {
 export const InventoryTabs = ({
   chainId,
   inventoryAddress,
+  marketConfig,
 }: InventoryTabsProps) => {
-  const marketConfig = marketConfig$.get();
   const router = useRouter();
   const pathname = usePathname();
 

@@ -6,7 +6,6 @@ type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;
   sidebar: React.ReactNode;
   header: React.ReactNode;
-  details: React.ReactNode;
   controls: React.ReactNode;
   content: React.ReactNode;
 
@@ -26,7 +25,6 @@ export const CollectionViewPageLayout = ({
   banner,
   sidebar,
   header,
-  details,
   controls,
   content,
   collectionConfig,
@@ -67,7 +65,6 @@ export const CollectionViewPageLayout = ({
             {header}
           </Grid.Child>
           <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
-          <Grid.Child name="collection-details">{details}</Grid.Child>
           <Grid.Child
             name="collection-controls"
             className="sticky z-20"
@@ -113,7 +110,6 @@ export const CollectionViewPageLayout = ({
             `}
           >
             <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
-            <Grid.Child name="collection-details">{details}</Grid.Child>
             <Grid.Child
               name="collection-controls"
               className="sticky z-20"
