@@ -12,7 +12,6 @@ export const CollectibleFilterState = z.object({
   includeUserOrders: z.boolean().default(true),
   searchText: z.string().default(''),
   filterOptions: z.array(FilterValues).default([]),
-  sortBy: z.nativeEnum(SortType).default(SortType.PRICE_ASC),
 });
 
 export type CollectibleFilterState = z.infer<typeof CollectibleFilterState>;

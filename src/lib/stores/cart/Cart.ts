@@ -52,7 +52,6 @@ export const cartItemId = (
     `${item.collectibleMetadata.chainId}-` +
     `${item.collectibleMetadata.collectionAddress}-` +
     `${item.collectibleMetadata.tokenId}-` +
-    `${item.exchangeAddress}-` +
     `${item.orderbookOrderId}`
   );
 };
