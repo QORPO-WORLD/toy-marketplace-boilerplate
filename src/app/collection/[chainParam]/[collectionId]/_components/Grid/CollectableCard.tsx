@@ -4,36 +4,32 @@ import type { ComponentProps } from 'react';
 import { memo } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { useCartItem } from '~/hooks/cart/useCartItem';
-import { textClassName, truncateAtMiddle } from '~/utils/helpers';
+import { Routes } from '~/lib/routes';
+import { truncateAtMiddle, textClassName } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, Image, Text, cn, Box } from '$ui';
-import type { AddToCartButtonProps } from '../../../../../../components/buttons/AddToCartButton';
-import { AddToCartButton } from '../../../../../../components/buttons/AddToCartButton';
-import type { TokenBalance } from '@0xsequence/indexer';
+import type { TokenMetadata } from '@0xsequence/metadata';
 import NextLink from 'next/link';
-import type { UrlObject } from 'url';
 
-export type CollectibleCardData = CardProps | undefined | null;
-export type CardProps = {
-  loading?: boolean;
-  tokenId: string;
-  link: string | UrlObject;
-  name?: string;
-  image: string;
-  price?: {
-    loading?: boolean;
-    symbolUrl?: string;
-    value: string | number;
-    title?: number | string;
-    className?: string;
-  };
-  className?: string;
-  userData?: Pick<TokenBalance, 'balance'>;
-  priceData?: CollectiblePriceData;
-  addToCartButtonProps?: AddToCartButtonProps;
-  badges?: Badge[];
-};
+export type CollectibleCardData = TokenMetadata;
+// export type CardProps = {
+//   loading?: boolean;
+//   tokenId: string;
+//   name?: string;
+//   image: string;
+//   price?: {
+//     loading?: boolean;
+//     symbolUrl?: string;
+//     value: string | number;
+//     title?: number | string;
+//     className?: string;
+//   };
+//   className?: string;
+//   userData?: Pick<TokenBalance, 'balance'>;
+//   priceData?: any;
+//   // addToCartButtonProps?: AddToCartButtonProps;
+//   badges?: Badge[];
+// };
 
 export type Badge = {
   label: string;
@@ -49,7 +45,6 @@ export const CollectibleCard = ({ data }: { data: CollectibleCardData }) => {
       <Card
         loading
         image=""
-        link=""
         tokenId="-"
         name="-"
         price={{ symbolUrl: '', value: '' }}
@@ -64,22 +59,31 @@ export const CollectibleCard = ({ data }: { data: CollectibleCardData }) => {
       />
     );
   }
-  return <Card {...data} key={data.tokenId} />;
+  const { collectionId, chainParam } = Routes.collection.useParams();
+  return (
+    <Card
+      {...data}
+      key={data.tokenId}
+      collectionId={collectionId}
+      chainParam={chainParam}
+    />
+  );
 };
 
 const Card = memo(
   ({
     tokenId,
-    link,
     loading,
     name,
     image,
     price,
     badges,
     addToCartButtonProps,
+    collectionId,
+    chainParam,
   }: CardProps) => {
-    const addToCartData = addToCartButtonProps?.addToCartData;
-    const { cartItem } = useCartItem(addToCartData);
+    // const addToCartData = addToCartButtonProps?.addToCartData;
+    // const { cartItem } = useCartItem(addToCartData);
 
     return (
       <article
@@ -87,13 +91,20 @@ const Card = memo(
           classNames.collectibleSelectionIndicator,
           `relative flex h-full w-full flex-col align-top`,
           'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
-          !!cartItem
-            ? `${getOrderTypeOutlineColor(addToCartData?.item.itemType)}`
-            : '',
+          // !!cartItem
+          //   ? `${getOrderTypeOutlineColor(addToCartData?.item.itemType)}`
+          //   : '',
           'z-10 overflow-hidden !outline transition-all',
         )}
       >
-        <NextLink href={link} className="peer h-full p-2">
+        <NextLink
+          href={Routes.collectible({
+            chainParam,
+            collectionId,
+            tokenId,
+          })}
+          className="peer h-full p-2"
+        >
           <Image.Base
             src={image}
             containerClassName="bg-foreground/10 aspect-square rounded-sm"
@@ -108,7 +119,7 @@ const Card = memo(
             badges={badges}
           />
         </NextLink>
-        {addToCartButtonProps && (
+        {/* {addToCartButtonProps && (
           <AddToCartButton
             className={cn(
               'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
@@ -116,11 +127,12 @@ const Card = memo(
             )}
             {...addToCartButtonProps}
           />
-        )}
+        )} */}
       </article>
     );
   },
 );
+Card.displayName = 'CollectableCard';
 
 const Footer = ({
   tokenId,

@@ -1,12 +1,9 @@
-import type { ComponentProps } from 'react';
-
 import { classNames } from '~/config/classNames';
 
 import { Grid, cn } from '$ui';
-import { FilterBadges } from '../../../../_components';
 import { OrderBookContent } from './marketplaceTypes/orderbook';
 
-const CollectionContentBase = ({ children }: { children: React.ReactNode }) => {
+const CollectionContent = () => {
   return (
     <Grid.Root
       className={cn(classNames.collectionContent, 'min-h-screen')}
@@ -19,20 +16,7 @@ const CollectionContentBase = ({ children }: { children: React.ReactNode }) => {
       / 100%
       `}
     >
-      {children}
+      <OrderBookContent {...props} />
     </Grid.Root>
   );
 };
-
-export const CollectionContent = (
-  props: ComponentProps<typeof OrderBookContent>,
-) => (
-  <CollectionContentBase>
-    <FilterBadges
-      marketType="orderbook"
-      collectionAddress={props.collectionId}
-      chainId={props.chainId}
-    />
-    <OrderBookContent {...props} />
-  </CollectionContentBase>
-);

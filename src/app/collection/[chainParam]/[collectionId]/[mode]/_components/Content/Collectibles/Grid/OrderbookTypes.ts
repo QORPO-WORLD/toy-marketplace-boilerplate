@@ -1,8 +1,3 @@
-import type {
-  DefaultCurrency,
-  GetCollectiblesUserBalancesResponse,
-} from '~/api';
-
 import type { OrderbookOrder } from '@0xsequence/indexer';
 
 export type CollectiblesListProps = {

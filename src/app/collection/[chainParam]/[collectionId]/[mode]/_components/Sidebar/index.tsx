@@ -219,28 +219,6 @@ const CollectionSidebarContent = ({
   );
 };
 
-// const collectionSidebarContent = ({
-//   chainId,
-//   collectionAddress,
-// }: BaseCollectionSidebarProps) => {
-
-//   return (
-//     <BaseCollectionSidebarContent
-//       sortSelector={{
-//         controls: {
-//           value: sortBy,
-//           onValueChange: updateSortType,
-//         },
-//         options: sortOptions,
-//       }}
-//       filterSwitches={[...filterOptions]}
-//       propertyFilters={{ data: filters?.data || [], loading: isFiltersLoading }}
-//       disableFilters={mode === 'activity'}
-//       addresses={addresses}
-//     />
-//   );
-// };
-
 function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
   const { isCollectionSidebarOpen } = useSnapshot(uiState);
 

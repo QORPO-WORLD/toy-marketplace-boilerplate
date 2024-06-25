@@ -3,26 +3,26 @@ import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
 import { compareAddress } from '~/lib/utils/helpers';
 
-import CollectionBanner from './_components/Banner';
-import CollectionControls from './_components/Controls';
-import CollectionHeader from './_components/Header';
-import { CollectionViewPageLayout } from './_components/Layout';
-import { CollectionSidebar } from './_components/Sidebar';
+import CollectionBanner from './[mode]/_components/Banner';
+import CollectionControls from './[mode]/_components/Controls';
+import CollectionHeader from './[mode]/_components/Header';
+import { CollectionViewPageLayout } from './[mode]/_components/Layout';
+import { CollectionSidebar } from './[mode]/_components/Sidebar';
 
-const Page = async ({
+const Layout = async ({
   params: { chainParam, collectionId, mode },
+  children,
 }: {
+  children: React.ReactNode;
   params: typeof Routes.collection.params;
 }) => {
   const chainId = getChainId(chainParam)!;
   const marketConfig = await getMarketConfig();
 
-  const collectionConfig = marketConfig.collections?.find((c) => {
-    console.log(c.collectionAddress, collectionId, chainId);
-    return (
-      compareAddress(c.collectionAddress, collectionId) && chainId == c.chainId
-    );
-  });
+  const collectionConfig = marketConfig.collections?.find(
+    (c) =>
+      compareAddress(c.collectionAddress, collectionId) && chainId == c.chainId,
+  );
 
   return (
     <CollectionViewPageLayout
@@ -46,14 +46,11 @@ const Page = async ({
           mode={mode}
         />
       }
-      content={
-        <></>
-        // <CollectionContent chainId={chainId} collectionId={collectionId} />
-      }
+      content={children}
     />
   );
 };
 
-export default Page;
+export default Layout;
 
 export const runtime = 'edge';

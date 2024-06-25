@@ -20,7 +20,7 @@ const collectionId = isAddress;
 const collectionParams = z.object({
   chainParam,
   collectionId,
-  mode: swapModeEnum,
+  mode: swapModeEnum.optional(),
 });
 
 const tab = ['details', 'listings', 'offers'] as const;

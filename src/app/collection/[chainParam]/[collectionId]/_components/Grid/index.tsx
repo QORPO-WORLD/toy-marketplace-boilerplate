@@ -50,6 +50,7 @@ export const CollectiblesGrid = ({
 
 type GridContainerProps = {
   className: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
 
@@ -74,3 +75,5 @@ const GridContainer = forwardRef(
     );
   },
 );
+
+GridContainer.displayName = 'GridContainer';
