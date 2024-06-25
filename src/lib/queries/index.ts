@@ -1,4 +1,3 @@
-import { collectibleFilterState } from '../stores/collectible';
 import {
   type BatchCollectionArgs,
   type CollectionArgs,
@@ -6,13 +5,16 @@ import {
   fetchCollectionsMetadata,
   fetchTokenMetadata,
   fetchCollectionFilters,
+  fetchTokenBalances,
+  type TokenBalancesArgs,
 } from './fetchers';
+import { type Page } from '@0xsequence/indexer';
 import {
   type GetTokenMetadataArgs,
   type GetContractInfoReturn,
-  TokenCollectionFiltersArgs,
+  type TokenCollectionFiltersArgs,
 } from '@0xsequence/metadata';
-import { queryOptions } from '@tanstack/react-query';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 
 type BatchCollectionReturn = ReturnType<typeof fetchCollectionsMetadata>;
 
@@ -50,5 +52,19 @@ export const metadataQueries = {
     queryOptions({
       queryKey: metadataQueries.collectibleFilters(),
       queryFn: () => fetchCollectionFilters(args),
+    }),
+};
+
+export const indexerQueries = {
+  all: () => ['indexer'],
+  tokenBalances: () => [...indexerQueries.all(), 'tokenBalances'],
+  tokenBalance: (args: TokenBalancesArgs) =>
+    infiniteQueryOptions({
+      queryKey: indexerQueries.tokenBalances(),
+      queryFn: ({ pageParam }: { pageParam?: Page }) =>
+        fetchTokenBalances({ ...args, page: pageParam }),
+      initialPageParam: undefined,
+      getNextPageParam: ({ page: pageResponse }) =>
+        pageResponse.more ? pageResponse : undefined,
     }),
 };

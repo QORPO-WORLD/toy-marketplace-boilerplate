@@ -1,6 +1,7 @@
-import { getMetadataClient } from './clients';
+import { getIndexerClient, getMetadataClient } from './clients';
+import type { GetTokenBalancesArgs } from '@0xsequence/indexer';
 import {
-  TokenCollectionFiltersArgs,
+  type TokenCollectionFiltersArgs,
   type GetTokenMetadataArgs,
 } from '@0xsequence/metadata';
 import { group } from 'radash';
@@ -56,4 +57,37 @@ export const fetchCollectionFilters = (args: TokenCollectionFiltersArgs) => {
   const metadata = getMetadataClient(args.chainID);
 
   return metadata.tokenCollectionFilters(args).then((resp) => resp.filters);
+};
+
+export type TokenBalancesArgs = {
+  chainId: number;
+  accountAddress: string;
+  contractAddress?: string;
+  includeMetadata?: boolean;
+  page?: GetTokenBalancesArgs['page'];
+};
+
+export const fetchTokenBalances = ({
+  chainId,
+  accountAddress,
+  contractAddress,
+  includeMetadata = true,
+  page,
+}: TokenBalancesArgs) => {
+  const indexer = getIndexerClient(chainId);
+  const includeContracts = [];
+  if (contractAddress) {
+    includeContracts.push(contractAddress);
+  }
+
+  return indexer.getTokenBalances({
+    accountAddress,
+    contractAddress,
+    includeMetadata,
+    metadataOptions: {
+      verifiedOnly: true,
+      includeContracts,
+    },
+    page,
+  });
 };

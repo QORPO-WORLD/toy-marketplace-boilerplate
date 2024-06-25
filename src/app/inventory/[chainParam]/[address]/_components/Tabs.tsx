@@ -3,13 +3,15 @@
 import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
-import { useWalletBalances } from '~/hooks/data';
+import { indexerQueries } from '~/lib/queries';
 import { marketConfig$ } from '~/lib/stores/marketConfig';
-import { compareAddress } from '~/utils/address';
+import { compareAddress } from '~/lib/utils/helpers';
 
 import { Tabs, Flex, Text, Grid } from '$ui';
 import { InventoryCollectiblesContent } from './Content/CollectiblesContent';
 import { InventoryFilters } from './Filters';
+import { ContractType, type TokenBalance } from '@0xsequence/indexer';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 type InventoryTabsProps = {
@@ -38,19 +40,22 @@ export const InventoryTabs = ({
   searchParams.set('activeTab', activeTab);
 
   const {
-    data: userTokenBalancesResp,
+    data: userTokenBalancesRespPage,
     isLoading: isUserTokenBalancesLoading,
     isError: isUserTokenBalancesError,
-  } = useWalletBalances({
-    chainId: String(chainId),
-    address: inventoryAddress,
-  });
+  } = useInfiniteQuery(
+    indexerQueries.tokenBalance({
+      chainId,
+      includeMetadata: false,
+      accountAddress: inventoryAddress,
+    }),
+  );
 
   if (isUserTokenBalancesLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
   }
 
-  if (isUserTokenBalancesError || userTokenBalancesResp?.error) {
+  if (isUserTokenBalancesError) {
     return (
       <Text className="w-full text-center text-destructive">
         Error occured. Failed to fetch the wallet collectible balances.
@@ -58,14 +63,15 @@ export const InventoryTabs = ({
     );
   }
 
-  if (!userTokenBalancesResp || userTokenBalancesResp.data === null) {
+  if (!userTokenBalancesRespPage) {
     return <Text className="w-full text-center text-pink">Empty.</Text>;
   }
 
+  const userTokenBalancesResp = userTokenBalancesRespPage.pages[0];
+
   // collectible balances and counts
-  console.log(userTokenBalancesResp);
-  const collectionBalances = userTokenBalancesResp.balances.filter(
-    (b) => b.contractType != 'ERC20',
+  const collectionBalances = userTokenBalancesResp?.balances.filter(
+    (b) => b.contractType != ContractType.ERC20,
   );
 
   const filteredCollecionBalances: TokenBalance[] = collectionBalances.filter(

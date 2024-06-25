@@ -6,18 +6,13 @@ import { PoolAvatar } from '~/components/Avatars';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { useViewType } from '~/components/ViewTypeToggle/useViewType';
-import { useCollectionUserBalances } from '~/hooks/balances/useCollectionUserBalances';
-import { useCollectionMetadata } from '~/hooks/data';
-import { useCollectionType } from '~/hooks/utils/useCollectionType';
+import { indexerQueries, metadataQueries } from '~/lib/queries';
 import {
   inventoryState,
   getCollectionId,
   setSearchResultAmountByCollection,
 } from '~/lib/stores/Inventory';
-import { configState, marketConfig$ } from '~/lib/stores/marketConfig';
-import { AddToCartButton } from '~/modules/CollectableGrid/AddToCartButton';
-import type { CollectibleCardData } from '~/modules/CollectableGrid/CollectableCard';
-import { CollectibleCard } from '~/modules/CollectableGrid/CollectableCard';
+import { marketConfig$ } from '~/lib/stores/marketConfig';
 
 import {
   Accordion,
@@ -32,6 +27,7 @@ import {
 } from '$ui';
 import { getInvetoryCardData } from './helpers';
 import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import Fuse from 'fuse.js';
 import { useSnapshot } from 'valtio';
 
@@ -58,7 +54,7 @@ export const InventoryCollectiblesContent = ({
         className="w-full"
         defaultValue={collectionBalances.map((c) => c.contractAddress)}
       >
-        {collectionBalances.map((c, i) => {
+        {collectionBalances.map((c) => {
           return (
             <CollectionSection
               key={c.contractAddress}
@@ -88,32 +84,26 @@ const CollectionSection = ({
     isLoading: isCollectionUserBalanceLoading,
     isError: isCollectionUserBalanceError,
     fetchNextPage,
-    hasNextPage,
     isFetchingNextPage,
-  } = useCollectionUserBalances({
-    chainId,
-    contractAddress,
-    userAddress: accountAddress,
-    pageSize: 16,
-  });
+    hasNextPage,
+  } = useInfiniteQuery(
+    indexerQueries.tokenBalance({
+      chainId,
+      contractAddress,
+      accountAddress,
+    }),
+  );
 
   const {
-    data: collectionMetadataResp,
+    data: collectionMetadata,
     isLoading: isCollectionMetadataLoading,
     isError: isCollectionMetadataError,
-  } = useCollectionMetadata({
-    chainID: String(chainId),
-    contractAddress,
-  });
-
-  const {
-    isERC1155,
-    isERC721,
-    isLoading: isCollectionTypeLoading,
-  } = useCollectionType({
-    chainId: chainId,
-    collectionAddress: contractAddress,
-  });
+  } = useQuery(
+    metadataQueries.collection({
+      chainID: chainId.toString(),
+      collectionId: contractAddress,
+    }),
+  );
 
   const { searchText } = useSnapshot(inventoryState);
 
@@ -160,8 +150,6 @@ const CollectionSection = ({
     );
   }, [searchText, collectibles]);
 
-  const collectionMetadata = collectionMetadataResp?.data || null;
-
   if (isCollectionUserBalanceLoading || collectibles.length === 0) {
     return null;
   }
@@ -171,7 +159,7 @@ const CollectionSection = ({
       return;
     }
 
-    fetchNextPage();
+    void fetchNextPage();
   };
 
   return (
@@ -189,18 +177,16 @@ const CollectionSection = ({
             <Flex className="items-center gap-3">
               <Avatar.Base>
                 <Avatar.Image
-                  alt={collectionMetadata?.contractInfo?.name}
-                  src={collectionMetadata?.contractInfo?.logoURI}
+                  alt={collectionMetadata?.name}
+                  src={collectionMetadata?.logoURI}
                 />
                 <Avatar.Fallback />
               </Avatar.Base>
 
               <Text className="text-sm">
-                {collectionMetadata?.contractInfo?.name || contractAddress}
+                {collectionMetadata?.name || contractAddress}
               </Text>
-              <NetworkIcon
-                chainId={Number(collectionMetadata?.contractInfo?.chainId)}
-              />
+              <NetworkIcon chainId={Number(collectionMetadata?.chainId)} />
               <ContractTypeBadge
                 chainId={chainId}
                 collectionAddress={contractAddress}
@@ -219,8 +205,7 @@ const CollectionSection = ({
           {collectibles.map((c) => {
             const data = getInvetoryCardData({
               collectible: c,
-              isERC721,
-              isERC1155,
+              collectionMetadata,
               marketConfig,
             });
             return isGridView ? (
