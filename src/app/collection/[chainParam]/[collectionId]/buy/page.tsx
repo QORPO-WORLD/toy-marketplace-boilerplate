@@ -34,8 +34,6 @@ const CollectionBuyPage = ({ params }: CollectionBuyPageParams) => {
       }),
   });
 
-  console.log(collectiblesResponse);
-
   const collectibles = collectiblesResponse.data?.pages[0]?.tokenMetadata ?? [];
   return (
     <CollectiblesGrid

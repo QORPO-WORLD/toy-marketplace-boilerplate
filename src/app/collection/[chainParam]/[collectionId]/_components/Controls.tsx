@@ -15,7 +15,7 @@ const CollectionControls = ({
 }: {
   chainId: number;
   collectionId: string;
-  mode: string;
+  mode?: 'buy' | 'sell';
 }) => {
   const router = useRouter();
 
