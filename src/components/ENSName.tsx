@@ -1,6 +1,6 @@
 'use client';
 
-import { truncateAtMiddle } from '~/utils/helpers';
+import { truncateAtMiddle } from '~/lib/utils/helpers';
 
 import type { Address } from 'viem';
 import { useEnsName } from 'wagmi';

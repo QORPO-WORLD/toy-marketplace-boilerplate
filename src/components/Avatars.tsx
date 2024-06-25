@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { truncateAtMiddle } from '~/utils/helpers';
+import { truncateAtMiddle } from '~/lib/utils/helpers';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
 import { NetworkIcon } from './NetworkLabel';

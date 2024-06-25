@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { classNames } from '~/config/classNames';
 import { getChain } from '~/config/networks';
-import { formatFiatValue } from '~/utils/price';
+import { formatFiatValue } from '~/lib/utils/price';
 
 import { Flex, Text, Button, cn, LinkIcon } from '$ui';
 import ENSName from './ENSName';

@@ -1,4 +1,6 @@
 export const classNames = {
+  themeManager: 'theme-manager',
+
   /* ********************* */
   /* COMPONENTS */
   currencyAvatar: 'currency-avatar',
