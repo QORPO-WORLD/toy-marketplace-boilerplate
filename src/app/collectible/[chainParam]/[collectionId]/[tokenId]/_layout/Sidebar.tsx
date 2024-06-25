@@ -29,8 +29,8 @@ export default function Sidebar() {
           collectionImageUrl={
             collectionMetadata.data?.extensions?.ogImage ?? ''
           }
-          tokenName={collectibleMetadata?.data?.[0]?.name}
-          tokenDecimals={collectibleMetadata?.data?.[0]?.decimals ?? 0}
+          tokenName={collectibleMetadata?.data?.name}
+          tokenDecimals={collectibleMetadata?.data?.decimals ?? 0}
           loading={
             collectibleMetadata.isLoading || collectionMetadata.isLoading
           }

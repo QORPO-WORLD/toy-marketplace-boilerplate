@@ -1,9 +1,9 @@
 'use client';
 
 import { InfoGrid } from '~/components/InfoGrid';
-import { formatAttributes, formatProperties } from '~/utils/utils';
 
 import { Box } from '$ui';
+import { formatAttributes, formatProperties } from './helpers';
 import type { TokenMetadata } from '@0xsequence/metadata';
 
 interface CollectiblePropertiesProps {

@@ -1,5 +1,8 @@
 import { getMetadataClient } from './clients';
-import { type GetTokenMetadataArgs } from '@0xsequence/metadata';
+import {
+  TokenCollectionFiltersArgs,
+  type GetTokenMetadataArgs,
+} from '@0xsequence/metadata';
 import { group } from 'radash';
 
 export type CollectionArgs = {
@@ -46,5 +49,11 @@ export const fetchCollectionMetadata = (args: CollectionArgs) => {
 export const fetchTokenMetadata = (args: GetTokenMetadataArgs) => {
   const metadata = getMetadataClient(args.chainID);
 
-  return metadata.getTokenMetadata(args).then((resp) => resp.tokenMetadata);
+  return metadata.getTokenMetadata(args).then((resp) => resp.tokenMetadata[0]);
+};
+
+export const fetchCollectionFilters = (args: TokenCollectionFiltersArgs) => {
+  const metadata = getMetadataClient(args.chainID);
+
+  return metadata.tokenCollectionFilters(args).then((resp) => resp.filters);
 };

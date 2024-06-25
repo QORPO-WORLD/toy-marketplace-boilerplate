@@ -1,18 +1,6 @@
-'use client';
-
-import React from 'react';
-
+import { Box, Flex, Grid, Text, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import { type MarketConfig } from '~/config/marketplace';
-import { compareAddress } from '~/utils/address';
-
-import { Box, Flex, Grid, Text, cn } from '$ui';
-import useCollectionParams from '../../../_hooks/useCollectionParams';
-import CollectionBanner from './Banner';
-import { CollectionContent } from './Content';
-import CollectionControls from './Controls';
-import CollectionHeader from './Header';
-import { CollectionSidebar } from './Sidebar';
+import type { MarketConfig } from '~/config/marketplace';
 
 type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;
@@ -31,9 +19,9 @@ const defaultGridContainerClassName = [
   '@container/collectionViewContainer',
   'px-2 md:px-4 xl:px-8',
   'min-h-screen gap-y-8 md:gap-y-12',
-];
+] as const;
 
-const CollectionViewPageLayout = ({
+export const CollectionViewPageLayout = ({
   chainError,
   banner,
   sidebar,
@@ -99,6 +87,7 @@ const CollectionViewPageLayout = ({
         <>
           <Box
             className="relative mb-4 h-[300px] lg:mb-12"
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             style={{ '--bannerUrl': `url(${collectionConfig?.bannerUrl})` }}
           >
@@ -141,37 +130,3 @@ const CollectionViewPageLayout = ({
     }
   }
 };
-
-type CollectionViewPageProps = {
-  whitelabelProps: MarketConfig;
-};
-
-const CollectionView = ({ whitelabelProps }: CollectionViewPageProps) => {
-  const { collectionId, chainId } = useCollectionParams();
-
-  const collectionConfig = whitelabelProps?.collections?.find(
-    (c) =>
-      compareAddress(c.collectionAddress, collectionId) &&
-      chainId === c.chainId,
-  );
-
-  return (
-    <CollectionViewPageLayout
-      collectionConfig={collectionConfig}
-      banner={<CollectionBanner bannerUrl={collectionConfig?.bannerUrl} />}
-      sidebar={
-        <CollectionSidebar chainId={chainId} collectionAddress={collectionId} />
-      }
-      header={
-        <CollectionHeader chainId={chainId} collectionAddress={collectionId} />
-      }
-      details={<></>}
-      controls={<CollectionControls />}
-      content={
-        <CollectionContent chainId={chainId} collectionId={collectionId} />
-      }
-    />
-  );
-};
-
-export default CollectionView;

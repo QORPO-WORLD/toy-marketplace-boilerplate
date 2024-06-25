@@ -16,7 +16,7 @@ import { _addToCart_ } from '~/lib/stores';
 import { CartType } from '~/lib/stores/cart/types';
 import { transactionNotification } from '~/modals/Notifications/transactionNotification';
 import {
-  ORDERBOOK_CONTRACT_ADDRESS,
+  SEQUENCE_MARKET_V1_ADDRESS,
   Orderbook,
 } from '~/sdk/orderbook/clients/Orderbook';
 import { defaultSelectionQuantity } from '~/utils/quantity';
@@ -74,7 +74,7 @@ const UserOffers = ({
 
   const orderbook = new Orderbook({
     chainId: chainId,
-    contractAddress: ORDERBOOK_CONTRACT_ADDRESS,
+    contractAddress: SEQUENCE_MARKET_V1_ADDRESS,
   });
 
   const cancelOnClick = async (orderId: string) => {

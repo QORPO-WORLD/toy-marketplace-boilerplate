@@ -1,13 +1,16 @@
+import { collectibleFilterState } from '../stores/collectible';
 import {
   type BatchCollectionArgs,
   type CollectionArgs,
   fetchCollectionMetadata,
   fetchCollectionsMetadata,
   fetchTokenMetadata,
+  fetchCollectionFilters,
 } from './fetchers';
 import {
   type GetTokenMetadataArgs,
   type GetContractInfoReturn,
+  TokenCollectionFiltersArgs,
 } from '@0xsequence/metadata';
 import { queryOptions } from '@tanstack/react-query';
 
@@ -41,5 +44,11 @@ export const metadataQueries = {
     queryOptions({
       queryKey: [...metadataQueries.collectables(), args],
       queryFn: () => fetchTokenMetadata(args),
+    }),
+  collectibleFilters: () => [...metadataQueries.all(), 'collectibleFilters'],
+  collectibleFilter: (args: TokenCollectionFiltersArgs) =>
+    queryOptions({
+      queryKey: metadataQueries.collectibleFilters(),
+      queryFn: () => fetchCollectionFilters(args),
     }),
 };

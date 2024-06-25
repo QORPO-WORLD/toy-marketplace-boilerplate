@@ -2,17 +2,10 @@
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
-import { useCollectibleBalance } from '~/hooks/data';
-import { useIsConnected } from '~/hooks/wallet/useIsConnected';
-import {
-  formatDecimals,
-  formatDisplay,
-  truncateAtMiddle,
-} from '~/utils/helpers';
+import { truncateAtMiddle } from '~/lib/utils/helpers';
 
-import { Avatar, Badge, Flex, Text, cn } from '$ui';
+import { Avatar, Flex, Text, cn } from '$ui';
 import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 
 type CollectibleInfoProps = {
@@ -71,7 +64,7 @@ export const CollectibleInfo = ({
               )}
               href={''}
             >
-              {collectionName || '<unknown>'}
+              {collectionName ?? '<unknown>'}
             </NextLink>
             <NetworkIcon size="sm" chainId={chainId} />
           </Flex>

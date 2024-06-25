@@ -5,8 +5,6 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
-import type { MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/lib/queries';
 
 import {
   Grid,
@@ -20,37 +18,36 @@ import {
   ChevronUpIcon,
   BugIcon,
 } from '$ui';
-import { useQuery } from '@tanstack/react-query';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
 
-interface CollectionHeaderProps {
+type BaseCollectionHeaderProps = {
+  isLoading?: boolean;
+  isError?: boolean;
+  name: string;
+  logo: string;
+  symbol: string;
+  contractAddress: string;
+  image?: string;
   chainId: number;
-  collectionAddress: string;
-  marketConfig: MarketConfig;
-}
+  description?: string;
+  social?: { website?: string };
+  badges: { loading?: boolean; label: string; value: string; title?: string }[];
+};
 
 const MIN_HEIGHT = 140;
-const CollectionHeader = ({
+export const BaseCollectionHeader = ({
+  isLoading,
+  isError,
+  contractAddress,
+  name,
+  logo,
+  symbol,
+  image,
   chainId,
-  collectionAddress,
-  marketConfig,
-}: CollectionHeaderProps) => {
-  const collectionMetadata = useQuery(
-    metadataQueries.collection({
-      chainID: chainId.toString(),
-      collectionId: collectionAddress,
-    }),
-  );
-
-  const { data: collection, isLoading, isError } = collectionMetadata;
-  const name = collection?.name;
-  const logo = collection?.logoURI;
-  const symbol = collection?.symbol;
-  const image = collection?.extensions?.ogImage;
-  const description = collection?.extensions?.description;
-  const socials = marketConfig.socials;
-
+  description,
+  social,
+}: BaseCollectionHeaderProps) => {
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(
     'show-more',
@@ -101,7 +98,6 @@ const CollectionHeader = ({
       <Head>
         {image ? <link rel="preload" as="image" href={image} /> : null}
       </Head>
-
       <Grid.Root
         className={cn(classNames.collectionHeader, 'gap-x-4 gap-y-2')}
         template={`
@@ -114,7 +110,7 @@ const CollectionHeader = ({
         <Grid.Root
           className="gap-x-2"
           template={`
-        [row1-start] "collection-name collection-type-and-network  . collection-social" [row1-end]
+        [row1-start] "collection-name collection-type-and-network . collection-social" [row1-end]
         / minmax(auto, max-content) min-content min-content auto max-content 
         `}
         >
@@ -125,7 +121,7 @@ const CollectionHeader = ({
             <Avatar.Base>
               <Avatar.Image src={logo} />
               <Avatar.Fallback>
-                {symbol?.slice(0, 2).toUpperCase()}
+                {symbol.slice(0, 2).toUpperCase()}
               </Avatar.Fallback>
             </Avatar.Base>
 
@@ -148,16 +144,16 @@ const CollectionHeader = ({
 
             <ContractTypeBadge
               chainId={chainId}
-              collectionAddress={collectionAddress}
+              collectionAddress={contractAddress}
             />
           </Grid.Child>
 
           <Grid.Child name="." />
 
           <Grid.Child name="collection-social" className="flex gap-2">
-            {socials?.website ? (
+            {social?.website ? (
               <Button asChild variant="ghost">
-                <a href={socials.website} target="_blank">
+                <a href={social.website} target="_blank">
                   <GlobeIcon />
                 </a>
               </Button>
@@ -222,26 +218,7 @@ const CollectionHeader = ({
             </Button>
           ) : null}
         </Grid.Child>
-
-        {/* <Grid.Child name="collection-badges">
-          <ScrollArea.Base>
-            <Flex gap={3} wrap className={classNames.collectionHeaderBadges}>
-              {badges.map((b, i) => (
-                <Badge
-                  key={i}
-                  size="sm"
-                  loading={b.loading}
-                  title={b.loading ? 'loading..' : b.title}
-                >
-                  {b.label}:&nbsp;<span>{b.value}</span>
-                </Badge>
-              ))}
-            </Flex>
-          </ScrollArea.Base>
-        </Grid.Child> */}
       </Grid.Root>
     </>
   );
 };
-
-export default CollectionHeader;

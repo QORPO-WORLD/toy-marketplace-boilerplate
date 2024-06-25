@@ -1,16 +1,16 @@
 'use client';
 
 import { NetworkIcon } from '~/components/NetworkLabel';
+import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
 import { type MarketConfig } from '~/config/marketplace';
 import { metadataQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
-import { isVideo } from '~/utils/helpers';
+import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { useQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
-import { placeholderImgUrl } from 'system/Image/image';
 
 type CollectionCard = MarketConfig['collections'][0];
 
@@ -45,7 +45,7 @@ export const CollectionCard = ({
       )}
     >
       <NextLink
-        href={Routes.orderbookCollection({
+        href={Routes.collection({
           chainParam: chainId,
           collectionId: collectionAddress,
           mode: 'buy',

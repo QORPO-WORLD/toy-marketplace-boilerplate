@@ -23,11 +23,8 @@ const collectionParams = z.object({
   mode: swapModeEnum,
 });
 
-const tab = ['details', 'listings'] as const;
+const tab = ['details', 'listings', 'offers'] as const;
 const CollectibleTabEnum = z.enum(tab);
-
-const orderbookTab = [...tab, 'offers'] as const;
-export const collectibleTabEnum = z.enum(orderbookTab);
 
 const collectibleParams = z.object({
   chainParam,
@@ -52,9 +49,9 @@ export const Routes = {
   landing: makeRoute(() => '/'),
 
   //collection -- TODO: The filterParams should be merged here
-  orderbookCollection: makeRoute(
+  collection: makeRoute(
     ({ chainParam, collectionId, mode }) =>
-      `/collection/${chainToName(chainParam)}/${collectionId}/orderbook/${mode}`,
+      `/collection/${chainToName(chainParam)}/${collectionId}/${mode}`,
     collectionParams,
   ),
 

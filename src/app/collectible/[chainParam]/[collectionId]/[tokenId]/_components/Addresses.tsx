@@ -1,8 +1,8 @@
 'use client';
 
-import { getNetworkConfigAndClients } from '~/api';
 import ENSName from '~/components/ENSName';
 import { InfoGrid } from '~/components/InfoGrid';
+import { getChain } from '~/config/networks';
 
 import { Box, Button, LinkIcon, cn } from '$ui';
 
@@ -31,15 +31,12 @@ export const CollectibleAddresses = ({
           'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3',
         )}
         values={addresses.map((a) => {
-          const { networkConfig } = getNetworkConfigAndClients(a.chainId);
+          const { explorerUrl } = getChain(a.chainId);
           return {
             label: a.label,
             children: (
               <Button asChild variant="ghost" size="sm" className="uppercase">
-                <a
-                  href={`${networkConfig?.explorerUrl}/address/${a.address}`}
-                  target="_blank"
-                >
+                <a href={`${explorerUrl}/address/${a.address}`} target="_blank">
                   <LinkIcon />
                   <ENSName address={a.address} truncateAt={4} />
                 </a>

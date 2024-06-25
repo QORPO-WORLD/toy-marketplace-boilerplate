@@ -2,19 +2,10 @@
 
 import { useState } from 'react';
 
-import { ORDERBOOK_CONTRACT_ADDRESS } from '~/config/consts';
-import {
-  useCollectibleBalance,
-  useDefaultCurrencies,
-  useCollectibleMetadata,
-  useCollectionMetadata,
-} from '~/hooks/data';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useOrderbookTopOrders } from '~/hooks/orderbook';
-import { _addToCart_ } from '~/lib/stores';
 import { CartType } from '~/lib/stores/cart/types';
-import { OrderModalContent } from '~/modals/OrderModalContent';
-import { defaultSelectionQuantity } from '~/utils/quantity';
-import { getThemeManagerElement } from '~/utils/theme';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { SortOrder } from '@0xsequence/indexer';
@@ -46,7 +37,7 @@ export const CollectibleTradeActions = ({
     useOrderbookTopOrders(chainId, {
       collectionAddress,
       currencyAddresses: currencies,
-      orderbookContractAddress: ORDERBOOK_CONTRACT_ADDRESS,
+      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
       tokenIDs: [tokenId],
       isListing: false,
       priceSort: SortOrder.DESC,
@@ -58,7 +49,7 @@ export const CollectibleTradeActions = ({
     useOrderbookTopOrders(chainId, {
       collectionAddress,
       currencyAddresses: currencies,
-      orderbookContractAddress: ORDERBOOK_CONTRACT_ADDRESS,
+      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
       tokenIDs: [tokenId],
       isListing: true,
       priceSort: SortOrder.DESC,
