@@ -1,3 +1,4 @@
+import { compareAddress } from '@0xsequence/kit';
 import type {
   AddToCartData,
   CartItem,
@@ -9,6 +10,7 @@ import { ContractType } from '@0xsequence/indexer';
 import * as ethers from 'ethers';
 import { proxy, subscribe } from 'valtio';
 import { derive } from 'valtio/utils';
+import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
 import { OrderItemType } from '~/types/OrderItemType';
 
 const CART_LOCAL_STORAGE_TAG = '@marketplace.cart';
