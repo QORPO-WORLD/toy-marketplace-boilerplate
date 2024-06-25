@@ -217,7 +217,7 @@ export const OrderForm = ({
         s.id === 'approveERC1155' ||
         s.id === 'approveERC20' ||
         s.id === 'approveERC721',
-    ) as GenericStep | undefined;
+    );
 
     if (!approveStep) return;
 
@@ -338,9 +338,7 @@ export const OrderForm = ({
   };
 
   const onSubmit: SubmitHandler<OrderbookFormData> = async (data) => {
-    const createOrderStep = steps.find((s) => s.id === 'createOrder') as
-      | GenerateStepsOrderbookOrder
-      | undefined;
+    const createOrderStep = steps.find((s) => s.id === 'createOrder');
 
     if (!createOrderStep) return;
 

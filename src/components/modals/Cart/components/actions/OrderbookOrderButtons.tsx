@@ -229,9 +229,7 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !erc20Address) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC20') as
-        | GenericStep
-        | undefined;
+      const approveStep = steps.find((s) => s.id === 'approveERC20');
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -268,9 +266,7 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC1155') as
-        | GenericStep
-        | undefined;
+      const approveStep = steps.find((s) => s.id === 'approveERC1155');
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -307,9 +303,7 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC721') as
-        | GenericStep
-        | undefined;
+      const approveStep = steps.find((s) => s.id === 'approveERC721');
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -345,9 +339,7 @@ export const OrderbookOrderButtons = ({
   const buyAction = async () => {
     if (!walletClient || !orderData) return;
 
-    const acceptOrderStep = steps.find((s) => s.id === 'acceptRequestBatch') as
-      | GenerateStepsOrderbookAcceptRequest
-      | undefined;
+    const acceptOrderStep = steps.find((s) => s.id === 'acceptRequestBatch');
     if (!acceptOrderStep) return;
 
     setTransactionPendingState(true);
@@ -426,9 +418,7 @@ export const OrderbookOrderButtons = ({
   const sellAction = async () => {
     if (!walletClient || !orderData) return;
 
-    const acceptOrderStep = steps.find((s) => s.id === 'acceptRequestBatch') as
-      | GenerateStepsOrderbookAcceptRequest
-      | undefined;
+    const acceptOrderStep = steps.find((s) => s.id === 'acceptRequestBatch');
     if (!acceptOrderStep) return;
 
     setTransactionPendingState(true);

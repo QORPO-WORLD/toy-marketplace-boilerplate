@@ -2,10 +2,10 @@
 
 import { getChainId } from '~/config/networks';
 import { getMetadataClient } from '~/lib/queries/clients';
-import { Routes } from '~/lib/routes';
+import { type Routes } from '~/lib/routes';
 
 import { CollectiblesGrid } from '../_components/Grid';
-import { Page } from '@0xsequence/metadata';
+import { type Page } from '@0xsequence/metadata';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 type CollectionBuyPageParams = {

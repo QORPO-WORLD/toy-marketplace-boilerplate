@@ -3,7 +3,7 @@
 import { Accordion } from '$ui';
 import { IntFilter } from './IntFilter';
 import { StringFilter } from './StringFilter';
-import { PropertyFilter, PropertyType } from '@0xsequence/metadata';
+import { type PropertyFilter, PropertyType } from '@0xsequence/metadata';
 
 export type FilterProps = {
   filter: PropertyFilter;

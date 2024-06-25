@@ -16,7 +16,7 @@ import {
   Text,
   Button,
   Select,
-  Switch,
+  type Switch,
   Flex,
   cn,
   Label,
@@ -119,7 +119,7 @@ const CollectionSidebarContent = ({
   //   }
   // }, [mode]);
 
-  let sortOptions = [
+  const sortOptions = [
     {
       label: 'PRICE ASCENDING',
       value: SortType.PRICE_ASC,
