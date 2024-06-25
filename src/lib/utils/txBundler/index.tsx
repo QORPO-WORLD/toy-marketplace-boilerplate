@@ -98,11 +98,11 @@ export interface CreateOrder {
 export interface CreateRequestParams {
   createOrder?: CreateOrder;
 
-  partialOrders?: AcceptRequest[];
+  partialOrders?: [AcceptRequest, ...AcceptRequest[]];
 }
 
 export interface AcceptRequestParams {
-  acceptRequests: AcceptRequest[];
+  acceptRequests: [AcceptRequest, ...AcceptRequest[]];
 }
 
 export const generateStepsOrderbookAcceptRequest = (

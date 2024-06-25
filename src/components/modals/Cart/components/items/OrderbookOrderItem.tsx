@@ -1,13 +1,7 @@
 'use client';
 
-import { formatDecimals, formatDisplay } from '~/api';
-import { CurrencyAvatar } from '~/components/Avatars';
-import { classNames } from '~/config/classNames';
-import { useCollectionMetadata } from '~/hooks/data';
-import { useCollectionType } from '~/hooks/utils/useCollectionType';
-import type { CartItem } from '~/lib/stores';
-import { editQuantity, removeFromCart } from '~/lib/stores';
-import type { OrderRequest } from '~/sdk/orderbook/clients/Orderbook';
+import { type OrderRequest } from '~/lib/sdk/orderbook/clients/Orderbook';
+import { type CartItem } from '~/lib/stores/cart/types';
 
 import {
   Button,
@@ -23,6 +17,9 @@ import {
 import { QuantityModalV2 } from './QuantityModalV2';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
+import { useQuery } from '@tanstack/react-query';
+import { metadataQueries } from '~/lib/queries';
+import { classNames } from '~/config/classNames';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -42,17 +39,20 @@ export const OrderbookOrderItem = ({
   isOrderValid,
 }: OrderbookOrderItemProps) => {
   const { data: currencyMetadataResp, isLoading: isCurrencyMetadataLoading } =
-    useCollectionMetadata({
-      chainID: item.chainId.toString(),
-      contractAddress: order.currency,
-    });
+    useQuery(metadataQueries.collection(
+      {
+        chainID: item.chainId.toString(),
+        collectionId: order.currency,
+      }
+    )
+  
 
   const { isERC1155, isLoading: isCollectionTypeLoading } = useCollectionType({
     chainId: item.chainId,
     collectionAddress: item.collectibleMetadata.collectionAddress,
   });
 
-  const currencyMetadata = currencyMetadataResp?.data || null;
+  const currencyMetadata = currencyMetadataResp || null;
 
   const showQuantityAndSubtotal = isERC1155 && isOrderValid;
 

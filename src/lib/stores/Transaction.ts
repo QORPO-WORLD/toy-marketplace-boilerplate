@@ -1,4 +1,4 @@
-import type { OrderItemType } from '~/api';
+import type { OrderItemType } from '~/types/OrderItemType';
 
 import type { CartItem } from './cart/Cart';
 import { proxy } from 'valtio';

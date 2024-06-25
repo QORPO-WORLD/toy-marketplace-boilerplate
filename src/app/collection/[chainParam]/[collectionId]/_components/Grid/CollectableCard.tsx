@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
 import { truncateAtMiddle, textClassName } from '~/lib/utils/helpers';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { Avatar, Badge, Flex, Image, Text, cn, Box } from '$ui';
 import type { TokenMetadata } from '@0xsequence/metadata';

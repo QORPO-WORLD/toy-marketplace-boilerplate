@@ -1,5 +1,7 @@
 'use client';
 
+import { formatDisplay } from '~/lib/utils/helpers';
+
 import { Avatar, Flex, Text, cn } from '$ui';
 import type { Hex } from 'viem';
 import { useAccount, useBalance } from 'wagmi';
@@ -9,11 +11,7 @@ interface CryptoBalanceProps {
   tokenAddress?: string;
   wrapTargetId?: string;
   tokenImageUrl: string;
-  options: SwapOption[];
   decimalsMax: number;
-  setUniswapModalSettings: React.Dispatch<
-    React.SetStateAction<Record<string, string> | null>
-  >;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

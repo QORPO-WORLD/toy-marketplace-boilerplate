@@ -1,5 +1,6 @@
-import { BigIntMin } from '~/utils/helpers';
+import { OrderItemType } from '~/types/OrderItemType';
 
+import { BigIntMin } from './helpers';
 import { parseUnits } from 'viem';
 
 interface GetQuantityProps {
@@ -19,12 +20,12 @@ export const defaultSelectionQuantity = ({
   let value = defaultQuantity;
 
   switch (type) {
-    case OrderItemType.BUY_ORDERBOOK:
+    case OrderItemType.BUY:
       value = availableTokenAmount
         ? BigIntMin(availableTokenAmount, defaultQuantity)
         : defaultQuantity;
       break;
-    case OrderItemType.SELL_ORDERBOOK:
+    case OrderItemType.SELL:
       value = availableTokenAmount
         ? BigIntMin(availableTokenAmount, defaultQuantity)
         : defaultQuantity;

@@ -2,12 +2,12 @@
 
 import type { ComponentProps } from 'react';
 
-import type { ExtendedPropertyFilter } from '~/api';
 import { classNames } from '~/config/classNames';
+import type { PropertyFilter } from '~/lib/queries/marketplace.gen';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Text, Select, Switch, Flex, cn, Label, ScrollArea, Box } from '$ui';
-import { AddressesLinks } from '../../../_components/Base/Sidebar/Addresses';
+import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
 import { capitalize } from 'radash';
 
@@ -18,7 +18,7 @@ export type BaseCollectionSidebarContentProps = {
     options: Array<{ label: string; value: string }>;
   };
   filterSwitches: Array<ComponentProps<typeof Switch.Base>>;
-  propertyFilters: { data: ExtendedPropertyFilter[]; loading?: boolean };
+  propertyFilters: { data: PropertyFilter[]; loading?: boolean };
   addresses: ComponentProps<typeof AddressesLinks>['addresses'];
   disableFilters?: boolean;
 };

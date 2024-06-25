@@ -1,7 +1,8 @@
+import { BigIntMin, compareAddress } from '~/lib/utils/helpers';
+
 import { useOrderbookIsValid } from './useOrderbookIsValid';
 import { OrderbookOrder } from '@0xsequence/indexer';
 import { formatUnits } from 'viem';
-import { compareAddress } from '~/lib/utils/helpers';
 
 interface Props {
   selectedTokenAmountRaw: bigint;

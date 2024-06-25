@@ -6,13 +6,14 @@ import { Controller } from 'react-hook-form';
 
 import { WalletButton } from '~/app/_layout/Header/Buttons/WalletButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import { getPresentableChainName } from '~/config/networks';
+import { getChain, getPresentableChainName } from '~/config/networks';
 import { useOrderbookApprovals } from '~/hooks/orderbook/useOrderbookApprovals';
 import {
   useOrderbookFormData,
   type OrderbookFormData,
 } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
+import { Currency } from '~/lib/queries/marketplace.gen';
 import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
 import { formatDecimals } from '~/lib/utils/helpers';
 import {
@@ -68,7 +69,7 @@ interface OrderFormProps {
   chainId: number;
   collectionMetadata: ContractInfo;
   tokenMetadata: TokenMetadata;
-  currencyOptions: DefaultCurrency[];
+  currencyOptions: Currency[];
   royaltyPercentage: bigint | undefined;
 
   isERC1155: boolean;
@@ -97,8 +98,6 @@ export const OrderForm = ({
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
   const queryClient = useQueryClient();
-
-  const { analytics } = useSnapshot(analyticsState);
 
   const { switchChainAsync, isPending: isSwitchNetworkLoading } =
     useSwitchChain();
@@ -381,106 +380,13 @@ export const OrderForm = ({
       const txnHash = await createOrderStep.action(action);
 
       await transactionNotification({
-        network: getNetworkConfigAndClients(chainId).networkConfig,
+        network: getChain(chainId)!,
         txHash: txnHash,
-        onSuccess: async () => {
-          if (action.partialOrders) {
-            // matched order or partial fulfillment
-            if (isListing) {
-              // order is matched in create listing mode, this means this is a sell order
-              analytics()?.trackSellItems({
-                props: {
-                  txnHash,
-                  chainId: String(chainId),
-                  marketplaceType: 'orderbook',
-                  collectionAddress: collectionMetadata.address.toLowerCase(),
-                  currencyAddress: data.currency.contractAddress.toLowerCase(),
-                  currencySymbol:
-                    data.currency.symbol?.toUpperCase() || 'unknown',
-                  requestId: action.partialOrders[0].orderId,
-                  tokenId: action.partialOrders[0].tokenId,
-                },
-                nums: {
-                  currencyValueDecimal: totalCost.decimal,
-                  currencyValueRaw: Number(totalCost.raw),
-                },
-              });
-            } else {
-              // order is matched in create offer mode, this means this is a buy order
-              analytics()?.trackBuyItems({
-                props: {
-                  txnHash,
-                  chainId: String(chainId),
-                  marketplaceType: 'orderbook',
-                  collectionAddress: collectionMetadata.address.toLowerCase(),
-                  currencyAddress: data.currency.contractAddress.toLowerCase(),
-                  currencySymbol:
-                    data.currency.symbol?.toUpperCase() || 'unknown',
-                  requestId: action.partialOrders[0].orderId,
-                  tokenId: action.partialOrders[0].tokenId,
-                },
-                nums: {
-                  currencyValueDecimal: totalCost.decimal,
-                  currencyValueRaw: Number(totalCost.raw),
-                },
-              });
-            }
-          }
-
-          if (action.createOrder) {
-            const requestId = await getRequestIdFromHash(
-              txnHash,
-              walletClient,
-              publicClient,
-            );
-            if (isListing) {
-              // order is not matched in create listing mode, normal listing
-              analytics()?.trackCreateListing({
-                props: {
-                  txnHash,
-                  chainId: String(chainId),
-                  marketplaceType: 'orderbook',
-                  collectionAddress: collectionMetadata.address.toLowerCase(),
-                  currencyAddress: data.currency.contractAddress.toLowerCase(),
-                  currencySymbol:
-                    data.currency.symbol?.toUpperCase() || 'unknown',
-                  requestId,
-                  tokenId: action.createOrder.tokenId,
-                },
-                nums: {
-                  currencyValueDecimal: totalCost.decimal,
-                  currencyValueRaw: Number(totalCost.raw),
-                },
-              });
-            } else {
-              // order is not matched in create offer mode, normal offer
-              analytics()?.trackCreateOffer({
-                props: {
-                  txnHash,
-                  chainId: String(chainId),
-                  marketplaceType: 'orderbook',
-                  collectionAddress: collectionMetadata.address.toLowerCase(),
-                  currencyAddress: data.currency.contractAddress.toLowerCase(),
-                  currencySymbol:
-                    data.currency.symbol?.toUpperCase() || 'unknown',
-                  requestId,
-                  tokenId: action.createOrder.tokenId,
-                },
-                nums: {
-                  currencyValueDecimal: totalCost.decimal,
-                  currencyValueRaw: Number(totalCost.raw),
-                },
-              });
-            }
-          }
-        },
       });
       postTransactionCacheClear();
       setOpen(false);
     } catch (error) {
       console.error(error);
-      const errorMessage =
-        error instanceof Error ? error.message : 'unknown error';
       toast.error('The transaction has failed or was cancelled');
     }
     setOrderTxPending(false);
@@ -499,10 +405,6 @@ export const OrderForm = ({
     orderTxPending ||
     formHasValidationErrors ||
     totalCost.raw <= 0;
-
-  // if (isLoading) {
-  //   return <Spinner />
-  // }
 
   const actionLabel = () => {
     if (shouldAutoFill) {
@@ -949,10 +851,6 @@ export const OrderForm = ({
           ) : null}
         </Flex>
       </Flex>
-      {/* <Box className="absolute w-full h-full bg-foreground/50 top-0" /> */}
     </form>
   );
 };
-function postTransactionCacheClear() {
-  throw new Error('Function not implemented.');
-}

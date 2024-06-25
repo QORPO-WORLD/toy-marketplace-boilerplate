@@ -31,7 +31,7 @@ export const CollectibleAddresses = ({
           'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3',
         )}
         values={addresses.map((a) => {
-          const { explorerUrl } = getChain(a.chainId);
+          const { explorerUrl } = getChain(a.chainId)!;
           return {
             label: a.label,
             children: (

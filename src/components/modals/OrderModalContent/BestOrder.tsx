@@ -1,7 +1,8 @@
-import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
+import type { Currency } from '~/lib/queries/marketplace.gen';
 
 import { Avatar, Badge, Box, Flex, Text } from '$ui';
 import type { OrderbookModalType } from '.';
+import type { OrderbookOrder } from '@0xsequence/indexer';
 import type { TokenMetadata } from '@0xsequence/metadata';
 import { formatUnits } from 'viem';
 
@@ -9,7 +10,7 @@ interface Props {
   type: OrderbookModalType;
   bestOrder?: OrderbookOrder;
   tokenMetadata: TokenMetadata;
-  currency: DefaultCurrency;
+  currency: Currency;
 }
 
 export const BestOrder = ({

@@ -1,6 +1,6 @@
 'use client';
 
-import { removeFilterOption } from '~/lib/stores';
+import { removeFilterOption } from '~/lib/stores/collectible/Collectible';
 
 import { Badge, CloseIcon, Text } from '$ui';
 

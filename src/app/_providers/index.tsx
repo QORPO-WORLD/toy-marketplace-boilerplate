@@ -55,7 +55,6 @@ export default function Providers({
       socialAuthOptions: defaultSignInOptions.socialAuthOptions,
       walletAuthOptions,
     },
-    disableAnalytics: true,
   } satisfies KitConfig;
 
   const [wagmiConfig] = useState(createWagmiConfig(marketConfig));

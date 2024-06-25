@@ -9,8 +9,8 @@ import {
 import { PoolAvatar } from '~/components/Avatars';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
-import { useViewType } from '~/components/ViewTypeToggle/useViewType';
 import { AddToCartButton } from '~/components/buttons/AddToCartButton';
+import { MarketConfig } from '~/config/marketplace';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
 
 import {
@@ -37,10 +37,12 @@ import { useSnapshot } from 'valtio';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
+  marketConfig: MarketConfig;
 };
 
 export const InventoryCollectiblesContent = ({
   collectionBalances,
+  marketConfig,
 }: InventoryCollectiblesContent) => {
   const { searchResultAmount, searchText } = useSnapshot(inventoryState);
 
@@ -63,6 +65,7 @@ export const InventoryCollectiblesContent = ({
             <CollectionSection
               key={c.contractAddress}
               {...c}
+              marketConfig={marketConfig}
               allCollectionIds={allCollectionIds}
             />
           );
@@ -74,6 +77,7 @@ export const InventoryCollectiblesContent = ({
 
 interface CollectionSectionProps extends TokenBalance {
   allCollectionIds: string[];
+  marketConfig: MarketConfig;
 }
 
 const CollectionSection = ({

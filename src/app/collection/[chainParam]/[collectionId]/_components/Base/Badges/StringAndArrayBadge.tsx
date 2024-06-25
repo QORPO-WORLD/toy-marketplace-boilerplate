@@ -1,8 +1,8 @@
 'use client';
 
-import { removeFilterOption } from '~/lib/stores';
 
 import { Badge, CloseIcon, Text } from '$ui';
+import { removeFilterOption } from '~/lib/stores/collectible/Collectible';
 
 type StringAndArrayBadge = {
   filter: {

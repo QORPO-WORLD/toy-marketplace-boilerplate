@@ -1,18 +1,18 @@
 'use client';
 
 import type { ChangeEvent } from 'react';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { ViewTypeToggle } from '~/components/ViewTypeToggle';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
+
+import { Flex, Input, Text } from '$ui';
 import {
   clearInventorySearchText,
   inventoryState,
   setInventorySearchText,
-} from '~/lib/stores/Inventory';
-
-import { Flex, Input, Text } from '$ui';
-import _debounce from 'lodash.debounce';
+} from './Inventory';
+import { debounce } from 'radash';
 import { useSnapshot } from 'valtio';
 
 type InventoryFiltersProps = {
@@ -52,7 +52,6 @@ export const InventoryFilters = (props: InventoryFiltersProps) => {
   return (
     <Flex className="items-center justify-between">
       <Flex>
-        {/* <SortInventory /> */}
         <SearchInventory />
       </Flex>
 
@@ -73,12 +72,8 @@ const SearchInventory = () => {
 
   const [shadowValue, setShadowValue] = useState<string>(searchText);
 
-  const searchDebounce = useMemo(
-    () =>
-      _debounce((val: string) => {
-        setInventorySearchText(val);
-      }, 500),
-    [],
+  const searchDebounce = debounce({ delay: 500 }, (val: string) =>
+    setInventorySearchText(val),
   );
 
   useEffect(() => {
@@ -89,10 +84,6 @@ const SearchInventory = () => {
     <Input.Search
       id="inventory-search"
       placeholder="Search"
-      // css={{
-      //   $$inputWidth: '200px',
-      //   $$inputHeight: 'calc($space$10 - 2px)'
-      // }}
       value={shadowValue}
       onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
         setShadowValue(value);

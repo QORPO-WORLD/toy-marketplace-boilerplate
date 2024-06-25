@@ -2,39 +2,24 @@
 
 import React from 'react';
 
-import { getNetworkConfigAndClients } from '~/api';
-import { formatDecimals } from '~/api';
-import { OrderItemType } from '~/api/types/order';
 import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
-import {
-  balancesKeys,
-  metadataKeys,
-  orderbookKeys,
-  useCountryCode,
-} from '~/hooks/data';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
+import { getChain } from '~/config/networks';
 import type { OrderWithID } from '~/hooks/orderbook';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
-import { resetCart, cartState, toggleCart } from '~/lib/stores';
+import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
 import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
-import { getFrontEndFeeAmount } from '~/sdk/niftyswap-v2';
-import {
-  SEQUENCE_MARKET_V1_ADDRESS,
-  Orderbook,
-} from '~/sdk/orderbook/clients/Orderbook';
-import { isProduction } from '~/utils/environment';
-import type {
-  GenericStep,
-  GenerateStepsOrderbookAcceptRequest,
-} from '~/utils/txBundler';
-import { generateStepsOrderbookAcceptRequest } from '~/utils/txBundler';
+import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
+import { formatDecimals } from '~/lib/utils/helpers';
+import { generateStepsOrderbookAcceptRequest } from '~/lib/utils/txBundler';
 
 import { Box, Button, Text, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
@@ -94,12 +79,6 @@ export const OrderbookOrderButtons = ({
   const erc20ApprovalEnabled =
     !!erc20Amount && cartType === OrderItemType.BUY_ORDERBOOK;
 
-  const { data: countryCodeData, isLoading: isLoadingCountryCode } =
-    useCountryCode();
-  const isDev = !isProduction;
-
-  const countryCode = isDev ? 'US' : countryCodeData?.countryCode;
-
   const {
     data: erc20Approval,
     isLoading: isErc20ApprovalLoading,
@@ -150,11 +129,7 @@ export const OrderbookOrderButtons = ({
   }
 
   if (hasMultipleCurrencies) {
-    return (
-      <>
-        <Button className="w-full" label="Disabled" disabled />
-      </>
-    );
+    return <Button className="w-full" label="Disabled" disabled />;
   }
 
   const postTransactionCacheClear = () => {
@@ -188,7 +163,6 @@ export const OrderbookOrderButtons = ({
     (erc721ApprovalEnabled && isErc721ApprovalLoading) ||
     (erc1155ApprovalEnabled && isErc1155ApprovalLoading) ||
     isLoading ||
-    isLoadingCountryCode ||
     !orderData
   ) {
     return <Button className="w-full" label="estimating" disabled />;
@@ -237,7 +211,7 @@ export const OrderbookOrderButtons = ({
         const txnHash = await approveStep.action();
 
         await transactionNotification({
-          network: getNetworkConfigAndClients(chainId).networkConfig,
+          network: getChain(chainId)!,
           txHash: txnHash,
         });
 
@@ -274,7 +248,7 @@ export const OrderbookOrderButtons = ({
         const txnHash = await approveStep.action();
 
         await transactionNotification({
-          network: getNetworkConfigAndClients(chainId).networkConfig,
+          network: getChain(chainId)!,
           txHash: txnHash,
         });
 
@@ -311,7 +285,7 @@ export const OrderbookOrderButtons = ({
         const txnHash = await approveStep.action();
 
         await transactionNotification({
-          network: getNetworkConfigAndClients(chainId).networkConfig,
+          network: getChain(chainId)!,
           txHash: txnHash,
         });
 
@@ -357,7 +331,7 @@ export const OrderbookOrderButtons = ({
       });
 
       await transactionNotification({
-        network: getNetworkConfigAndClients(chainId).networkConfig,
+        network: getChain(chainId)!,
         txHash: txnHash,
         onSuccess: () => {
           cartItems.forEach((item) => {
@@ -365,28 +339,6 @@ export const OrderbookOrderButtons = ({
               item.subtotal,
               frontendFeePercentage,
             );
-            const currencyAmountRaw = defaultOrder?.isListing
-              ? item.subtotal + frontendFeeAmount
-              : item.subtotal - frontendFeeAmount;
-
-            analytics()?.trackBuyItems({
-              props: {
-                txnHash,
-                chainId: String(chainId),
-                marketplaceType: 'orderbook',
-                collectionAddress: collectionAddress.toLowerCase(),
-                currencyAddress: erc20Address.toLowerCase(),
-                currencySymbol: erc20Symbol.toUpperCase(),
-                tokenId: item.collectibleMetadata.tokenId,
-                requestId: item.orderbookOrderId || '',
-              },
-              nums: {
-                currencyValueDecimal: Number(
-                  formatDecimals(currencyAmountRaw, erc20Decimals),
-                ),
-                currencyValueRaw: Number(currencyAmountRaw),
-              },
-            });
           });
         },
       });
@@ -400,15 +352,7 @@ export const OrderbookOrderButtons = ({
       });
 
       resetCart();
-    } catch (error: any) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'unknown error';
-      analytics()?.trackTransactionFailed({
-        chainId: String(chainId),
-        txnHash: '',
-        description: 'orderbook - buy from cart',
-        errorMessage,
-      });
+    } catch (error: unknown) {
       showErrorToast(error);
     }
 
@@ -533,7 +477,6 @@ export const OrderbookOrderButtons = ({
 
   return (
     <>
-      {renderNFTCheckoutButton()}
       {!isBundled && renderCurrencyApprovalButton()}
       {!isBundled && renderERC1155ApprovalButton()}
       {!isBundled && renderERC721ApprovalButton()}

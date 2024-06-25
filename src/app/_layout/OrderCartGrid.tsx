@@ -1,19 +1,16 @@
 'use client';
 
-import { classNames } from '~/config/classNames';
+import { OrderCart } from '~/components/modals/Cart';
+import { TransactionConfirmationModal } from '~/components/modals/Cart/components/transactionConfirmation';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import { cartState, setCartOpen } from '~/lib/stores';
 import {
   onTransactionConfirmationModelClose,
   transactionState,
 } from '~/lib/stores/Transaction';
+import { cartState, setCartOpen } from '~/lib/stores/cart/Cart';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Grid, Dialog, cn } from '$ui';
-import { OrderCart } from '../../modules/Cart';
-import { TransactionConfirmationModal } from '../../modules/Cart/components/transactionConfirmation';
-import { Footer } from './Footer';
-import { Header } from './Header';
 import { useSnapshot } from 'valtio';
 
 type LayoutProps = {
@@ -22,26 +19,6 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => {
   return <></>;
-};
-
-//TODO...
-const RouteLoadingBar = () => {
-  // const { isFinished, progress, animationDuration } = useNProgress({
-  //   isAnimating: isLoading,
-  //   incrementDuration: 1600,
-  //   minimum: 0.05
-  // })
-  // return (
-  //   <Box
-  //     className={cn(
-  //       'fixed left-0 top-0 z-[1000] h-[2px] transition-all',
-  //       isFinished ? 'bg-transparent' : 'bg-primary'
-  //     )}
-  //     style={{
-  //       width: `${isFinished ? 0 : progress * 100}vw`
-  //     }}
-  //   />
-  // )
 };
 
 export const OrderCartGrid = () => {

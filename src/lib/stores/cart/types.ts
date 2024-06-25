@@ -1,3 +1,4 @@
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { ContractType } from '@0xsequence/indexer';
 import { z } from 'zod';

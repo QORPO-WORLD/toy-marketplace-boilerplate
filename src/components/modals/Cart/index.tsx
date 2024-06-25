@@ -2,24 +2,18 @@
 
 import { useState } from 'react';
 
-import { OrderItemType } from '~/api/types/order';
-import { MarketplaceLabel } from '~/app/_components/MarketplaceLabel';
 import { Spinner } from '~/components/Spinner';
 import { classNames } from '~/config/classNames';
-import { useExchange } from '~/hooks/data';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import {
-  areTermsAccepted,
-  setTermsAccepted as setTermsAcceptedStorage,
-} from '~/legal/termsAcceptance';
+import { transactionState } from '~/lib/stores/Transaction';
 import {
   cartState,
-  clearOverrideCartState,
-  overrideCart,
-  resetCart,
   toggleCart,
-} from '~/lib/stores';
-import { transactionState } from '~/lib/stores/Transaction';
+  resetCart,
+  overrideCart,
+  clearOverrideCartState,
+} from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Flex, Text, Box, cn, CollapseIcon } from '$ui';
 import { OrderRenderer } from './type';
@@ -36,13 +30,6 @@ export const OrderCart = ({ className }: { className?: string }) => {
     baseOrderInfo: { chainId, exchangeAddress, orderType },
     override,
   } = useSnapshot(cartState);
-
-  const { data: exchangeResp } = useExchange({
-    chainId,
-    exchangeAddress,
-  });
-
-  const exchange = exchangeResp?.data;
 
   const { transactionPending } = useSnapshot(transactionState);
 
@@ -81,24 +68,16 @@ export const OrderCart = ({ className }: { className?: string }) => {
     );
   };
 
-  const getFormattedOrderType = (orderType: OrderItemType | undefined) => {
+  const getFormattedOrderType = (orderType?: OrderItemType) => {
     switch (orderType) {
-      case OrderItemType.BUY_AMM:
-        return 'Buy Order';
-      case OrderItemType.SELL_AMM:
-        return 'Sell Order';
-      case OrderItemType.DEPOSIT:
-        return 'Deposit Order';
-      case OrderItemType.WITHDRAW:
-        return 'Withdraw Order';
       case OrderItemType.TRANSFER:
         return 'Transfer Order';
-      case OrderItemType.BUY_ORDERBOOK:
+      case OrderItemType.BUY:
         return 'Buy Order';
-      case OrderItemType.SELL_ORDERBOOK:
+      case OrderItemType.SELL:
         return 'Sell Order';
-      case OrderItemType.UNKNOWN:
-        return 'Unknown Order';
+      // case OrderItemType.UNKNOWN:
+      //   return 'Unknown Order';
       default:
         return orderType;
     }
@@ -113,13 +92,6 @@ export const OrderCart = ({ className }: { className?: string }) => {
         'relative h-full w-full flex-col rounded-md bg-foreground/5',
         className,
       )}
-      // template={`
-      //     [row1-start] "cart-header" max-content [row1-end]
-      //     [row2-start] "cart-items" 1fr [row2-end]
-      //     [row3-start] "cart-info" [row3-end]
-      //     [row4-start] "cart-actions" [row4-end]
-      //     / 100%
-      // `}
     >
       <Flex
         className={cn(
@@ -135,24 +107,6 @@ export const OrderCart = ({ className }: { className?: string }) => {
           <CollapseIcon />
         </Button>
       </Flex>
-
-      {exchange && (
-        <Flex
-          className={cn(
-            classNames.orderCartSubHeader,
-            'gap-1 border-b border-b-border px-3 py-2',
-          )}
-        >
-          <MarketplaceLabel
-            size="sm"
-            collectionName={exchange.collection.name}
-            currencySymbol={exchange.currency.symbol}
-            collectionIconUrl={exchange.collection.iconUrl}
-            currencyIconUrl={exchange.currency.iconUrl}
-            lpFee={exchange.lpFeePercentage}
-          />
-        </Flex>
-      )}
 
       <Flex
         className={cn(

@@ -1,5 +1,5 @@
-import { OrderItemType } from '~/api/types/order';
-import type { CartItem } from '~/lib/stores';
+import { type CartItem } from '~/lib/stores/cart/types';
+import { OrderItemType } from '~/types/OrderItemType';
 
 export const getTitleFromCartData = ({
   cartType,
@@ -11,17 +11,11 @@ export const getTitleFromCartData = ({
   const multipleItemsSuffix = cartItems.length > 1 ? 's' : '';
 
   switch (cartType) {
-    case OrderItemType.BUY_AMM: {
+    case OrderItemType.BUY: {
       return `ITEM${multipleItemsSuffix} SUCCESSFULLY BOUGHT`;
     }
-    case OrderItemType.SELL_AMM: {
+    case OrderItemType.SELL: {
       return `ITEM${multipleItemsSuffix} SUCCESSFULLY SOLD`;
-    }
-    case OrderItemType.DEPOSIT: {
-      return `NEW POSITION${multipleItemsSuffix} CREATED`;
-    }
-    case OrderItemType.WITHDRAW: {
-      return `POSITION${multipleItemsSuffix} WITHDRAWN`;
     }
     case OrderItemType.TRANSFER: {
       return `ITEM${multipleItemsSuffix} SUCCESSFULLY TRANSFERRED`;
@@ -39,24 +33,15 @@ export const getSubTitleFromCartData = ({
   cartItems: readonly CartItem[];
 }): string => {
   switch (cartType) {
-    case OrderItemType.BUY_AMM: {
+    case OrderItemType.BUY: {
       return `Bought ${cartItems.length > 1 ? cartItems.length + ' items' : ''}`;
     }
-    case OrderItemType.SELL_AMM: {
+    case OrderItemType.SELL: {
       return `Sold ${cartItems.length > 1 ? cartItems.length + ' items' : ''}`;
     }
-    case OrderItemType.DEPOSIT: {
-      return `
-        ${cartItems.length > 1 ? cartItems.length + ' New positions' : ''} \n\n
-        Deposited`;
-    }
-    case OrderItemType.WITHDRAW: {
-      return `Withdrawn`;
-    }
+
     case OrderItemType.TRANSFER: {
       return `Transferred`;
     }
   }
-
-  return '';
 };

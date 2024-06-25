@@ -94,8 +94,11 @@ function getWalletConfigs(
   } as const;
 
   const supportedWallets = marketConfig.walletOptions || [];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return supportedWallets.length
-    ? supportedWallets.map((key) => walletObject[key]).filter(Boolean)
+    ? // @ts-expect-error -- Missing support for Ledger
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      supportedWallets.map((key) => walletObject[key]).filter(Boolean)
     : Object.values(walletObject);
 }
 

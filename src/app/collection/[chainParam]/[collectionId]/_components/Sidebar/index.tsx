@@ -25,7 +25,6 @@ import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'radash';
-import { useSnapshot } from 'valtio';
 import { useAccount } from 'wagmi';
 
 type CollectionSidebarProps = {

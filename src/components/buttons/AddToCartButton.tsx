@@ -1,13 +1,12 @@
 'use client';
 
-import { OrderItemType } from '~/api';
-import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
-import type { CollectiblesListProps } from '~/app/(page)/(marketplace)/collection/[chainParam]/[collectionId]/orderbook/[mode]/_components/Content/Collectibles/Grid/OrderbookTypes';
 import { useCartItem } from '~/hooks/cart/useCartItem';
-import { _addToCart_ } from '~/lib/stores';
+import { _addToCart_ } from '~/lib/stores/cart/Cart';
 import type { AddToCartData } from '~/lib/stores/cart/types';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button } from '$ui';
+import type { OrderbookOrder } from '@0xsequence/indexer';
 
 type BaseProps = {
   addToCartData: AddToCartData;
@@ -18,7 +17,7 @@ type BaseProps = {
 
 type PropsWithOrderModal = BaseProps & {
   onClickOrderModal: CollectiblesListProps['onClickOrderModal'];
-  itemType: OrderItemType.BUY_ORDERBOOK | OrderItemType.SELL_ORDERBOOK;
+  itemType: OrderItemType.BUY | OrderItemType.SELL;
 };
 
 type PropsWithoutOrderModal = BaseProps & {
@@ -52,7 +51,7 @@ export const AddToCartButton = ({
   let label: ButtonLabel;
 
   switch (itemType) {
-    case OrderItemType.BUY_ORDERBOOK:
+    case OrderItemType.BUY:
       if (cartItem) {
         onClick = () => _addToCart_(addToCartData);
         label = ButtonLabel.REMOVE_FROM_CART;

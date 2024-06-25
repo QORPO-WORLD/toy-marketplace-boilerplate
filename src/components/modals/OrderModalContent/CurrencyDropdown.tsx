@@ -2,14 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { type Currency } from '~/lib/queries/marketplace.gen';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Flex, Image, Select, Text } from '$ui';
 
 interface CurrencyDropdownProps {
-  defaultCurrency: DefaultCurrency;
-  currencies: DefaultCurrency[];
-  onSetCurrency: (currency: DefaultCurrency) => void;
+  defaultCurrency: Currency;
+  currencies: Currency[];
+  onSetCurrency: (currency: Currency) => void;
   resetCurrencyAmount: () => void;
 }
 

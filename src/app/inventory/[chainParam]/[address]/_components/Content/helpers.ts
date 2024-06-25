@@ -32,29 +32,29 @@ export const getInvetoryCardData = ({
     decimals: decimals,
   };
 
-  const addToCartData = {
-    // type: CartType.TRANSFER,
-    // item: {
-    //   itemType: OrderItemType.TRANSFER,
-    //   contractType: contractType,
-    //   collectibleMetadata: metadata,
-    //   chainId,
-    //   quantity: defaultSelectionQuantity({
-    //     type: OrderItemType.TRANSFER,
-    //     tokenDecimals: decimals,
-    //     tokenUserBalance: balance ? BigInt(balance) : 0n,
-    //   }),
-    // },
-    // options: {
-    //   toggle: true,
-    // },
-  } satisfies AddToCartData;
+  // const addToCartData = {
+  //   // type: CartType.TRANSFER,
+  //   // item: {
+  //   //   itemType: OrderItemType.TRANSFER,
+  //   //   contractType: contractType,
+  //   //   collectibleMetadata: metadata,
+  //   //   chainId,
+  //   //   quantity: defaultSelectionQuantity({
+  //   //     type: OrderItemType.TRANSFER,
+  //   //     tokenDecimals: decimals,
+  //   //     tokenUserBalance: balance ? BigInt(balance) : 0n,
+  //   //   }),
+  //   // },
+  //   // options: {
+  //   //   toggle: true,
+  //   // },
+  // } satisfies AddToCartData;
 
-  const addToCartButtonProps = {
-    // addToCartData,
-    // isAvailable: true,
-    // itemType: OrderItemType.TRANSFER,
-  } satisfies AddToCartButtonProps;
+  // const addToCartButtonProps = {
+  //   // addToCartData,
+  //   // isAvailable: true,
+  //   // itemType: OrderItemType.TRANSFER,
+  // } satisfies AddToCartButtonProps;
 
   return {
     link: Routes.collectible({
@@ -66,7 +66,7 @@ export const getInvetoryCardData = ({
     image: metadata.imageUrl,
     tokenId: tokenId,
     name: name,
-    addToCartButtonProps,
+    // addToCartButtonProps,
     badges: [
       {
         label: 'OWNED',

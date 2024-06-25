@@ -1,9 +1,9 @@
-import type { OrderRequest } from '../../sdk/orderbook/clients/Orderbook';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import {
-  SEQUENCE_MARKET_V1_ADDRESS,
+  type OrderRequest,
   Orderbook,
-} from '../../sdk/orderbook/clients/Orderbook';
-import { orderbookKeys } from '../data';
+} from '~/lib/sdk/orderbook/clients/Orderbook';
+
 import { useQuery } from '@tanstack/react-query';
 
 interface Props {
@@ -43,7 +43,7 @@ export const useGetOrderBatch = (
   arg: Partial<{ chainId: number; orderIds: string[]; disabled?: boolean }>,
 ) =>
   useQuery({
-    queryKey: [...orderbookKeys.userOrderbookOrders(), JSON.stringify(arg)],
+    queryKey: ['userOrderbookOrders', JSON.stringify(arg)],
     queryFn: () => {
       const orderbook = new Orderbook({
         chainId: arg.chainId!,
