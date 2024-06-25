@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { PoolAvatar } from '~/components/Avatars';
 import type { CartItem } from '~/lib/stores';
 import { editQuantity } from '~/lib/stores';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 import { formatDecimals } from '~/utils/helpers';
-import { getThemeManagerElement } from '~/utils/theme';
 
 import { Button, Dialog, Flex, Text, cn } from '$ui';
 import QuantityInput from './QuantityInput';

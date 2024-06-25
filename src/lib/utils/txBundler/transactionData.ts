@@ -1,4 +1,4 @@
-import { ORDERBOOK_CONTRACT_ADDRESS } from '~/config/consts';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { Orderbook_ABI } from '~/sdk/orderbook/contracts/abi/orderbook';
 import { ERC20_ABI } from '~/sdk/shared/abi/token/ERC20';
 import { ERC721_ABI } from '~/sdk/shared/abi/token/ERC721';
@@ -101,7 +101,7 @@ export const getCreateRequestTransaction = (
   );
 
   const createRequestTx = {
-    to: ORDERBOOK_CONTRACT_ADDRESS,
+    to: SEQUENCE_MARKET_V1_ADDRESS,
     data: createRequestData,
   };
 
@@ -124,7 +124,7 @@ export const getAcceptRequestBatchTx = (partialOrders: AcceptRequest[]) => {
   );
 
   const acceptRequestBatchTx = {
-    to: ORDERBOOK_CONTRACT_ADDRESS,
+    to: SEQUENCE_MARKET_V1_ADDRESS,
     data: acceptRequestBatchData,
   };
 

@@ -2,7 +2,7 @@ import type { DOMAttributes } from 'react';
 
 import {
   Orderbook,
-  ORDERBOOK_CONTRACT_ADDRESS,
+  SEQUENCE_MARKET_V1_ADDRESS,
 } from '~/sdk/orderbook/clients/Orderbook';
 import { ERC721 } from '~/sdk/shared/clients/ERC721';
 import { ERC1155 } from '~/sdk/shared/clients/ERC1155';
@@ -145,7 +145,7 @@ export const generateStepsOrderbookAcceptRequest = (
       if (requireERC721Approval) {
         const erc721ApprovalAllTx = getErc721ApproveAllTransaction(
           tokenContract,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc721ApprovalAllTx);
       }
@@ -153,7 +153,7 @@ export const generateStepsOrderbookAcceptRequest = (
       if (requireERC1155Approval) {
         const erc1155ApprovalAllTx = getErc1155ApproveAllTransaction(
           tokenContract,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc1155ApprovalAllTx);
       }
@@ -161,7 +161,7 @@ export const generateStepsOrderbookAcceptRequest = (
       if (requireERC20Approval) {
         const erc20ApprovalTx = getErc20ApproveTransaction(
           currency,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc20ApprovalTx);
       }
@@ -186,14 +186,14 @@ export const generateStepsOrderbookAcceptRequest = (
   } else {
     const orderbook = new Orderbook({
       chainId,
-      contractAddress: ORDERBOOK_CONTRACT_ADDRESS as Hex,
+      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
     });
 
     if (requireERC721Approval) {
       const approveERC721Action = ERC721.setApprovalForAll.bind(
         null,
         tokenContract,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         true,
         walletClient,
       );
@@ -208,7 +208,7 @@ export const generateStepsOrderbookAcceptRequest = (
       const approveERC1155Action = ERC1155.setApprovalForAll.bind(
         null,
         tokenContract,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         true,
         walletClient,
       );
@@ -223,7 +223,7 @@ export const generateStepsOrderbookAcceptRequest = (
       const approveERC20Action = ERC20.approveInfinite.bind(
         null,
         currency,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         walletClient,
       );
       steps.push({
@@ -308,7 +308,7 @@ export const generateStepsOrderbookOrder = (
       if (requireERC721Approval) {
         const erc721ApprovalAllTx = getErc721ApproveAllTransaction(
           tokenContract,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc721ApprovalAllTx);
       }
@@ -316,7 +316,7 @@ export const generateStepsOrderbookOrder = (
       if (requireERC1155Approval) {
         const erc1155ApprovalAllTx = getErc1155ApproveAllTransaction(
           tokenContract,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc1155ApprovalAllTx);
       }
@@ -324,7 +324,7 @@ export const generateStepsOrderbookOrder = (
       if (requireERC20Approval) {
         const erc20ApprovalTx = getErc20ApproveTransaction(
           currency,
-          ORDERBOOK_CONTRACT_ADDRESS,
+          SEQUENCE_MARKET_V1_ADDRESS,
         );
         txns.push(erc20ApprovalTx);
       }
@@ -355,14 +355,14 @@ export const generateStepsOrderbookOrder = (
   } else {
     const orderbook = new Orderbook({
       chainId,
-      contractAddress: ORDERBOOK_CONTRACT_ADDRESS as Hex,
+      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
     });
 
     if (requireERC721Approval) {
       const approveERC721Action = ERC721.setApprovalForAll.bind(
         null,
         tokenContract,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         true,
         walletClient,
       );
@@ -377,7 +377,7 @@ export const generateStepsOrderbookOrder = (
       const approveERC1155Action = ERC1155.setApprovalForAll.bind(
         null,
         tokenContract,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         true,
         walletClient,
       );
@@ -392,7 +392,7 @@ export const generateStepsOrderbookOrder = (
       const approveERC20Action = ERC20.approveInfinite.bind(
         null,
         currency,
-        ORDERBOOK_CONTRACT_ADDRESS,
+        SEQUENCE_MARKET_V1_ADDRESS,
         walletClient,
       );
       steps.push({

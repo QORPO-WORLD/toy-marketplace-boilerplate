@@ -1,4 +1,4 @@
-import { ORDERBOOK_CONTRACT_ADDRESS } from '~/config/consts';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { compareAddress } from '~/utils/address';
 
 import { type GetPublicClientReturnType } from '@wagmi/core';
@@ -35,7 +35,7 @@ export const getRequestIdFromHash = async (
   receipt.logs.forEach((log) => {
     const isOrderbookContract = compareAddress(
       log.address,
-      ORDERBOOK_CONTRACT_ADDRESS,
+      SEQUENCE_MARKET_V1_ADDRESS,
     );
     const eventSignature = ethers.utils.id(
       'RequestCreated(uint256,address,address,uint256,bool,uint256,address,uint256,uint256)',

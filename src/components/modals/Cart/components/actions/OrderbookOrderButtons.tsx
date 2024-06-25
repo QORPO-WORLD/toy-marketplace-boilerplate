@@ -26,7 +26,7 @@ import {
 } from '~/lib/stores/Transaction';
 import { getFrontEndFeeAmount } from '~/sdk/niftyswap-v2';
 import {
-  ORDERBOOK_CONTRACT_ADDRESS,
+  SEQUENCE_MARKET_V1_ADDRESS,
   Orderbook,
 } from '~/sdk/orderbook/clients/Orderbook';
 import { isProduction } from '~/utils/environment';
@@ -105,7 +105,7 @@ export const OrderbookOrderButtons = ({
     isLoading: isErc20ApprovalLoading,
     refetch: refetchErc20Approval,
   } = useERC20Approval({
-    spenderAddress: ORDERBOOK_CONTRACT_ADDRESS,
+    spenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
     erc20Address: erc20Address,
     userAddress: userAddress,
     targetAmount: erc20Amount,
@@ -122,7 +122,7 @@ export const OrderbookOrderButtons = ({
     isLoading: isErc721ApprovalLoading,
     refetch: refetchERC721Approval,
   } = useERC721Approval({
-    operatorAddress: ORDERBOOK_CONTRACT_ADDRESS,
+    operatorAddress: SEQUENCE_MARKET_V1_ADDRESS,
     erc721Address: collectionAddress,
     ownerAddress: userAddress,
     chainId: chainId,
@@ -138,7 +138,7 @@ export const OrderbookOrderButtons = ({
     isLoading: isErc1155ApprovalLoading,
     refetch: refetchERC1155Approval,
   } = useERC1155Approval({
-    operatorAddress: ORDERBOOK_CONTRACT_ADDRESS,
+    operatorAddress: SEQUENCE_MARKET_V1_ADDRESS,
     erc1155Address: collectionAddress,
     ownerAddress: userAddress,
     chainId: chainId,

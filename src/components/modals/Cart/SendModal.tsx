@@ -3,7 +3,7 @@
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
-import { getThemeManagerElement } from '~/utils/theme';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Input } from '$ui';
 import { isAddress } from 'viem';

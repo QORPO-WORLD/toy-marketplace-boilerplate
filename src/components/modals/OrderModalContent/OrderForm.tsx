@@ -14,7 +14,7 @@ import {
 import type { OrderbookOrder } from '~/api/temp/marketplace-api';
 import { WalletButton } from '~/app/_layout/Header/Buttons/WalletButton';
 import { getPlatformFeeRecipient, getPresentableChainName } from '~/config';
-import { ORDERBOOK_CONTRACT_ADDRESS } from '~/config/consts';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import {
   balancesKeys,
   metadataKeys,
@@ -60,7 +60,6 @@ import { TokenSummary } from './TokenSummary';
 import type { ContractInfo, TokenMetadata } from '@0xsequence/metadata';
 import { useQueryClient } from '@tanstack/react-query';
 import { addDays } from 'date-fns';
-import { DatePicker } from 'system/DatePicker';
 import { useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
@@ -196,7 +195,7 @@ export const OrderForm = ({
     type,
     erc20Address: watch('currency.contractAddress'),
     erc20Amount: totalCost.raw,
-    orderbookAddress: ORDERBOOK_CONTRACT_ADDRESS,
+    orderbookAddress: SEQUENCE_MARKET_V1_ADDRESS,
     walletClient: walletClient as GetWalletClientData<any, any> | undefined,
   });
 

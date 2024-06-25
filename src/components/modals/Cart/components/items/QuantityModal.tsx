@@ -8,8 +8,8 @@ import { PoolAvatar } from '~/components/Avatars';
 import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
 import type { CartItem, CollectibleMetadata } from '~/lib/stores';
 import { editQuantity } from '~/lib/stores';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 import { formatDecimals } from '~/utils/helpers';
-import { getThemeManagerElement } from '~/utils/theme';
 
 import { Button, Dialog, Flex, Input, LoadingIcon, Text, cn } from '$ui';
 import { parseUnits } from 'viem';

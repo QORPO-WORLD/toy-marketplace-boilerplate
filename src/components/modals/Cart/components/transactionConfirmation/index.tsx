@@ -7,12 +7,12 @@ import { OrderItemType } from '~/api/types/order';
 import { useCollectibleMetadata } from '~/hooks/data';
 import useElementDimensions from '~/hooks/ui/useElementDimentions';
 import type { CartItem } from '~/lib/stores';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 import {
   formatDecimals,
   formatDisplay,
   truncateAtMiddle,
 } from '~/utils/helpers';
-import { getThemeManagerElement } from '~/utils/theme';
 
 import {
   Avatar,
