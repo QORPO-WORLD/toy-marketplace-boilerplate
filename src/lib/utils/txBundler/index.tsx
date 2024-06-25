@@ -1,11 +1,10 @@
 import type { DOMAttributes } from 'react';
 
-import {
-  Orderbook,
-  SEQUENCE_MARKET_V1_ADDRESS,
-} from '~/sdk/orderbook/clients/Orderbook';
-import { ERC721 } from '~/sdk/shared/clients/ERC721';
-import { ERC1155 } from '~/sdk/shared/clients/ERC1155';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
+import { ERC20 } from '~/lib/sdk/niftyswap-v2';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
+import { ERC721 } from '~/lib/sdk/shared/clients/ERC721';
+import { ERC1155 } from '~/lib/sdk/shared/clients/ERC1155';
 
 import { sequence } from '0xsequence';
 import { Button, ChevronRightIcon, LoaderIcon } from '$ui';

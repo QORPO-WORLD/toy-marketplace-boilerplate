@@ -1,5 +1,4 @@
-import { getERC1155Contract } from '~/sdk/niftyswap-v2';
-
+import { getERC1155Contract } from '../../niftyswap-v2';
 import { ERC1155_ABI } from '../abi/token/ERC1155';
 import type { Hex } from 'viem';
 import { encodeFunctionData } from 'viem';

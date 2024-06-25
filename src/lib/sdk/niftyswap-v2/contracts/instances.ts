@@ -1,7 +1,7 @@
 import { getPublicClient } from '~/config/networks/wagmi/rpcClients';
-import { ERC721_ABI } from '~/sdk/shared/abi/token/ERC721';
 
 import { ERC20_ABI } from '../../shared/abi/token/ERC20';
+import { ERC721_ABI } from '../../shared/abi/token/ERC721';
 import { ERC1155_ABI } from '../../shared/abi/token/ERC1155';
 import { Niftyswap20_ABI } from './abi/niftyswap/Niftyswap20';
 import { NiftyswapFactory20_ABI } from './abi/niftyswap/NiftyswapFactory20';

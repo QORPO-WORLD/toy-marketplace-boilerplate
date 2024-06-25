@@ -2,7 +2,6 @@
 
 import { useCallback, useState } from 'react';
 
-import type { DefaultCurrency } from '~/api';
 import { SortOrder } from '~/api/temp/marketplace-api.gen';
 import type { OrderbookOrder } from '~/api/types/orderbook';
 import { CollectibleSearch } from '~/components/CollectibleSearch';

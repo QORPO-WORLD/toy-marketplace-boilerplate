@@ -2,17 +2,11 @@
 
 import React from 'react';
 
-import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
 import { Spinner } from '~/components/Spinner';
-import {
-  useCollectibleMetadata,
-  useCollectionMetadata,
-  useDefaultCurrencies,
-} from '~/hooks/data';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import { useCollectionType } from '~/hooks/utils/useCollectionType';
 
 import { OrderForm } from './OrderForm';
+import type { OrderbookOrder } from '@0xsequence/indexer';
 
 export type OrderbookModalType = 'listing' | 'offer';
 

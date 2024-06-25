@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { DefaultCurrency } from '~/api';
+import type { Currency } from '~/lib/queries/marketplace.gen';
 
 import type { TokenMetadata } from '@0xsequence/metadata';
 import { addDays } from 'date-fns';
@@ -12,13 +12,13 @@ export type OrderbookFormData = {
   unitPrice: string;
   tokenAmount: string;
   //
-  currency: DefaultCurrency;
+  currency: Currency;
   expiry: Iso8601DateString;
 };
 
 interface Props {
   currency: {
-    defaultCurrency: DefaultCurrency;
+    defaultCurrency: Currency;
   };
   tokenMetadata: TokenMetadata;
   options: {

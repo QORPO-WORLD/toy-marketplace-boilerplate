@@ -1,5 +1,4 @@
-import { ZERO_ADDRESS } from '~/sdk/shared/utils';
-
+import { ZERO_ADDRESS } from '../../shared/utils';
 import type { OrderRequest } from '../clients/Orderbook';
 
 const EMPTY_ORDER: OrderRequest = {

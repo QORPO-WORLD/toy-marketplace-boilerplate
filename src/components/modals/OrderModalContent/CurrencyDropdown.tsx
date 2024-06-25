@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 
-import type { DefaultCurrency } from '~/api';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Flex, Image, Select, Text } from '$ui';

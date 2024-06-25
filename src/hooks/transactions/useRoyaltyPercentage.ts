@@ -1,10 +1,9 @@
 import { getPublicClient } from '~/config/networks/wagmi/rpcClients';
-import { EIP2981_ABI } from '~/sdk/shared/abi/standard/EIP2981';
 
-import { balancesKeys, time } from '../data';
 import { useQuery } from '@tanstack/react-query';
 import type { Hex } from 'viem';
 import { getContract } from 'viem';
+import { EIP2981_ABI } from '~/lib/sdk/shared/abi/standard/EIP2981';
 
 interface Props {
   chainId: number;
@@ -16,7 +15,7 @@ export const useCollectionRoyalty = (
   arg: Partial<Props> & { disabled?: boolean },
 ) =>
   useQuery({
-    queryKey: [...balancesKeys.useCollectionRoyalties(), arg],
+    queryKey: ['useCollectionRoyalties', arg],
     queryFn: () =>
       getRoyalties({
         chainId: arg.chainId!,
@@ -24,7 +23,6 @@ export const useCollectionRoyalty = (
         tokenId: arg.tokenId!,
       }),
     retry: false,
-    staleTime: 1 * time.oneHour,
     enabled:
       !!arg.chainId && !!arg.contractAddress && !!arg.tokenId && !arg.disabled,
   });

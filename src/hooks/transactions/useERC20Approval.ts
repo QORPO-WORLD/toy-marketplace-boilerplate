@@ -1,7 +1,6 @@
-import { ERC20 } from '~/sdk/shared/clients/ERC20';
-import { BigIntReplacer } from '~/utils/bigint';
 
 import { useQuery } from '@tanstack/react-query';
+import { BigIntReplacer } from '~/lib/utils/bigint';
 
 interface Props {
   spenderAddress: string;

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 
-import type { DefaultCurrency } from '~/api';
 import { getNetworkConfigAndClients } from '~/api';
 import type {
   GetOrderbookOrdersResponse,
@@ -21,6 +20,7 @@ import NextLink from 'next/link';
 import { format as timeAgo } from 'timeago.js';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
+import { Currency } from '~/lib/queries/marketplace.gen';
 
 export interface BuyOnClickProps {
   orderId: string;
@@ -34,7 +34,7 @@ export interface BuyOnClickProps {
 type MarketType = {
   marketType: 'orderbook';
   data: InfiniteData<GetOrderbookOrdersResponse> | undefined;
-  defaultCurrencies: DefaultCurrency[];
+  defaultCurrencies: Currency[];
 };
 
 type ListingsTableProps = {

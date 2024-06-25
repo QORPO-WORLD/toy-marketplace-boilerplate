@@ -1,9 +1,3 @@
-import {
-  Orderbook,
-  SEQUENCE_MARKET_V1_ADDRESS,
-} from '~/sdk/orderbook/clients/Orderbook';
-
-import { orderbookKeys, time } from '../data';
 import { useQuery } from '@tanstack/react-query';
 import type { Hex } from 'viem';
 
@@ -16,7 +10,7 @@ export interface UseOrderbookIsValidArgs {
 export const useOrderbookIsValid = (args: UseOrderbookIsValidArgs) =>
   useQuery({
     queryKey: [
-      ...orderbookKeys.useOrderbookIsValid(),
+      'orderbookIsValid',
       {
         ...args,
         requestId: args.requestId.toString(),

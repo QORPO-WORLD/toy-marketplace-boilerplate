@@ -1,5 +1,4 @@
-import { getERC721Contract } from '~/sdk/niftyswap-v2';
-
+import { getERC721Contract } from '../../niftyswap-v2';
 import { ERC721_ABI } from '../abi/token/ERC721';
 import type { Hex } from 'viem';
 import { encodeFunctionData } from 'viem';

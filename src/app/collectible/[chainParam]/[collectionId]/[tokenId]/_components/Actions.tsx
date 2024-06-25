@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useOrderbookTopOrders } from '~/hooks/orderbook';
 import { CartType } from '~/lib/stores/cart/types';
@@ -24,142 +25,140 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  const { data: defaultCurrencies, isLoading: isLoadingCurrencies } =
-    useDefaultCurrencies({
-      chainId: chainId,
-      collectionAddress: collectionAddress,
-    });
+  // const { data: defaultCurrencies, isLoading: isLoadingCurrencies } =
+  //   useDefaultCurrencies({
+  //     chainId: chainId,
+  //     collectionAddress: collectionAddress,
+  //   });
 
-  const currencies =
-    defaultCurrencies?.data.map((c) => c.contractAddress) || [];
+  // const currencies =
+  //   defaultCurrencies?.data.map((c) => c.contractAddress) || [];
 
-  const { data: bestOffers, isLoading: isLoadingBestOffers } =
-    useOrderbookTopOrders(chainId, {
-      collectionAddress,
-      currencyAddresses: currencies,
-      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-      tokenIDs: [tokenId],
-      isListing: false,
-      priceSort: SortOrder.DESC,
-    });
+  // const { data: bestOffers, isLoading: isLoadingBestOffers } =
+  //   useOrderbookTopOrders(chainId, {
+  //     collectionAddress,
+  //     currencyAddresses: currencies,
+  //     orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+  //     tokenIDs: [tokenId],
+  //     isListing: false,
+  //     priceSort: SortOrder.DESC,
+  //   });
 
-  const bestOffer = bestOffers?.orders[0];
+  // const bestOffer = bestOffers?.orders[0];
 
-  const { data: bestListings, isLoading: isLoadingBestListings } =
-    useOrderbookTopOrders(chainId, {
-      collectionAddress,
-      currencyAddresses: currencies,
-      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-      tokenIDs: [tokenId],
-      isListing: true,
-      priceSort: SortOrder.DESC,
-    });
+  // const { data: bestListings, isLoading: isLoadingBestListings } =
+  //   useOrderbookTopOrders(chainId, {
+  //     collectionAddress,
+  //     currencyAddresses: currencies,
+  //     orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+  //     tokenIDs: [tokenId],
+  //     isListing: true,
+  //     priceSort: SortOrder.DESC,
+  //   });
 
-  const bestListing = bestListings?.orders[0];
+  // const bestListing = bestListings?.orders[0];
 
-  const {
-    data: collectiblesMetadata,
-    isLoading: isLoadingCollectibleMetadata,
-  } = useCollectibleMetadata({
-    chainID: String(chainId),
-    contractAddress: collectionAddress,
-    tokenIDs: [tokenId],
-  });
-  const collectibleMetadata = collectiblesMetadata?.data[0];
+  // const {
+  //   data: collectiblesMetadata,
+  //   isLoading: isLoadingCollectibleMetadata,
+  // } = useCollectibleMetadata({
+  //   chainID: String(chainId),
+  //   contractAddress: collectionAddress,
+  //   tokenIDs: [tokenId],
+  // });
+  // const collectibleMetadata = collectiblesMetadata?.data[0];
 
-  const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
-    useCollectionMetadata({
-      chainID: String(chainId),
-      contractAddress: collectionAddress,
-    });
+  // const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
+  //   useCollectionMetadata({
+  //     chainID: String(chainId),
+  //     contractAddress: collectionAddress,
+  //   });
 
-  const isERC1155 = collectionMetadata?.data?.contractInfo.type === 'ERC1155';
+  // const isERC1155 = collectionMetadata?.data?.contractInfo.type === 'ERC1155';
 
-  const { address, isConnected } = useAccount();
+  // const { address, isConnected } = useAccount();
 
-  const { data: userBalance, isLoading: isBalanceLoading } =
-    useCollectibleBalance({
-      chainId: chainId,
-      userAddress: address as string,
-      contractAddress: collectionAddress,
-      tokenId: tokenId,
-    });
+  // const { data: userBalance, isLoading: isBalanceLoading } =
+  //   useCollectibleBalance({
+  //     chainId: chainId,
+  //     userAddress: address as string,
+  //     contractAddress: collectionAddress,
+  //     tokenId: tokenId,
+  //   });
 
-  const hasUserBalance = userBalance?.gt(0);
+  // const hasUserBalance = userBalance?.gt(0);
 
-  const item721AlreadyOwned = hasUserBalance && !isERC1155;
+  // const item721AlreadyOwned = hasUserBalance && !isERC1155;
 
-  const isLoading =
-    isLoadingCurrencies ||
-    isLoadingBestOffers ||
-    isLoadingBestListings ||
-    isLoadingCollectibleMetadata ||
-    (isConnected && isBalanceLoading) ||
-    isCollectionMetadataLoading;
+  // const isLoading =
+  //   isLoadingCurrencies ||
+  //   isLoadingBestOffers ||
+  //   isLoadingBestListings ||
+  //   isLoadingCollectibleMetadata ||
+  //   (isConnected && isBalanceLoading) ||
+  //   isCollectionMetadataLoading;
 
   const onClickBuy = () => {
-    if (!bestListing) return;
-
-    _addToCart_({
-      type: CartType.ORDERBOOK,
-      item: {
-        chainId,
-        itemType: OrderItemType.BUY_ORDERBOOK,
-        collectibleMetadata: {
-          collectionAddress: bestListing.tokenContract,
-          tokenId: bestListing.tokenId,
-          name: collectibleMetadata?.name || '',
-          imageUrl: collectibleMetadata?.image || '',
-          decimals: collectibleMetadata?.decimals || 0,
-          chainId,
-        },
-        quantity: defaultSelectionQuantity({
-          type: OrderItemType.BUY_ORDERBOOK,
-          tokenDecimals: collectibleMetadata?.decimals || 0,
-          tokenUserBalance: BigInt(userBalance?.toString() || 0),
-          tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
-        }),
-        orderbookOrderId: bestListing.orderId,
-      },
-      options: {
-        toggle: true,
-      },
-    });
+    // if (!bestListing) return;
+    // _addToCart_({
+    //   type: CartType.ORDERBOOK,
+    //   item: {
+    //     chainId,
+    //     itemType: OrderItemType.BUY_ORDERBOOK,
+    //     collectibleMetadata: {
+    //       collectionAddress: bestListing.tokenContract,
+    //       tokenId: bestListing.tokenId,
+    //       name: collectibleMetadata?.name || '',
+    //       imageUrl: collectibleMetadata?.image || '',
+    //       decimals: collectibleMetadata?.decimals || 0,
+    //       chainId,
+    //     },
+    //     quantity: defaultSelectionQuantity({
+    //       type: OrderItemType.BUY_ORDERBOOK,
+    //       tokenDecimals: collectibleMetadata?.decimals || 0,
+    //       tokenUserBalance: BigInt(userBalance?.toString() || 0),
+    //       tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
+    //     }),
+    //     orderbookOrderId: bestListing.orderId,
+    //   },
+    //   options: {
+    //     toggle: true,
+    //   },
+    // });
   };
 
   const onClickSell = () => {
-    if (!bestOffer) return;
-
-    _addToCart_({
-      type: CartType.ORDERBOOK,
-      item: {
-        chainId,
-        itemType: OrderItemType.SELL_ORDERBOOK,
-        collectibleMetadata: {
-          collectionAddress: bestOffer.tokenContract,
-          tokenId: bestOffer.tokenId,
-          name: collectibleMetadata?.name || '',
-          imageUrl: collectibleMetadata?.image || '',
-          decimals: collectibleMetadata?.decimals || 0,
-          chainId,
-        },
-        quantity: defaultSelectionQuantity({
-          type: OrderItemType.SELL_ORDERBOOK,
-          tokenDecimals: collectibleMetadata?.decimals || 0,
-          tokenUserBalance: BigInt(userBalance?.toString() || 0),
-          tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
-        }),
-        orderbookOrderId: bestOffer.orderId,
-      },
-      options: {
-        toggle: true,
-      },
-    });
+    // if (!bestOffer) return;
+    // _addToCart_({
+    //   type: CartType.ORDERBOOK,
+    //   item: {
+    //     chainId,
+    //     itemType: OrderItemType.SELL_ORDERBOOK,
+    //     collectibleMetadata: {
+    //       collectionAddress: bestOffer.tokenContract,
+    //       tokenId: bestOffer.tokenId,
+    //       name: collectibleMetadata?.name || '',
+    //       imageUrl: collectibleMetadata?.image || '',
+    //       decimals: collectibleMetadata?.decimals || 0,
+    //       chainId,
+    //     },
+    //     quantity: defaultSelectionQuantity({
+    //       type: OrderItemType.SELL_ORDERBOOK,
+    //       tokenDecimals: collectibleMetadata?.decimals || 0,
+    //       tokenUserBalance: BigInt(userBalance?.toString() || 0),
+    //       tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
+    //     }),
+    //     orderbookOrderId: bestOffer.orderId,
+    //   },
+    //   options: {
+    //     toggle: true,
+    //   },
+    // });
   };
 
-  const buyDisabled = !bestListing || item721AlreadyOwned;
-  const offerDisabled = !isConnected;
-  const listingDisabled = !isConnected || !hasUserBalance;
+  // const buyDisabled = !bestListing || item721AlreadyOwned;
+  // const offerDisabled = !isConnected;
+  // const listingDisabled = !isConnected || !hasUserBalance;
 
   return (
     <Flex className="flex-col gap-4">
@@ -167,8 +166,8 @@ export const CollectibleTradeActions = ({
         <Button
           size="lg"
           className="w-full justify-between"
-          loading={isLoading}
-          disabled={buyDisabled}
+          // loading={isLoading}
+          // disabled={buyDisabled}
           onClick={onClickBuy}
         >
           <Text className="text-inherit">Buy</Text>
@@ -183,7 +182,7 @@ export const CollectibleTradeActions = ({
                 className="w-full justify-between"
                 size="lg"
                 loading={false}
-                disabled={offerDisabled}
+                // disabled={offerDisabled}
               >
                 <Text className="text-inherit">Offer</Text>
               </Button>
@@ -192,14 +191,14 @@ export const CollectibleTradeActions = ({
             <Dialog.BaseContent
               container={getThemeManagerElement()}
               className="max-h-screen max-w-[700px] p-5"
-              onOpenAutoFocus={(e) => e.preventDefault()} // to prevent a Tooltip in Dialog to open by default
+              onOpenAutoFocus={(e) => e.preventDefault()}
             >
               <Dialog.Title>Create an offer</Dialog.Title>
               <OrderModalContent
                 chainId={chainId}
                 collectionAddress={collectionAddress}
                 tokenId={tokenId}
-                bestOrder={bestListing}
+                // bestOrder={bestListing}
                 open={isOfferModalOpen}
                 setOpen={setIsOfferModalOpen}
                 type="offer"
@@ -212,10 +211,8 @@ export const CollectibleTradeActions = ({
         <Button
           className="w-full justify-between"
           size="lg"
-          loading={isLoading}
-          // button disabled until a new flow is figured out
+          // loading={isLoading}
           // disabled={sellDisabled}
-          disabled
           onClick={onClickSell}
         >
           <Text className="text-inherit">Sell</Text>
@@ -231,7 +228,7 @@ export const CollectibleTradeActions = ({
                 className="w-full justify-between"
                 size="lg"
                 loading={false}
-                disabled={listingDisabled}
+                // disabled={listingDisabled}
               >
                 <Text className="text-inherit">List</Text>
               </Button>
@@ -240,7 +237,7 @@ export const CollectibleTradeActions = ({
             <Dialog.BaseContent
               container={getThemeManagerElement()}
               className="flex max-w-[700px] flex-col overflow-hidden p-0"
-              onOpenAutoFocus={(e) => e.preventDefault()} // to prevent a Tooltip in Dialog to open by default
+              onOpenAutoFocus={(e) => e.preventDefault()}
             >
               <ScrollArea.Base viewportClassName="max-h-screen">
                 <Flex className="h-full w-full flex-col gap-4 p-5">
@@ -250,7 +247,7 @@ export const CollectibleTradeActions = ({
                     chainId={chainId}
                     collectionAddress={collectionAddress}
                     tokenId={tokenId}
-                    bestOrder={bestOffer}
+                    // bestOrder={bestOffer}
                     open={isListingModalOpen}
                     setOpen={setIsListingModalOpen}
                     type="listing"

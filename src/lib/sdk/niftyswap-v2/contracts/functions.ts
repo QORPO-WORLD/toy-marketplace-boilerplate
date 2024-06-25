@@ -1,13 +1,6 @@
-import {
-  percentageToBasis1000,
-  BASIS_DENOMINATOR_1000,
-  getERC1155Contract,
-  getNiftyswap20Contract,
-  percentageToBPS,
-  BASIS_DENOMINATOR_10000,
-} from '~/sdk/niftyswap-v2';
-
-import type { ExchangeLiquidity } from '../../../api/types';
+import { BASIS_DENOMINATOR_1000, BASIS_DENOMINATOR_10000 } from './constants';
+import { getNiftyswap20Contract, getERC1155Contract } from './instances';
+import { percentageToBPS, percentageToBasis1000 } from './utils';
 
 export const getCurrencyReserves = async (
   exchangeAddress: string,

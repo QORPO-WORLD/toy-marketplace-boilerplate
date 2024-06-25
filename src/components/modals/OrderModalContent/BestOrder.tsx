@@ -1,4 +1,3 @@
-import type { DefaultCurrency } from '~/api';
 import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
 
 import { Avatar, Badge, Box, Flex, Text } from '$ui';

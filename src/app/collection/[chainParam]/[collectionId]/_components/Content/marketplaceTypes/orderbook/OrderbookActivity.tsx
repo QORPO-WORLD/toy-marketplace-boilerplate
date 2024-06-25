@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
-import type { DefaultCurrency } from '~/api';
 import { OrderItemType } from '~/api';
 import { formatDisplay, getNetworkConfigAndClients } from '~/api';
 import type { OrderbookOrder } from '~/api/types/orderbook';

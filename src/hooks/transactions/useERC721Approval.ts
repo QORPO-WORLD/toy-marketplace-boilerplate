@@ -1,5 +1,4 @@
-import { ERC721 } from '~/sdk/shared/clients/ERC721';
-import { BigIntReplacer } from '~/utils/bigint';
+import { BigIntReplacer } from '~/lib/utils/bigint';
 
 import { useQuery } from '@tanstack/react-query';
 

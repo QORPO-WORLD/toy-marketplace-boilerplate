@@ -1,6 +1,6 @@
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import { compareAddress } from '~/utils/address';
 
+import { compareAddress } from '../helpers';
 import { type GetPublicClientReturnType } from '@wagmi/core';
 import { ethers } from 'ethers';
 import type { Hex } from 'viem';

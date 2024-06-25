@@ -4,38 +4,22 @@ import React, { useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
-import type { DefaultCurrency } from '~/api';
-import {
-  compareAddress,
-  formatDecimals,
-  formatDisplay,
-  getNetworkConfigAndClients,
-} from '~/api';
-import type { OrderbookOrder } from '~/api/temp/marketplace-api';
 import { WalletButton } from '~/app/_layout/Header/Buttons/WalletButton';
-import { getPlatformFeeRecipient, getPresentableChainName } from '~/config';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import {
-  balancesKeys,
-  metadataKeys,
-  orderbookKeys,
-  useCollectibleBalance,
-  useERC20UserBalanceDirect,
-} from '~/hooks/data';
+import { getPresentableChainName } from '~/config/networks';
 import { useOrderbookApprovals } from '~/hooks/orderbook/useOrderbookApprovals';
-import type { OrderbookFormData } from '~/hooks/orderbook/useOrderbookFormData';
-import { useOrderbookFormData } from '~/hooks/orderbook/useOrderbookFormData';
+import {
+  useOrderbookFormData,
+  type OrderbookFormData,
+} from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
-import { getMarketplaceFeePercentage } from '~/lib/stores/marketConfig';
-import { transactionNotification } from '~/modals/Notifications/transactionNotification';
-import { getFrontEndFeeAmount } from '~/sdk/niftyswap-v2';
-import type {
-  CreateRequestParams,
-  GenerateStepsOrderbookOrder,
-  GenericStep,
-} from '~/utils/txBundler';
-import { generateStepsOrderbookOrder } from '~/utils/txBundler';
-import { getRequestIdFromHash } from '~/utils/txBundler/getRequestIdFromHash';
+import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
+import { formatDecimals } from '~/lib/utils/helpers';
+import {
+  generateStepsOrderbookOrder,
+  type CreateRequestParams,
+} from '~/lib/utils/txBundler';
+import { getRequestIdFromHash } from '~/lib/utils/txBundler/getRequestIdFromHash';
 
 import {
   Avatar,
@@ -51,12 +35,20 @@ import {
   ChevronRightIcon,
   LoaderIcon,
   cn,
+  DatePicker,
 } from '$ui';
 import type { OrderbookModalType } from '.';
+import { transactionNotification } from '../Notifications/transactionNotification';
 import { BestOrder } from './BestOrder';
 import { CurrencyDropdown } from './CurrencyDropdown';
 import { MatchingOrderInfo } from './MatchedOrderDisplay';
 import { TokenSummary } from './TokenSummary';
+import { type OrderbookOrder } from '@0xsequence/indexer';
+import {
+  compareAddress,
+  useCollectibleBalance,
+  formatDisplay,
+} from '@0xsequence/kit';
 import type { ContractInfo, TokenMetadata } from '@0xsequence/metadata';
 import { useQueryClient } from '@tanstack/react-query';
 import { addDays } from 'date-fns';

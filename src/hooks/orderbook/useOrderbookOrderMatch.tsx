@@ -1,9 +1,7 @@
-import type { OrderbookOrder } from '~/api/temp/marketplace-api.gen';
-import { compareAddress } from '~/utils/address';
-import { BigIntMin } from '~/utils/helpers';
-
 import { useOrderbookIsValid } from './useOrderbookIsValid';
+import { OrderbookOrder } from '@0xsequence/indexer';
 import { formatUnits } from 'viem';
+import { compareAddress } from '~/lib/utils/helpers';
 
 interface Props {
   selectedTokenAmountRaw: bigint;

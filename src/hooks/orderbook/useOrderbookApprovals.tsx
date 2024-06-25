@@ -1,11 +1,11 @@
+import type { OrderbookModalType } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
-import type { OrderbookModalType } from '~/modals/OrderModalContent';
-import { ERC20 } from '~/sdk/shared/clients/ERC20';
-import { ERC721 } from '~/sdk/shared/clients/ERC721';
-import { ERC1155 } from '~/sdk/shared/clients/ERC1155';
+import { ERC20 } from '~/lib/sdk/niftyswap-v2';
+import { ERC721 } from '~/lib/sdk/shared/clients/ERC721';
+import { ERC1155 } from '~/lib/sdk/shared/clients/ERC1155';
 
 import type { Hex } from 'viem';
 import type { GetWalletClientData } from 'wagmi/query';

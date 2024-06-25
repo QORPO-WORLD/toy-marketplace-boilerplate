@@ -1,6 +1,7 @@
 'use client';
 
 import { Box, Flex, cn } from '$ui';
+import { CollectibleTradeActions } from '../_components/Actions';
 import { CollectibleInfo } from '../_components/Info';
 import { useCollectableData } from '../_hooks/useCollectableData';
 
@@ -37,11 +38,11 @@ export default function Sidebar() {
         />
 
         <Flex className="flex-col gap-3">
-          {/* <CollectibleTradeActions
-         chainId={chainId}
-         collectionAddress={collectionId}
-         tokenId={tokenId}
-        /> */}
+          <CollectibleTradeActions
+            chainId={chainId}
+            collectionAddress={collectionId}
+            tokenId={tokenId}
+          />
         </Flex>
       </Flex>
     </Box>
