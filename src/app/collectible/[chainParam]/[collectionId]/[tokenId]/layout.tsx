@@ -16,8 +16,8 @@ const CollectableLayout = ({ children }: { children: React.ReactNode }) => {
         )}
       >
         <Sidebar />
+        <Flex className="flex-1 flex-col">{children}</Flex>
       </Flex>
-      {children}
     </Flex>
   );
 };
