@@ -3,11 +3,11 @@ import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
 import { compareAddress } from '~/lib/utils/helpers';
 
-import CollectionBanner from './[mode]/_components/Banner';
-import CollectionControls from './[mode]/_components/Controls';
-import CollectionHeader from './[mode]/_components/Header';
-import { CollectionViewPageLayout } from './[mode]/_components/Layout';
-import { CollectionSidebar } from './[mode]/_components/Sidebar';
+import CollectionBanner from './_components/Banner';
+import CollectionControls from './_components/Controls';
+import CollectionHeader from './_components/Header';
+import { CollectionViewPageLayout } from './_components/Layout';
+import { CollectionSidebar } from './_components/Sidebar';
 
 const Layout = async ({
   params: { chainParam, collectionId, mode },

@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import { resetCart } from '~/lib/stores';
-
 import { type GetAccountReturnType } from '@wagmi/core';
 import { watchAccount } from '@wagmi/core';
 import { type Config } from 'wagmi';
@@ -15,7 +13,7 @@ export const AccountEvents = ({ wagmiConfig }: { wagmiConfig: Config }) => {
       ) {
         // reset cart if user switches wallet
         if (prevAccount.address !== account.address) {
-          resetCart();
+          // resetCart();
         }
       },
     });
