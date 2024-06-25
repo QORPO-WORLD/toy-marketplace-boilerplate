@@ -1,10 +1,7 @@
 import { type MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/lib/queries';
-import { getQueryClient } from '~/lib/queries/getQueryClient';
 
-import { Flex, Text } from '$ui';
-import { CollectionsGrid } from './Grid';
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import { Flex, Grid, Text, cn } from '$ui';
+import { CollectionCard } from './Card';
 
 type LandingCollectionsProps = {
   collections: MarketConfig['collections'];
@@ -15,25 +12,20 @@ export const LandingCollections = ({
   collections,
   className,
 }: LandingCollectionsProps) => {
-  const queryClient = getQueryClient();
-
-  void queryClient.prefetchQuery(
-    metadataQueries.batchCollection(
-      collections.map((collection) => ({
-        collectionId: collection.collectionAddress,
-        chainID: collection.chainId.toString(),
-      })),
-    ),
-  );
-
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
-        <Text className="size-sm font-bold text-foreground/50">
-          Collections
-        </Text>
-        <CollectionsGrid data={collections} className={className} />
-      </Flex>
-    </HydrationBoundary>
+    <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
+      <Text className="size-sm font-bold text-foreground/50">Collections</Text>
+      <Grid.Root
+        className={cn(
+          'grid-flow-row auto-rows-[minmax(380px,381px)] grid-cols-[repeat(auto-fill,minmax(260px,1fr))] grid-rows-[minmax(380px,381px)] gap-4',
+          'md:grid-cols-[repeat(auto-fill,minmax(320px,1fr))]',
+          className,
+        )}
+      >
+        {collections.map((d) => {
+          return <CollectionCard key={d.collectionAddress} {...d} />;
+        })}
+      </Grid.Root>
+    </Flex>
   );
 };

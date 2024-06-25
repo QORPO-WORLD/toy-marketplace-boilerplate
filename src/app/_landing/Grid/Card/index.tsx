@@ -1,5 +1,7 @@
 'use client';
 
+import { Suspense } from 'react';
+
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
@@ -9,17 +11,22 @@ import { Routes } from '~/lib/routes';
 import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
-import { useQuery } from '@tanstack/react-query';
+import { CollectionCardSkeleton } from './Skeleton';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
 
 type CollectionCard = MarketConfig['collections'][0];
 
-export const CollectionCard = ({
-  chainId,
-  collectionAddress,
-  bannerUrl,
-}: CollectionCard) => {
-  const { data } = useQuery(
+export const CollectionCard = (params: CollectionCard) => {
+  return (
+    <Suspense fallback={<CollectionCardSkeleton />}>
+      <Card {...params} />
+    </Suspense>
+  );
+};
+
+const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
+  const { data } = useSuspenseQuery(
     metadataQueries.collection({
       collectionId: collectionAddress,
       chainID: chainId.toString(),
@@ -98,9 +105,6 @@ export const CollectionCard = ({
               className={cn(classNames.collectionHeaderBadges, 'mt-auto gap-2')}
             >
               {contractType && <Badge variant="muted">{contractType}</Badge>}
-
-              {/* TODO: Add after currency endpoint is ready 
-              <Badges collectionAddress={collectionAddress} chainId={chainId} /> */}
             </Flex>
           </ScrollArea.Base>
         </Flex>
