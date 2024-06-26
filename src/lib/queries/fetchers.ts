@@ -1,5 +1,12 @@
-import { getIndexerClient, getMetadataClient } from './clients';
-import type { GetTokenBalancesArgs } from '@0xsequence/indexer';
+import {
+  getIndexerClient,
+  getMetadataClient,
+  getOldMarketplaceClient,
+} from './clients';
+import type {
+  GetTokenBalancesArgs,
+  GetTopOrdersArgs,
+} from '@0xsequence/indexer';
 import {
   type TokenCollectionFiltersArgs,
   type GetTokenMetadataArgs,
@@ -90,4 +97,14 @@ export const fetchTokenBalances = ({
     },
     page,
   });
+};
+
+export const fetchTopOrders = async (
+  chainId: number,
+  args: GetTopOrdersArgs,
+) => {
+  const oldMarketplace = getOldMarketplaceClient(chainId);
+  const orders = await oldMarketplace.getTopOrders(args);
+
+  return orders;
 };

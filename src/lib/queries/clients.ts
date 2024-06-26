@@ -1,6 +1,10 @@
 import { getChain } from '~/config/networks';
 import { env } from '~/env';
 
+import {
+  SequenceMarketplace,
+  SequenceOldMarketplace,
+} from './marketplace/marketplaceApi';
 import { SequenceAPIClient } from '@0xsequence/api';
 import { SequenceIndexer } from '@0xsequence/indexer';
 import { SequenceMetadata } from '@0xsequence/metadata';
@@ -31,4 +35,20 @@ export const getSequenceAPIClient = (chainId: number | string) => {
 export const getIndexerClient = (chainId: number | string) => {
   const networkConfig = getNetworkConfig(chainId);
   return new SequenceIndexer(networkConfig.indexerUrl, SEQUENCE_ACCESS_KEY);
+};
+
+export const getMarketplaceClient = (chainId: number | string) => {
+  const networkConfig = getNetworkConfig(chainId);
+  return new SequenceMarketplace(
+    networkConfig.marketplaceApiUrl,
+    SEQUENCE_ACCESS_KEY,
+  );
+};
+
+export const getOldMarketplaceClient = (chainId: number | string) => {
+  const networkConfig = getNetworkConfig(chainId);
+  return new SequenceOldMarketplace(
+    networkConfig.marketplaceApiUrl,
+    SEQUENCE_ACCESS_KEY,
+  );
 };

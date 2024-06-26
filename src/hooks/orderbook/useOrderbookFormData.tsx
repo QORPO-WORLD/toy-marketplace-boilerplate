@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { Currency } from '~/lib/queries/marketplace.gen';
+import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
 
 import type { TokenMetadata } from '@0xsequence/metadata';
 import { addDays } from 'date-fns';
