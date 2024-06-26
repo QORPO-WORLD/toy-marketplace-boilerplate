@@ -4,11 +4,7 @@ import { classNames } from '~/config/classNames';
 
 import { Grid, cn } from '$ui';
 
-export const CollectionContentBase = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
+export const CollectionContent = ({ children }: { children: ReactNode }) => {
   return (
     <Grid.Root
       className={cn(classNames.collectionContent, 'min-h-screen')}

@@ -6,25 +6,15 @@ import { classNames } from '~/config/classNames';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { metadataQueries } from '~/lib/queries';
+import { Routes } from '~/lib/routes';
 
-// import { setShowAvailableOnly } from '~/lib/stores/collectible';
-// import { getThemeManagerElement } from '~/lib/utils/theme';
-import {
-  Text,
-  Button,
-  Select,
-  type Switch,
-  Flex,
-  cn,
-  Label,
-  ScrollArea,
-  Box,
-  Portal,
-} from '$ui';
+import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
+import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
+import { ObservableBoolean } from '@legendapp/state';
+import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
-import { capitalize } from 'radash';
 import { useAccount } from 'wagmi';
 
 type CollectionSidebarProps = {
@@ -66,6 +56,10 @@ export const CollectionSidebar = ({
   );
 };
 
+type FilterOptions = ComponentProps<typeof Switch.Base> & {
+  checked: ObservableBoolean;
+};
+
 const CollectionSidebarContent = ({
   chainId,
   collectionAddress,
@@ -79,33 +73,35 @@ const CollectionSidebarContent = ({
     }),
   );
 
-  const filterOptions = new Set<ComponentProps<typeof Switch.Base>>();
+  const { mode } = Routes.collection.useParams();
 
-  // const showOwnedOnlyToggle = {
-  //   id: 'show-owned-only',
-  //   checked: showAvailableOnly,
-  //   onCheckedChange: setShowAvailableOnly,
-  //   children: 'Available Items Only',
-  // };
+  const filterOptions = new Set<FilterOptions>();
 
-  // const includeUserOrdersToggle = {
-  //   id: 'include-user-orders',
-  //   checked: includeUserOrders,
-  //   onCheckedChange: setIncludeUserOrders,
-  //   children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
-  // };
+  const showOwnedOnlyToggle = {
+    id: 'show-owned-only',
+    checked: filters$.showOwnedOnly,
+    onCheckedChange: () => filters$.showOwnedOnly.toggle(),
+    children: 'Available Items Only',
+  };
 
-  // if (mode === 'buy') {
-  //   filterOptions.add(showOwnedOnlyToggle);
-  // } else {
-  //   filterOptions.delete(showOwnedOnlyToggle);
-  // }
+  const includeUserOrdersToggle = {
+    id: 'include-user-orders',
+    checked: filters$.includeUserOrders,
+    onCheckedChange: () => filters$.includeUserOrders.toggle(),
+    children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
+  };
 
-  // if (isConnected) {
-  //   filterOptions.add(includeUserOrdersToggle);
-  // } else {
-  //   filterOptions.delete(includeUserOrdersToggle);
-  // }
+  if (mode === 'buy') {
+    filterOptions.add(showOwnedOnlyToggle);
+  } else {
+    filterOptions.delete(showOwnedOnlyToggle);
+  }
+
+  if (isConnected) {
+    filterOptions.add(includeUserOrdersToggle);
+  } else {
+    filterOptions.delete(includeUserOrdersToggle);
+  }
 
   const addresses = [
     {
@@ -119,6 +115,8 @@ const CollectionSidebarContent = ({
       chainId,
     },
   ];
+
+  const filterSwitches = Array.from(filterOptions);
   return (
     <ScrollArea.Base className="h-full">
       <Flex
@@ -127,58 +125,18 @@ const CollectionSidebarContent = ({
           'h-full w-full flex-col gap-y-4',
         )}
       >
-        {/* {sortSelector?.options?.length ? (
-          <Flex className="flex-col gap-2 p-3 pl-1">
-            <Text className="text-sm text-foreground/50">Sort By</Text>
-
-            <Select.Root {...sortSelector?.controls}>
-              <Select.Trigger
-                id="collection-sidebar-sort-by"
-                className="w-full"
-              >
-                <Select.Value placeholder="Sort By" />
-              </Select.Trigger>
-
-              <Select.Options container={getThemeManagerElement()}>
-                {sortSelector?.options.map((o, i) => (
-                  <Select.Option key={i} value={o.value} className="py-2">
-                    {capitalize(o.label.toLowerCase())}
-                  </Select.Option>
-                ))}
-              </Select.Options>
-            </Select.Root>
-          </Flex>
-        ) : null}
-
         {filterSwitches.length ? (
-          <Flex
-            className={cn(
-              'flex-col gap-3 p-3 pl-1',
-              disableFilters ? 'hidden' : '',
-            )}
-          >
+          <Flex className={'flex-col gap-3 p-3 pl-1'}>
             <Flex className="flex-col gap-2">
-              {filterSwitches.map((f, i) => (
-                <div key={i} className="flex items-center space-x-2">
-                  <Switch.Base
-                    className="flex-row-reverse justify-end"
-                    {...f}
-                  />
-
-                  <Label htmlFor={f.id}>{f.children}</Label>
-                </div>
+              {filterSwitches.map((f) => (
+                <FilterSwitch key={f.id} filter={f} />
               ))}
             </Flex>
           </Flex>
-        ) : null} */}
+        ) : null}
 
         {collectableFilters.data?.length || collectableFilters.isLoading ? (
-          <Flex
-            className={cn(
-              'flex-col gap-3 p-3 pl-1',
-              // disableFilters ? 'hidden' : '',
-            )}
-          >
+          <Flex className="flex-col gap-3 p-3 pl-1">
             <PropertyFilters
               filters={collectableFilters.data}
               loading={collectableFilters.isLoading}
@@ -234,3 +192,17 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
     </Portal>
   );
 }
+
+const FilterSwitch = observer(({ filter }: { filter: FilterOptions }) => {
+  const checked = filter.checked.get();
+  return (
+    <div className="flex items-center space-x-2">
+      <Switch.Base
+        className="flex-row-reverse justify-end"
+        {...filter}
+        checked={checked}
+      />
+      <Label htmlFor={filter.id}>{filter.children}</Label>
+    </div>
+  );
+});

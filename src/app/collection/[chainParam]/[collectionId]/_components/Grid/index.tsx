@@ -28,23 +28,24 @@ export const CollectiblesGrid = ({
   data,
 }: CollectiblesGridProps) => {
   return (
-    <VirtuosoGrid
-      className="@container/collectiblesGridContainer"
-      key={virtuosoKey}
-      totalCount={totalCount}
-      overscan={{
-        main: window.innerHeight * 3,
-        reverse: window.innerHeight,
-      }}
-      useWindowScroll
-      components={{
-        List: GridContainer,
-      }}
-      itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
-      rangeChanged={onRangeChanged}
-      endReached={endReached}
-      data={data}
-    />
+    // <VirtuosoGrid
+    //   className="@container/collectiblesGridContainer"
+    //   key={virtuosoKey}
+    //   totalCount={totalCount}
+    //   overscan={{
+    //     main: window.innerHeight * 3,
+    //     reverse: window.innerHeight,
+    //   }}
+    //   useWindowScroll
+    //   components={{
+    //     List: GridContainer,
+    //   }}
+    //   itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
+    //   rangeChanged={onRangeChanged}
+    //   endReached={endReached}
+    //   data={data}
+    // />
+    <></>
   );
 };
 

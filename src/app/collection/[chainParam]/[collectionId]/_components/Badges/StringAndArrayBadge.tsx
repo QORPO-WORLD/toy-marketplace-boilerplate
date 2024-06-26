@@ -1,8 +1,7 @@
 'use client';
 
-
 import { Badge, CloseIcon, Text } from '$ui';
-import { removeFilterOption } from '~/lib/stores/collectible/Collectible';
+import { filters$ } from '../FilterStore';
 
 type StringAndArrayBadge = {
   filter: {
@@ -20,7 +19,7 @@ export const StringAndArrayBadge = ({ filter }: StringAndArrayBadge) => {
       <CloseIcon
         className="ml-2 cursor-pointer"
         onClick={() => {
-          removeFilterOption(name);
+          filters$.deleteFilter(name);
         }}
       />
     </Badge>

@@ -222,23 +222,6 @@ const CollectionHeader = ({
             </Button>
           ) : null}
         </Grid.Child>
-
-        {/* <Grid.Child name="collection-badges">
-          <ScrollArea.Base>
-            <Flex gap={3} wrap className={classNames.collectionHeaderBadges}>
-              {badges.map((b, i) => (
-                <Badge
-                  key={i}
-                  size="sm"
-                  loading={b.loading}
-                  title={b.loading ? 'loading..' : b.title}
-                >
-                  {b.label}:&nbsp;<span>{b.value}</span>
-                </Badge>
-              ))}
-            </Flex>
-          </ScrollArea.Base>
-        </Grid.Child> */}
       </Grid.Root>
     </>
   );

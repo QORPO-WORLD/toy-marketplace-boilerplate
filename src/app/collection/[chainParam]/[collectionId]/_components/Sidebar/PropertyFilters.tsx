@@ -10,7 +10,7 @@ export type FilterProps = {
 };
 
 type PropertyFiltersProps = {
-  filters: PropertyFilter[];
+  filters?: PropertyFilter[];
   loading?: boolean;
 };
 

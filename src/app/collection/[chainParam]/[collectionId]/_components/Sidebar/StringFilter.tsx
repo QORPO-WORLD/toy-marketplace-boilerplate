@@ -1,28 +1,22 @@
 'use client';
 
 import type { ChangeEvent } from 'react';
-import { useCallback, useState } from 'react';
-
-import {
-  collectibleFilterState,
-  updateSelectedPropertyFilter,
-} from '~/lib/stores/collectible/Collectible';
+import { useState } from 'react';
 
 import { Accordion, Flex, Input, Text, ScrollArea, Checkbox, Label } from '$ui';
+import { filters$ } from '../FilterStore';
 import type { FilterProps } from './PropertyFilters';
+import { observer } from '@legendapp/state/react';
 import Fuse from 'fuse.js';
 import { capitalize } from 'radash';
-import { useSnapshot } from 'valtio';
 
-export const StringFilter = (props: FilterProps) => {
-  const { name, values } = props.filter;
+export const StringFilter = observer(({ filter }: FilterProps) => {
+  const { name, values } = filter;
   const [options, setOptions] = useState<string[]>(values as string[]);
-
   // Search
   const [search, setSearch] = useState('');
   const showSearchInput = values && values.length > 5;
   const fuse = new Fuse((values as string[]) || []);
-
   const handleSearch = (value: string) => {
     setSearch(value);
     if (!value) {
@@ -33,29 +27,15 @@ export const StringFilter = (props: FilterProps) => {
     setOptions(filtered.map((filteredItem) => filteredItem.item));
   };
 
-  // Filtered options
-  const { filterOptions } = useSnapshot(collectibleFilterState);
-  const checks = filterOptions.filter((f) => f.name === name)[0]?.values || [];
+  const checks = filters$.getFilterValuesByName(name) || [];
 
-  const onCheckChange = useCallback(
-    (value: string) => {
-      const isChecked = checks.includes(value);
-      let newChecks: any[];
-      if (isChecked) {
-        newChecks = checks.filter((check) => check !== value);
-      } else {
-        newChecks = [...checks, value];
-      }
-      updateSelectedPropertyFilter(name, newChecks);
-    },
-    [checks, name],
-  );
+  const onCheckChange = (value: string) =>
+    filters$.toggleStringFilterValue(name, value);
 
   return (
     <Accordion.Item value={name}>
       <Accordion.Trigger>
         {capitalize(name)}
-
         <Flex className="ml-auto items-center gap-3">
           {checks.length ? (
             <Text as="span" className="text-primary mr-2 text-xs">
@@ -64,7 +44,6 @@ export const StringFilter = (props: FilterProps) => {
           ) : null}
         </Flex>
       </Accordion.Trigger>
-
       <Accordion.Content>
         {showSearchInput ? (
           <Input.Search
@@ -77,17 +56,14 @@ export const StringFilter = (props: FilterProps) => {
             onClear={() => handleSearch('')}
           />
         ) : null}
-
         {options.length === 0 && (
           <Text as="span" className="text-foreground/40">
             No Results
           </Text>
         )}
-
         <ScrollArea.Base className="mt-2 flex h-[400px] flex-col">
           {options.map((property, i) => {
             const isChecked = checks.includes(property);
-
             return (
               <div
                 key={i}
@@ -96,7 +72,6 @@ export const StringFilter = (props: FilterProps) => {
                 <Label htmlFor={property} className="w-full py-2 pl-2">
                   {property}
                 </Label>
-
                 <Checkbox.Base
                   id={property}
                   checked={isChecked}
@@ -109,4 +84,4 @@ export const StringFilter = (props: FilterProps) => {
       </Accordion.Content>
     </Accordion.Item>
   );
-};
+});

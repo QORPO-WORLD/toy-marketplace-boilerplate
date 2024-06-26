@@ -3,7 +3,7 @@
 import type { ChangeEvent } from 'react';
 import { useState, useEffect } from 'react';
 
-import { ViewTypeToggle } from '~/components/ViewTypeToggle';
+// import { ViewTypeToggle } from '~/components/ViewTypeToggle';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 
 import { Flex, Input, Text } from '$ui';
@@ -36,9 +36,9 @@ export const InventoryFilters = (props: InventoryFiltersProps) => {
             <SearchInventory />
           </Flex>
 
-          <Flex className="items-center gap-5">
+          {/* <Flex className="items-center gap-5">
             <ViewTypeToggle />
-          </Flex>
+          </Flex> */}
         </Flex>
 
         <Text className="uppercase text-foreground/50">
@@ -61,7 +61,7 @@ export const InventoryFilters = (props: InventoryFiltersProps) => {
           {hasExcess ? '+' : ''} Result{resultAmount > 1 ? 's' : ''}
         </Text>
 
-        <ViewTypeToggle />
+        {/* <ViewTypeToggle /> */}
       </Flex>
     </Flex>
   );

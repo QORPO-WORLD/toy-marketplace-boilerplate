@@ -1,4 +1,4 @@
-import type { CollectibleFilterState } from '~/lib/stores/collectible/types';
+import { CollectibleFilters } from '~/app/collection/[chainParam]/[collectionId]/_components/FilterStore';
 
 import type { BigNumber, BigNumberish } from 'ethers';
 import { formatUnits } from 'ethers/lib/utils';
@@ -146,9 +146,7 @@ export const marketDataPeriodDiffPercentage = (
 
 // A unique grid virtuoso key must be given to the virtuoso grid to prevent display issues
 // when displayed data changes in the same screen ie: filters, sorting, etc...
-export const getVirtuosoGridKey = (
-  collectibleFilter: CollectibleFilterState,
-) => {
+export const getVirtuosoGridKey = (collectibleFilter: CollectibleFilters) => {
   return JSON.stringify(collectibleFilter);
 };
 

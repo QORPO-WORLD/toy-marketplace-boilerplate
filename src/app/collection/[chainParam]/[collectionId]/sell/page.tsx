@@ -4,6 +4,7 @@ import { getChainId } from '~/config/networks';
 import { getMetadataClient } from '~/lib/queries/clients';
 import { type Routes } from '~/lib/routes';
 
+import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { type Page } from '@0xsequence/metadata';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -18,7 +19,12 @@ const CollectionBuyPage = ({ params }: CollectionBuyPageParams) => {
   const { collectionId } = params;
 
   const collectiblesResponse = useInfiniteQuery({
-    queryKey: ['collection', collectionId],
+    queryKey: [
+      'collection',
+      collectionId,
+      filters$.searchText,
+      filters$.filterOptions,
+    ],
     initialPageParam: undefined,
     getNextPageParam: ({ page: pageResponse }) =>
       pageResponse?.more ? pageResponse : undefined,
@@ -28,8 +34,8 @@ const CollectionBuyPage = ({ params }: CollectionBuyPageParams) => {
         contractAddress: collectionId,
         page: pageParam,
         filter: {
-          text: undefined,
-          properties: undefined,
+          text: filters$.searchText.get(),
+          properties: filters$.filterOptions.get(),
         },
       }),
   });

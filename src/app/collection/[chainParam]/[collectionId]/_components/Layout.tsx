@@ -2,6 +2,8 @@ import { Box, Flex, Grid, Text, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import type { MarketConfig } from '~/config/marketplace';
 
+import { FilterBadges } from './Badges';
+
 type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;
   sidebar: React.ReactNode;
@@ -74,7 +76,15 @@ export const CollectionViewPageLayout = ({
           >
             {controls}
           </Grid.Child>
-          <Grid.Child name="collection-content">{content}</Grid.Child>
+          <Grid.Child name="collection-content">
+            {collectionConfig && (
+              <FilterBadges
+                chainId={collectionConfig.chainId}
+                collectionAddress={collectionConfig.collectionAddress}
+              />
+            )}
+            {content}
+          </Grid.Child>
         </Grid.Root>
       );
     }

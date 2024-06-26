@@ -1,8 +1,7 @@
 'use client';
 
-import { removeFilterOption } from '~/lib/stores/collectible/Collectible';
-
 import { Badge, CloseIcon, Text } from '$ui';
+import { filters$ } from '../FilterStore';
 
 type IntBadgeProps = {
   name: string;
@@ -18,7 +17,7 @@ export const IntBadge = ({ name, min, max }: IntBadgeProps) => {
       <CloseIcon
         className="ml-2 cursor-pointer"
         onClick={() => {
-          removeFilterOption(name);
+          filters$.deleteFilter(name);
         }}
       />
     </Badge>
