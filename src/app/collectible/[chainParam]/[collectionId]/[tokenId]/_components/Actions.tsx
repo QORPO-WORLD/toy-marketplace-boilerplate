@@ -1,15 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import { useOrderbookTopOrders } from '~/hooks/orderbook';
-import { CartType } from '~/lib/stores/cart/types';
+import { indexerQueries, marketplaceQueries } from '~/lib/queries';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
+import { useCollectableData } from '../_hooks/useCollectableData';
 import { SortOrder } from '@0xsequence/indexer';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -25,78 +26,66 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  // const { data: defaultCurrencies, isLoading: isLoadingCurrencies } =
-  //   useDefaultCurrencies({
-  //     chainId: chainId,
-  //     collectionAddress: collectionAddress,
-  //   });
+  //TODO: Add default currencies
+  const currencies = [
+    '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+    '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
+    '0xad9f61563b104281b14322fec8b42eb67711bf68',
+  ];
 
-  // const currencies =
-  //   defaultCurrencies?.data.map((c) => c.contractAddress) || [];
+  const { data: bestOffers, isLoading: isLoadingBestOffers } = useQuery(
+    marketplaceQueries.topOrder({
+      chainId,
+      collectionAddress,
+      currencyAddresses: currencies,
+      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+      tokenIDs: [tokenId],
+      isListing: false,
+      priceSort: SortOrder.DESC,
+    }),
+  );
 
-  // const { data: bestOffers, isLoading: isLoadingBestOffers } =
-  //   useOrderbookTopOrders(chainId, {
-  //     collectionAddress,
-  //     currencyAddresses: currencies,
-  //     orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-  //     tokenIDs: [tokenId],
-  //     isListing: false,
-  //     priceSort: SortOrder.DESC,
-  //   });
+  const bestOffer = bestOffers?.orders[0];
 
-  // const bestOffer = bestOffers?.orders[0];
+  const { data: bestListings, isLoading: isLoadingBestListings } = useQuery(
+    marketplaceQueries.topOrder({
+      chainId,
+      collectionAddress,
+      currencyAddresses: currencies,
+      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+      tokenIDs: [tokenId],
+      isListing: true,
+      priceSort: SortOrder.DESC,
+    }),
+  );
 
-  // const { data: bestListings, isLoading: isLoadingBestListings } =
-  //   useOrderbookTopOrders(chainId, {
-  //     collectionAddress,
-  //     currencyAddresses: currencies,
-  //     orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
-  //     tokenIDs: [tokenId],
-  //     isListing: true,
-  //     priceSort: SortOrder.DESC,
-  //   });
+  const bestListing = bestListings?.orders[0];
 
-  // const bestListing = bestListings?.orders[0];
+  const { collectionMetadata } = useCollectableData();
 
-  // const {
-  //   data: collectiblesMetadata,
-  //   isLoading: isLoadingCollectibleMetadata,
-  // } = useCollectibleMetadata({
-  //   chainID: String(chainId),
-  //   contractAddress: collectionAddress,
-  //   tokenIDs: [tokenId],
-  // });
-  // const collectibleMetadata = collectiblesMetadata?.data[0];
+  const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
 
-  // const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
-  //   useCollectionMetadata({
-  //     chainID: String(chainId),
-  //     contractAddress: collectionAddress,
-  //   });
+  const { address, isConnected } = useAccount();
 
-  // const isERC1155 = collectionMetadata?.data?.contractInfo.type === 'ERC1155';
+  const { data: userBalance, isLoading: isBalanceLoading } = useInfiniteQuery({
+    ...indexerQueries.tokenBalance({
+      chainId: chainId,
+      contractAddress: collectionAddress,
+      tokenId,
+      includeMetadata: false,
+      accountAddress: address as string,
+    }),
+    enabled: !!isConnected && !!address,
+  });
 
-  // const { address, isConnected } = useAccount();
+  const hasUserBalance = userBalance?.pages?.[0]?.balances[0]?.balance;
 
-  // const { data: userBalance, isLoading: isBalanceLoading } =
-  //   useCollectibleBalance({
-  //     chainId: chainId,
-  //     userAddress: address as string,
-  //     contractAddress: collectionAddress,
-  //     tokenId: tokenId,
-  //   });
+  const item721AlreadyOwned = !!hasUserBalance && !isERC1155;
 
-  // const hasUserBalance = userBalance?.gt(0);
-
-  // const item721AlreadyOwned = hasUserBalance && !isERC1155;
-
-  // const isLoading =
-  //   isLoadingCurrencies ||
-  //   isLoadingBestOffers ||
-  //   isLoadingBestListings ||
-  //   isLoadingCollectibleMetadata ||
-  //   (isConnected && isBalanceLoading) ||
-  //   isCollectionMetadataLoading;
+  const isLoading =
+    isLoadingBestOffers ||
+    isLoadingBestListings ||
+    (isConnected && isBalanceLoading);
 
   const onClickBuy = () => {
     // if (!bestListing) return;
@@ -156,9 +145,10 @@ export const CollectibleTradeActions = ({
     // });
   };
 
-  // const buyDisabled = !bestListing || item721AlreadyOwned;
-  // const offerDisabled = !isConnected;
-  // const listingDisabled = !isConnected || !hasUserBalance;
+  const buyDisabled = !bestListing || item721AlreadyOwned;
+  const offerDisabled = !isConnected;
+  const listingDisabled = !isConnected || !hasUserBalance;
+  const sellDisabled = !bestOffer || !hasUserBalance;
 
   return (
     <Flex className="flex-col gap-4">
@@ -166,8 +156,8 @@ export const CollectibleTradeActions = ({
         <Button
           size="lg"
           className="w-full justify-between"
-          // loading={isLoading}
-          // disabled={buyDisabled}
+          loading={isLoading}
+          disabled={buyDisabled}
           onClick={onClickBuy}
         >
           <Text className="text-inherit">Buy</Text>
@@ -182,7 +172,7 @@ export const CollectibleTradeActions = ({
                 className="w-full justify-between"
                 size="lg"
                 loading={false}
-                // disabled={offerDisabled}
+                disabled={offerDisabled}
               >
                 <Text className="text-inherit">Offer</Text>
               </Button>
@@ -198,7 +188,7 @@ export const CollectibleTradeActions = ({
                 chainId={chainId}
                 collectionAddress={collectionAddress}
                 tokenId={tokenId}
-                // bestOrder={bestListing}
+                bestOrder={bestListing}
                 open={isOfferModalOpen}
                 setOpen={setIsOfferModalOpen}
                 type="offer"
@@ -211,8 +201,8 @@ export const CollectibleTradeActions = ({
         <Button
           className="w-full justify-between"
           size="lg"
-          // loading={isLoading}
-          // disabled={sellDisabled}
+          loading={isLoading}
+          disabled={sellDisabled}
           onClick={onClickSell}
         >
           <Text className="text-inherit">Sell</Text>
@@ -228,7 +218,7 @@ export const CollectibleTradeActions = ({
                 className="w-full justify-between"
                 size="lg"
                 loading={false}
-                // disabled={listingDisabled}
+                disabled={listingDisabled}
               >
                 <Text className="text-inherit">List</Text>
               </Button>
@@ -247,7 +237,7 @@ export const CollectibleTradeActions = ({
                     chainId={chainId}
                     collectionAddress={collectionAddress}
                     tokenId={tokenId}
-                    // bestOrder={bestOffer}
+                    bestOrder={bestOffer}
                     open={isListingModalOpen}
                     setOpen={setIsListingModalOpen}
                     type="listing"

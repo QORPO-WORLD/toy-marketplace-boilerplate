@@ -13,7 +13,7 @@ import {
   type OrderbookFormData,
 } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
-import { Currency } from '~/lib/queries/marketplace.gen';
+import { Currency } from '~/lib/queries/marketplace/marketplace.gen';
 import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
 import { formatDecimals } from '~/lib/utils/helpers';
 import {

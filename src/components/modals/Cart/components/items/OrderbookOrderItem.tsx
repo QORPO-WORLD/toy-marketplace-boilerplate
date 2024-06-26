@@ -1,5 +1,8 @@
 'use client';
 
+import { classNames } from '~/config/classNames';
+import { useCollectionType } from '~/hooks/collection/useCollectionType';
+import { metadataQueries } from '~/lib/queries';
 import { type OrderRequest } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { type CartItem } from '~/lib/stores/cart/types';
 
@@ -15,11 +18,9 @@ import {
   SubtractIcon,
 } from '$ui';
 import { QuantityModalV2 } from './QuantityModalV2';
+import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
-import { useQuery } from '@tanstack/react-query';
-import { metadataQueries } from '~/lib/queries';
-import { classNames } from '~/config/classNames';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -39,13 +40,12 @@ export const OrderbookOrderItem = ({
   isOrderValid,
 }: OrderbookOrderItemProps) => {
   const { data: currencyMetadataResp, isLoading: isCurrencyMetadataLoading } =
-    useQuery(metadataQueries.collection(
-      {
+    useQuery(
+      metadataQueries.collection({
         chainID: item.chainId.toString(),
         collectionId: order.currency,
-      }
-    )
-  
+      }),
+    );
 
   const { isERC1155, isLoading: isCollectionTypeLoading } = useCollectionType({
     chainId: item.chainId,

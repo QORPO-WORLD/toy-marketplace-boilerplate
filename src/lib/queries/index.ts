@@ -7,11 +7,11 @@ import {
   fetchCollectionFilters,
   fetchTokenBalances,
   type TokenBalancesArgs,
+  fetchTopOrders,
 } from './fetchers';
 import { type Page } from '@0xsequence/indexer';
 import {
   type GetTokenMetadataArgs,
-  type GetContractInfoReturn,
   type TokenCollectionFiltersArgs,
 } from '@0xsequence/metadata';
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
@@ -60,11 +60,21 @@ export const indexerQueries = {
   tokenBalances: () => [...indexerQueries.all(), 'tokenBalances'],
   tokenBalance: (args: TokenBalancesArgs) =>
     infiniteQueryOptions({
-      queryKey: indexerQueries.tokenBalances(),
+      queryKey: [indexerQueries.tokenBalances(), args],
       queryFn: ({ pageParam }: { pageParam?: Page }) =>
         fetchTokenBalances({ ...args, page: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: ({ page: pageResponse }) =>
         pageResponse.more ? pageResponse : undefined,
+    }),
+};
+
+export const marketplaceQueries = {
+  all: () => ['marketplace'],
+  topOrders: () => [...marketplaceQueries.all(), 'topOrder'],
+  topOrder: (args: Parameters<typeof fetchTopOrders>[0]) =>
+    queryOptions({
+      queryKey: [marketplaceQueries.topOrders(), args],
+      queryFn: () => fetchTopOrders(args),
     }),
 };

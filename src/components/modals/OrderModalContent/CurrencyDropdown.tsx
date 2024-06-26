@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { type Currency } from '~/lib/queries/marketplace.gen';
+import { type Currency } from '~/lib/queries/marketplace/marketplace.gen';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Flex, Image, Select, Text } from '$ui';

@@ -1,4 +1,4 @@
-import type { Currency } from '~/lib/queries/marketplace.gen';
+import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
 
 import { Avatar, Badge, Box, Flex, Text } from '$ui';
 import type { OrderbookModalType } from '.';

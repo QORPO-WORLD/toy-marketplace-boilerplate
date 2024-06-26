@@ -72,6 +72,7 @@ export type TokenBalancesArgs = {
   contractAddress?: string;
   includeMetadata?: boolean;
   page?: GetTokenBalancesArgs['page'];
+  tokenId?: string;
 };
 
 export const fetchTokenBalances = ({
@@ -79,6 +80,7 @@ export const fetchTokenBalances = ({
   accountAddress,
   contractAddress,
   includeMetadata = true,
+  tokenId,
   page,
 }: TokenBalancesArgs) => {
   const indexer = getIndexerClient(chainId);
@@ -91,6 +93,7 @@ export const fetchTokenBalances = ({
     accountAddress,
     contractAddress,
     includeMetadata,
+    tokenID: tokenId,
     metadataOptions: {
       verifiedOnly: true,
       includeContracts,
@@ -99,12 +102,10 @@ export const fetchTokenBalances = ({
   });
 };
 
-export const fetchTopOrders = async (
-  chainId: number,
-  args: GetTopOrdersArgs,
+export const fetchTopOrders = (
+  args: GetTopOrdersArgs & { chainId: number },
 ) => {
-  const oldMarketplace = getOldMarketplaceClient(chainId);
-  const orders = await oldMarketplace.getTopOrders(args);
+  const oldMarketplace = getOldMarketplaceClient(args.chainId);
 
-  return orders;
+  return oldMarketplace.getTopOrders(args);
 };

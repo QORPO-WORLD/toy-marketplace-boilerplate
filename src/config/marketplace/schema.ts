@@ -32,6 +32,7 @@ export const MarketConfigSchema = z.object({
       'coinbase',
       'injected',
       'ledger',
+      'rainbow',
     ]),
   ),
   collections: z.array(
