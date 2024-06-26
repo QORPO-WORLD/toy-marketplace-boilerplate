@@ -45,24 +45,9 @@ export const BaseImage = memo(
             ref={ref}
             className={cn(
               'h-full w-full rounded-[inherit] object-contain',
-              // 'opacity-0 transition-opacity duration-300',
               className,
             )}
-            // onLoad={(e) => {
-            //   // if (!loaded) {
-            //   //   setLoaded(true)
-            //   // }
-            //   if (onLoad) {
-            //     onLoad(e);
-            //   }
-            // }}
-            // onError={({ currentTarget }: unknown) => {
-            //   if (currentTarget && fallbackSrc) {
-            //     currentTarget.onerror = null; // prevents looping
-            //     currentTarget.src = fallbackSrc;
-            //   }
-            // }}
-            // {...props}
+            src={props.src}
           />
 
           {children ? (

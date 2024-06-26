@@ -2,7 +2,6 @@
 
 import type { ForwardedRef } from 'react';
 import { forwardRef } from 'react';
-import type { ListRange } from 'react-virtuoso';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
@@ -12,40 +11,25 @@ import type { CollectibleCardData } from './CollectableCard';
 import { CollectibleCard } from './CollectableCard';
 
 export type CollectiblesGridProps = {
-  virtuosoKey: string;
-  totalCount?: number;
   data: CollectibleCardData[];
-
-  onRangeChanged?: (range: ListRange) => void;
   endReached?: () => void;
 };
 
 export const CollectiblesGrid = ({
-  virtuosoKey,
-  totalCount,
-  onRangeChanged,
   endReached,
   data,
 }: CollectiblesGridProps) => {
   return (
-    // <VirtuosoGrid
-    //   className="@container/collectiblesGridContainer"
-    //   key={virtuosoKey}
-    //   totalCount={totalCount}
-    //   overscan={{
-    //     main: window.innerHeight * 3,
-    //     reverse: window.innerHeight,
-    //   }}
-    //   useWindowScroll
-    //   components={{
-    //     List: GridContainer,
-    //   }}
-    //   itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
-    //   rangeChanged={onRangeChanged}
-    //   endReached={endReached}
-    //   data={data}
-    // />
-    <></>
+    <VirtuosoGrid
+      className="@container/collectiblesGridContainer"
+      components={{
+        List: GridContainer,
+      }}
+      itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
+      // increaseViewportBy={200}
+      endReached={endReached}
+      data={data}
+    />
   );
 };
 
