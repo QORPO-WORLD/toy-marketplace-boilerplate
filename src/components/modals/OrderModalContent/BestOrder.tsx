@@ -42,7 +42,7 @@ export const BestOrder = ({
         <Flex className="flex-row gap-3">
           <Flex className="items-center justify-end gap-2">
             <Avatar.Base className="h-5 w-5">
-              <Avatar.Image src={currency.logoUri} />
+              <Avatar.Image src={currency.imageUrl} />
               <Avatar.Fallback>{currency.symbol}</Avatar.Fallback>
             </Avatar.Base>
 

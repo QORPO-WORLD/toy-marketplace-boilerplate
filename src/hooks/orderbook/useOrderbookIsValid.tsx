@@ -1,3 +1,6 @@
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
+
 import { useQuery } from '@tanstack/react-query';
 import type { Hex } from 'viem';
 
@@ -25,7 +28,6 @@ export const useOrderbookIsValid = (args: UseOrderbookIsValidArgs) =>
       return orderbook.isRequestValid(args.requestId, args.quantity);
     },
     retry: false,
-    staleTime: 1 * time.oneMinute,
     enabled:
       !!args.chainId &&
       // allow requestId === 0n

@@ -42,7 +42,7 @@ export const CurrencyDropdown = ({
       <Select.Trigger className="h-12 w-full">
         <Flex className="w-full gap-2">
           <Image.Base
-            src={selectedCurrency.logoUri}
+            src={selectedCurrency.imageUrl}
             alt={selectedCurrency.name}
             className="h-5 w-5"
           />
@@ -54,7 +54,7 @@ export const CurrencyDropdown = ({
           <Select.Option value={currency.contractAddress} key={index}>
             <Flex className="w-full gap-2">
               <Image.Base
-                src={currency.logoUri}
+                src={currency.imageUrl}
                 alt={currency.name}
                 className="h-5 w-5"
               />

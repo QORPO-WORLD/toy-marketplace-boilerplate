@@ -47,7 +47,7 @@ export const OrderbookOrderItem = ({
       }),
     );
 
-  const { isERC1155, isLoading: isCollectionTypeLoading } = useCollectionType({
+  const { isERC1155 } = useCollectionType({
     chainId: item.chainId,
     collectionAddress: item.collectibleMetadata.collectionAddress,
   });

@@ -5,7 +5,10 @@ import type { SubmitHandler } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 
 import { WalletButton } from '~/app/_layout/Header/Buttons/WalletButton';
-import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
+import {
+  DEFAULT_PLATFORM_FEE_PERCENTAGE,
+  SEQUENCE_MARKET_V1_ADDRESS,
+} from '~/config/consts';
 import { getChain, getPresentableChainName } from '~/config/networks';
 import { useOrderbookApprovals } from '~/hooks/orderbook/useOrderbookApprovals';
 import {
@@ -13,14 +16,16 @@ import {
   type OrderbookFormData,
 } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
-import { Currency } from '~/lib/queries/marketplace/marketplace.gen';
-import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
-import { formatDecimals } from '~/lib/utils/helpers';
+import { getPlatformFeeRecipient } from '~/lib/fees';
+import { indexerQueries } from '~/lib/queries';
+import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
+import { getERC20Contract, getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
+import { formatDecimals, formatDisplay } from '~/lib/utils/helpers';
 import {
+  GenericStep,
   generateStepsOrderbookOrder,
   type CreateRequestParams,
 } from '~/lib/utils/txBundler';
-import { getRequestIdFromHash } from '~/lib/utils/txBundler/getRequestIdFromHash';
 
 import {
   Avatar,
@@ -45,23 +50,14 @@ import { CurrencyDropdown } from './CurrencyDropdown';
 import { MatchingOrderInfo } from './MatchedOrderDisplay';
 import { TokenSummary } from './TokenSummary';
 import { type OrderbookOrder } from '@0xsequence/indexer';
-import {
-  compareAddress,
-  useCollectibleBalance,
-  formatDisplay,
-} from '@0xsequence/kit';
+import { compareAddress } from '@0xsequence/kit';
 import type { ContractInfo, TokenMetadata } from '@0xsequence/metadata';
-import { useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { addDays } from 'date-fns';
-import { useSnapshot } from 'valtio';
+import { BigNumber, constants } from 'ethers';
 import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
-import {
-  useAccount,
-  useSwitchChain,
-  useWalletClient,
-  usePublicClient,
-} from 'wagmi';
+import { useAccount, useSwitchChain, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
 
 interface OrderFormProps {
@@ -96,8 +92,6 @@ export const OrderForm = ({
 
   const { address, isConnected, connector, chain } = useAccount();
   const { data: walletClient } = useWalletClient();
-  const publicClient = usePublicClient();
-  const queryClient = useQueryClient();
 
   const { switchChainAsync, isPending: isSwitchNetworkLoading } =
     useSwitchChain();
@@ -111,7 +105,7 @@ export const OrderForm = ({
     ? currencyOptions.find((c) =>
         compareAddress(c.contractAddress, bestOrder.currencyAddress),
       ) || currencyOptions[0]
-    : currencyOptions[0];
+    : currencyOptions[0]!;
 
   const {
     control,
@@ -132,7 +126,7 @@ export const OrderForm = ({
     },
   } = useOrderbookFormData({
     currency: {
-      defaultCurrency,
+      defaultCurrency: defaultCurrency!,
     },
     options: {
       tokenDecimalDisabled: !decimalEnabled,
@@ -175,6 +169,7 @@ export const OrderForm = ({
   }, [bestOrder, tokenMetadata]);
 
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     data: isApprovedData,
     isLoading: isLoadingIsApproved,
     refetch: refetchIsApproved,
@@ -208,7 +203,7 @@ export const OrderForm = ({
         s.id === 'approveERC1155' ||
         s.id === 'approveERC20' ||
         s.id === 'approveERC721',
-    );
+    ) as GenericStep | undefined;
 
     if (!approveStep) return;
 
@@ -218,7 +213,7 @@ export const OrderForm = ({
       const txHash = await approveStep.action();
 
       await transactionNotification({
-        network: getNetworkConfigAndClients(chainId).networkConfig,
+        network: getChain(chainId)!,
         txHash,
       });
       await refetchIsApproved();
@@ -228,29 +223,41 @@ export const OrderForm = ({
     setApproveTxPending(false);
   };
 
-  const {
-    data: userCollectibleBalance,
-    isLoading: isUserCollectibleBalanceLoading,
-  } = useCollectibleBalance({
-    chainId,
-    userAddress: address as string,
-    contractAddress: collectionMetadata.address,
-    tokenId: tokenMetadata.tokenId,
-  });
+  const { data: userBalance, isLoading: isBalanceLoading } = useInfiniteQuery(
+    indexerQueries.tokenBalance({
+      chainId: chainId,
+      contractAddress: collectionMetadata.address,
+      tokenId: tokenMetadata.tokenId,
+      includeMetadata: false,
+      accountAddress: address as string,
+    }),
+  );
+  let balance = constants.Zero;
+
+  try {
+    balance = BigNumber.from(userBalance?.pages?.[0]?.balances[0]?.balance);
+  } catch {}
 
   const formattedTokenBalance = formatDisplay(
-    formatDecimals(userCollectibleBalance || 0, tokenMetadata?.decimals || 0),
+    formatDecimals(balance || 0, tokenMetadata?.decimals || 0),
   );
 
+  const erc20contractAddress = watch('currency.contractAddress');
+
   const { data: userCurrencyBalance, isLoading: isUserCurrencyBalanceLoading } =
-    useERC20UserBalanceDirect({
-      chainId,
-      userAddress: address as string,
-      erc20contractAddress: watch('currency.contractAddress'),
+    useQuery({
+      queryKey: ['useERC20UserBalanceDirect', erc20contractAddress],
+      queryFn: () => {
+        const contract = getERC20Contract({
+          contractAddress: erc20contractAddress,
+          chainId: chainId,
+        });
+        return contract.read.balanceOf([address!]);
+      },
     });
 
   const formattedCurrencyBalance = formatDecimals(
-    userCurrencyBalance || 0,
+    balance || 0,
     watch('currency.decimals') || 0,
   );
 
@@ -321,11 +328,11 @@ export const OrderForm = ({
   };
 
   const postTransactionCacheClear = () => {
-    queryClient.invalidateQueries({ queryKey: [...orderbookKeys.all()] });
-    queryClient.invalidateQueries({ queryKey: [...balancesKeys.all()] });
-    queryClient.invalidateQueries({
-      queryKey: [...metadataKeys.useCollectionTokenIDs()],
-    });
+    // queryClient.invalidateQueries({ queryKey: [...orderbookKeys.all()] });
+    // queryClient.invalidateQueries({ queryKey: [...balancesKeys.all()] });
+    // queryClient.invalidateQueries({
+    //   queryKey: [...metadataKeys.useCollectionTokenIDs()],
+    // });
   };
 
   const onSubmit: SubmitHandler<OrderbookFormData> = async (data) => {
@@ -342,9 +349,7 @@ export const OrderForm = ({
       let action: CreateRequestParams;
 
       if (shouldAutoFill && bestOrder && fillableTokenAmountRaw) {
-        const feePerceentage = getMarketplaceFeePercentage(
-          bestOrder.tokenContract,
-        );
+        const feePerceentage = DEFAULT_PLATFORM_FEE_PERCENTAGE;
 
         const orderSubtotalRaw =
           BigInt(bestOrder.pricePerToken) * fillableTokenAmountRaw;
@@ -659,7 +664,7 @@ export const OrderForm = ({
               </Text>
               <Flex className="w-full items-center justify-start gap-2">
                 <Avatar.Base className="h-5 w-5">
-                  <Avatar.Image src={watch('currency.logoUri')} />
+                  <Avatar.Image src={watch('currency.imageUrl')} />
                   <Avatar.Fallback>{watch('currency.symbol')}</Avatar.Fallback>
                 </Avatar.Base>
 
@@ -680,7 +685,7 @@ export const OrderForm = ({
               </Text>
               <Flex className="w-full items-center justify-start gap-2">
                 <Avatar.Base className="h-5 w-5">
-                  <Avatar.Image src={watch('currency.logoUri')} />
+                  <Avatar.Image src={watch('currency.imageUrl')} />
                   <Avatar.Fallback>{watch('currency.symbol')}</Avatar.Fallback>
                 </Avatar.Base>
                 <Text className="w-full flex-col justify-between gap-3 text-sm sm:flex-row sm:items-center">
@@ -701,7 +706,7 @@ export const OrderForm = ({
                 </Text>
                 <Flex className="w-full items-center justify-start gap-2">
                   <Avatar.Base className="h-5 w-5">
-                    <Avatar.Image src={watch('currency.logoUri')} />
+                    <Avatar.Image src={watch('currency.imageUrl')} />
                     <Avatar.Fallback>
                       {watch('currency.symbol')}
                     </Avatar.Fallback>
@@ -725,7 +730,7 @@ export const OrderForm = ({
                 </Text>
                 <Flex className="w-full items-center justify-start gap-2">
                   <Avatar.Base className="h-5 w-5">
-                    <Avatar.Image src={watch('currency.logoUri')} />
+                    <Avatar.Image src={watch('currency.imageUrl')} />
                     <Avatar.Fallback>
                       {watch('currency.symbol')}
                     </Avatar.Fallback>
@@ -798,7 +803,7 @@ export const OrderForm = ({
                 {totalCost.decimal > 0 && (
                   <Flex className="items-center justify-end gap-2">
                     <Avatar.Base className="h-5 w-5">
-                      <Avatar.Image src={watch('currency.logoUri')} />
+                      <Avatar.Image src={watch('currency.imageUrl')} />
                       <Avatar.Fallback>
                         {watch('currency.symbol')}
                       </Avatar.Fallback>

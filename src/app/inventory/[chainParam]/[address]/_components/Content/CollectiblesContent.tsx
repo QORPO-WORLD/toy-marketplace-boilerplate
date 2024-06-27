@@ -116,7 +116,9 @@ const CollectionSection = ({
 
   const { searchText } = useSnapshot(inventoryState);
 
-  const { isGridView } = useViewType();
+  // const { isGridView } = useViewType();
+
+  const isGridView = true;
 
   const pageData: GetTokenBalancesReturn[] = collectionUserBalanceResp
     ? collectionUserBalanceResp.pages

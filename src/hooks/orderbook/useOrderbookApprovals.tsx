@@ -78,7 +78,7 @@ export const useOrderbookApprovals = ({
 
   const setErc1155Approval = async (): Promise<string> => {
     if (!walletClient) {
-      throw 'no wallet clinet';
+      throw 'no wallet client';
     }
 
     const txnHash = await ERC1155.setApprovalForAll(
@@ -129,6 +129,7 @@ export const useOrderbookApprovals = ({
     };
   } else if (erc721ApprovalEnabled) {
     return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       data: erc721Approval?.isApprovedForAll,
       isLoading: isErc721ApprovalLoading,
       refetch: refetchERC721Approval,
