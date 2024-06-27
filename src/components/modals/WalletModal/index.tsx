@@ -15,10 +15,9 @@ import {
   DisconnectIcon,
   CheckmarkIcon,
 } from '$ui';
-import { WalletDialogBalances } from './Balances';
 import { useAccount, useDisconnect } from 'wagmi';
 
-export const WalletDialogContent = () => {
+export const WalletModalContent = () => {
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
 
@@ -43,7 +42,7 @@ export const WalletDialogContent = () => {
       <Flex className="mb-5 flex-col items-start justify-between">
         <Flex className="items-center gap-3 font-medium text-foreground/80">
           <WalletIcon />
-          <Text>{connector?.id.toLowerCase()}</Text>
+          <Text>{connector?.id}</Text>
         </Flex>
         <Flex className="w-full text-foreground/80">
           <Text className="ml-1 mt-2 text-sm text-foreground/50 md:block">
@@ -74,9 +73,7 @@ export const WalletDialogContent = () => {
         </Flex>
       </Flex>
 
-      <WalletDialogBalances />
-
-      <Flex className="mb-2 mt-8 w-full flex-col gap-3">
+      <Flex className="mb-2 w-full flex-col gap-3">
         {connector?.id === 'sequence' && (
           <Button
             className="w-full justify-start"
