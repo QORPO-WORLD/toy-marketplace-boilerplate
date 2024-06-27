@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -16,13 +17,13 @@ import {
   type OrderbookFormData,
 } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
-import { getPlatformFeeRecipient } from '~/lib/fees';
+import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
 import { indexerQueries } from '~/lib/queries';
 import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
-import { getERC20Contract, getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
+import { getERC20Contract } from '~/lib/sdk/niftyswap-v2';
 import { formatDecimals, formatDisplay } from '~/lib/utils/helpers';
 import {
-  GenericStep,
+  type GenericStep,
   generateStepsOrderbookOrder,
   type CreateRequestParams,
 } from '~/lib/utils/txBundler';
@@ -59,6 +60,12 @@ import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
 import { useAccount, useSwitchChain, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface OrderFormProps {
   type: OrderbookModalType;
@@ -482,6 +489,7 @@ export const OrderForm = ({
 
                       validate: {
                         isNumber: (val) =>
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                           !isNaN(val) || 'Quantity should be a valid number',
 
                         isMoreThanZero: (val) => {

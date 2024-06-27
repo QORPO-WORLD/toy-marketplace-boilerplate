@@ -19,6 +19,7 @@ interface Props {
   type: OrderbookModalType;
   isErc1155: boolean;
   orderbookAddress: Hex;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   walletClient: GetWalletClientData<any, any> | undefined;
 }
 

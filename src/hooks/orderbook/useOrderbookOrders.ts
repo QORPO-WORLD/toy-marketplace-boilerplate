@@ -36,7 +36,7 @@ export const useOrderbookOrders = (props: Props) => {
   });
 
   return {
-    orders: ordersWithID,
+    orders: ordersWithID as OrderWithID[],
     isLoading,
   };
 };

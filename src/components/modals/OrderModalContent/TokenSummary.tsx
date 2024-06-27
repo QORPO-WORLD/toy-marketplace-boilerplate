@@ -27,7 +27,6 @@ export interface TokenSummary {
 export const TokenSummary = ({
   tokenMetadata,
   collectionData,
-  type,
 }: TokenSummary) => {
   const { data: royaltyPercentage, isLoading: isRoyaltyInfoLoading } =
     useCollectionRoyalty({

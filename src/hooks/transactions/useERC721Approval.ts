@@ -1,6 +1,7 @@
 import { BigIntReplacer } from '~/lib/utils/bigint';
 
 import { useQuery } from '@tanstack/react-query';
+import { ERC721 } from '~/lib/sdk/shared/clients/ERC721';
 
 interface Props {
   operatorAddress: string;

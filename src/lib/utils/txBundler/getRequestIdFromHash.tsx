@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 
 import { compareAddress } from '../helpers';

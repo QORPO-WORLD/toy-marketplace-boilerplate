@@ -14,7 +14,6 @@ export const MatchingOrderInfo = ({
   type,
   fillableAmount,
   unfillableAmount,
-  tokenDecimal,
 }: MatchingOrderInfo) => {
   if (fillableAmount === undefined || unfillableAmount === undefined) {
     return null;

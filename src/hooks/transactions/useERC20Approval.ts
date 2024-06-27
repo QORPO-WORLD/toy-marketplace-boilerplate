@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { ERC20 } from '~/lib/sdk/niftyswap-v2';
+import { BigIntReplacer } from '~/lib/utils/bigint';
 
 import { useQuery } from '@tanstack/react-query';
-import { BigIntReplacer } from '~/lib/utils/bigint';
 
 interface Props {
   spenderAddress: string;

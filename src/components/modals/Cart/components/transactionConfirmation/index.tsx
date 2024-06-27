@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { getChain } from '~/config/networks';
 import useElementDimensions from '~/hooks/ui/useElementDimensions';
-import { CartItem } from '~/lib/stores/cart/types';
+import { type CartItem } from '~/lib/stores/cart/types';
 import { truncateAtMiddle, formatDecimals } from '~/lib/utils/helpers';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 import { OrderItemType } from '~/types/OrderItemType';
@@ -131,7 +131,8 @@ const CartItems = ({ items }: { items: readonly CartItem[] }) => {
       </Button>
 
       <Flex
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore -- TODO: fix this
         ref={boxRef}
         className={cn('flex-1 gap-5', 'no-scrollbar snap-x overflow-x-auto')}
       >

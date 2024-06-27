@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Routes } from '..';
 import type { ReadonlyURLSearchParams } from 'next/navigation';
 import {

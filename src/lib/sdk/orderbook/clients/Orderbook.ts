@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getPublicClient } from '~/config/networks/wagmi/rpcClients';
 
 import { Orderbook_ABI } from '../contracts/abi/orderbook';
@@ -136,6 +138,7 @@ export class Orderbook {
 
     const isValid = res[0];
     const orders = res[1].map((order: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
       isEmptyOrder(order) ? null : order,
     );
 

@@ -3,12 +3,12 @@
 import { classNames } from '~/config/classNames';
 import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
 import { useCollectionType } from '~/hooks/collection/useCollectionType';
+import { removeFromCart } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
 import { Grid, Flex, Text, Image, cn, CloseIcon } from '$ui';
 import QuantityInput from './QuantityInput';
 import { CartItemEditQuantityModal } from './QuantityModal';
-import { removeFromCart } from '~/lib/stores/cart/Cart';
 
 interface TransferOrderItemProps {
   item: CartItem;
@@ -97,24 +97,22 @@ interface OrderCollectibleQuantityProps {
 }
 
 const OrderCollectibleQuantity = ({ item }: OrderCollectibleQuantityProps) => {
-  const { getMaxQuantity } = useOrderItemMaxQuantity({
-    chainId: item.chainId,
-    itemType: item.itemType,
-    collectionAddress: item.collectibleMetadata.collectionAddress,
-    exchangeAddress: item.exchangeAddress || undefined,
-    tokenId: item.collectibleMetadata.tokenId,
-  });
-
-  return (
-    <Flex className="max-w-full items-center gap-3">
-      <QuantityInput
-        item={item}
-        onChange={editQuantity}
-        maxQuantity={getMaxQuantity}
-        readonly
-      />
-
-      <CartItemEditQuantityModal item={item} />
-    </Flex>
-  );
+  // TODO: Implement max quantity
+  // const { getMaxQuantity } = useOrderItemMaxQuantity({
+  //   chainId: item.chainId,
+  //   itemType: item.itemType,
+  //   collectionAddress: item.collectibleMetadata.collectionAddress,
+  //   tokenId: item.collectibleMetadata.tokenId,
+  // });
+  // return (
+  //   <Flex className="max-w-full items-center gap-3">
+  //     <QuantityInput
+  //       item={item}
+  //       onChange={editQuantity}
+  //       maxQuantity={getMaxQuantity}
+  //       readonly
+  //     />
+  //     <CartItemEditQuantityModal item={item} />
+  //   </Flex>
+  // );
 };

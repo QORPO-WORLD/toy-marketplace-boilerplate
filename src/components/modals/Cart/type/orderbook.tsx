@@ -131,7 +131,7 @@ export const OrderbookOrderComponents = () => {
     isLoading: isLoadingOrderBatchValidity,
   } = useOrderbookIsValidBatch({
     chainId: chainId!,
-    requestIds: orders.map((o) => BigInt(o.orderId!)),
+    requestIds: orders.map((o) => BigInt(o.orderId)),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     quantities: orders.map((o) => o.quantity),

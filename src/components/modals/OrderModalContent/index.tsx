@@ -28,7 +28,6 @@ export const OrderModalContent = ({
   tokenId,
   bestOrder,
   type,
-  open,
   setOpen,
 }: OrderModalContentProps) => {
   //TODO: Add default currencies

@@ -12,7 +12,7 @@ import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
 import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
-import { ObservableBoolean } from '@legendapp/state';
+import { type ObservableBoolean } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';

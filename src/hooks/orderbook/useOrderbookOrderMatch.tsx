@@ -1,7 +1,7 @@
 import { BigIntMin, compareAddress } from '~/lib/utils/helpers';
 
 import { useOrderbookIsValid } from './useOrderbookIsValid';
-import { OrderbookOrder } from '@0xsequence/indexer';
+import { type OrderbookOrder } from '@0xsequence/indexer';
 import { formatUnits } from 'viem';
 
 interface Props {

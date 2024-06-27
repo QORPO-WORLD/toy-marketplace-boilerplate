@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DOMAttributes } from 'react';
 
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
@@ -41,19 +42,19 @@ export type Step =
 export interface GenericStep {
   id: StepId;
   label: string;
-  action: () => Promise<Hex | string>;
+  action: () => Promise<string>;
 }
 
 export interface GenerateStepsOrderbookOrder {
   id: 'createOrder';
   label: string;
-  action: (params: CreateRequestParams) => Promise<Hex | string>;
+  action: (params: CreateRequestParams) => Promise<string>;
 }
 
 export interface GenerateStepsOrderbookAcceptRequest {
   id: 'acceptRequestBatch';
   label: string;
-  action: (params: AcceptRequestParams) => Promise<Hex | string>;
+  action: (params: AcceptRequestParams) => Promise<string>;
 }
 
 /// generate steps

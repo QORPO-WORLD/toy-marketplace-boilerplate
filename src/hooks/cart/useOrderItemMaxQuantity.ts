@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { useState } from 'react';
 
 import { BigIntCast } from '~/lib/utils/helpers';
-import { OrderItemType } from '~/types/OrderItemType';
+import { type OrderItemType } from '~/types/OrderItemType';
 import type { GetOrderMaxQuantitiesArgs } from '~/types/order/getOrderMaxQuantities';
 
 import { toast } from '$ui';
@@ -17,82 +20,84 @@ interface UseOrderItemMaxQuantityProps {
 }
 
 export const useOrderItemMaxQuantity = (item: UseOrderItemMaxQuantityProps) => {
-  const [maxQuantity, setMaxQuantity] = useState<bigint>();
-  const [isLoading, setIsLoading] = useState(false);
+  // TODO
+  // const [maxQuantity, setMaxQuantity] = useState<bigint>();
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const { address: userAddress } = useAccount();
+  // const { address: userAddress } = useAccount();
 
-  let balanceHolderAddress: string | undefined = undefined;
+  // let balanceHolderAddress: string | undefined = undefined;
 
-  switch (item.itemType) {
-    case OrderItemType.TRANSFER:
-      balanceHolderAddress = userAddress;
-      break;
-    default:
-      break;
-  }
+  // switch (item.itemType) {
+  //   case OrderItemType.TRANSFER:
+  //     balanceHolderAddress = userAddress;
+  //     break;
+  //   default:
+  //     break;
+  // }
 
-  const args: GetOrderMaxQuantitiesArgs = {
-    chainId: item.chainId,
-    orderType: item.itemType,
-    collectionAddress: item.collectionAddress || '',
-    balanceHolderAddress: balanceHolderAddress || '',
-    tokenIds: [item.tokenId],
-  };
+  // const args: GetOrderMaxQuantitiesArgs = {
+  //   chainId: item.chainId,
+  //   orderType: item.itemType,
+  //   collectionAddress: item.collectionAddress || '',
+  //   balanceHolderAddress: balanceHolderAddress || '',
+  //   tokenIds: [item.tokenId],
+  // };
 
-  const {
-    data: maxQuantitiesResp,
-    refetch,
-    isStale,
-    isFetched,
-  } = useQuery({
-    queryKey: ['orderMaxQuantities', args],
-    queryFn: () => fetchOrderMaxQuantities(args),
-    retry: false,
-    staleTime: 15 * time.oneSecond,
-    enabled: false,
-  });
+  // const {
+  //   data: maxQuantitiesResp,
+  //   refetch,
+  //   isStale,
+  //   isFetched,
+  // } = useQuery({
+  //   queryKey: ['orderMaxQuantities', args],
+  //   queryFn: () => fetchOrderMaxQuantities(args),
+  //   retry: false,
+  //   staleTime: 15 * time.oneSecond,
+  //   enabled: false,
+  // });
 
-  const lazyFetch = async (): Promise<bigint | undefined> => {
-    setIsLoading(true);
+  // const lazyFetch = async (): Promise<bigint | undefined> => {
+  //   setIsLoading(true);
 
-    let data = maxQuantitiesResp;
+  //   let data = maxQuantitiesResp;
 
-    if (isStale || !isFetched) {
-      // manually refetch
-      const {
-        data: maxQuantitiesResp,
-        isRefetchError,
-        error,
-      } = await refetch();
+  //   if (isStale || !isFetched) {
+  //     // manually refetch
+  //     const {
+  //       data: maxQuantitiesResp,
+  //       isRefetchError,
+  //       error,
+  //     } = await refetch();
 
-      if (isRefetchError) {
-        console.error(error);
-        toast.error('Error fetching max quantity', {
-          toastId: 'error-fetching-max-quantity',
-        });
-        return;
-      }
+  //     if (isRefetchError) {
+  //       console.error(error);
+  //       toast.error('Error fetching max quantity', {
+  //         toastId: 'error-fetching-max-quantity',
+  //       });
+  //       return;
+  //     }
 
-      data = maxQuantitiesResp;
-    }
+  //     data = maxQuantitiesResp;
+  //   }
 
-    // format
-    const maxQuantity = data?.data?.itemMaxQuantities[0].maxQuantity;
+  //   // format
+  //   const maxQuantity = data?.data?.itemMaxQuantities[0].maxQuantity;
 
-    setIsLoading(false);
-    setMaxQuantity(BigIntCast(maxQuantity));
+  //   setIsLoading(false);
+  //   setMaxQuantity(BigIntCast(maxQuantity));
 
-    if (maxQuantity) {
-      return BigInt(maxQuantity);
-    } else {
-      return undefined;
-    }
-  };
+  //   if (maxQuantity) {
+  //     return BigInt(maxQuantity);
+  //   } else {
+  //     return undefined;
+  //   }
+  // };
 
-  return {
-    maxQuantity,
-    isLoading,
-    getMaxQuantity: lazyFetch,
-  };
+  // return {
+  //   maxQuantity,
+  //   isLoading,
+  //   getMaxQuantity: lazyFetch,
+  // };
+  return {};
 };
