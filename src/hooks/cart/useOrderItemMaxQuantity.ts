@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { BigIntCast } from '~/lib/utils/helpers';
 import { OrderItemType } from '~/types/OrderItemType';
+import type { GetOrderMaxQuantitiesArgs } from '~/types/order/getOrderMaxQuantities';
 
 import { toast } from '$ui';
 import { useQuery } from '@tanstack/react-query';
-import { time } from 'console';
 import { useAccount } from 'wagmi';
 
 interface UseOrderItemMaxQuantityProps {

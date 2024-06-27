@@ -1,11 +1,7 @@
-import {
-  Orderbook,
-  SEQUENCE_MARKET_V1_ADDRESS,
-} from '~/sdk/orderbook/clients/Orderbook';
-
-import { orderbookKeys, time } from '../data';
 import { useQuery } from '@tanstack/react-query';
 import type { Hex } from 'viem';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 
 export interface UseOrderbookIsValidBatchArgs {
   requestIds: bigint[];
@@ -16,7 +12,7 @@ export interface UseOrderbookIsValidBatchArgs {
 export const useOrderbookIsValidBatch = (args: UseOrderbookIsValidBatchArgs) =>
   useQuery({
     queryKey: [
-      ...orderbookKeys.useOrderbookIsValid(),
+      'useOrderbookIsValid',
       {
         ...args,
         requestIds: args.requestIds.map((r) => r.toString()),
@@ -32,7 +28,6 @@ export const useOrderbookIsValidBatch = (args: UseOrderbookIsValidBatchArgs) =>
       return orderbook.isRequestValidBatch(args.requestIds, args.quantities);
     },
     retry: false,
-    staleTime: 1 * time.oneMinute,
     enabled:
       !!args.chainId && !!args.requestIds.length && !!args.quantities.length,
   });

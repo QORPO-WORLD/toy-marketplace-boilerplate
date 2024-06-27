@@ -13,14 +13,6 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 import { Grid, Dialog, cn } from '$ui';
 import { useSnapshot } from 'valtio';
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
-  return <></>;
-};
-
 export const OrderCartGrid = () => {
   const { isCartOpen } = useSnapshot(cartState);
 

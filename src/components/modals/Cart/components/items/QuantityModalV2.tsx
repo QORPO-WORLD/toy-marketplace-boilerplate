@@ -4,14 +4,16 @@ import type { FormEvent } from 'react';
 import { useState } from 'react';
 
 import { PoolAvatar } from '~/components/Avatars';
-import type { CartItem } from '~/lib/stores';
-import { editQuantity } from '~/lib/stores';
+import { editQuantity } from '~/lib/stores/cart/Cart';
+import type { CartItem } from '~/lib/stores/cart/types';
+import { formatDecimals } from '~/lib/utils/helpers';
 import { getThemeManagerElement } from '~/lib/utils/theme';
-import { formatDecimals } from '~/utils/helpers';
 
 import { Button, Dialog, Flex, Text, cn } from '$ui';
 import QuantityInput from './QuantityInput';
 import { parseUnits } from 'viem';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type QuantityModalV2Props = {
   item: CartItem;
@@ -66,6 +68,7 @@ export const QuantityModalV2 = (props: QuantityModalV2Props) => {
     });
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const val = (e.target as any).quantity.value as string;
       const inputDecimals = val.split('.')[1]?.length || 0;
 

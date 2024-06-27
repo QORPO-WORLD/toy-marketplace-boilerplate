@@ -24,7 +24,9 @@ export const useOrderbookOrders = (props: Props) => {
   });
 
   // if orderId is invalid, a null order object is returned from above, filter these out
-  const orders = ordersRaw ? ordersRaw.filter((order) => !!order) : [];
+  const orders = ordersRaw?.filter((order) => !!order);
+
+  if (!orders) return { orders: [], isLoading };
 
   const ordersWithID = orders.map((order, index) => {
     return {

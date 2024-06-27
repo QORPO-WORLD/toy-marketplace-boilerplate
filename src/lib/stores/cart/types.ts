@@ -28,7 +28,6 @@ const cartItemSchema = z.object({
   itemType: orderItemTypeSchema,
   collectibleMetadata: collectibleMetadataSchema,
   chainId: z.number(),
-  exchangeAddress: z.union([z.string(), z.undefined()]),
   subtotal: z.bigint(),
   quantity: z.bigint(),
   contractType: z.nativeEnum(ContractType).optional(), // Needed for transfer flow

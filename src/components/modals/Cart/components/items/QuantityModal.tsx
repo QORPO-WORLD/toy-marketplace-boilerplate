@@ -3,16 +3,16 @@
 import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
 
-import type { OrderItemType } from '~/api';
 import { PoolAvatar } from '~/components/Avatars';
 import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
-import type { CartItem, CollectibleMetadata } from '~/lib/stores';
-import { editQuantity } from '~/lib/stores';
+import type { CartItem, CollectibleMetadata } from '~/lib/stores/cart/types';
 import { getThemeManagerElement } from '~/lib/utils/theme';
-import { formatDecimals } from '~/utils/helpers';
+import type { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Dialog, Flex, Input, LoadingIcon, Text, cn } from '$ui';
 import { parseUnits } from 'viem';
+import { formatDecimals } from '~/lib/utils/helpers';
+import { editQuantity } from '~/lib/stores/cart/Cart';
 
 type BaseEditQuantityModalProps = {
   quantity: bigint;
@@ -98,6 +98,7 @@ export const BaseEditQuantityModal = (props: BaseEditQuantityModalProps) => {
     });
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const val = (e.target as any)[0].value as string;
 
       const inputDecimals = val.split('.')[1]?.length || 0;

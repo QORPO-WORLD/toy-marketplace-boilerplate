@@ -6,7 +6,7 @@ import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { getChain } from '~/config/networks';
-import type { OrderWithID } from '~/hooks/orderbook';
+import { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
@@ -19,7 +19,11 @@ import {
 } from '~/lib/stores/Transaction';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
 import { formatDecimals } from '~/lib/utils/helpers';
-import { generateStepsOrderbookAcceptRequest } from '~/lib/utils/txBundler';
+import {
+  GenericStep,
+  generateStepsOrderbookAcceptRequest,
+} from '~/lib/utils/txBundler';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { Box, Button, Text, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
@@ -73,11 +77,10 @@ export const OrderbookOrderButtons = ({
     targetChainId: chainId,
   });
 
-  const defaultOrder = orders[0];
+  const defaultOrder = orders[0]!;
   const collectionAddress = defaultOrder?.tokenContract;
 
-  const erc20ApprovalEnabled =
-    !!erc20Amount && cartType === OrderItemType.BUY_ORDERBOOK;
+  const erc20ApprovalEnabled = !!erc20Amount && cartType === OrderItemType.BUY;
 
   const {
     data: erc20Approval,
@@ -93,8 +96,7 @@ export const OrderbookOrderButtons = ({
   });
 
   const erc721ApprovalEnabled =
-    cartType === OrderItemType.SELL_ORDERBOOK &&
-    defaultOrder?.isERC1155 === false;
+    cartType === OrderItemType.SELL && defaultOrder?.isERC1155 === false;
 
   const {
     data: erc721Approval,
@@ -109,8 +111,7 @@ export const OrderbookOrderButtons = ({
   });
 
   const erc1155ApprovalEnabled =
-    cartType === OrderItemType.SELL_ORDERBOOK &&
-    defaultOrder?.isERC1155 === true;
+    cartType === OrderItemType.SELL && defaultOrder?.isERC1155 === true;
 
   const {
     data: erc1155Approval,
@@ -133,11 +134,12 @@ export const OrderbookOrderButtons = ({
   }
 
   const postTransactionCacheClear = () => {
-    queryClient.invalidateQueries({ queryKey: [...orderbookKeys.all()] });
-    queryClient.invalidateQueries({ queryKey: [...balancesKeys.all()] });
-    queryClient.invalidateQueries({
-      queryKey: [...metadataKeys.useCollectionTokenIDs()],
-    });
+    //TODO
+    // queryClient.invalidateQueries({ queryKey: [...orderbookKeys.all()] });
+    // queryClient.invalidateQueries({ queryKey: [...balancesKeys.all()] });
+    // queryClient.invalidateQueries({
+    //   queryKey: [...metadataKeys.useCollectionTokenIDs()],
+    // });
   };
 
   if (!isConnected) {
@@ -194,7 +196,7 @@ export const OrderbookOrderButtons = ({
     currency: erc20Address as Hex,
     chainId,
     isERC1155: defaultOrder?.isERC1155 === true,
-    isListing: cartType === OrderItemType.BUY_ORDERBOOK,
+    isListing: cartType === OrderItemType.BUY,
     isApproved: !requiresApproval,
     walletClient: walletClient as GetWalletClientData<any, any> | undefined,
   });
@@ -203,7 +205,9 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !erc20Address) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC20');
+      const approveStep = steps.find((s) => s.id === 'approveERC20') as
+        | GenericStep
+        | undefined;
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -240,7 +244,9 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC1155');
+      const approveStep = steps.find((s) => s.id === 'approveERC1155') as
+        | GenericStep
+        | undefined;
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -277,7 +283,9 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC721');
+      const approveStep = steps.find((s) => s.id === 'approveERC721') as
+        | GenericStep
+        | undefined;
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -333,14 +341,6 @@ export const OrderbookOrderButtons = ({
       await transactionNotification({
         network: getChain(chainId)!,
         txHash: txnHash,
-        onSuccess: () => {
-          cartItems.forEach((item) => {
-            const frontendFeeAmount = getFrontEndFeeAmount(
-              item.subtotal,
-              frontendFeePercentage,
-            );
-          });
-        },
       });
 
       postTransactionCacheClear();
@@ -380,38 +380,8 @@ export const OrderbookOrderButtons = ({
       });
 
       await transactionNotification({
-        network: getNetworkConfigAndClients(chainId).networkConfig,
+        network: getChain(chainId)!,
         txHash: txnHash,
-        onSuccess: () => {
-          cartItems.forEach((item) => {
-            const frontendFeeAmount = getFrontEndFeeAmount(
-              item.subtotal,
-              frontendFeePercentage,
-            );
-            const currencyAmountRaw = defaultOrder?.isListing
-              ? item.subtotal + frontendFeeAmount
-              : item.subtotal - frontendFeeAmount;
-
-            analytics()?.trackSellItems({
-              props: {
-                txnHash,
-                chainId: String(chainId),
-                marketplaceType: 'orderbook',
-                collectionAddress: collectionAddress.toLowerCase(),
-                currencyAddress: erc20Address.toLowerCase(),
-                currencySymbol: erc20Symbol.toUpperCase(),
-                tokenId: item.collectibleMetadata.tokenId,
-                requestId: item.orderbookOrderId || '',
-              },
-              nums: {
-                currencyValueDecimal: Number(
-                  formatDecimals(currencyAmountRaw, erc20Decimals),
-                ),
-                currencyValueRaw: Number(currencyAmountRaw),
-              },
-            });
-          });
-        },
       });
 
       postTransactionCacheClear();
@@ -426,12 +396,6 @@ export const OrderbookOrderButtons = ({
     } catch (error: any) {
       const errorMessage =
         error instanceof Error ? error.message : 'unknown error';
-      analytics()?.trackTransactionFailed({
-        chainId: String(chainId),
-        txnHash: '',
-        description: 'orderbook - sell from cart',
-        errorMessage,
-      });
       showErrorToast(error);
     }
 
@@ -440,15 +404,15 @@ export const OrderbookOrderButtons = ({
 
   const renderOrderButton = () => {
     const onBuyClick = () => {
-      buyAction();
+      void buyAction();
     };
 
     const onSellClick = () => {
-      sellAction();
+      void sellAction();
     };
 
     switch (cartType) {
-      case OrderItemType.BUY_ORDERBOOK:
+      case OrderItemType.BUY:
         return (
           <Button
             className="w-full"
@@ -457,7 +421,7 @@ export const OrderbookOrderButtons = ({
             disabled={!isBundled && requiresApproval}
           />
         );
-      case OrderItemType.SELL_ORDERBOOK:
+      case OrderItemType.SELL:
         return (
           <Button
             className="w-full"

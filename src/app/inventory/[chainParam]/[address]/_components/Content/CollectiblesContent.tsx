@@ -10,7 +10,7 @@ import { PoolAvatar } from '~/components/Avatars';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { AddToCartButton } from '~/components/buttons/AddToCartButton';
-import { MarketConfig } from '~/config/marketplace';
+import type { MarketConfig } from '~/config/marketplace';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
 
 import {
@@ -213,7 +213,8 @@ const CollectionSection = ({
         <ContentWrapper isGridView={isGridView}>
           {collectibles.map((c) => {
             const data = getInvetoryCardData({
-              collectible: c,            });
+              collectible: c,
+            });
             return isGridView ? (
               <CollectibleCard data={data} key={data.tokenId} />
             ) : (

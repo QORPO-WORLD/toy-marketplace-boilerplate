@@ -1,8 +1,7 @@
 'use client';
 
-import { cartState } from '~/lib/stores';
+import { cartState } from '~/lib/stores/cart/Cart';
 
-import { OrderButtons } from '../components/actions/OrderButtons';
 import { TransferOrderItem } from '../components/items/TransferOrderItem';
 import { OrderSections } from './shared';
 import { useSnapshot } from 'valtio';
@@ -23,7 +22,8 @@ export const TransferOrderComponents = () => {
       </OrderSections.Summary>
 
       <OrderSections.Buttons>
-        <OrderButtons isLoading={false} />
+        <></>
+        {/* <OrderButtons isLoading={false} /> */}
       </OrderSections.Buttons>
     </>
   );

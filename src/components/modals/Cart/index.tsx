@@ -13,6 +13,10 @@ import {
   overrideCart,
   clearOverrideCartState,
 } from '~/lib/stores/cart/Cart';
+import {
+  areTermsAccepted,
+  setTermsAccepted as setTermsAcceptedStorage,
+} from '~/lib/termsAcceptance';
 import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Flex, Text, Box, cn, CollapseIcon } from '$ui';
@@ -27,7 +31,7 @@ export const OrderCart = ({ className }: { className?: string }) => {
 
   const {
     cartItems,
-    baseOrderInfo: { chainId, exchangeAddress, orderType },
+    baseOrderInfo: { chainId, orderType },
     override,
   } = useSnapshot(cartState);
 

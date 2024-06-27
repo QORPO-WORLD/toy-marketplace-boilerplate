@@ -2,21 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { getNetworkConfigAndClients } from '~/api';
-import { OrderItemType } from '~/api/types/order';
-import { useCollectibleMetadata } from '~/hooks/data';
-import useElementDimensions from '~/hooks/ui/useElementDimentions';
-import type { CartItem } from '~/lib/stores';
+import { getChain } from '~/config/networks';
+import useElementDimensions from '~/hooks/ui/useElementDimensions';
+import { CartItem } from '~/lib/stores/cart/types';
+import { truncateAtMiddle, formatDecimals } from '~/lib/utils/helpers';
 import { getThemeManagerElement } from '~/lib/utils/theme';
-import {
-  formatDecimals,
-  formatDisplay,
-  truncateAtMiddle,
-} from '~/utils/helpers';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import {
-  Avatar,
-  Badge,
   Box,
   Button,
   ChevronLeftIcon,
@@ -29,8 +22,6 @@ import {
   cn,
 } from '$ui';
 import { getSubTitleFromCartData, getTitleFromCartData } from './utils';
-import { ethers } from 'ethers';
-import { useAccount } from 'wagmi';
 
 type TransactionConfitmationModalProps = {
   open: boolean;
@@ -54,9 +45,7 @@ export const TransactionConfirmationModal = ({
   const title = getTitleFromCartData({ cartType, cartItems });
   const subTitle = getSubTitleFromCartData({ cartType, cartItems });
 
-  const { networkConfig: network } = getNetworkConfigAndClients(
-    cartItems[0]?.chainId,
-  );
+  const network = getChain(cartItems[0]?.chainId || 1);
 
   const maxW = 'max-w-xs sm:max-w-sm md:max-w-md';
 
@@ -91,10 +80,6 @@ export const TransactionConfirmationModal = ({
                 </Button>
               </Flex>
             ) : null}
-
-            <Flex className="mt-4">
-              <TransactionConfirmationFooter cartType={cartType} />
-            </Flex>
           </Flex>
         </Box>
       </Dialog.BaseContent>
@@ -178,36 +163,9 @@ const CartItems = ({ items }: { items: readonly CartItem[] }) => {
 };
 
 const CartItemBox = (item: CartItem) => {
-  const {
-    chainId,
-    itemType,
-    collectibleMetadata,
-    exchangeAddress,
-    quantity,
-    subtotal,
-  } = item;
+  const { itemType, collectibleMetadata, quantity } = item;
 
-  const { name, tokenId, decimals, imageUrl } = collectibleMetadata;
-
-  const exchange = exchangeData?.data;
-
-  const { data: lpTokenMetadataResp, isLoading: isLpTokenMetadataLoading } =
-    useCollectibleMetadata({
-      chainID: String(exchange?.chainId),
-      contractAddress: exchange?.exchangeAddress,
-      tokenIDs: [tokenId],
-    });
-
-  const lpTokenMetadata = lpTokenMetadataResp?.data[0];
-
-  const subtotalNum = formatDecimals(
-    ethers.BigNumber.from(subtotal),
-    exchange?.currency.decimals || 0,
-  );
-  const quantityNum = formatDecimals(ethers.BigNumber.from(quantity), decimals);
-
-  const eachNum = Number(subtotalNum) / Number(quantityNum);
-  const each = formatDisplay(eachNum);
+  const { name, decimals, imageUrl } = collectibleMetadata;
 
   const collectibleHasDecimals = (collectibleMetadata.decimals || 0) > 0;
   const formatQuantity = formatDecimals(quantity, decimals);
@@ -233,9 +191,7 @@ const CartItemBox = (item: CartItem) => {
       );
     }
 
-    case OrderItemType.BUY_ORDERBOOK: {
-      if (isError) return null;
-
+    case OrderItemType.BUY: {
       return (
         <Flex className="w-full flex-col items-center gap-4">
           <Text className={'text-center uppercase text-foreground/60'}>
@@ -246,9 +202,7 @@ const CartItemBox = (item: CartItem) => {
         </Flex>
       );
     }
-    case OrderItemType.SELL_ORDERBOOK: {
-      if (isError) return null;
-
+    case OrderItemType.SELL: {
       return (
         <Flex className="w-full flex-col items-center gap-4">
           <Text className="text-center uppercase text-foreground/60">
@@ -260,30 +214,4 @@ const CartItemBox = (item: CartItem) => {
       );
     }
   }
-
-  return null;
-};
-
-type TransactionConfirmationFooterProps = {
-  cartType: OrderItemType;
-};
-
-const TransactionConfirmationFooter = ({
-  cartType,
-}: TransactionConfirmationFooterProps) => {
-  switch (cartType) {
-    case OrderItemType.DEPOSIT: {
-      return (
-        <Text className="px-4 text-center text-sm uppercase text-foreground/50">
-          <Text className="text-center uppercase text-destructive">
-            Do not burn this SFT
-          </Text>
-          if you do, you will lose your liquidity. the wallet that holds this
-          sft will have exclusive access to your position
-        </Text>
-      );
-    }
-  }
-
-  return <></>;
 };

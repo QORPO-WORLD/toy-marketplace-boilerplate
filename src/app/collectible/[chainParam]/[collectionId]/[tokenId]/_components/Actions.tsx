@@ -1,11 +1,15 @@
 'use client';
 
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { indexerQueries, marketplaceQueries } from '~/lib/queries';
+import { _addToCart_ } from '~/lib/stores/cart/Cart';
+import { CartType } from '~/lib/stores/cart/types';
+import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 import { getThemeManagerElement } from '~/lib/utils/theme';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
@@ -61,26 +65,27 @@ export const CollectibleTradeActions = ({
 
   const bestListing = bestListings?.orders[0];
 
-  const { collectionMetadata } = useCollectableData();
+  const { collectionMetadata, collectibleMetadata } = useCollectableData();
 
   const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
 
   const { address, isConnected } = useAccount();
 
-  const { data: userBalance, isLoading: isBalanceLoading } = useInfiniteQuery({
-    ...indexerQueries.tokenBalance({
-      chainId: chainId,
-      contractAddress: collectionAddress,
-      tokenId,
-      includeMetadata: false,
-      accountAddress: address as string,
-    }),
-    enabled: !!isConnected && !!address,
-  });
+  const { data: userBalanceResp, isLoading: isBalanceLoading } =
+    useInfiniteQuery({
+      ...indexerQueries.tokenBalance({
+        chainId: chainId,
+        contractAddress: collectionAddress,
+        tokenId,
+        includeMetadata: false,
+        accountAddress: address as string,
+      }),
+      enabled: !!isConnected && !!address,
+    });
 
-  const hasUserBalance = userBalance?.pages?.[0]?.balances[0]?.balance;
+  const userBalance = userBalanceResp?.pages?.[0]?.balances[0];
 
-  const item721AlreadyOwned = !!hasUserBalance && !isERC1155;
+  const item721AlreadyOwned = !!userBalance && !isERC1155;
 
   const isLoading =
     isLoadingBestOffers ||
@@ -88,67 +93,67 @@ export const CollectibleTradeActions = ({
     (isConnected && isBalanceLoading);
 
   const onClickBuy = () => {
-    // if (!bestListing) return;
-    // _addToCart_({
-    //   type: CartType.ORDERBOOK,
-    //   item: {
-    //     chainId,
-    //     itemType: OrderItemType.BUY_ORDERBOOK,
-    //     collectibleMetadata: {
-    //       collectionAddress: bestListing.tokenContract,
-    //       tokenId: bestListing.tokenId,
-    //       name: collectibleMetadata?.name || '',
-    //       imageUrl: collectibleMetadata?.image || '',
-    //       decimals: collectibleMetadata?.decimals || 0,
-    //       chainId,
-    //     },
-    //     quantity: defaultSelectionQuantity({
-    //       type: OrderItemType.BUY_ORDERBOOK,
-    //       tokenDecimals: collectibleMetadata?.decimals || 0,
-    //       tokenUserBalance: BigInt(userBalance?.toString() || 0),
-    //       tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
-    //     }),
-    //     orderbookOrderId: bestListing.orderId,
-    //   },
-    //   options: {
-    //     toggle: true,
-    //   },
-    // });
+    if (!bestListing) return;
+    _addToCart_({
+      type: CartType.ORDERBOOK,
+      item: {
+        chainId,
+        itemType: OrderItemType.BUY,
+        collectibleMetadata: {
+          collectionAddress: bestListing.tokenContract,
+          tokenId: bestListing.tokenId,
+          name: collectibleMetadata.data?.name || '',
+          imageUrl: collectibleMetadata.data?.image || '',
+          decimals: collectibleMetadata.data?.decimals || 0,
+          chainId,
+        },
+        quantity: defaultSelectionQuantity({
+          type: OrderItemType.BUY,
+          tokenDecimals: collectibleMetadata.data?.decimals || 0,
+          tokenUserBalance: BigInt(userBalance?.toString() || 0),
+          tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
+        }),
+        orderbookOrderId: bestListing.orderId,
+      },
+      options: {
+        toggle: true,
+      },
+    });
   };
 
   const onClickSell = () => {
-    // if (!bestOffer) return;
-    // _addToCart_({
-    //   type: CartType.ORDERBOOK,
-    //   item: {
-    //     chainId,
-    //     itemType: OrderItemType.SELL_ORDERBOOK,
-    //     collectibleMetadata: {
-    //       collectionAddress: bestOffer.tokenContract,
-    //       tokenId: bestOffer.tokenId,
-    //       name: collectibleMetadata?.name || '',
-    //       imageUrl: collectibleMetadata?.image || '',
-    //       decimals: collectibleMetadata?.decimals || 0,
-    //       chainId,
-    //     },
-    //     quantity: defaultSelectionQuantity({
-    //       type: OrderItemType.SELL_ORDERBOOK,
-    //       tokenDecimals: collectibleMetadata?.decimals || 0,
-    //       tokenUserBalance: BigInt(userBalance?.toString() || 0),
-    //       tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
-    //     }),
-    //     orderbookOrderId: bestOffer.orderId,
-    //   },
-    //   options: {
-    //     toggle: true,
-    //   },
-    // });
+    if (!bestOffer) return;
+    _addToCart_({
+      type: CartType.ORDERBOOK,
+      item: {
+        chainId,
+        itemType: OrderItemType.SELL,
+        collectibleMetadata: {
+          collectionAddress: bestOffer.tokenContract,
+          tokenId: bestOffer.tokenId,
+          name: collectibleMetadata.data?.name || '',
+          imageUrl: collectibleMetadata.data?.image || '',
+          decimals: collectibleMetadata.data?.decimals || 0,
+          chainId,
+        },
+        quantity: defaultSelectionQuantity({
+          type: OrderItemType.SELL,
+          tokenDecimals: collectibleMetadata.data?.decimals || 0,
+          tokenUserBalance: BigInt(userBalance?.toString() || 0),
+          tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
+        }),
+        orderbookOrderId: bestOffer.orderId,
+      },
+      options: {
+        toggle: true,
+      },
+    });
   };
 
   const buyDisabled = !bestListing || item721AlreadyOwned;
   const offerDisabled = !isConnected;
-  const listingDisabled = !isConnected || !hasUserBalance;
-  const sellDisabled = !bestOffer || !hasUserBalance;
+  const listingDisabled = !isConnected || !userBalance;
+  const sellDisabled = !bestOffer || !userBalance;
 
   return (
     <Flex className="flex-col gap-4">

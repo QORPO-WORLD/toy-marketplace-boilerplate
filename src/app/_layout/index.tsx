@@ -3,6 +3,7 @@ import { classNames } from '~/config/classNames';
 import { Grid, cn } from '$ui';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { OrderCartGrid } from './OrderCartGrid';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -49,7 +50,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Footer />
       </Grid.Child>
 
-      {/* <OrderCartGrid /> */}
+      <OrderCartGrid />
     </Grid.Root>
   );
 }

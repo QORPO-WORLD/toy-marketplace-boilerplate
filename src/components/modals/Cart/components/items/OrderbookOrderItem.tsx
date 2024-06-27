@@ -21,6 +21,10 @@ import { QuantityModalV2 } from './QuantityModalV2';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
+import { formatDisplay } from '@0xsequence/kit';
+import { CurrencyAvatar } from '~/components/Avatars';
+import { removeFromCart, editQuantity } from '~/lib/stores/cart/Cart';
+import { formatDecimals } from '~/lib/utils/helpers';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -39,7 +43,7 @@ export const OrderbookOrderItem = ({
   maxQuantity,
   isOrderValid,
 }: OrderbookOrderItemProps) => {
-  const { data: currencyMetadataResp, isLoading: isCurrencyMetadataLoading } =
+  const { data: currencyMetadata, isLoading: isCurrencyMetadataLoading } =
     useQuery(
       metadataQueries.collection({
         chainID: item.chainId.toString(),
@@ -51,8 +55,6 @@ export const OrderbookOrderItem = ({
     chainId: item.chainId,
     collectionAddress: item.collectibleMetadata.collectionAddress,
   });
-
-  const currencyMetadata = currencyMetadataResp || null;
 
   const showQuantityAndSubtotal = isERC1155 && isOrderValid;
 
@@ -79,10 +81,10 @@ export const OrderbookOrderItem = ({
           order={order}
           isLoading={isLoading}
           price={price}
-          currencySymbol={currencyMetadata?.contractInfo.symbol || 'unknown'}
-          currencyUrl={currencyMetadata?.contractInfo.logoURI || ''}
+          currencySymbol={currencyMetadata?.symbol || 'unknown'}
+          currencyUrl={currencyMetadata?.logoURI || ''}
           maxQuantity={maxQuantity}
-          currencyDecimals={currencyMetadata?.contractInfo.decimals || 0}
+          currencyDecimals={currencyMetadata?.decimals || 0}
         />
       </Grid.Child>
       {showQuantityAndSubtotal ? (
@@ -93,8 +95,8 @@ export const OrderbookOrderItem = ({
           <Grid.Child name="subtotal">
             <OrderCollectibleSubtotal
               item={item}
-              currencyDecimals={currencyMetadata?.contractInfo.decimals || 0}
-              currencyUrl={currencyMetadata?.contractInfo.logoURI || ''}
+              currencyDecimals={currencyMetadata?.decimals || 0}
+              currencyUrl={currencyMetadata?.logoURI || ''}
               isLoading={isLoading}
               price={price}
             />

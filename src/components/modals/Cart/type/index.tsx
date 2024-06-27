@@ -2,13 +2,14 @@
 
 import { memo } from 'react';
 
-import { OrderItemType } from '~/api/types/order';
-import { cartState } from '~/lib/stores';
+import { cartState } from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/types/OrderItemType';
 
 import { OrderbookOrderComponents } from './orderbook';
 import { TransferOrderComponents } from './transfer';
 import { useSnapshot } from 'valtio';
 
+// eslint-disable-next-line react/display-name
 export const OrderRenderer = memo(() => {
   const {
     baseOrderInfo: { orderType },
@@ -17,8 +18,8 @@ export const OrderRenderer = memo(() => {
   switch (orderType) {
     case OrderItemType.TRANSFER:
       return <TransferOrderComponents />;
-    case OrderItemType.BUY_ORDERBOOK:
-    case OrderItemType.SELL_ORDERBOOK:
+    case OrderItemType.BUY:
+    case OrderItemType.SELL:
       return <OrderbookOrderComponents />;
     default:
       return <></>;

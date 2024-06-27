@@ -1,4 +1,6 @@
-import { compareAddress } from '@0xsequence/kit';
+import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
+import type { OrderItemType } from '~/types/OrderItemType';
+
 import type {
   AddToCartData,
   CartItem,
@@ -7,11 +9,10 @@ import type {
 } from './types';
 import { CartType, cartStateSchema } from './types';
 import { ContractType } from '@0xsequence/indexer';
+import { compareAddress } from '@0xsequence/kit';
 import * as ethers from 'ethers';
 import { proxy, subscribe } from 'valtio';
 import { derive } from 'valtio/utils';
-import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
-import { OrderItemType } from '~/types/OrderItemType';
 
 const CART_LOCAL_STORAGE_TAG = '@marketplace.cart';
 
@@ -119,7 +120,7 @@ const canAddToCart = (
 
   // do not allow mixed cart items for now
   // remove this when we support batch transactions / sequence proxy
-  const referenceItem = cartState.cartItems[0];
+  const referenceItem = cartState.cartItems[0]!;
 
   if (newItem.itemType !== referenceItem.itemType) {
     return {
@@ -157,13 +158,6 @@ const canAddToCart = (
     };
   }
 
-  if (!compareAddress(newItem.exchangeAddress, referenceItem.exchangeAddress)) {
-    return {
-      isValid: false,
-      reason: 'Conflicting exchange address detected',
-    };
-  }
-
   // no issues
   return {
     isValid: true,
@@ -187,12 +181,6 @@ export const _addToCart_ = (data: AddToCartData) => {
   // special TRANSFER handling
   if (data.type === CartType.TRANSFER) {
     cartItem.contractType = data.item.contractType;
-  }
-
-  // escape hatch
-  if (data.item.itemType === OrderItemType.UNKNOWN) {
-    console.error('unknown item type');
-    return;
   }
 
   // set cart states
@@ -227,22 +215,7 @@ export const _addToCart_ = (data: AddToCartData) => {
     }
   }
 
-  if (itemAlreadyInCart) {
-    // item already in cart
-    switch (data.item.itemType) {
-      case OrderItemType.DEPOSIT:
-        itemAlreadyInCart.quantity = cartItem.quantity;
-        itemAlreadyInCart.subtotal = cartItem.subtotal;
-        break;
-      case OrderItemType.WITHDRAW:
-        itemAlreadyInCart.quantity = cartItem.quantity;
-      default:
-        break;
-    }
-  } else {
-    // new item
-    cartState.cartItems.push(cartItem);
-  }
+  cartState.cartItems.push(cartItem);
 };
 
 export const overrideCart = () => {

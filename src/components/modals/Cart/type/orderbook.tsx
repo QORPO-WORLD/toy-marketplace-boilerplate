@@ -1,31 +1,100 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 'use client';
 
 import { useEffect } from 'react';
 
 import { CurrencyAvatar } from '~/components/Avatars';
-import { getPlatformFeeRecipient } from '~/config';
-import { useCollectionMetadata } from '~/hooks/data';
-import {
-  useOrderbookIsValidBatch,
-  useOrderbookIsValid,
-} from '~/hooks/orderbook';
+import { DEFAULT_PLATFORM_FEE_PERCENTAGE } from '~/config/consts';
+import { useOrderbookIsValid } from '~/hooks/orderbook/useOrderbookIsValid';
+import { useOrderbookIsValidBatch } from '~/hooks/orderbook/useOrderbookIsValidBatch';
 import { useOrderbookOrders } from '~/hooks/orderbook/useOrderbookOrders';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import type { CartItem } from '~/lib/stores';
-import { cartState, updateCartItemSubtotals } from '~/lib/stores';
-import { getMarketplaceFeePercentage } from '~/lib/stores/marketConfig';
-import { getFrontEndFeeAmount } from '~/sdk/niftyswap-v2';
-import { formatDisplay } from '~/utils/helpers';
+import { getPlatformFeeRecipient } from '~/lib/fees';
+import { metadataQueries } from '~/lib/queries';
+import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
+import { cartState, updateCartItemSubtotals } from '~/lib/stores/cart/Cart';
+import type { CartItem } from '~/lib/stores/cart/types';
 
 import { Accordion, Avatar, Flex, InformationIcon, Text, Tooltip } from '$ui';
 // import { OrderbookOrderButtons } from '../components/actions/OrderbookOrderButtons'
 import { OrderbookOrderItem } from '../components/items/OrderbookOrderItem';
 import { OrderSections } from './shared';
+import { formatDisplay } from '@0xsequence/kit';
+import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { useSnapshot } from 'valtio';
-import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
 export const OrderbookOrderButtons = dynamic(
   () =>
@@ -46,12 +115,12 @@ export const OrderbookOrderComponents = () => {
   const chainId = cartItems[0]?.chainId;
 
   const { orders } = useOrderbookOrders({
-    chainId,
+    chainId: chainId!,
     orderIds: cartItems.map((item) => item.orderbookOrderId!),
   });
 
   const hasMultipleCurrencies =
-    new Set(orders.map((o) => o.currency.toLowerCase())).size > 1;
+    new Set(orders.map((o) => o.currency?.toLowerCase())).size > 1;
 
   // TODO:
   const defaultOrder = orders[0];
@@ -61,8 +130,10 @@ export const OrderbookOrderComponents = () => {
     data: isOrderValidBatchData,
     isLoading: isLoadingOrderBatchValidity,
   } = useOrderbookIsValidBatch({
-    chainId,
-    requestIds: orders.map((o) => BigInt(o.orderId)),
+    chainId: chainId!,
+    requestIds: orders.map((o) => BigInt(o.orderId!)),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     quantities: orders.map((o) => o.quantity),
   });
 
@@ -70,22 +141,25 @@ export const OrderbookOrderComponents = () => {
     useCollectionRoyalty({
       chainId,
       contractAddress: defaultOrder?.tokenContract!,
-      tokenId: defaultOrder?.tokenId.toString(),
+      tokenId: String(defaultOrder?.tokenId),
     });
 
-  const { data: currencyMetadataResp, isLoading: isCurrencyMetadataLoading } =
-    useCollectionMetadata({
-      chainID: String(chainId),
-      contractAddress: defaultCurrency,
-    });
-
-  const currencyMetadata = currencyMetadataResp?.data || null;
+  const { data: currencyMetadata, isLoading: isCurrencyMetadataLoading } =
+    useQuery(
+      metadataQueries.collection({
+        chainID: String(chainId),
+        collectionId: defaultCurrency,
+      }),
+    );
 
   useEffect(() => {
     if (orders && orders.length == cartItems.length) {
       const subTotals: bigint[] = [];
       cartItems.forEach((_, i) => {
-        const subTotal = cartItems[i].quantity * orders[i].pricePerToken;
+        const quantity = cartItems[i]?.quantity;
+        const pricePerToken = orders[i]?.pricePerToken;
+        if (!quantity || !pricePerToken) return;
+        const subTotal = quantity * pricePerToken;
         subTotals.push(subTotal);
       });
       updateCartItemSubtotals(subTotals);
@@ -109,7 +183,7 @@ export const OrderbookOrderComponents = () => {
       useOrderbookIsValid({
         requestId: BigInt(order?.orderId || ''),
         quantity: BigInt(order?.quantity || 0),
-        chainId,
+        chainId: chainId!,
       });
 
     const isValidOrder = isValidOrderData?.isValid || false;
@@ -136,10 +210,8 @@ export const OrderbookOrderComponents = () => {
   };
 
   // order summary calculations
-  const currencyDecimals = currencyMetadata?.contractInfo.decimals || 0;
-  const feePerceentage = getMarketplaceFeePercentage(
-    defaultOrder?.tokenContract,
-  );
+  const currencyDecimals = currencyMetadata?.decimals || 0;
+  const feePerceentage = DEFAULT_PLATFORM_FEE_PERCENTAGE;
 
   // TODO: this assumes all orders are the same currency
   const orderSubtotalRaw = cartItems.reduce(
@@ -185,15 +257,12 @@ export const OrderbookOrderComponents = () => {
               className="items-center justify-end gap-2"
             >
               <Avatar.Base className="h-10 w-10">
-                <Avatar.Image src={currencyMetadata?.contractInfo.logoURI} />
-                <Avatar.Fallback>
-                  {currencyMetadata?.contractInfo.symbol}
-                </Avatar.Fallback>
+                <Avatar.Image src={currencyMetadata?.logoURI} />
+                <Avatar.Fallback>{currencyMetadata?.symbol}</Avatar.Fallback>
               </Avatar.Base>
 
               <Text className="text-2xl font-semibold text-foreground">
-                {formatDisplay(formattedTotal)}{' '}
-                {currencyMetadata?.contractInfo.symbol}
+                {formatDisplay(formattedTotal)} {currencyMetadata?.symbol}
               </Text>
             </Flex>
             <Accordion.Root
@@ -221,8 +290,8 @@ export const OrderbookOrderComponents = () => {
                         title={formattedSubtotal}
                         amount={formatDisplay(formattedSubtotal)}
                         currency={{
-                          src: currencyMetadata?.contractInfo.logoURI,
-                          symbol: currencyMetadata?.contractInfo.symbol,
+                          src: currencyMetadata?.logoURI,
+                          symbol: currencyMetadata?.symbol,
                         }}
                       />
                     </Flex>
@@ -250,8 +319,8 @@ export const OrderbookOrderComponents = () => {
                         title={formattedFeeAmount}
                         amount={formatDisplay(formattedFeeAmount)}
                         currency={{
-                          src: currencyMetadata?.contractInfo.logoURI,
-                          symbol: currencyMetadata?.contractInfo.symbol,
+                          src: currencyMetadata?.logoURI,
+                          symbol: currencyMetadata?.symbol,
                         }}
                       />
                     </Flex>
@@ -263,8 +332,8 @@ export const OrderbookOrderComponents = () => {
                         title={formattedTotal}
                         amount={formatDisplay(formattedTotal)}
                         currency={{
-                          src: currencyMetadata?.contractInfo.logoURI,
-                          symbol: currencyMetadata?.contractInfo.symbol,
+                          src: currencyMetadata?.logoURI,
+                          symbol: currencyMetadata?.symbol,
                         }}
                       />
                     </Flex>
@@ -281,11 +350,11 @@ export const OrderbookOrderComponents = () => {
           orders={orders}
           isLoading={isLoadingOrderBatchValidity}
           erc20Amount={orderTotalRaw}
-          erc20Symbol={currencyMetadata?.contractInfo.symbol || 'unknown'}
-          erc20Decimals={currencyMetadata?.contractInfo.decimals || 0}
+          erc20Symbol={currencyMetadata?.symbol || 'unknown'}
+          erc20Decimals={currencyMetadata?.decimals || 0}
           platformFee={feeAmountRaw}
           erc20Address={defaultCurrency}
-          frontEndFeeRecipient={getPlatformFeeRecipient(chainId)}
+          frontEndFeeRecipient={getPlatformFeeRecipient(chainId!)}
           hasMultipleCurrencies={hasMultipleCurrencies}
           containsInvalidOrder={containsInvalidOrder}
           frontendFeePercentage={feePerceentage}
