@@ -213,10 +213,7 @@ const CollectionSection = ({
         <ContentWrapper isGridView={isGridView}>
           {collectibles.map((c) => {
             const data = getInvetoryCardData({
-              collectible: c,
-              collectionMetadata,
-              marketConfig,
-            });
+              collectible: c,            });
             return isGridView ? (
               <CollectibleCard data={data} key={data.tokenId} />
             ) : (

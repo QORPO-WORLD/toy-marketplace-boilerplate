@@ -1,5 +1,4 @@
 import { Routes } from '~/lib/routes';
-import type { AddToCartData } from '~/lib/stores/cart/types';
 
 import type { TokenBalance } from '@0xsequence/indexer';
 
@@ -8,14 +7,7 @@ export const getInvetoryCardData = ({
 }: {
   collectible: TokenBalance;
 }) => {
-  const {
-    tokenID,
-    tokenMetadata,
-    balance,
-    chainId,
-    contractAddress,
-    contractType,
-  } = collectible;
+  const { tokenID, tokenMetadata, chainId, contractAddress } = collectible;
 
   const { tokenId, name, image, decimals } = tokenMetadata || {
     tokenId: tokenID,
