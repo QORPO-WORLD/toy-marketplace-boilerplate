@@ -6,26 +6,24 @@ import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { getChain } from '~/config/networks';
-import { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
+import type { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
-import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
 import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
-import { formatDecimals } from '~/lib/utils/helpers';
 import {
-  GenericStep,
+  type GenericStep,
   generateStepsOrderbookAcceptRequest,
 } from '~/lib/utils/txBundler';
 import { OrderItemType } from '~/types/OrderItemType';
 
-import { Box, Button, Text, toast } from '$ui';
+import { Button, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
 import { useCheckoutModal } from '@0xsequence/kit-checkout';
 import { useQueryClient } from '@tanstack/react-query';

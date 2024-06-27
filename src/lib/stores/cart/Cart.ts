@@ -35,17 +35,13 @@ export type OrderData = {
 // since we don't support mixed cart yet
 export type BaseOrderInfo = {
   chainId: number | undefined;
-  exchangeAddress: string | undefined;
   collectionAddress: string | undefined;
   orderType: OrderItemType | undefined;
 };
 
 // unique id for cart item
 export const cartItemId = (
-  item: Pick<
-    CartItem,
-    'itemType' | 'collectibleMetadata' | 'exchangeAddress' | 'orderbookOrderId'
-  >,
+  item: Pick<CartItem, 'itemType' | 'collectibleMetadata' | 'orderbookOrderId'>,
 ) => {
   return (
     `${item.itemType}-` +
@@ -274,7 +270,6 @@ export const cartState = derive(
       return {
         chainId: defaultItem?.chainId,
         collectionAddress: defaultItem?.collectibleMetadata.collectionAddress,
-        exchangeAddress: defaultItem?.exchangeAddress,
         orderType: defaultItem?.itemType,
       };
     },

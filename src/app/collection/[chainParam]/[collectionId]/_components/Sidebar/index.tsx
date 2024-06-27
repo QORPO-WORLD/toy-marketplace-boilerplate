@@ -77,31 +77,31 @@ const CollectionSidebarContent = ({
 
   const filterOptions = new Set<FilterOptions>();
 
-  const showOwnedOnlyToggle = {
-    id: 'show-owned-only',
-    checked: filters$.showOwnedOnly,
-    onCheckedChange: () => filters$.showOwnedOnly.toggle(),
-    children: 'Available Items Only',
-  };
+  // const showOwnedOnlyToggle = {
+  //   id: 'show-owned-only',
+  //   checked: filters$.showOwnedOnly,
+  //   onCheckedChange: () => filters$.showOwnedOnly.toggle(),
+  //   children: 'Available Items Only',
+  // };
 
-  const includeUserOrdersToggle = {
-    id: 'include-user-orders',
-    checked: filters$.includeUserOrders,
-    onCheckedChange: () => filters$.includeUserOrders.toggle(),
-    children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
-  };
+  // const includeUserOrdersToggle = {
+  //   id: 'include-user-orders',
+  //   checked: filters$.includeUserOrders,
+  //   onCheckedChange: () => filters$.includeUserOrders.toggle(),
+  //   children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
+  // };
 
-  if (mode === 'buy') {
-    filterOptions.add(showOwnedOnlyToggle);
-  } else {
-    filterOptions.delete(showOwnedOnlyToggle);
-  }
+  // if (mode === 'buy') {
+  //   filterOptions.add(showOwnedOnlyToggle);
+  // } else {
+  //   filterOptions.delete(showOwnedOnlyToggle);
+  // }
 
-  if (isConnected) {
-    filterOptions.add(includeUserOrdersToggle);
-  } else {
-    filterOptions.delete(includeUserOrdersToggle);
-  }
+  // if (isConnected) {
+  //   filterOptions.add(includeUserOrdersToggle);
+  // } else {
+  //   filterOptions.delete(includeUserOrdersToggle);
+  // }
 
   const addresses = [
     {

@@ -1,8 +1,8 @@
-import { cartItemId, cartState } from '~/lib/stores';
 import type { AddToCartData } from '~/lib/stores/cart/types';
 import { CartType } from '~/lib/stores/cart/types';
 
 import { useSnapshot } from 'valtio';
+import { cartItemId, cartState } from '~/lib/stores/cart/Cart';
 
 export const useCartItem = (addToCartData?: AddToCartData) => {
   const { cartItems } = useSnapshot(cartState);
