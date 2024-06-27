@@ -327,7 +327,7 @@ export const OrderbookOrderButtons = ({
     try {
       const txnHash = await acceptOrderStep.action({
         acceptRequests: cartItems.map((item) => ({
-          orderId: item.orderbookOrderId!,
+          orderId: item.orderId!,
           quantity: item.quantity,
           address: userAddress || '',
           tokenId: item.collectibleMetadata.tokenId,
@@ -368,7 +368,7 @@ export const OrderbookOrderButtons = ({
     try {
       const txnHash = await acceptOrderStep.action({
         acceptRequests: cartItems.map((item) => ({
-          orderId: item.orderbookOrderId!,
+          orderId: item.orderId!,
           quantity: item.quantity,
           address: userAddress || '',
           tokenId: item.collectibleMetadata.tokenId,

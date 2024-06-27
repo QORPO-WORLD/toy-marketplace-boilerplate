@@ -41,14 +41,14 @@ export type BaseOrderInfo = {
 
 // unique id for cart item
 export const cartItemId = (
-  item: Pick<CartItem, 'itemType' | 'collectibleMetadata' | 'orderbookOrderId'>,
+  item: Pick<CartItem, 'itemType' | 'collectibleMetadata' | 'orderId'>,
 ) => {
   return (
     `${item.itemType}-` +
     `${item.collectibleMetadata.chainId}-` +
     `${item.collectibleMetadata.collectionAddress}-` +
     `${item.collectibleMetadata.tokenId}-` +
-    `${item.orderbookOrderId}`
+    `${item.orderId}`
   );
 };
 
@@ -171,7 +171,7 @@ export const _addToCart_ = (data: AddToCartData) => {
 
   // special orderbook handling
   if (data.type === CartType.ORDERBOOK) {
-    cartItem.orderbookOrderId = data.item.orderbookOrderId;
+    cartItem.orderId = data.item.orderId;
   }
 
   // special TRANSFER handling

@@ -32,7 +32,7 @@ const cartItemSchema = z.object({
   quantity: z.bigint(),
   contractType: z.nativeEnum(ContractType).optional(), // Needed for transfer flow
   customUnitPrice: z.bigint().optional(), // TODO: should this be renamed to customSubtotal? Trade deposit flow to find out.
-  orderbookOrderId: z.string().optional(), // TODO: extract this to separate cart item type
+  orderId: z.string().optional(), // TODO: extract this to separate cart item type
 });
 
 export type CartItem = z.infer<typeof cartItemSchema>;
@@ -65,7 +65,7 @@ interface AddToCart_Options {
 export interface AddToCart_Orderbook {
   type: CartType.ORDERBOOK;
   item: AddToCart_Base & {
-    orderbookOrderId: string;
+    orderId: string;
   };
   options?: AddToCart_Options;
 }

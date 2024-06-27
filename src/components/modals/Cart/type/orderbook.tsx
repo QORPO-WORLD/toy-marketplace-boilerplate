@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 'use client';
 
 import { useEffect } from 'react';
@@ -9,9 +8,8 @@ import { useOrderbookIsValid } from '~/hooks/orderbook/useOrderbookIsValid';
 import { useOrderbookIsValidBatch } from '~/hooks/orderbook/useOrderbookIsValidBatch';
 import { useOrderbookOrders } from '~/hooks/orderbook/useOrderbookOrders';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import { getPlatformFeeRecipient } from '~/lib/fees';
+import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
 import { metadataQueries } from '~/lib/queries';
-import { getFrontEndFeeAmount } from '~/lib/sdk/niftyswap-v2';
 import { cartState, updateCartItemSubtotals } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
@@ -25,74 +23,6 @@ import dynamic from 'next/dynamic';
 import { useSnapshot } from 'valtio';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
@@ -116,7 +46,7 @@ export const OrderbookOrderComponents = () => {
 
   const { orders } = useOrderbookOrders({
     chainId: chainId!,
-    orderIds: cartItems.map((item) => item.orderbookOrderId!),
+    orderIds: cartItems.map((item) => item.orderId!),
   });
 
   const hasMultipleCurrencies =
@@ -175,9 +105,7 @@ export const OrderbookOrderComponents = () => {
   const OrderItem = ({ item }: { item: CartItem }) => {
     const orderItemKey = `${item.chainId}-${item.collectibleMetadata.collectionAddress}-${item.collectibleMetadata.tokenId}-${orderType}}`;
 
-    const order = orders.find(
-      (order) => order.orderId === item.orderbookOrderId,
-    );
+    const order = orders.find((order) => order.orderId === item.orderId);
 
     const { data: isValidOrderData, isLoading: isLoadingOrderValidity } =
       useOrderbookIsValid({

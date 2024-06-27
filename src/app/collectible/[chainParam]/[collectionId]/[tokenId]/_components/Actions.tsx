@@ -113,7 +113,7 @@ export const CollectibleTradeActions = ({
           tokenUserBalance: BigInt(userBalance?.toString() || 0),
           tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
         }),
-        orderbookOrderId: bestListing.orderId,
+        orderId: bestListing.orderId,
       },
       options: {
         toggle: true,
@@ -142,7 +142,7 @@ export const CollectibleTradeActions = ({
           tokenUserBalance: BigInt(userBalance?.toString() || 0),
           tokenAvailableAmount: BigInt(Number(bestOffer.quantityRemaining)),
         }),
-        orderbookOrderId: bestOffer.orderId,
+        orderId: bestOffer.orderId,
       },
       options: {
         toggle: true,
