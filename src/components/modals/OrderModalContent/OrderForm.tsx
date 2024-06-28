@@ -234,14 +234,12 @@ export const OrderForm = ({
       accountAddress: address as string,
     }),
   );
-  let balance = constants.Zero;
 
-  try {
-    balance = BigNumber.from(userBalance?.pages?.[0]?.balances[0]?.balance);
-  } catch {}
+  const userCollectibleBalance =
+    userBalance?.pages[0]?.balances[0]?.balance || 0;
 
   const formattedTokenBalance = formatDisplay(
-    formatDecimals(balance || 0, tokenMetadata?.decimals || 0),
+    formatDecimals(userCollectibleBalance || 0, tokenMetadata?.decimals || 0),
   );
 
   const erc20contractAddress = watch('currency.contractAddress');
@@ -257,6 +255,12 @@ export const OrderForm = ({
         return contract.read.balanceOf([address!]);
       },
     });
+
+  let balance = constants.Zero;
+
+  try {
+    balance = BigNumber.from(userCurrencyBalance || 0);
+  } catch {}
 
   const formattedCurrencyBalance = formatDecimals(
     balance || 0,
