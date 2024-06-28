@@ -8,6 +8,7 @@ import {
   fetchTokenBalances,
   type TokenBalancesArgs,
   fetchTopOrders,
+  fetchCurrencies,
 } from './fetchers';
 import { type Page } from '@0xsequence/indexer';
 import {
@@ -76,5 +77,11 @@ export const marketplaceQueries = {
     queryOptions({
       queryKey: [marketplaceQueries.topOrders(), args],
       queryFn: () => fetchTopOrders(args),
+    }),
+  currenciess: () => [...marketplaceQueries.all(), 'topOrder'],
+  currencies: (args: { chainId: number }) =>
+    queryOptions({
+      queryKey: [marketplaceQueries.currenciess(), args],
+      queryFn: () => fetchCurrencies(args)
     }),
 };

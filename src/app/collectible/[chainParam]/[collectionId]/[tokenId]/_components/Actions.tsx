@@ -30,24 +30,27 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  //TODO: Add default currencies
-  const currencies = [
-    '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-    '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-    '0xad9f61563b104281b14322fec8b42eb67711bf68',
-  ];
+  const { data: currencies } = useQuery(
+    marketplaceQueries.currencies({
+      chainId,
+    }),
+  );
 
-  const { data: bestOffers, isLoading: isLoadingBestOffers } = useQuery(
-    marketplaceQueries.topOrder({
+  const currencyAddresses =
+    currencies?.currencies.map((c) => c.contractAddress) || [];
+
+  const { data: bestOffers, isLoading: isLoadingBestOffers } = useQuery({
+    ...marketplaceQueries.topOrder({
       chainId,
       collectionAddress,
-      currencyAddresses: currencies,
+      currencyAddresses,
       orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
       tokenIDs: [tokenId],
       isListing: false,
       priceSort: SortOrder.DESC,
     }),
-  );
+    enabled: !!currencies,
+  });
 
   const bestOffer = bestOffers?.orders[0];
 
@@ -55,7 +58,7 @@ export const CollectibleTradeActions = ({
     marketplaceQueries.topOrder({
       chainId,
       collectionAddress,
-      currencyAddresses: currencies,
+      currencyAddresses,
       orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
       tokenIDs: [tokenId],
       isListing: true,
