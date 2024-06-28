@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -60,10 +59,6 @@ import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
 import { useAccount, useSwitchChain, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
