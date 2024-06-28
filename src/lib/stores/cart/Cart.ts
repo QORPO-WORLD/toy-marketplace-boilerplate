@@ -97,7 +97,7 @@ export const updateCartItemSubtotals = (subtotals: bigint[]) => {
   }
 
   cartState.cartItems.forEach((item, index) => {
-    item.subtotal = subtotals[index];
+    item.subtotal = subtotals[index]!;
   });
 };
 
@@ -108,7 +108,7 @@ const canAddToCart = (
   reason?: string;
 } => {
   if (cartState.cartItems.length === 0) {
-    // first item, dont care
+    // first item, will always be valid
     return {
       isValid: true,
     };

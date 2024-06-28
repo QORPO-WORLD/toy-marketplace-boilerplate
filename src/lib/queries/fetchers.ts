@@ -110,54 +110,55 @@ export const fetchTopOrders = (
 };
 
 export const fetchCurrencies = (args: { chainId: number }) => {
-  //  const marketplace = getMarketplaceClient(args.chainId);
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.listCurrencies();
 
-  return {
-    currencies: [
-      {
-        id: 1,
-        chainId: 137,
-        contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
-        name: 'USDC',
-        symbol: 'USDC',
-        decimals: 6,
-        imageUrl:
-          'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png?1547042389',
-        exchangeRate: 0,
-        defaultChainCurrency: true,
-        creditCardSupported: true,
-        createdAt: '2021-10-14T14:00:00.000Z',
-        updatedAt: '2021-10-14T14:00:00.000Z',
-      },
-      {
-        id: 2,
-        chainId: 137,
-        contractAddress: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-        name: 'Wrapped ETH',
-        symbol: 'WETH',
-        decimals: 18,
-        imageUrl:
-          'https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.sv',
-        exchangeRate: 0,
-        defaultChainCurrency: true,
-        creditCardSupported: false,
-        createdAt: '2021-10-14T14:00:00.000Z',
-        updatedAt: '2021-10-14T14:00:00.000Z',
-      },
-      {
-        id: 3,
-        chainId: 137,
-        contractAddress: '0xad9f61563b104281b14322fec8b42eb67711bf68',
-        name: 'Synergy Land Token',
-        symbol: 'SNG',
-        decimals: 18,
-        imageUrl: 'https://polygonscan.com/token/images/synergylandsng_32.png',
-        exchangeRate: 0,
-        defaultChainCurrency: false,
-        creditCardSupported: false,
-        createdAt: '2021-10-14T14:00:00.000Z',
-        updatedAt: '2021-10-14T14:00:00.000Z',
-      },
-    ],
-  };
+  // return {
+  //   currencies: [
+  //     {
+  //       id: 1,
+  //       chainId: 137,
+  //       contractAddress: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+  //       name: 'USDC',
+  //       symbol: 'USDC',
+  //       decimals: 6,
+  //       imageUrl:
+  //         'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png?1547042389',
+  //       exchangeRate: 0,
+  //       defaultChainCurrency: true,
+  //       creditCardSupported: true,
+  //       createdAt: '2021-10-14T14:00:00.000Z',
+  //       updatedAt: '2021-10-14T14:00:00.000Z',
+  //     },
+  //     {
+  //       id: 2,
+  //       chainId: 137,
+  //       contractAddress: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
+  //       name: 'Wrapped ETH',
+  //       symbol: 'WETH',
+  //       decimals: 18,
+  //       imageUrl:
+  //         'https://openseauserdata.com/files/accae6b6fb3888cbff27a013729c22dc.sv',
+  //       exchangeRate: 0,
+  //       defaultChainCurrency: true,
+  //       creditCardSupported: false,
+  //       createdAt: '2021-10-14T14:00:00.000Z',
+  //       updatedAt: '2021-10-14T14:00:00.000Z',
+  //     },
+  //     {
+  //       id: 3,
+  //       chainId: 137,
+  //       contractAddress: '0xad9f61563b104281b14322fec8b42eb67711bf68',
+  //       name: 'Synergy Land Token',
+  //       symbol: 'SNG',
+  //       decimals: 18,
+  //       imageUrl: 'https://polygonscan.com/token/images/synergylandsng_32.png',
+  //       exchangeRate: 0,
+  //       defaultChainCurrency: false,
+  //       creditCardSupported: false,
+  //       createdAt: '2021-10-14T14:00:00.000Z',
+  //       updatedAt: '2021-10-14T14:00:00.000Z',
+  //     },
+  //   ],
+  // };
 };
