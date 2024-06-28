@@ -3,10 +3,11 @@
 import type { ComponentProps } from 'react';
 
 import ENSName from '~/components/ENSName';
+import { WalletModalContent } from '~/components/modals/WalletModal';
+import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, WalletIcon } from '$ui';
 import { useAccount } from 'wagmi';
-import { getThemeManagerElement } from '~/lib/utils/theme';
 
 export const AccountButton = (props: ComponentProps<typeof Button>) => {
   const { address } = useAccount();
@@ -31,7 +32,7 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
         container={getThemeManagerElement()}
         title="Wallet"
       >
-        {/* <WalletModalContent /> */}
+        <WalletModalContent />
       </Dialog.BaseContent>
     </Dialog.Root>
   );
