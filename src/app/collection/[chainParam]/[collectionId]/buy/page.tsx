@@ -1,7 +1,8 @@
 'use client';
 
 import { getChainId } from '~/config/networks';
-import { getMetadataClient } from '~/lib/queries/clients';
+import { getMarketplaceClient } from '~/lib/queries/clients';
+import { MarketplaceKind } from '~/lib/queries/marketplace/marketplace.gen';
 import { type Routes } from '~/lib/routes';
 
 import { filters$ } from '../_components/FilterStore';
@@ -16,7 +17,7 @@ type CollectionBuyPageParams = {
 
 const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const chainId = getChainId(params.chainParam)!;
-  const metadata = getMetadataClient(chainId);
+  const marketplace = getMarketplaceClient(chainId);
   const { collectionId } = params;
 
   const text = filters$.searchText.get();
@@ -33,21 +34,21 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       };
     },
     queryFn: ({ pageParam }: { pageParam?: Page }) => {
-      return metadata.searchTokenMetadata({
+      return marketplace.listCollectiblesWithLowestListing({
         chainID: chainId.toString(),
         contractAddress: collectionId,
         page: pageParam,
         filter: {
           text,
           properties,
+          marketplaces: [MarketplaceKind.sequence_marketplace_v1],
         },
       });
     },
   });
 
   const collectibles =
-    collectiblesResponse.data?.pages.flatMap((page) => page.tokenMetadata) ??
-    [];
+    collectiblesResponse.data?.pages.flatMap((p) => p.collectibles) ?? [];
 
   return (
     <CollectiblesGrid
