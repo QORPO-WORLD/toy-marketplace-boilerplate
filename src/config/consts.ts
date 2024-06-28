@@ -18,11 +18,15 @@ export const DEFAULT_NETWORK = ChainId.POLYGON;
 export const SEQUENCE_MARKET_V1_ADDRESS =
   '0xB537a160472183f2150d42EB1c3DD6684A55f74c';
 
+// TODO: remove this once we have a better way to determine if we are in dev mode
+const isDev = true;
+const devPrefix = isDev ? 'dev-' : '';
+
 const SERVICES = {
   sequenceApi: 'https://api.sequence.app',
   metadata: 'https://metadata.sequence.app',
   indexer: 'https://${network}-indexer.sequence.app',
-  marketplaceApi: 'https://marketplace-api.sequence.app/${network}',
+  marketplaceApi: 'https://${dev}marketplace-api.sequence.app/${network}',
   rpcNodeUrl: 'https://nodes.sequence.app/${network}/${accessKey}',
   directorySearchEndpoint:
     'https://api.sequence.build/rpc/Builder/DirectorySearchCollections',
@@ -38,7 +42,7 @@ export const indexerURL = (network: string) =>
   stringTemplate(SERVICES.indexer, { network: network });
 
 export const marketplaceApiURL = (network: string) =>
-  stringTemplate(SERVICES.marketplaceApi, { network: network });
+  stringTemplate(SERVICES.marketplaceApi, { dev: devPrefix, network: network });
 
 export const builderMarketplaceApi = () => SERVICES.builderMarketplaceApi;
 
