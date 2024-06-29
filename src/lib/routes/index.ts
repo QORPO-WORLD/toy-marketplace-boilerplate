@@ -48,7 +48,7 @@ export const Routes = {
   // Landing
   landing: makeRoute(() => '/'),
 
-  //collection -- TODO: The filterParams should be merged here
+  //collection
   collection: makeRoute(
     ({ chainParam, collectionId, mode }) =>
       `/collection/${chainToName(chainParam)}/${collectionId}/${mode}`,

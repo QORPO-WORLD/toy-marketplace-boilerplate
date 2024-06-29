@@ -1,5 +1,5 @@
 import { type CartItem } from '~/lib/stores/cart/types';
-import { OrderItemType } from '~/types/OrderItemType';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 export const getTitleFromCartData = ({
   cartType,

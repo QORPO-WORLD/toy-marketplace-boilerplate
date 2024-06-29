@@ -4,7 +4,7 @@ import {
   getMetadataClient,
   getOldMarketplaceClient,
 } from './clients';
-import { GetTopOrdersArgs } from './marketplace/oldMarketplace.gen';
+import type { GetTopOrdersArgs } from './marketplace/oldMarketplace.gen';
 import type { GetTokenBalancesArgs } from '@0xsequence/indexer';
 import {
   type TokenCollectionFiltersArgs,

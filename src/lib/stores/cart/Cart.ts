@@ -1,13 +1,15 @@
+import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
-import type { OrderItemType } from '~/types/OrderItemType';
+import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 
-import type {
+import {
   AddToCartData,
   CartItem,
   CartState,
   CollectibleMetadata,
+  OrderItemType,
 } from './types';
-import { CartType, cartStateSchema } from './types';
+import { cartStateSchema } from './types';
 import { ContractType } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/kit';
 import * as ethers from 'ethers';
@@ -19,7 +21,6 @@ const CART_LOCAL_STORAGE_TAG = '@marketplace.cart';
 export type { CartItem, CollectibleMetadata };
 
 const defaultCartState = (): CartState => ({
-  cartType: CartType.EMPTY,
   isCartOpen: false,
   cartItems: [],
   override: undefined,
@@ -160,6 +161,36 @@ const canAddToCart = (
   };
 };
 
+export const addCollectibleOrderToCart = (props: CollectibleOrder) => {
+  const order = props.order;
+  const metadata = props.metadata;
+
+  if (!order) return;
+  _addToCart_({
+    item: {
+      chainId: order.chainId,
+      itemType: OrderItemType.BUY,
+      collectibleMetadata: {
+        collectionAddress: order.collectionId.toString(),
+        tokenId: order.tokenId,
+        name: metadata.name || '',
+        imageUrl: metadata.image || '',
+        decimals: metadata.decimals || 0,
+        chainId: order.chainId,
+      },
+      quantity: defaultSelectionQuantity({
+        type: OrderItemType.BUY,
+        tokenDecimals: metadata.decimals || 0,
+        tokenAvailableAmount: BigInt(Number(order.quantityRemaining)),
+      }),
+      orderId: order.orderId,
+    },
+    options: {
+      toggle: true,
+    },
+  });
+};
+
 export const _addToCart_ = (data: AddToCartData) => {
   const cartItem: CartItem = {
     itemType: data.item.itemType,
@@ -169,22 +200,16 @@ export const _addToCart_ = (data: AddToCartData) => {
     subtotal: 0n, // calculated dynamically in cart
   };
 
-  // special orderbook handling
-  if (data.type === CartType.ORDERBOOK) {
-    cartItem.orderId = data.item.orderId;
-  }
-
-  // special TRANSFER handling
-  if (data.type === CartType.TRANSFER) {
+  if (data.item.itemType == OrderItemType.TRANSFER) {
     cartItem.contractType = data.item.contractType;
+  } else {
+    cartItem.orderId = data.item.orderId;
   }
 
   // set cart states
   if (cartState.cartItems.length === 0) {
     // pop open the cart if first item is being added
     cartState.isCartOpen = true;
-    // set cart type!
-    cartState.cartType = data.type; // TODO: do we need this?
   }
 
   // cart conflict conditions

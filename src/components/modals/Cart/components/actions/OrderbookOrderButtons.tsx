@@ -17,11 +17,11 @@ import {
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/lib/stores/cart/types';
 import {
   type GenericStep,
   generateStepsOrderbookAcceptRequest,
 } from '~/lib/utils/txBundler';
-import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';

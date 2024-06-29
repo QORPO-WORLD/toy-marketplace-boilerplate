@@ -1,14 +1,10 @@
-import { OrderItemType } from '~/types/OrderItemType';
-
 import { ContractType } from '@0xsequence/indexer';
 import { z } from 'zod';
 
-export enum CartType {
-  // regular types
-  ORDERBOOK = 'ORDERBOOK',
-  // special types
+export enum OrderItemType {
+  BUY = 'BUY',
+  SELL = 'SELL',
   TRANSFER = 'TRANSFER',
-  EMPTY = 'EMPTY',
 }
 
 const orderItemTypeSchema = z.nativeEnum(OrderItemType);
@@ -32,14 +28,13 @@ const cartItemSchema = z.object({
   quantity: z.bigint(),
   contractType: z.nativeEnum(ContractType).optional(), // Needed for transfer flow
   customUnitPrice: z.bigint().optional(), // TODO: should this be renamed to customSubtotal? Trade deposit flow to find out.
-  orderId: z.string().optional(), // TODO: extract this to separate cart item type
+  orderId: z.string().optional(),
 });
 
 export type CartItem = z.infer<typeof cartItemSchema>;
 
 export const cartStateSchema = z.object({
   isCartOpen: z.boolean(),
-  cartType: z.nativeEnum(CartType),
   cartItems: z.array(cartItemSchema),
   override: z
     .object({
@@ -63,7 +58,6 @@ interface AddToCart_Options {
 }
 
 export interface AddToCart_Orderbook {
-  type: CartType.ORDERBOOK;
   item: AddToCart_Base & {
     orderId: string;
   };
@@ -71,7 +65,6 @@ export interface AddToCart_Orderbook {
 }
 
 export interface AddToCart_Transfer {
-  type: CartType.TRANSFER;
   item: AddToCart_Base & {
     contractType: ContractType;
   };

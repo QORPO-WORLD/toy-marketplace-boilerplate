@@ -5,13 +5,13 @@ import { forwardRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
+import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 
 import { Grid, cn } from '$ui';
-import type { CollectibleCardData } from './CollectableCard';
-import { CollectibleCard } from './CollectableCard';
+import { CollectibleCard } from './Card/CollectableCard';
 
 export type CollectiblesGridProps = {
-  data: CollectibleCardData[];
+  data: CollectibleOrder[];
   endReached?: () => void;
 };
 
@@ -26,7 +26,6 @@ export const CollectiblesGrid = ({
         List: GridContainer,
       }}
       itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
-      // increaseViewportBy={200}
       endReached={endReached}
       data={data}
     />

@@ -6,16 +6,15 @@ import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { indexerQueries, marketplaceQueries } from '~/lib/queries';
 import { _addToCart_ } from '~/lib/stores/cart/Cart';
-import { CartType } from '~/lib/stores/cart/types';
 import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 import { getThemeManagerElement } from '~/lib/utils/theme';
-import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { SortOrder } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -98,7 +97,6 @@ export const CollectibleTradeActions = ({
   const onClickBuy = () => {
     if (!bestListing) return;
     _addToCart_({
-      type: CartType.ORDERBOOK,
       item: {
         chainId,
         itemType: OrderItemType.BUY,
@@ -127,7 +125,6 @@ export const CollectibleTradeActions = ({
   const onClickSell = () => {
     if (!bestOffer) return;
     _addToCart_({
-      type: CartType.ORDERBOOK,
       item: {
         chainId,
         itemType: OrderItemType.SELL,

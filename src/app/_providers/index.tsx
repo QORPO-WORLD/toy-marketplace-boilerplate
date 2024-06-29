@@ -18,6 +18,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
 
+const queryClient = getQueryClient();
+
 export default function Providers({
   marketConfig,
   children,
@@ -27,7 +29,6 @@ export default function Providers({
   marketConfig: MarketConfig;
   children: React.ReactNode;
 }) {
-  const queryClient = getQueryClient();
   const walletAuthOptions = defaultSignInOptions.walletAuthOptions;
   marketConfig.walletOptions.forEach((wallet) => {
     switch (wallet) {

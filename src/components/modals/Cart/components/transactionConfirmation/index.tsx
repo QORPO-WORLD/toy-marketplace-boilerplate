@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 import { getChain } from '~/config/networks';
 import useElementDimensions from '~/hooks/ui/useElementDimensions';
 import { type CartItem } from '~/lib/stores/cart/types';
+import { OrderItemType } from '~/lib/stores/cart/types';
 import { truncateAtMiddle, formatDecimals } from '~/lib/utils/helpers';
 import { getThemeManagerElement } from '~/lib/utils/theme';
-import { OrderItemType } from '~/types/OrderItemType';
 
 import {
   Box,

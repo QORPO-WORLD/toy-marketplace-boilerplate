@@ -1,31 +1,13 @@
 'use client';
 
-import { useCartItem } from '~/hooks/cart/useCartItem';
-import { _addToCart_ } from '~/lib/stores/cart/Cart';
-import type { AddToCartData } from '~/lib/stores/cart/types';
-import { OrderItemType } from '~/types/OrderItemType';
+import { CollectionOfferModal$ } from '~/app/collection/[chainParam]/[collectionId]/buy/OfferModal';
+import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
+import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
+import { addCollectibleOrderToCart } from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Button } from '$ui';
-import type { OrderbookOrder } from '@0xsequence/indexer';
-
-type BaseProps = {
-  addToCartData: AddToCartData;
-  isAvailable: boolean;
-  className?: string;
-  orderbookOrderItem?: OrderbookOrder;
-};
-
-type PropsWithOrderModal = BaseProps & {
-  onClickOrderModal: CollectiblesListProps['onClickOrderModal'];
-  itemType: OrderItemType.BUY | OrderItemType.SELL;
-};
-
-type PropsWithoutOrderModal = BaseProps & {
-  onClickOrderModal?: CollectiblesListProps['onClickOrderModal'];
-  itemType: OrderItemType.TRANSFER;
-};
-
-export type AddToCartButtonProps = PropsWithOrderModal | PropsWithoutOrderModal;
+import { usePathname } from 'next/navigation';
 
 enum ButtonLabel {
   PLACE_OFFER = 'Place offer',
@@ -37,42 +19,52 @@ enum ButtonLabel {
   TRANSFER = 'Transfer token',
 }
 
+type AddToCartButtonProps = {
+  className?: string;
+  collectibleOrder: CollectibleOrder;
+};
+
 export const AddToCartButton = ({
-  addToCartData,
-  isAvailable,
   className,
-  itemType,
-  onClickOrderModal,
-  orderbookOrderItem,
+  collectibleOrder,
 }: AddToCartButtonProps) => {
-  const { cartItem } = useCartItem(addToCartData);
+  const cartItem = useCartItemFromCollectibleOrder(collectibleOrder);
 
   let onClick: () => void;
   let label: ButtonLabel;
 
+  const itemType = useCartItemFromPath();
+
+  const order = collectibleOrder.order;
+
   switch (itemType) {
     case OrderItemType.BUY:
       if (cartItem) {
-        onClick = () => _addToCart_(addToCartData);
+        onClick = () => {}; //_addToCart_(addToCartData);
         label = ButtonLabel.REMOVE_FROM_CART;
       } else {
         onClick = () =>
-          isAvailable
-            ? _addToCart_(addToCartData)
-            : onClickOrderModal(addToCartData.item.collectibleMetadata.tokenId);
-        label = isAvailable ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
+          order
+            ? addCollectibleOrderToCart(collectibleOrder)
+            : CollectionOfferModal$.open.set(true);
+        label = order ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
       }
       break;
 
-    case OrderItemType.TRANSFER:
-      onClick = () => _addToCart_(addToCartData);
-      label = cartItem
-        ? ButtonLabel.REMOVE_FROM_TRANSFERS
-        : ButtonLabel.TRANSFER;
-      break;
-    default:
-      const _: never = itemType;
-      return _;
+    // case OrderItemType.SELL:
+    //   onClick = () => _addToCart_(addToCartData);
+    //   label = ButtonLabel.SELL;
+    //   break;
+
+    // case OrderItemType.TRANSFER:
+    //   onClick = () => _addToCart_(addToCartData);
+    //   label = cartItem
+    //     ? ButtonLabel.REMOVE_FROM_TRANSFERS
+    //     : ButtonLabel.TRANSFER;
+    //   break;
+    // default:
+    //   const _: never = itemType;
+    //   return _;
   }
 
   return (
@@ -80,4 +72,15 @@ export const AddToCartButton = ({
       {label}
     </Button>
   );
+};
+
+export const useCartItemFromPath = () => {
+  const path = usePathname();
+  if (path.startsWith('/inventory')) {
+    return OrderItemType.TRANSFER;
+  } else if (path.endsWith('/buy')) {
+    return OrderItemType.BUY;
+  } else if (path.endsWith('/sell')) {
+    return OrderItemType.SELL;
+  }
 };

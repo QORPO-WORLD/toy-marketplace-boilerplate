@@ -13,11 +13,11 @@ import {
   overrideCart,
   clearOverrideCartState,
 } from '~/lib/stores/cart/Cart';
+import { OrderItemType } from '~/lib/stores/cart/types';
 import {
   areTermsAccepted,
   setTermsAccepted as setTermsAcceptedStorage,
 } from '~/lib/termsAcceptance';
-import { OrderItemType } from '~/types/OrderItemType';
 
 import { Button, Flex, Text, Box, cn, CollapseIcon } from '$ui';
 import { OrderRenderer } from './type';
