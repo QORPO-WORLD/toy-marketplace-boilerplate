@@ -13,7 +13,6 @@ import {
   defaultSignInOptions,
   type KitConfig,
 } from '@0xsequence/kit';
-import { KitCheckoutProvider } from '@0xsequence/kit-checkout';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
@@ -62,17 +61,15 @@ export default function Providers({
 
   return (
     <WagmiProvider config={wagmiConfig} initialState={wagmiInitState}>
-      <QueryClientProvider client={queryClient}>
-        <KitProvider config={kitConfig}>
-          <KitCheckoutProvider>
-            <Tooltip.Provider>
-              {children}
-              <ToastProvider />
-            </Tooltip.Provider>
-          </KitCheckoutProvider>
-        </KitProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <KitProvider config={kitConfig}>
+        <QueryClientProvider client={queryClient}>
+          <Tooltip.Provider>
+            {children}
+            <ToastProvider />
+          </Tooltip.Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </KitProvider>
     </WagmiProvider>
   );
 }

@@ -78,10 +78,10 @@ export const marketplaceQueries = {
       queryKey: [marketplaceQueries.topOrders(), args],
       queryFn: () => fetchTopOrders(args),
     }),
-  currenciess: () => [...marketplaceQueries.all(), 'topOrder'],
+  currenciess: () => [...marketplaceQueries.all(), 'currencies'],
   currencies: (args: { chainId: number }) =>
     queryOptions({
       queryKey: [marketplaceQueries.currenciess(), args],
-      queryFn: () => fetchCurrencies(args)
+      queryFn: () => fetchCurrencies(args),
     }),
 };

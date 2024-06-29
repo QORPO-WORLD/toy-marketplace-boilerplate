@@ -1,4 +1,4 @@
-import { OrderItemType } from '~/types/OrderItemType';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { BigIntMin } from './helpers';
 import { parseUnits } from 'viem';
