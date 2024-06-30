@@ -3,10 +3,10 @@ import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
 import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 
 import {
-  AddToCartData,
-  CartItem,
-  CartState,
-  CollectibleMetadata,
+  type AddToCartData,
+  type CartItem,
+  type CartState,
+  type CollectibleMetadata,
   OrderItemType,
 } from './types';
 import { cartStateSchema } from './types';
@@ -127,7 +127,7 @@ const canAddToCart = (
   }
 
   if (
-    cartState.cartType === CartType.TRANSFER &&
+    referenceItem.itemType === OrderItemType.TRANSFER &&
     newItem.contractType === ContractType.ERC721
   ) {
     return {
@@ -161,15 +161,20 @@ const canAddToCart = (
   };
 };
 
-export const addCollectibleOrderToCart = (props: CollectibleOrder) => {
-  const order = props.order;
-  const metadata = props.metadata;
+type AddCollectibleOrderToCartProps = {
+  collectibleOrder: CollectibleOrder;
+  itemType: OrderItemType;
+};
 
+export const addCollectibleOrderToCart = ({
+  collectibleOrder: { order, metadata },
+  itemType,
+}: AddCollectibleOrderToCartProps) => {
   if (!order) return;
   _addToCart_({
     item: {
       chainId: order.chainId,
-      itemType: OrderItemType.BUY,
+      itemType,
       collectibleMetadata: {
         collectionAddress: order.collectionId.toString(),
         tokenId: order.tokenId,
@@ -179,7 +184,7 @@ export const addCollectibleOrderToCart = (props: CollectibleOrder) => {
         chainId: order.chainId,
       },
       quantity: defaultSelectionQuantity({
-        type: OrderItemType.BUY,
+        type: itemType,
         tokenDecimals: metadata.decimals || 0,
         tokenAvailableAmount: BigInt(Number(order.quantityRemaining)),
       }),

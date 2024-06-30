@@ -47,7 +47,6 @@ export type CartState = z.infer<typeof cartStateSchema>;
 
 // add to cart types
 interface AddToCart_Base {
-  itemType: OrderItemType;
   collectibleMetadata: CollectibleMetadata;
   quantity: bigint;
   chainId: number;
@@ -59,6 +58,7 @@ interface AddToCart_Options {
 
 export interface AddToCart_Orderbook {
   item: AddToCart_Base & {
+    itemType: OrderItemType.BUY | OrderItemType.SELL;
     orderId: string;
   };
   options?: AddToCart_Options;
@@ -66,6 +66,7 @@ export interface AddToCart_Orderbook {
 
 export interface AddToCart_Transfer {
   item: AddToCart_Base & {
+    itemType: OrderItemType.TRANSFER;
     contractType: ContractType;
   };
   options?: AddToCart_Options;
