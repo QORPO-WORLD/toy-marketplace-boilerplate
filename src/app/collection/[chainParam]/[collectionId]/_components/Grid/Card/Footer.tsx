@@ -1,29 +1,15 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
 import { marketplaceQueries } from '~/lib/queries';
-import { type CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
+import {
+  type Order,
+  type CollectibleOrder,
+} from '~/lib/queries/marketplace/marketplace.gen';
 import { textClassName, truncateAtMiddle } from '~/lib/utils/helpers';
 
 import { useQuery } from '@tanstack/react-query';
 
-export const Footer = (params: CollectibleOrder) => {
-  const { tokenId, name } = params.metadata;
-  const order = params.order;
-
-  const { data: currencies } = useQuery(
-    marketplaceQueries.currencies({
-      chainId: params.order?.chainId!, //TODO:
-    }),
-  );
-
-  const getCurrency = (address: string) => {
-    return currencies?.currencies.find((c) => c.contractAddress === address);
-  };
-
-  const currency = getCurrency(order?.priceCurrencyAddress!);
-
-  // TODO
-
-  const price = order?.priceAmountNet / 10 ** currency?.decimals;
+export const Footer = ({ metadata, order }: CollectibleOrder) => {
+  const { tokenId, name } = metadata;
 
   const height = 'h-[24px]';
   return (
@@ -48,28 +34,46 @@ export const Footer = (params: CollectibleOrder) => {
         {name || '<unknown>'}
       </Text>
 
-      {order && (
-        <Flex className={cn(height, 'flex-1 items-center justify-between')}>
-          <Flex className="items-center gap-2">
-            <Avatar.Base size="xs">
-              <Avatar.Image src={currency?.imageUrl} />
-              <Avatar.Fallback>{currency?.name}</Avatar.Fallback>
-            </Avatar.Base>
-            <Text
-              className={cn(
-                'ellipsis text-sm md:text-base',
-                textClassName(!order.priceAmountFormatted),
-              )}
-              title={String(currency?.name)}
-            >
-              {price || 'N/A'}
-            </Text>
-          </Flex>
-          <Badge variant="success">
-            Stock: <span className="ml-1">{order.quantityRemaining}</span>
-          </Badge>
-        </Flex>
-      )}
+      {order && <Order height={height} order={order} />}
     </>
+  );
+};
+
+type OrderProps = {
+  height: string;
+  order: Order;
+};
+
+const Order = ({ height, order }: OrderProps) => {
+  const { data: currencies } = useQuery(
+    marketplaceQueries.currencies({
+      chainId: order.chainId,
+    }),
+  );
+  const currency = currencies?.currencies.find(
+    (c) => c.contractAddress === order.priceCurrencyAddress,
+  );
+
+  const price = currency
+    ? BigInt(order.priceAmountNet) / BigInt(10 ** currency.decimals)
+    : null;
+  return (
+    <Flex className={cn(height, 'flex-1 items-center justify-between')}>
+      <Flex className="items-center gap-2">
+        <Avatar.Base size="xs">
+          <Avatar.Image src={currency?.imageUrl} />
+          <Avatar.Fallback>{currency?.name}</Avatar.Fallback>
+        </Avatar.Base>
+        <Text
+          className="ellipsis text-sm md:text-base"
+          title={String(currency?.name)}
+        >
+          {price || 'N/A'}
+        </Text>
+      </Flex>
+      <Badge variant="success">
+        Stock: <span className="ml-1">{order.quantityRemaining}</span>
+      </Badge>
+    </Flex>
   );
 };
