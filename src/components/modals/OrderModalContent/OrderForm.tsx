@@ -246,7 +246,12 @@ export const OrderForm = ({
 
   const { data: userCurrencyBalance, isLoading: isUserCurrencyBalanceLoading } =
     useQuery({
-      queryKey: ['useERC20UserBalanceDirect', erc20contractAddress],
+      queryKey: [
+        'useERC20UserBalanceDirect',
+        erc20contractAddress,
+        chainId,
+        address,
+      ],
       queryFn: () => {
         const contract = getERC20Contract({
           contractAddress: erc20contractAddress,

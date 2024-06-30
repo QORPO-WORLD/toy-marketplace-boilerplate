@@ -51,7 +51,7 @@ export const metadataQueries = {
   collectibleFilters: () => [...metadataQueries.all(), 'collectibleFilters'],
   collectibleFilter: (args: TokenCollectionFiltersArgs) =>
     queryOptions({
-      queryKey: metadataQueries.collectibleFilters(),
+      queryKey: [...metadataQueries.collectibleFilters(), args],
       queryFn: () => fetchCollectionFilters(args),
     }),
 };

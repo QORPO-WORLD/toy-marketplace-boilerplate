@@ -9,7 +9,6 @@ import { metadataQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
 
 import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
-import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
 import { type ObservableBoolean } from '@legendapp/state';

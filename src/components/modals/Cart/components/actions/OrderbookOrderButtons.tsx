@@ -33,6 +33,10 @@ import type { Hex } from 'viem';
 import { useAccount, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
 
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 interface OrderbookOrderButtonsProps {
   orders: OrderWithID[];
   erc20Address: string;

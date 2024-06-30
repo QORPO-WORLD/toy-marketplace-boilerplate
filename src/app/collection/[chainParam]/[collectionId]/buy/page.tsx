@@ -28,7 +28,13 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const properties = filters$.filterOptions.get();
 
   const collectiblesResponse = useInfiniteQuery({
-    queryKey: ['collection', collectionId, text, properties],
+    queryKey: [
+      'collection',
+      collectionId,
+      text,
+      properties,
+      MarketplaceKind.sequence_marketplace_v1,
+    ],
     initialPageParam: { page: 1, pageSize: 30 },
     getNextPageParam: (lastPage) => {
       if (!lastPage.page?.more) return undefined;
