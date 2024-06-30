@@ -65,16 +65,18 @@ export default function Providers({
 
   return (
     <WagmiProvider config={wagmiConfig} initialState={wagmiInitState}>
-      <KitProvider config={kitConfig}>
-        <QueryClientProvider client={queryClient}>
-          <Tooltip.Provider>
-            {children}
-            <ToastProvider />
-          </Tooltip.Provider>
-          <AccountEvents wagmiConfig={wagmiConfig} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </KitProvider>
+      <QueryClientProvider client={queryClient}>
+        <KitProvider config={kitConfig}>
+          <QueryClientProvider client={queryClient}>
+            <Tooltip.Provider>
+              {children}
+              <ToastProvider />
+            </Tooltip.Provider>
+            <AccountEvents wagmiConfig={wagmiConfig} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </KitProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }
