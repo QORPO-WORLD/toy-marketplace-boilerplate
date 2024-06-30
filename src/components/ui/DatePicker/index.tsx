@@ -1,5 +1,7 @@
 'use client';
 
+import { forwardRef } from 'react';
+
 import { DatePickerWithPresets } from './datePickerwithPresets';
 
 interface DatePickerProps {
@@ -16,12 +18,10 @@ interface DatePickerProps {
   onChange?: (date: Date) => void;
 }
 
-export const DatePicker = ({
-  variant,
-  onChange,
-  defaultDate,
-  closeOnSelect,
-}: DatePickerProps) => {
+export const DatePicker = forwardRef(function DatePicker(
+  { variant, onChange, defaultDate, closeOnSelect }: DatePickerProps,
+  _ref,
+) {
   if (variant === 'withPresets')
     return (
       <DatePickerWithPresets
@@ -31,4 +31,4 @@ export const DatePicker = ({
       />
     );
   return <div>TODO: Other variants</div>;
-};
+});
