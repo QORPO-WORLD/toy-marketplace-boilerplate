@@ -388,6 +388,8 @@ export const OrderForm = ({
         };
       }
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore -- TODO: fix this
       const txnHash = await createOrderStep.action(action);
 
       await transactionNotification({
@@ -453,7 +455,7 @@ export const OrderForm = ({
             bestOrder={bestOrder}
             type={type}
             tokenMetadata={tokenMetadata}
-            currency={defaultCurrency}
+            currency={defaultCurrency!}
           />
 
           <Flex className="mt-8 w-full flex-col gap-5">
@@ -501,10 +503,9 @@ export const OrderForm = ({
                           const tokenDecimals = tokenMetadata?.decimals || 0;
                           const tokenAmountString = String(tokenAmount);
                           const tokenAmountSplit = tokenAmountString.split('.');
-                          const tokenAmountDecimal =
-                            tokenAmountSplit.length > 1
-                              ? tokenAmountSplit[1].length
-                              : 0;
+                          const tokenAmountDecimal = !!tokenAmountSplit[1]
+                            ? tokenAmountSplit[1].length
+                            : 0;
                           return (
                             tokenAmountDecimal <= tokenDecimals ||
                             `${tokenMetadata.name} supports a maximum of ${tokenDecimals} decimals`
@@ -615,10 +616,9 @@ export const OrderForm = ({
                             const currencyDecimalString = String(val);
                             const currencyValueSplit =
                               currencyDecimalString.split('.');
-                            const currencyDecimal =
-                              currencyValueSplit.length > 1
-                                ? currencyValueSplit[1].length
-                                : 0;
+                            const currencyDecimal = !!currencyValueSplit[1]
+                              ? currencyValueSplit[1].length
+                              : 0;
                             return (
                               currencyDecimal <= currencyDecimals ||
                               `${watch(

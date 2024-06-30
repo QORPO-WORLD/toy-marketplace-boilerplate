@@ -33,7 +33,8 @@ export const TransferOrderItem = ({ item }: TransferOrderItemProps) => {
 
       {!isCollectionTypeLoading && isERC1155 && (
         <Grid.Child name="quantity">
-          <OrderCollectibleQuantity item={item} />
+          {/* TODO -- Implement this */}
+          {/* <OrderCollectibleQuantity item={item} /> */}
         </Grid.Child>
       )}
     </Grid.Root>
