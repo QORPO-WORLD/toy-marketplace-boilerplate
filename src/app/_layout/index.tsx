@@ -30,7 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </Grid.Child>
 
       <Grid.Child
-        name="content" // as="main"
+        name="content"
         className="flex w-full flex-col justify-self-center"
         style={{
           width: 'calc(100% - var(--orderCartRightOffset))',

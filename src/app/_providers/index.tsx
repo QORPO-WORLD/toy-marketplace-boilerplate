@@ -8,6 +8,7 @@ import { env } from '~/env';
 import { getQueryClient } from '~/lib/queries/getQueryClient';
 
 import { ToastProvider, Tooltip } from '$ui';
+import { AccountEvents } from './accountEvents';
 import {
   KitProvider,
   defaultSignInOptions,
@@ -70,6 +71,7 @@ export default function Providers({
             {children}
             <ToastProvider />
           </Tooltip.Provider>
+          <AccountEvents wagmiConfig={wagmiConfig} />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </KitProvider>

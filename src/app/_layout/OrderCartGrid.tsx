@@ -49,7 +49,6 @@ export const OrderCartGrid = () => {
       className={cn(
         'sticky right-[--orderCartRightOffset] top-[--headerHeight] border border-border',
         'w-[350px] rounded-md bg-background',
-        // 'transition-all',
         isCartOpen
           ? 'sticky right-[--orderCartRightOffset] top-[--headerHeight] flex animate-in fade-in slide-in-from-bottom-10'
           : 'none fixed right-[-400px]',
