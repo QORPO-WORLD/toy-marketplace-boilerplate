@@ -14,39 +14,43 @@ type UseCartItemProps = {
   orderId?: string;
 };
 
-export const useCartItemFromCollectibleOrder = (props?: CollectibleOrder) => {
+type CartFromCollectibleOrderProps = {
+  collectibleOrder: CollectibleOrder;
+  chainId: number;
+  collectionId: string;
+  itemType: OrderItemType;
+};
+
+export const useCartItemFromCollectibleOrder = ({
+  collectibleOrder,
+  chainId,
+  collectionId,
+  itemType,
+}: CartFromCollectibleOrderProps) => {
   const { cartItems } = useSnapshot(cartState);
-
-  if (!props?.order) return;
-
-  let cartItem = undefined;
-
-  const order = props?.order;
+  const { order, metadata } = collectibleOrder;
 
   const collectibleMetadata = {
-    chainId: order.chainId,
-    collectionAddress: props.order.collectionId.toString(),
-    tokenId: props.metadata.tokenId,
-    name: props.metadata.name,
-    imageUrl: props.metadata.image || '',
-    decimals: props.metadata.decimals,
+    chainId: chainId,
+    collectionAddress: collectionId,
+    tokenId: metadata.tokenId,
+    name: metadata.name,
+    imageUrl: metadata.image || '',
+    decimals: metadata.decimals,
   } satisfies CollectibleMetadata;
-  const itemType = OrderItemType.BUY;
-  const orderId = order.id.toString();
+  const orderId = order?.id.toString();
 
-  const item = cartItems.find(
+  const isTransfer = itemType === OrderItemType.TRANSFER;
+
+  return cartItems.find(
     (i) =>
       cartItemId(i) ===
       cartItemId({
         collectibleMetadata,
         itemType,
-        orderId: itemType !== OrderItemType.TRANSFER ? orderId : undefined,
+        orderId: !isTransfer ? orderId : undefined,
       }),
   );
-
-  cartItem = item;
-
-  return cartItem;
 };
 
 export const useCartItem = (props?: UseCartItemProps) => {

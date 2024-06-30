@@ -7,6 +7,7 @@ import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
 import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import {
   Accordion,
@@ -207,6 +208,7 @@ const CollectionSection = ({
                 chainParam={chainId}
                 collectionId={contractAddress}
                 key={c.tokenID}
+                itemType={OrderItemType.TRANSFER}
                 contractType={getContractType(c.contractInfo!.type)}
               />
             ) : (

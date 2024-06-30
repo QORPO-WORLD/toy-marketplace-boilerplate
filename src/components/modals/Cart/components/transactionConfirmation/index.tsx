@@ -112,7 +112,7 @@ const CartItems = ({ items }: { items: readonly CartItem[] }) => {
   if (items.length === 1) {
     return (
       <Flex className="mx-auto w-full max-w-full">
-        <CartItemBox {...items[0]} />
+        <CartItemBox {...items[0]!} />
       </Flex>
     );
   }

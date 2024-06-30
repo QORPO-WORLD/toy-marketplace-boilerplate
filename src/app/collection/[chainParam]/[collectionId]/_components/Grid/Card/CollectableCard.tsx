@@ -11,11 +11,30 @@ import { Footer } from './Footer';
 import { type ContractType } from '@0xsequence/metadata';
 import Link from 'next/link';
 
-export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
+export const CollectibleCard = ({
+  data,
+  itemType,
+}: {
+  data: CollectibleOrder;
+  itemType: OrderItemType;
+}) => {
   const { collectionId, chainParam } = Routes.collection.useParams();
   return (
-    <Card data={data} chainParam={chainParam} collectionId={collectionId} />
+    <Card
+      data={data}
+      itemType={itemType}
+      chainParam={chainParam}
+      collectionId={collectionId}
+    />
   );
+};
+
+type CardProps = {
+  data: CollectibleOrder;
+  chainParam: string | number;
+  collectionId: string;
+  contractType?: ContractType;
+  itemType: OrderItemType;
 };
 
 export const Card = ({
@@ -23,15 +42,17 @@ export const Card = ({
   chainParam,
   collectionId,
   contractType,
-}: {
-  data: CollectibleOrder;
-  chainParam: string | number;
-  collectionId: string;
-  contractType?: ContractType;
-}) => {
+  itemType,
+}: CardProps) => {
   const { tokenId } = data.metadata;
-  const cartItem = useCartItemFromCollectibleOrder(data);
   const chainId = getChainId(chainParam)!;
+
+  const cartItem = useCartItemFromCollectibleOrder({
+    collectibleOrder: data,
+    chainId,
+    collectionId,
+    itemType,
+  });
 
   return (
     <article

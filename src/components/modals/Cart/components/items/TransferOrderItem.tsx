@@ -1,14 +1,11 @@
 'use client';
 
 import { classNames } from '~/config/classNames';
-import { useOrderItemMaxQuantity } from '~/hooks/cart/useOrderItemMaxQuantity';
 import { useCollectionType } from '~/hooks/collection/useCollectionType';
 import { removeFromCart } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
-import { Grid, Flex, Text, Image, cn, CloseIcon } from '$ui';
-import QuantityInput from './QuantityInput';
-import { CartItemEditQuantityModal } from './QuantityModal';
+import { Grid, Text, Image, cn, CloseIcon } from '$ui';
 
 interface TransferOrderItemProps {
   item: CartItem;

@@ -7,6 +7,7 @@ import {
   type Page,
 } from '~/lib/queries/marketplace/marketplace.gen';
 import { type Routes } from '~/lib/routes';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
@@ -54,6 +55,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     <>
       <CollectiblesGrid
         endReached={collectiblesResponse.fetchNextPage}
+        itemType={OrderItemType.BUY}
         data={collectibles}
       />
       <CollectionOfferModal />

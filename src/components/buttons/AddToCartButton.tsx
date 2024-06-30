@@ -41,12 +41,17 @@ export const AddToCartButton = ({
   collectibleOrder,
   contractType,
 }: AddToCartButtonProps) => {
-  const cartItem = useCartItemFromCollectibleOrder(collectibleOrder);
   const itemType = useOrderItemFromPath();
   const order = collectibleOrder.order;
 
   let onClick: () => void;
   let label: ButtonLabel = ButtonLabel.ADD_TO_CART;
+  const cartItem = useCartItemFromCollectibleOrder({
+    collectibleOrder,
+    chainId,
+    collectionId,
+    itemType,
+  });
 
   switch (itemType) {
     case OrderItemType.BUY:

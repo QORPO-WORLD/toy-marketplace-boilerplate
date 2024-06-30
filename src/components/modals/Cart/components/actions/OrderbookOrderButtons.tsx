@@ -21,6 +21,7 @@ import { OrderItemType } from '~/lib/stores/cart/types';
 import {
   type GenericStep,
   generateStepsOrderbookAcceptRequest,
+  type AcceptRequest,
 } from '~/lib/utils/txBundler';
 
 import { Button, toast } from '$ui';
@@ -45,6 +46,8 @@ interface OrderbookOrderButtonsProps {
   containsInvalidOrder: boolean;
   frontendFeePercentage: number;
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const OrderbookOrderButtons = ({
   orders,
@@ -333,7 +336,7 @@ export const OrderbookOrderButtons = ({
           tokenId: item.collectibleMetadata.tokenId,
           additionalFees: [BigInt(platformFee?.toString() || 0n)],
           additionalFeeRecipients: [frontEndFeeRecipient as Hex],
-        })),
+        })) as [AcceptRequest, ...AcceptRequest[]],
       });
 
       await transactionNotification({
@@ -374,7 +377,7 @@ export const OrderbookOrderButtons = ({
           tokenId: item.collectibleMetadata.tokenId,
           additionalFees: [BigInt(platformFee?.toString() || 0n)],
           additionalFeeRecipients: [frontEndFeeRecipient as Hex],
-        })),
+        })) as [AcceptRequest, ...AcceptRequest[]],
       });
 
       await transactionNotification({
