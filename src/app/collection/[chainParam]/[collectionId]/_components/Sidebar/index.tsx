@@ -5,16 +5,16 @@ import { useState, type ComponentProps } from 'react';
 import { classNames } from '~/config/classNames';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
-import { metadataQueries } from '~/lib/queries';
-import { Routes } from '~/lib/routes';
+import { collectionQueries } from '~/lib/queries';
 
 import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
+import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
-import { type ObservableBoolean } from '@legendapp/state';
+import type { ObservableBoolean } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
+import { usePathname } from 'next/navigation';
 
 type CollectionSidebarProps = {
   chainId: number;
@@ -63,25 +63,26 @@ const CollectionSidebarContent = ({
   chainId,
   collectionAddress,
 }: CollectionSidebarProps) => {
-  const { isConnected } = useAccount();
+  // const { isConnected } = useAccount();
 
   const collectableFilters = useQuery(
-    metadataQueries.collectibleFilter({
+    collectionQueries.filter({
       chainID: chainId.toString(),
       contractAddress: collectionAddress,
     }),
   );
 
-  const { mode } = Routes.collection.useParams();
+  const path = usePathname();
+  const mode = path.includes('/sell') ? 'sell' : 'buy';
 
   const filterOptions = new Set<FilterOptions>();
 
-  // const showOwnedOnlyToggle = {
-  //   id: 'show-owned-only',
-  //   checked: filters$.showOwnedOnly,
-  //   onCheckedChange: () => filters$.showOwnedOnly.toggle(),
-  //   children: 'Available Items Only',
-  // };
+  const availableOnlyToggle = {
+    id: 'available-items-only',
+    checked: filters$.showAvailableOnly,
+    onCheckedChange: () => filters$.showAvailableOnly.toggle(),
+    children: 'Available Items Only',
+  };
 
   // const includeUserOrdersToggle = {
   //   id: 'include-user-orders',
@@ -90,11 +91,13 @@ const CollectionSidebarContent = ({
   //   children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
   // };
 
-  // if (mode === 'buy') {
-  //   filterOptions.add(showOwnedOnlyToggle);
-  // } else {
-  //   filterOptions.delete(showOwnedOnlyToggle);
-  // }
+  if (mode === 'buy') {
+    //@ts-expect-error -- Todo: Fix this
+    filterOptions.add(availableOnlyToggle);
+  } else {
+    //@ts-expect-error -- Todo: Fix this
+    filterOptions.delete(availableOnlyToggle);
+  }
 
   // if (isConnected) {
   //   filterOptions.add(includeUserOrdersToggle);
