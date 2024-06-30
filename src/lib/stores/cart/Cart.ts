@@ -196,6 +196,43 @@ export const addCollectibleOrderToCart = ({
   });
 };
 
+type AddTransferOrderToCartProps = {
+  collectibleOrder: CollectibleOrder;
+  itemType: OrderItemType.TRANSFER;
+  contractType: ContractType;
+};
+
+export const addTransferOrderToCart = ({
+  collectibleOrder: { order, metadata },
+  contractType,
+  itemType,
+}: AddTransferOrderToCartProps) => {
+  if (!order) return;
+  _addToCart_({
+    item: {
+      chainId: order.chainId,
+      itemType,
+      contractType,
+      collectibleMetadata: {
+        collectionAddress: order.collectionId.toString(),
+        tokenId: order.tokenId,
+        name: metadata.name || '',
+        imageUrl: metadata.image || '',
+        decimals: metadata.decimals || 0,
+        chainId: order.chainId,
+      },
+      quantity: defaultSelectionQuantity({
+        type: itemType,
+        tokenDecimals: metadata.decimals || 0,
+        tokenAvailableAmount: BigInt(Number(order.quantityRemaining)),
+      }),
+    },
+    options: {
+      toggle: true,
+    },
+  });
+};
+
 export const _addToCart_ = (data: AddToCartData) => {
   const cartItem: CartItem = {
     itemType: data.item.itemType,

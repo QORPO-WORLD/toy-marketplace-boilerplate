@@ -24,6 +24,7 @@ import {
   setSearchResultAmountByCollection,
 } from '../Inventory';
 import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
+import { ContractType } from '@0xsequence/metadata';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import Fuse from 'fuse.js';
 import { useSnapshot } from 'valtio';
@@ -206,6 +207,7 @@ const CollectionSection = ({
                 chainParam={chainId}
                 collectionId={contractAddress}
                 key={c.tokenID}
+                contractType={getContractType(c.contractInfo!.type)}
               />
             ) : (
               <InventoryRow />
@@ -224,6 +226,17 @@ const CollectionSection = ({
       </Accordion.Content>
     </Accordion.Item>
   );
+};
+
+const getContractType = (contractType?: string) => {
+  switch (contractType?.toUpperCase()) {
+    case 'ERC721':
+      return ContractType.ERC721;
+    case 'ERC1155':
+      return ContractType.ERC1155;
+    default:
+      return ContractType.UNKNOWN;
+  }
 };
 
 const ContentWrapper = ({

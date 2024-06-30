@@ -8,6 +8,7 @@ import { Routes } from '~/lib/routes';
 import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Footer } from './Footer';
+import { type ContractType } from '@0xsequence/metadata';
 import Link from 'next/link';
 
 export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
@@ -21,10 +22,12 @@ export const Card = ({
   data,
   chainParam,
   collectionId,
+  contractType,
 }: {
   data: CollectibleOrder;
   chainParam: string | number;
   collectionId: string;
+  contractType?: ContractType;
 }) => {
   const { tokenId } = data.metadata;
   const cartItem = useCartItemFromCollectibleOrder(data);
@@ -63,6 +66,7 @@ export const Card = ({
         chainId={chainId}
         collectionId={collectionId}
         collectibleOrder={data}
+        contractType={contractType}
       />
     </article>
   );

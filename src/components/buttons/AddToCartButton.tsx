@@ -2,16 +2,18 @@
 
 import {
   CollectionOfferModal$,
-  CollectionOfferModalState,
+  type CollectionOfferModalState,
 } from '~/app/collection/[chainParam]/[collectionId]/sell/OfferModal';
-import { getChainId } from '~/config/networks';
 import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
-import { Routes } from '~/lib/routes';
-import { addCollectibleOrderToCart } from '~/lib/stores/cart/Cart';
+import {
+  addCollectibleOrderToCart,
+  addTransferOrderToCart,
+} from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Button } from '$ui';
+import type { ContractType } from '@0xsequence/metadata';
 import { usePathname } from 'next/navigation';
 
 enum ButtonLabel {
@@ -29,6 +31,7 @@ type AddToCartButtonProps = {
   chainId: number;
   collectionId: string;
   collectibleOrder: CollectibleOrder;
+  contractType?: ContractType;
 };
 
 export const AddToCartButton = ({
@@ -36,9 +39,10 @@ export const AddToCartButton = ({
   chainId,
   collectionId,
   collectibleOrder,
+  contractType,
 }: AddToCartButtonProps) => {
   const cartItem = useCartItemFromCollectibleOrder(collectibleOrder);
-  const itemType = useCartItemFromPath();
+  const itemType = useOrderItemFromPath();
   const order = collectibleOrder.order;
 
   let onClick: () => void;
@@ -86,9 +90,10 @@ export const AddToCartButton = ({
 
     case OrderItemType.TRANSFER:
       onClick = () =>
-        addCollectibleOrderToCart({
+        addTransferOrderToCart({
           collectibleOrder,
           itemType: OrderItemType.TRANSFER,
+          contractType: contractType!,
         });
       label = cartItem
         ? ButtonLabel.REMOVE_FROM_TRANSFERS
@@ -106,7 +111,7 @@ export const AddToCartButton = ({
   );
 };
 
-const useCartItemFromPath = () => {
+const useOrderItemFromPath = () => {
   const path = usePathname();
   if (path.startsWith('/inventory')) {
     return OrderItemType.TRANSFER;

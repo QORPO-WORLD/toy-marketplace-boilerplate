@@ -1,11 +1,20 @@
 import type { OrderbookModalType } from '~/components/modals/OrderModalContent';
 import { OrderForm } from '~/components/modals/OrderModalContent/OrderForm';
 import { Dialog, Flex } from '~/components/ui';
+import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
 import { marketplaceQueries, metadataQueries } from '~/lib/queries';
-import { Order } from '~/lib/queries/marketplace/marketplace.gen';
+import {
+  type Order,
+  OrderSide,
+  OrderStatus as OrderStatusMarket,
+} from '~/lib/queries/marketplace/marketplace.gen';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
+import {
+  OrderStatus as OrderStatusIndexer,
+  type OrderbookOrder,
+} from '@0xsequence/indexer';
 import { observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
@@ -68,6 +77,26 @@ export const CollectionOfferModal = observer(() => {
     }),
   );
 
+  //TODO, unify Order and OrderbookOrder
+  let order: OrderbookOrder | undefined;
+  const listing = bestListing.get();
+  if (listing) {
+    order = {
+      orderId: listing.orderId,
+      tokenContract: '',
+      tokenId: listing.tokenId,
+      isListing: listing.side === OrderSide.listing,
+      quantity: listing.quantityInitial,
+      quantityRemaining: listing.quantityRemaining,
+      currencyAddress: listing.priceCurrencyAddress,
+      pricePerToken: listing.priceAmount,
+      expiry: listing.validUntil,
+      orderStatus: getOrderStatus(listing.status),
+      createdBy: listing.createdBy,
+      createdAt: 0,
+      orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+    } satisfies OrderbookOrder;
+  }
   return (
     <Flex className="w-full flex-col gap-3">
       <Dialog.Root
@@ -88,7 +117,7 @@ export const CollectionOfferModal = observer(() => {
               tokenMetadata={tokenMetadata.data}
               currencyOptions={currencies?.currencies ?? []}
               isERC1155={isERC1155}
-              bestOrder={bestListing.get()}
+              bestOrder={order}
               setOpen={(isOpen) => open.set(isOpen)}
               royaltyPercentage={royaltyPercentage}
             />
@@ -98,3 +127,17 @@ export const CollectionOfferModal = observer(() => {
     </Flex>
   );
 });
+
+const getOrderStatus = (status: OrderStatusMarket): OrderStatusIndexer => {
+  switch (status) {
+    case OrderStatusMarket.active:
+      return OrderStatusIndexer.OPEN;
+    case OrderStatusMarket.filled:
+    case OrderStatusMarket.expired:
+    case OrderStatusMarket.inactive:
+    case OrderStatusMarket.unknown:
+      return OrderStatusIndexer.CLOSED;
+    case OrderStatusMarket.cancelled:
+      return OrderStatusIndexer.CANCELLED;
+  }
+};
