@@ -2,17 +2,15 @@
 
 import React, { useEffect } from 'react';
 
-import { PoolAvatar } from '~/components/Avatars';
+import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
-import { AddToCartButton } from '~/components/buttons/AddToCartButton';
-import type { MarketConfig } from '~/config/marketplace';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
+import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
 
 import {
   Accordion,
   Avatar,
-  Badge,
   Button,
   Flex,
   Grid,
@@ -25,21 +23,17 @@ import {
   getCollectionId,
   setSearchResultAmountByCollection,
 } from '../Inventory';
-import { getInvetoryCardData } from './helpers';
 import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import Fuse from 'fuse.js';
 import { useSnapshot } from 'valtio';
-import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
-  marketConfig: MarketConfig;
 };
 
 export const InventoryCollectiblesContent = ({
   collectionBalances,
-  marketConfig,
 }: InventoryCollectiblesContent) => {
   const { searchResultAmount, searchText } = useSnapshot(inventoryState);
 
@@ -62,7 +56,6 @@ export const InventoryCollectiblesContent = ({
             <CollectionSection
               key={c.contractAddress}
               {...c}
-              marketConfig={marketConfig}
               allCollectionIds={allCollectionIds}
             />
           );
@@ -74,7 +67,6 @@ export const InventoryCollectiblesContent = ({
 
 interface CollectionSectionProps extends TokenBalance {
   allCollectionIds: string[];
-  marketConfig: MarketConfig;
 }
 
 const CollectionSection = ({
@@ -83,7 +75,6 @@ const CollectionSection = ({
   accountAddress,
   balance,
   allCollectionIds,
-  marketConfig,
 }: CollectionSectionProps) => {
   const {
     data: collectionUserBalanceResp,
@@ -209,13 +200,13 @@ const CollectionSection = ({
       <Accordion.Content className="mt-0 p-1">
         <ContentWrapper isGridView={isGridView}>
           {collectibles.map((c) => {
-            const data = getInvetoryCardData({
-              collectible: c,
-            });
             return isGridView ? (
-              <CollectibleCard data={data} key={data.tokenId} />
+              <CollectibleCard
+                data={{ metadata: c.tokenMetadata as TokenMetadata }}
+                key={c.tokenID}
+              />
             ) : (
-              <InventoryRow data={data} key={data.tokenId} />
+              <InventoryRow />
             );
           })}
         </ContentWrapper>
@@ -254,33 +245,35 @@ const ContentWrapper = ({
     <>{children}</>
   );
 };
-const InventoryRow = ({
-  data,
-}: {
-  data: Exclude<CollectibleCardData, undefined | null>;
-}) => {
-  const badge = data.badges![0];
-  return (
-    <Flex className="justify-between border-b border-b-border py-3">
-      <Flex className="gap-3">
-        <PoolAvatar
-          src={data.image || ''}
-          name={data.name || ''}
-          chainId={data.addToCartButtonProps?.addToCartData.item.chainId}
-          tokenId={data.tokenId}
-          link={data.link}
-        />
-        <Badge variant="muted" title={String(badge.title)}>
-          {badge.label}:<span className="ml-1">{badge.value}</span>
-        </Badge>
-      </Flex>
-      {data.addToCartButtonProps?.addToCartData && (
-        <AddToCartButton
-          isAvailable={true}
-          addToCartData={data.addToCartButtonProps?.addToCartData}
-          itemType={OrderItemType.TRANSFER}
-        />
-      )}
-    </Flex>
-  );
-};
+const InventoryRow = () => null;
+// TODO: Implement InventoryRow
+// {
+//   data,
+// }: {
+//   data: Exclude<CollectibleCardData, undefined | null>;
+// }) => {
+//   const badge = data.badges![0];
+//   return (
+//     <Flex className="justify-between border-b border-b-border py-3">
+//       <Flex className="gap-3">
+//         <PoolAvatar
+//           src={data.image || ''}
+//           name={data.name || ''}
+//           chainId={data.addToCartButtonProps?.addToCartData.item.chainId}
+//           tokenId={data.tokenId}
+//           link={data.link}
+//         />
+//         <Badge variant="muted" title={String(badge.title)}>
+//           {badge.label}:<span className="ml-1">{badge.value}</span>
+//         </Badge>
+//       </Flex>
+//       {data.addToCartButtonProps?.addToCartData && (
+//         <AddToCartButton
+//           isAvailable={true}
+//           addToCartData={data.addToCartButtonProps?.addToCartData}
+//           itemType={OrderItemType.TRANSFER}
+//         />
+//       )}
+//     </Flex>
+//   );
+// };
