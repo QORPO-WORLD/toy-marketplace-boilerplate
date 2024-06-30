@@ -4,7 +4,12 @@ import {
   type Order,
   type CollectibleOrder,
 } from '~/lib/queries/marketplace/marketplace.gen';
-import { textClassName, truncateAtMiddle } from '~/lib/utils/helpers';
+import {
+  formatDecimals,
+  formatDisplay,
+  textClassName,
+  truncateAtMiddle,
+} from '~/lib/utils/helpers';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -55,8 +60,9 @@ const Order = ({ height, order }: OrderProps) => {
   );
 
   const price = currency
-    ? BigInt(order.priceAmountNet) / BigInt(10 ** currency.decimals)
+    ? formatDisplay(formatDecimals(order.priceAmountNet, currency.decimals))
     : null;
+
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
       <Flex className="items-center gap-2">
