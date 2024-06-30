@@ -3,7 +3,7 @@
 import {
   CollectionOfferModal$,
   type CollectionOfferModalState,
-} from '~/app/collection/[chainParam]/[collectionId]/sell/OfferModal';
+} from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import {
