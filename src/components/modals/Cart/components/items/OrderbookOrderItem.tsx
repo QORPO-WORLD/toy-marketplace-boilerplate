@@ -1,10 +1,13 @@
 'use client';
 
+import { CurrencyAvatar } from '~/components/Avatars';
 import { classNames } from '~/config/classNames';
 import { useCollectionType } from '~/hooks/collection/useCollectionType';
 import { metadataQueries } from '~/lib/queries';
 import { type OrderRequest } from '~/lib/sdk/orderbook/clients/Orderbook';
+import { removeFromCart, editQuantity } from '~/lib/stores/cart/Cart';
 import { type CartItem } from '~/lib/stores/cart/types';
+import { formatDecimals } from '~/lib/utils/helpers';
 
 import {
   Button,
@@ -17,14 +20,11 @@ import {
   CloseIcon,
   SubtractIcon,
 } from '$ui';
-import { QuantityModalV2 } from './QuantityModalV2';
+import { QuantityModal } from './QuantityModal';
+import { formatDisplay } from '@0xsequence/kit';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
-import { formatDisplay } from '@0xsequence/kit';
-import { CurrencyAvatar } from '~/components/Avatars';
-import { removeFromCart, editQuantity } from '~/lib/stores/cart/Cart';
-import { formatDecimals } from '~/lib/utils/helpers';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -280,7 +280,7 @@ const OrderCollectibleQuantity = ({
         MAX
       </Button>
 
-      <QuantityModalV2 item={item} maxQuantity={maxQuantity} />
+      <QuantityModal item={item} maxQuantity={maxQuantity} />
     </Flex>
   );
 };
