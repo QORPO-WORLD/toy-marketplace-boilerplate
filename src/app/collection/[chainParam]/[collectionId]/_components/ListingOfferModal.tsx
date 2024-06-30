@@ -101,6 +101,8 @@ export const CollectionOfferModal = observer(() => {
       orderbookContractAddress: SEQUENCE_MARKET_V1_ADDRESS,
     } satisfies OrderbookOrder;
   }
+  const title = type.get() == 'offer' ? 'Create an offer' : 'Make a listing';
+
   return (
     <Flex className="w-full flex-col gap-3">
       <Dialog.Root
@@ -112,7 +114,7 @@ export const CollectionOfferModal = observer(() => {
           className="max-h-screen max-w-[700px] p-5"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <Dialog.Title>Create an offer</Dialog.Title>
+          <Dialog.Title>{title}</Dialog.Title>
           {collectionMetadata.data && tokenMetadata.data && (
             <OrderForm
               type={type.get()}

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/sell/OfferModal';
 import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import {
@@ -25,6 +24,7 @@ import { useCollectableData } from '../_hooks/useCollectableData';
 import { type OrderbookOrder } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
+import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
