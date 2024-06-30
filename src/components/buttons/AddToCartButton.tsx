@@ -1,6 +1,9 @@
 'use client';
 
-import { CollectionOfferModal$ } from '~/app/collection/[chainParam]/[collectionId]/buy/OfferModal';
+import {
+  CollectionOfferModal$,
+  CollectionOfferModalState,
+} from '~/app/collection/[chainParam]/[collectionId]/sell/OfferModal';
 import { getChainId } from '~/config/networks';
 import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
@@ -35,10 +38,10 @@ export const AddToCartButton = ({
   const order = collectibleOrder.order;
 
   const { chainParam, collectionId } = Routes.collection.useParams();
-  const chainId = getChainId(chainParam);
+  const chainId = getChainId(chainParam)!;
 
   let onClick: () => void;
-  let label: ButtonLabel;
+  let label: ButtonLabel = ButtonLabel.ADD_TO_CART;
 
   switch (itemType) {
     case OrderItemType.BUY:
@@ -57,18 +60,20 @@ export const AddToCartButton = ({
               itemType: OrderItemType.BUY,
             });
           } else {
-            CollectionOfferModal$.state.set({
+            const state: CollectionOfferModalState = {
               chainId,
               type: 'offer',
               collectionAddress: collectionId,
               tokenId: collectibleOrder.metadata.tokenId,
-            });
+            };
+
+            CollectionOfferModal$.state.set(state);
             CollectionOfferModal$.open.set(true);
           }
           label = order ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
         };
-        break;
       }
+      break;
     case OrderItemType.SELL:
       onClick = () =>
         addCollectibleOrderToCart({
@@ -109,4 +114,5 @@ const useCartItemFromPath = () => {
   } else if (path.endsWith('/sell')) {
     return OrderItemType.SELL;
   }
+  return OrderItemType.BUY;
 };

@@ -2,10 +2,6 @@
 
 import React, { useEffect } from 'react';
 
-import {
-  CollectibleCard,
-  type CollectibleCardData,
-} from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/CollectableCard';
 import { PoolAvatar } from '~/components/Avatars';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
@@ -34,6 +30,7 @@ import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import Fuse from 'fuse.js';
 import { useSnapshot } from 'valtio';
+import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];

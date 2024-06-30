@@ -35,11 +35,11 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     },
     queryFn: ({ pageParam }: { pageParam?: Page }) => {
       return marketplace.listCollectiblesWithLowestListing({
-        chainID: chainId.toString(),
         contractAddress: collectionId,
         page: pageParam,
         filter: {
-          text,
+          searchText: text,
+          includeEmpty: !filters$.showAvailableOnly.get(),
           properties,
           marketplaces: [MarketplaceKind.sequence_marketplace_v1],
         },

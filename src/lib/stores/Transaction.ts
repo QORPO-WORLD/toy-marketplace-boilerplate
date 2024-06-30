@@ -1,6 +1,5 @@
-import type { OrderItemType } from '~/types/OrderItemType';
-
 import type { CartItem } from './cart/Cart';
+import type { OrderItemType } from './cart/types';
 import { proxy } from 'valtio';
 
 interface TransactionState {

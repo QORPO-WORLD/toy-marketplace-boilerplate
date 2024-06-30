@@ -4,10 +4,10 @@ import { classNames } from '~/config/classNames';
 import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { Routes } from '~/lib/routes';
+import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Footer } from './Footer';
 import Link from 'next/link';
-import { OrderItemType } from '~/lib/stores/cart/types';
 
 export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
   const cartItem = useCartItemFromCollectibleOrder(data);

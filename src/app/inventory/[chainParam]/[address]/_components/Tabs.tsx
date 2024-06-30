@@ -126,6 +126,7 @@ export const InventoryTabs = ({
               hasExcess={false}
             />
             <InventoryCollectiblesContent
+              marketConfig={marketConfig}
               collectionBalances={filteredCollecionBalances}
             />
           </Flex>

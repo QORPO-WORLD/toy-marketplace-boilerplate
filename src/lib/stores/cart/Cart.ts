@@ -163,7 +163,7 @@ const canAddToCart = (
 
 type AddCollectibleOrderToCartProps = {
   collectibleOrder: CollectibleOrder;
-  itemType: OrderItemType;
+  itemType: OrderItemType.BUY | OrderItemType.SELL;
 };
 
 export const addCollectibleOrderToCart = ({

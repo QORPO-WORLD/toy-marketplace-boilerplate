@@ -1,9 +1,11 @@
+import { PropertyType } from '@0xsequence/metadata';
 import { observable } from '@legendapp/state';
 import { z } from 'zod';
 
 const FilterValues = z.object({
   name: z.string(),
   values: z.array(z.any()),
+  type: z.nativeEnum(PropertyType),
 });
 
 const collectibleFilters = z.object({
@@ -59,13 +61,13 @@ export const filters$ = observable({
 
       filters$.filterOptions.set([
         ...otherFilters,
-        { name, values: newValues },
+        { name, type: PropertyType.STRING, values: newValues },
       ]);
     } else {
       filters$.filterOptions.set([
         ...otherFilters,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        { name, values: [...existingValues, value] },
+        { name, type: PropertyType.STRING, values: [...existingValues, value] },
       ]);
     }
   },
@@ -74,6 +76,9 @@ export const filters$ = observable({
       .get()
       .filter((f) => !(f.name === name));
 
-    filters$.filterOptions.set([...otherFilters, { name, values: [min, max] }]);
+    filters$.filterOptions.set([
+      ...otherFilters,
+      { name, type: PropertyType.INT, values: [min, max] },
+    ]);
   },
 });

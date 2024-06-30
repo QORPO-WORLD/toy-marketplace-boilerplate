@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
 'use client';
 
 import * as React from 'react';
@@ -6,10 +5,6 @@ import { Controller } from 'react-hook-form';
 
 import { ChevronDownIcon, cn } from '$ui';
 import * as SelectPrimitive from '@radix-ui/react-select';
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
-
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- TODO*/
 

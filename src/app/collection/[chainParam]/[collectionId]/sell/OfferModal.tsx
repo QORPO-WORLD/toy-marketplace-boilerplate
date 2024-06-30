@@ -1,21 +1,35 @@
+import type { OrderbookModalType } from '~/components/modals/OrderModalContent';
 import { OrderForm } from '~/components/modals/OrderModalContent/OrderForm';
-import type { OrderbookModalType } from '~/components/modals/OrderModalContent/index';
 import { Dialog, Flex } from '~/components/ui';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
 import { marketplaceQueries, metadataQueries } from '~/lib/queries';
+import { Order } from '~/lib/queries/marketplace/marketplace.gen';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
 
-export const CollectionOfferModal$ = observable({
+export type CollectionOfferModalState = {
+  chainId: number;
+  collectionAddress: string;
+  tokenId: string;
+  type: OrderbookModalType;
+  bestListing?: Order;
+};
+
+interface Store {
+  open: boolean;
+  state: CollectionOfferModalState;
+}
+
+export const CollectionOfferModal$ = observable<Store>({
   open: false,
   state: {
     chainId: 0,
     collectionAddress: '',
     tokenId: '',
-    type: 'offer' as OrderbookModalType,
+    type: 'offer',
     bestListing: undefined,
   },
 });

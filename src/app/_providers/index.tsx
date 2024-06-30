@@ -13,6 +13,7 @@ import {
   defaultSignInOptions,
   type KitConfig,
 } from '@0xsequence/kit';
+import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
@@ -28,6 +29,8 @@ export default function Providers({
   marketConfig: MarketConfig;
   children: React.ReactNode;
 }) {
+  enableReactComponents();
+
   const walletAuthOptions = defaultSignInOptions.walletAuthOptions;
   marketConfig.walletOptions.forEach((wallet) => {
     switch (wallet) {

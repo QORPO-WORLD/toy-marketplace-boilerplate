@@ -1,15 +1,13 @@
-import { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
+import { type CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { cartItemId, cartState } from '~/lib/stores/cart/Cart';
 import {
-  CartType,
-  CollectibleMetadata,
+  type CollectibleMetadata,
   OrderItemType,
 } from '~/lib/stores/cart/types';
 
 import { useSnapshot } from 'valtio';
 
 type UseCartItemProps = {
-  itemType: CartType;
   chainId: string;
   collectionAddress: string;
   tokenId: string;

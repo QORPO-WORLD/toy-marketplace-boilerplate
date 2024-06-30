@@ -74,7 +74,7 @@ interface OrderFormProps {
 
   bestOrder?: OrderbookOrder;
 
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (isOpen: boolean) => void;
 }
 
 export const OrderForm = ({
