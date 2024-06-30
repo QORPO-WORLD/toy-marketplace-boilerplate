@@ -13,6 +13,11 @@ import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
 import {
+  balanceQueries,
+  collectableQueries,
+  collectionQueries,
+} from '~/lib/queries';
+import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
@@ -139,12 +144,9 @@ export const OrderbookOrderButtons = ({
   }
 
   const postTransactionCacheClear = () => {
-    //TODO
-    // queryClient.invalidateQueries({ queryKey: [...orderbookKeys.all()] });
-    // queryClient.invalidateQueries({ queryKey: [...balancesKeys.all()] });
-    // queryClient.invalidateQueries({
-    //   queryKey: [...metadataKeys.useCollectionTokenIDs()],
-    // });
+    void queryClient.invalidateQueries({ queryKey: collectableQueries.all() });
+    void queryClient.invalidateQueries({ queryKey: collectionQueries.all() });
+    void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
 
   if (!isConnected) {
