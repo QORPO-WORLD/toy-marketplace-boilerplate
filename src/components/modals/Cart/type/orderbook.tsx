@@ -9,6 +9,7 @@ import { useOrderbookIsValidBatch } from '~/hooks/orderbook/useOrderbookIsValidB
 import { useOrderbookOrders } from '~/hooks/orderbook/useOrderbookOrders';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
 import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
+import { collectionQueries } from '~/lib/queries';
 import { cartState, updateCartItemSubtotals } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
@@ -22,7 +23,6 @@ import dynamic from 'next/dynamic';
 import { useSnapshot } from 'valtio';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
-import { collectionQueries } from '~/lib/queries';
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
@@ -42,17 +42,16 @@ export const OrderbookOrderComponents = () => {
     cartItems = [],
     baseOrderInfo: { orderType },
   } = useSnapshot(cartState);
-  const chainId = cartItems[0]?.chainId;
+  const chainId = cartItems[0]?.chainId!;
 
   const { orders } = useOrderbookOrders({
-    chainId: chainId!,
+    chainId: chainId,
     orderIds: cartItems.map((item) => item.orderId!),
   });
 
   const hasMultipleCurrencies =
     new Set(orders.map((o) => o.currency?.toLowerCase())).size > 1;
 
-  // TODO:
   const defaultOrder = orders[0];
   const defaultCurrency = defaultOrder?.currency || '';
 
@@ -60,7 +59,7 @@ export const OrderbookOrderComponents = () => {
     data: isOrderValidBatchData,
     isLoading: isLoadingOrderBatchValidity,
   } = useOrderbookIsValidBatch({
-    chainId: chainId!,
+    chainId: chainId,
     requestIds: orders.map((o) => BigInt(o.orderId)),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -111,7 +110,7 @@ export const OrderbookOrderComponents = () => {
       useOrderbookIsValid({
         requestId: BigInt(order?.orderId || ''),
         quantity: BigInt(order?.quantity || 0),
-        chainId: chainId!,
+        chainId: chainId,
       });
 
     const isValidOrder = isValidOrderData?.isValid || false;
@@ -282,7 +281,7 @@ export const OrderbookOrderComponents = () => {
           erc20Decimals={currencyMetadata?.decimals || 0}
           platformFee={feeAmountRaw}
           erc20Address={defaultCurrency}
-          frontEndFeeRecipient={getPlatformFeeRecipient(chainId!)}
+          frontEndFeeRecipient={getPlatformFeeRecipient(chainId)}
           hasMultipleCurrencies={hasMultipleCurrencies}
           containsInvalidOrder={containsInvalidOrder}
           frontendFeePercentage={feePerceentage}
