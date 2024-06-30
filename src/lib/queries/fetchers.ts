@@ -4,6 +4,12 @@ import {
   getMetadataClient,
   getOldMarketplaceClient,
 } from './clients';
+import {
+  type ListCollectiblesWithHighestOfferArgs,
+  type ListCollectiblesWithLowestListingArgs,
+  type GetCollectibleHighestOfferArgs,
+  type GetCollectibleLowestListingArgs,
+} from './marketplace/marketplace.gen';
 import type { GetTopOrdersArgs } from './marketplace/oldMarketplace.gen';
 import type { GetTokenBalancesArgs } from '@0xsequence/indexer';
 import {
@@ -105,8 +111,35 @@ export const fetchTopOrders = (
   args: GetTopOrdersArgs & { chainId: number },
 ) => {
   const oldMarketplace = getOldMarketplaceClient(args.chainId);
-
   return oldMarketplace.getTopOrders(args);
+};
+
+export const fetchLowestListing = (
+  args: GetCollectibleLowestListingArgs & { chainId: number },
+) => {
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.getCollectibleLowestListing(args);
+};
+
+export const fetchHighestOffer = (
+  args: GetCollectibleHighestOfferArgs & { chainId: number },
+) => {
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.getCollectibleHighestOffer(args);
+};
+
+export const fetchListLowestListings = (
+  args: ListCollectiblesWithLowestListingArgs & { chainId: number },
+) => {
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.listCollectiblesWithLowestListing(args);
+};
+
+export const fetchListHighestOffers = (
+  args: ListCollectiblesWithHighestOfferArgs & { chainId: number },
+) => {
+  const marketplace = getMarketplaceClient(args.chainId);
+  return marketplace.listCollectiblesWithHighestOffer(args);
 };
 
 export const fetchCurrencies = (args: { chainId: number }) => {

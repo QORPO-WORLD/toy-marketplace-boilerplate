@@ -7,8 +7,11 @@ import {
   fetchCollectionFilters,
   fetchTokenBalances,
   type TokenBalancesArgs,
-  fetchTopOrders,
   fetchCurrencies,
+  fetchHighestOffer,
+  fetchLowestListing,
+  fetchListHighestOffers,
+  fetchListLowestListings,
 } from './fetchers';
 import { type Page } from '@0xsequence/indexer';
 import {
@@ -19,18 +22,18 @@ import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 
 type BatchCollectionReturn = ReturnType<typeof fetchCollectionsMetadata>;
 
-export const metadataQueries = {
-  all: () => ['metadata'],
-  batchCollections: () => [...metadataQueries.all(), 'batchCollections'],
-  batchCollection: (args: BatchCollectionArgs) =>
+export const collectionQueries = {
+  all: () => ['collections'],
+  lists: () => [...collectionQueries.all(), 'lists'],
+  list: (args: BatchCollectionArgs) =>
     queryOptions({
-      queryKey: [...metadataQueries.batchCollections(), args],
+      queryKey: [...collectionQueries.lists(), args],
       queryFn: () => fetchCollectionsMetadata(args),
     }),
-  collections: () => [...metadataQueries.all(), 'collections'],
-  collection: (args: CollectionArgs) =>
+  details: () => [...collectionQueries.all(), 'details'],
+  detail: (args: CollectionArgs) =>
     queryOptions({
-      queryKey: [...metadataQueries.collections(), args],
+      queryKey: [...collectionQueries.details(), args],
       queryFn: () => fetchCollectionMetadata(args),
       // initialData: () => {
       //   const queryClient = getQueryClient();
@@ -42,46 +45,69 @@ export const metadataQueries = {
       //   ) as GetContractInfoReturn['contractInfo'];
       // },
     }),
-  collectables: () => [...metadataQueries.all(), 'collectable'],
-  collectible: (args: GetTokenMetadataArgs) =>
+  filters: () => [...collectionQueries.all(), 'filters'],
+  filter: (args: TokenCollectionFiltersArgs) =>
     queryOptions({
-      queryKey: [...metadataQueries.collectables(), args],
-      queryFn: () => fetchTokenMetadata(args),
-    }),
-  collectibleFilters: () => [...metadataQueries.all(), 'collectibleFilters'],
-  collectibleFilter: (args: TokenCollectionFiltersArgs) =>
-    queryOptions({
-      queryKey: [...metadataQueries.collectibleFilters(), args],
+      queryKey: [...collectionQueries.filters(), args],
       queryFn: () => fetchCollectionFilters(args),
     }),
 };
 
-export const indexerQueries = {
-  all: () => ['indexer'],
-  tokenBalances: () => [...indexerQueries.all(), 'tokenBalances'],
-  tokenBalance: (args: TokenBalancesArgs) =>
+export const collectableQueries = {
+  all: () => ['collectables'],
+  lists: () => [...collectableQueries.all(), 'lists'],
+  listLowestListings: () => [...collectableQueries.lists(), 'lowestListings'],
+  listLowestListing: (args: Parameters<typeof fetchListLowestListings>[0]) =>
+    queryOptions({
+      queryKey: [...collectableQueries.listLowestListings(), args],
+      queryFn: () => fetchListLowestListings(args),
+    }),
+  listHighestOffers: () => [...collectableQueries.lists(), 'highestOffers'],
+  listHighestOffer: (args: Parameters<typeof fetchListHighestOffers>[0]) =>
+    queryOptions({
+      queryKey: [...collectableQueries.listHighestOffers(), args],
+      queryFn: () => fetchListHighestOffers(args),
+    }),
+  details: () => [...collectableQueries.all(), 'details'],
+  detail: (args: GetTokenMetadataArgs) =>
+    queryOptions({
+      queryKey: [...collectableQueries.details(), args],
+      queryFn: () => fetchTokenMetadata(args),
+    }),
+  lowestListings: () => [...collectableQueries.all(), 'listings'],
+  lowestListing: (args: Parameters<typeof fetchLowestListing>[0]) =>
+    queryOptions({
+      queryKey: [...collectableQueries.lowestListings(), args],
+      queryFn: () => fetchLowestListing(args),
+    }),
+  highestOffers: () => [...collectableQueries.all(), 'offers'],
+  highestOffer: (args: Parameters<typeof fetchHighestOffer>[0]) =>
+    queryOptions({
+      queryKey: [...collectableQueries.highestOffers(), args],
+      queryFn: () => fetchHighestOffer(args),
+    }),
+};
+
+export const currencyQueries = {
+  all: () => ['currencies'],
+  lists: () => [...currencyQueries.all(), 'lists'],
+  list: (args: { chainId: number }) =>
+    queryOptions({
+      queryKey: [...currencyQueries.lists(), args],
+      queryFn: () => fetchCurrencies(args),
+    }),
+};
+
+export const balanceQueries = {
+  all: () => ['balances'],
+  lists: () => [...balanceQueries.all(), 'tokenBalances'],
+  list: (args: TokenBalancesArgs) =>
     infiniteQueryOptions({
-      queryKey: [indexerQueries.tokenBalances(), args],
+      queryKey: [balanceQueries.lists(), args],
       queryFn: ({ pageParam }: { pageParam?: Page }) =>
         fetchTokenBalances({ ...args, page: pageParam }),
       initialPageParam: undefined,
       getNextPageParam: ({ page: pageResponse }) =>
         pageResponse.more ? pageResponse : undefined,
-    }),
-};
-
-export const marketplaceQueries = {
-  all: () => ['marketplace'],
-  topOrders: () => [...marketplaceQueries.all(), 'topOrder'],
-  topOrder: (args: Parameters<typeof fetchTopOrders>[0]) =>
-    queryOptions({
-      queryKey: [marketplaceQueries.topOrders(), args],
-      queryFn: () => fetchTopOrders(args),
-    }),
-  currenciess: () => [...marketplaceQueries.all(), 'currencies'],
-  currencies: (args: { chainId: number }) =>
-    queryOptions({
-      queryKey: [marketplaceQueries.currenciess(), args],
-      queryFn: () => fetchCurrencies(args),
     }),
 };

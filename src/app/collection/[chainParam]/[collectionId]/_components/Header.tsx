@@ -6,7 +6,7 @@ import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
 import type { MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/lib/queries';
+import { collectionQueries } from '~/lib/queries';
 
 import {
   Grid,
@@ -37,7 +37,7 @@ const CollectionHeader = ({
   marketConfig,
 }: CollectionHeaderProps) => {
   const collectionMetadata = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.toString(),
       collectionId: collectionAddress,
     }),

@@ -1,5 +1,5 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
-import { marketplaceQueries } from '~/lib/queries';
+import { currencyQueries } from '~/lib/queries';
 import {
   type Order,
   type CollectibleOrder,
@@ -46,7 +46,7 @@ type OrderProps = {
 
 const Order = ({ height, order }: OrderProps) => {
   const { data: currencies } = useQuery(
-    marketplaceQueries.currencies({
+    currencyQueries.list({
       chainId: order.chainId,
     }),
   );

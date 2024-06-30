@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { Card } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
-import { indexerQueries, metadataQueries } from '~/lib/queries';
+import { balanceQueries, collectionQueries } from '~/lib/queries';
 import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
 import { OrderItemType } from '~/lib/stores/cart/types';
 
@@ -86,7 +86,7 @@ const CollectionSection = ({
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    indexerQueries.tokenBalance({
+    balanceQueries.list({
       chainId,
       contractAddress,
       accountAddress,
@@ -98,7 +98,7 @@ const CollectionSection = ({
     isLoading: isCollectionMetadataLoading,
     isError: isCollectionMetadataError,
   } = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.toString(),
       collectionId: contractAddress,
     }),

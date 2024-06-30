@@ -17,7 +17,7 @@ import {
 } from '~/hooks/orderbook/useOrderbookFormData';
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
 import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
-import { indexerQueries } from '~/lib/queries';
+import { balanceQueries } from '~/lib/queries';
 import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
 import { getERC20Contract } from '~/lib/sdk/niftyswap-v2';
 import { formatDecimals, formatDisplay } from '~/lib/utils/helpers';
@@ -226,7 +226,7 @@ export const OrderForm = ({
   };
 
   const { data: userBalance, isLoading: isBalanceLoading } = useInfiniteQuery(
-    indexerQueries.tokenBalance({
+    balanceQueries.list({
       chainId: chainId,
       contractAddress: collectionMetadata.address,
       tokenId: tokenMetadata.tokenId,

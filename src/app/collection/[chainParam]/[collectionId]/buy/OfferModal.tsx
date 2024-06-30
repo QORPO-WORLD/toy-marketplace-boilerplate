@@ -2,7 +2,11 @@ import { OrderForm } from '~/components/modals/OrderModalContent/OrderForm';
 import type { OrderbookModalType } from '~/components/modals/OrderModalContent/index';
 import { Dialog, Flex } from '~/components/ui';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import { marketplaceQueries, metadataQueries } from '~/lib/queries';
+import {
+  collectableQueries,
+  collectionQueries,
+  currencyQueries,
+} from '~/lib/queries';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { observable } from '@legendapp/state';
@@ -27,13 +31,13 @@ export const CollectionOfferModal = observer(() => {
   } = CollectionOfferModal$;
 
   const collectionMetadata = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.get().toString(),
       collectionId: collectionAddress.get(),
     }),
   );
   const tokenMetadata = useQuery(
-    metadataQueries.collectible({
+    collectableQueries.detail({
       chainID: chainId.get().toString(),
       contractAddress: collectionAddress.get(),
       tokenIDs: [tokenId.get()],
@@ -49,7 +53,7 @@ export const CollectionOfferModal = observer(() => {
   });
 
   const { data: currencies } = useQuery(
-    marketplaceQueries.currencies({
+    currencyQueries.list({
       chainId: chainId.get(),
     }),
   );

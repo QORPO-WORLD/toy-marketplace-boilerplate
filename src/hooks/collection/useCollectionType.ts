@@ -1,4 +1,4 @@
-import { metadataQueries } from '~/lib/queries';
+import { collectionQueries } from '~/lib/queries';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -14,7 +14,7 @@ export const useCollectionType = ({
   collectionAddress,
 }: UseCollectionTypeProps) => {
   const { data: collectionMetadata, isLoading } = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.toString(),
       collectionId: collectionAddress,
     }),

@@ -2,9 +2,13 @@
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
-import { truncateAtMiddle } from '~/lib/utils/helpers';
+import {
+  formatDecimals,
+  formatDisplay,
+  truncateAtMiddle,
+} from '~/lib/utils/helpers';
 
-import { Avatar, Flex, Text, cn } from '$ui';
+import { Avatar, Badge, Flex, Text, cn } from '$ui';
 import NextLink from 'next/link';
 import { useAccount } from 'wagmi';
 
@@ -99,7 +103,8 @@ export const CollectibleInfo = ({
           <Badge variant="muted" loading={isBalanceLoading}>
             <span>{userTokenBalance}</span>&nbsp;Owned
           </Badge>
-        </Flex> */}
+        </Flex>
+      )} */}
     </Flex>
   );
 };

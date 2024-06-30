@@ -6,7 +6,7 @@ import { NetworkIcon } from '~/components/NetworkLabel';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
 import { type MarketConfig } from '~/config/marketplace';
-import { metadataQueries } from '~/lib/queries';
+import { collectionQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
 import { isVideo } from '~/lib/utils/helpers';
 
@@ -27,7 +27,7 @@ export const CollectionCard = (params: CollectionCard) => {
 
 const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const { data } = useSuspenseQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       collectionId: collectionAddress,
       chainID: chainId.toString(),
     }),

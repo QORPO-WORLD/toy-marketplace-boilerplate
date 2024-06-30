@@ -1,6 +1,6 @@
 'use client';
 
-import { metadataQueries } from '~/lib/queries';
+import { collectionQueries } from '~/lib/queries';
 
 import { Badge } from '$ui';
 import { useQuery } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ export const ContractTypeBadge = ({ chainId, collectionAddress }: Props) => {
     data: collectionMetadataResp,
     isLoading: isCollectionMetadataLoading,
   } = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.toString(),
       collectionId: collectionAddress,
     }),

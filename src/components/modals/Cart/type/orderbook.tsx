@@ -9,7 +9,6 @@ import { useOrderbookIsValidBatch } from '~/hooks/orderbook/useOrderbookIsValidB
 import { useOrderbookOrders } from '~/hooks/orderbook/useOrderbookOrders';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
 import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
-import { metadataQueries } from '~/lib/queries';
 import { cartState, updateCartItemSubtotals } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
@@ -23,6 +22,7 @@ import dynamic from 'next/dynamic';
 import { useSnapshot } from 'valtio';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
+import { collectionQueries } from '~/lib/queries';
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
@@ -76,7 +76,7 @@ export const OrderbookOrderComponents = () => {
 
   const { data: currencyMetadata, isLoading: isCurrencyMetadataLoading } =
     useQuery(
-      metadataQueries.collection({
+      collectionQueries.detail({
         chainID: String(chainId),
         collectionId: defaultCurrency,
       }),

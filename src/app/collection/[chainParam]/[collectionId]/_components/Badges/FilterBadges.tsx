@@ -12,7 +12,7 @@ import {
   Text,
 } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import { metadataQueries } from '~/lib/queries';
+import { collectionQueries } from '~/lib/queries';
 
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
@@ -33,7 +33,7 @@ export const FilterBadges = observer(
     const { filterOptions: filters, searchText } = filters$.get();
 
     const { data } = useQuery(
-      metadataQueries.collectibleFilter({
+      collectionQueries.filter({
         chainID: chainId.toString(),
         contractAddress: collectionAddress,
       }),

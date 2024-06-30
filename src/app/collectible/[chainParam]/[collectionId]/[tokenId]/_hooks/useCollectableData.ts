@@ -1,5 +1,5 @@
 import { getChainId } from '~/config/networks';
-import { metadataQueries } from '~/lib/queries';
+import { collectableQueries, collectionQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
 
 import { useQuery } from '@tanstack/react-query';
@@ -8,14 +8,14 @@ export const useCollectableData = () => {
   const { chainParam, collectionId, tokenId } = Routes.collectible.useParams();
   const chainId = getChainId(chainParam)!;
   const collectionMetadata = useQuery(
-    metadataQueries.collection({
+    collectionQueries.detail({
       chainID: chainId.toString(),
       collectionId: collectionId,
     }),
   );
 
   const collectibleMetadata = useQuery(
-    metadataQueries.collectible({
+    collectableQueries.detail({
       chainID: chainId.toString(),
       contractAddress: collectionId,
       tokenIDs: [tokenId],

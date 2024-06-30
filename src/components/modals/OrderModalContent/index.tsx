@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useCollectableData } from '~/app/collectible/[chainParam]/[collectionId]/[tokenId]/_hooks/useCollectableData';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import { marketplaceQueries } from '~/lib/queries';
+import { currencyQueries } from '~/lib/queries';
 
 import { OrderForm } from './OrderForm';
 import type { OrderbookOrder } from '@0xsequence/indexer';
@@ -45,7 +45,7 @@ export const OrderModalContent = ({
   });
 
   const { data: currencies } = useQuery(
-    marketplaceQueries.currencies({
+    currencyQueries.list({
       chainId,
     }),
   );

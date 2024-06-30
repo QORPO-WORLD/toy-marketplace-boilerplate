@@ -4,7 +4,7 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 import type { MarketConfig } from '~/config/marketplace';
-import { indexerQueries } from '~/lib/queries';
+import { balanceQueries } from '~/lib/queries';
 import { compareAddress } from '~/lib/utils/helpers';
 
 import { Tabs, Flex, Text, Grid } from '$ui';
@@ -45,7 +45,7 @@ export const InventoryTabs = ({
     isLoading: isUserTokenBalancesLoading,
     isError: isUserTokenBalancesError,
   } = useInfiniteQuery(
-    indexerQueries.tokenBalance({
+    balanceQueries.list({
       chainId,
       includeMetadata: false,
       accountAddress: inventoryAddress,

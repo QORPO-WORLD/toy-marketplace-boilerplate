@@ -3,7 +3,6 @@
 import { CurrencyAvatar } from '~/components/Avatars';
 import { classNames } from '~/config/classNames';
 import { useCollectionType } from '~/hooks/collection/useCollectionType';
-import { metadataQueries } from '~/lib/queries';
 import { type OrderRequest } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { removeFromCart, editQuantity } from '~/lib/stores/cart/Cart';
 import { type CartItem } from '~/lib/stores/cart/types';
@@ -25,6 +24,7 @@ import { formatDisplay } from '@0xsequence/kit';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
+import { collectionQueries } from '~/lib/queries';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -45,7 +45,7 @@ export const OrderbookOrderItem = ({
 }: OrderbookOrderItemProps) => {
   const { data: currencyMetadata, isLoading: isCurrencyMetadataLoading } =
     useQuery(
-      metadataQueries.collection({
+      collectionQueries.detail({
         chainID: item.chainId.toString(),
         collectionId: order.currency,
       }),
