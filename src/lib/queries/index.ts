@@ -58,15 +58,21 @@ export const collectableQueries = {
   lists: () => [...collectableQueries.all(), 'lists'],
   listLowestListings: () => [...collectableQueries.lists(), 'lowestListings'],
   listLowestListing: (args: Parameters<typeof fetchListLowestListings>[0]) =>
-    queryOptions({
+    infiniteQueryOptions({
       queryKey: [...collectableQueries.listLowestListings(), args],
       queryFn: () => fetchListLowestListings(args),
+      initialPageParam: undefined,
+      getNextPageParam: ({ page: pageResponse }) =>
+        pageResponse?.more ? pageResponse : undefined,
     }),
   listHighestOffers: () => [...collectableQueries.lists(), 'highestOffers'],
   listHighestOffer: (args: Parameters<typeof fetchListHighestOffers>[0]) =>
-    queryOptions({
+    infiniteQueryOptions({
       queryKey: [...collectableQueries.listHighestOffers(), args],
       queryFn: () => fetchListHighestOffers(args),
+      initialPageParam: undefined,
+      getNextPageParam: ({ page: pageResponse }) =>
+        pageResponse?.more ? pageResponse : undefined,
     }),
   details: () => [...collectableQueries.all(), 'details'],
   detail: (args: GetTokenMetadataArgs) =>
