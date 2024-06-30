@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 
-import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
+import { Card } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { indexerQueries, metadataQueries } from '~/lib/queries';
@@ -201,8 +201,10 @@ const CollectionSection = ({
         <ContentWrapper isGridView={isGridView}>
           {collectibles.map((c) => {
             return isGridView ? (
-              <CollectibleCard
+              <Card
                 data={{ metadata: c.tokenMetadata as TokenMetadata }}
+                chainParam={chainId}
+                collectionId={contractAddress}
                 key={c.tokenID}
               />
             ) : (

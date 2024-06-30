@@ -26,19 +26,20 @@ enum ButtonLabel {
 
 type AddToCartButtonProps = {
   className?: string;
+  chainId: number;
+  collectionId: string;
   collectibleOrder: CollectibleOrder;
 };
 
 export const AddToCartButton = ({
   className,
+  chainId,
+  collectionId,
   collectibleOrder,
 }: AddToCartButtonProps) => {
   const cartItem = useCartItemFromCollectibleOrder(collectibleOrder);
   const itemType = useCartItemFromPath();
   const order = collectibleOrder.order;
-
-  const { chainParam, collectionId } = Routes.collection.useParams();
-  const chainId = getChainId(chainParam)!;
 
   let onClick: () => void;
   let label: ButtonLabel = ButtonLabel.ADD_TO_CART;

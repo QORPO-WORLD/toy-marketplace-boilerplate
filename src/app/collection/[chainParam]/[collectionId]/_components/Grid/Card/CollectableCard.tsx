@@ -1,6 +1,7 @@
 import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
+import { getChainId } from '~/config/networks';
 import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { Routes } from '~/lib/routes';
@@ -10,12 +11,25 @@ import { Footer } from './Footer';
 import Link from 'next/link';
 
 export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
-  const cartItem = useCartItemFromCollectibleOrder(data);
+  const { collectionId, chainParam } = Routes.collection.useParams();
+  return (
+    <Card data={data} chainParam={chainParam} collectionId={collectionId} />
+  );
+};
 
-  //TODO: This makes the collectible card not useable in the inventory page
-  const params = Routes.collection.useParams();
-
+export const Card = ({
+  data,
+  chainParam,
+  collectionId,
+}: {
+  data: CollectibleOrder;
+  chainParam: string | number;
+  collectionId: string;
+}) => {
   const { tokenId } = data.metadata;
+  const cartItem = useCartItemFromCollectibleOrder(data);
+  const chainId = getChainId(chainParam)!;
+
   return (
     <article
       className={cn(
@@ -28,8 +42,8 @@ export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
     >
       <Link
         href={Routes.collectible({
-          chainParam: params.chainParam,
-          collectionId: params.collectionId,
+          chainParam,
+          collectionId,
           tokenId,
         })}
         className="peer h-full p-2"
@@ -46,6 +60,8 @@ export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
           'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
           '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
         )}
+        chainId={chainId}
+        collectionId={collectionId}
         collectibleOrder={data}
       />
     </article>
