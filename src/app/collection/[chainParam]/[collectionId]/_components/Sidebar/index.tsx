@@ -74,15 +74,18 @@ const CollectionSidebarContent = ({
 
   const path = usePathname();
   const mode = path.includes('/sell') ? 'sell' : 'buy';
-
-  const filterOptions = new Set<FilterOptions>();
+  const isBuy = mode === 'sell';
 
   const availableOnlyToggle = {
     id: 'available-items-only',
     checked: filters$.showAvailableOnly,
     onCheckedChange: () => filters$.showAvailableOnly.toggle(),
-    children: 'Available Items Only',
+    children: isBuy ? 'Available Items Only' : 'Available Offers Only',
   };
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore -- TODO: fix this
+  const filterOptions = new Set<FilterOptions>([availableOnlyToggle]);
 
   // const includeUserOrdersToggle = {
   //   id: 'include-user-orders',
@@ -90,14 +93,6 @@ const CollectionSidebarContent = ({
   //   onCheckedChange: () => filters$.includeUserOrders.toggle(),
   //   children: mode === 'buy' ? 'Include my listings' : 'Include my offers',
   // };
-
-  if (mode === 'buy') {
-    //@ts-expect-error -- Todo: Fix this
-    filterOptions.add(availableOnlyToggle);
-  } else {
-    //@ts-expect-error -- Todo: Fix this
-    filterOptions.delete(availableOnlyToggle);
-  }
 
   // if (isConnected) {
   //   filterOptions.add(includeUserOrdersToggle);
