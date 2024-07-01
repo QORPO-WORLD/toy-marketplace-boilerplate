@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { type MarketConfig } from '~/config/marketplace';
 import { createWagmiConfig } from '~/config/networks/wagmi';
 import { env } from '~/env';
 import { getQueryClient } from '~/lib/queries/getQueryClient';
+import { marketConfig$ } from '~/lib/stores/marketConfig';
 
 import { ToastProvider, Tooltip } from '$ui';
 import { AccountEvents } from './accountEvents';
@@ -49,6 +50,10 @@ export default function Providers({
         return;
     }
   });
+
+  useEffect(() => {
+    marketConfig$.set(marketConfig);
+  }, []);
 
   const kitConfig = {
     defaultTheme: 'dark',

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useCollectableData } from '~/app/collectible/[chainParam]/[collectionId]/[tokenId]/_hooks/useCollectableData';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import { currencyQueries } from '~/lib/queries';
+import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
 
 import { OrderForm } from './OrderForm';
 import type { OrderbookOrder } from '@0xsequence/indexer';
@@ -44,11 +44,10 @@ export const OrderModalContent = ({
     tokenId,
   });
 
-  const { data: currencies } = useQuery(
-    currencyQueries.list({
-      chainId,
-    }),
-  );
+  const { currencies } = useCollectionCurrencies({
+    chainId,
+    collectionId: collectionAddress,
+  });
 
   return (
     currencies &&
@@ -59,7 +58,7 @@ export const OrderModalContent = ({
         chainId={chainId}
         collectionMetadata={collectionMetadata.data}
         tokenMetadata={tokenMetadata}
-        currencyOptions={currencies.currencies}
+        currencyOptions={currencies}
         isERC1155={isERC1155}
         bestOrder={bestOrder}
         setOpen={setOpen}

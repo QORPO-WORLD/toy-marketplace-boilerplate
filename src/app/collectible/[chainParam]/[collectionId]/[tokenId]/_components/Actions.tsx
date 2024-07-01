@@ -5,11 +5,8 @@ import { useState } from 'react';
 import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
-import {
-  balanceQueries,
-  collectableQueries,
-  currencyQueries,
-} from '~/lib/queries';
+import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
+import { balanceQueries, collectableQueries } from '~/lib/queries';
 import {
   MarketplaceKind,
   type Order,
@@ -39,14 +36,12 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  const { data: currencies } = useQuery(
-    currencyQueries.list({
-      chainId,
-    }),
-  );
+  const { currencies } = useCollectionCurrencies({
+    chainId: chainId,
+    collectionId: collectionAddress,
+  });
 
-  const currencyAddresses =
-    currencies?.currencies.map((c) => c.contractAddress) || [];
+  const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
   const { data: bestOffers, isLoading: isLoadingBestOffers } = useQuery({
     ...collectableQueries.highestOffer({

@@ -1,5 +1,5 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
-import { currencyQueries } from '~/lib/queries';
+import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
 import {
   type Order,
   type CollectibleOrder,
@@ -50,12 +50,12 @@ type OrderProps = {
 };
 
 const Order = ({ height, order }: OrderProps) => {
-  const { data: currencies } = useQuery(
-    currencyQueries.list({
-      chainId: order.chainId,
-    }),
-  );
-  const currency = currencies?.currencies.find(
+  const { currencies } = useCollectionCurrencies({
+    chainId: order.chainId,
+    collectionId: order.collectionContractAddress,
+  });
+
+  const currency = currencies?.find(
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
 

@@ -3,11 +3,8 @@ import { OrderForm } from '~/components/modals/OrderModalContent/OrderForm';
 import { Dialog, Flex } from '~/components/ui';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { useCollectionRoyalty } from '~/hooks/transactions/useRoyaltyPercentage';
-import {
-  collectableQueries,
-  collectionQueries,
-  currencyQueries,
-} from '~/lib/queries';
+import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
+import { collectableQueries, collectionQueries } from '~/lib/queries';
 import {
   type Order,
   OrderSide,
@@ -75,11 +72,10 @@ export const CollectionOfferModal = observer(() => {
     tokenId: tokenId.get(),
   });
 
-  const { data: currencies } = useQuery(
-    currencyQueries.list({
-      chainId: chainId.get(),
-    }),
-  );
+  const { currencies } = useCollectionCurrencies({
+    chainId: chainId.get(),
+    collectionId: collectionAddress.get(),
+  });
 
   //TODO, unify Order and OrderbookOrder
   let order: OrderbookOrder | undefined;
@@ -121,7 +117,7 @@ export const CollectionOfferModal = observer(() => {
               chainId={chainId.get()}
               collectionMetadata={collectionMetadata.data}
               tokenMetadata={tokenMetadata.data}
-              currencyOptions={currencies.currencies}
+              currencyOptions={currencies}
               isERC1155={isERC1155}
               bestOrder={order}
               setOpen={(isOpen) => open.set(isOpen)}
