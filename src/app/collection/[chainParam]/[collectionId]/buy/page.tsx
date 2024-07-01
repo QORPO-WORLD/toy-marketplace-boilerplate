@@ -22,6 +22,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
 
   const text = filters$.searchText.get();
   const properties = filters$.filterOptions.get();
+  const includeEmpty = !filters$.showAvailableOnly.get();
 
   const collectiblesResponse = useInfiniteQuery(
     collectableQueries.listLowestListing({
@@ -29,7 +30,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       contractAddress: collectionId,
       filter: {
         searchText: text,
-        includeEmpty: !filters$.showAvailableOnly.get(),
+        includeEmpty,
         properties,
         marketplaces: [MarketplaceKind.sequence_marketplace_v1],
       },

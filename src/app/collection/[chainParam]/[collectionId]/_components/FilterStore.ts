@@ -70,7 +70,6 @@ export const filters$ = observable({
         { name, type: PropertyType.STRING, values: [...existingValues, value] },
       ]);
     }
-    console.log(filters$.filterOptions.get());
   },
   setIntFilterValue: (name: string, min: number, max: number) => {
     const otherFilters = filters$.filterOptions
