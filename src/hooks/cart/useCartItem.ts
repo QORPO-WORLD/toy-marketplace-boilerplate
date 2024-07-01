@@ -8,13 +8,6 @@ import {
 import { useSnapshot } from 'valtio';
 
 type UseCartItemProps = {
-  chainId: string;
-  collectionAddress: string;
-  tokenId: string;
-  orderId?: string;
-};
-
-type CartFromCollectibleOrderProps = {
   collectibleOrder: CollectibleOrder;
   chainId: number;
   collectionId: string;
@@ -26,7 +19,7 @@ export const useCartItem = ({
   chainId,
   collectionId,
   itemType,
-}: CartFromCollectibleOrderProps) => {
+}: UseCartItemProps) => {
   const { cartItems } = useSnapshot(cartState);
   const { order, metadata } = collectibleOrder;
 
