@@ -4,7 +4,7 @@ import {
   CollectionOfferModal$,
   type CollectionOfferModalState,
 } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
-import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
+import { useCartItem } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import {
   addCollectibleOrderToCart,
@@ -46,7 +46,7 @@ export const AddToCartButton = ({
 
   let onClick: () => void;
   let label: ButtonLabel = ButtonLabel.ADD_TO_CART;
-  const cartItem = useCartItemFromCollectibleOrder({
+  const cartItem = useCartItem({
     collectibleOrder,
     chainId,
     collectionId,

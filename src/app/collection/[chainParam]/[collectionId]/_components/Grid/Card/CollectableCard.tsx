@@ -2,7 +2,7 @@ import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import { getChainId } from '~/config/networks';
-import { useCartItemFromCollectibleOrder } from '~/hooks/cart/useCartItem';
+import { useCartItem } from '~/hooks/cart/useCartItem';
 import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { Routes } from '~/lib/routes';
 import { OrderItemType } from '~/lib/stores/cart/types';
@@ -47,7 +47,7 @@ export const Card = ({
   const { tokenId } = data.metadata;
   const chainId = getChainId(chainParam)!;
 
-  const cartItem = useCartItemFromCollectibleOrder({
+  const cartItem = useCartItem({
     collectibleOrder: data,
     chainId,
     collectionId,

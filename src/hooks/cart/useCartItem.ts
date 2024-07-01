@@ -21,7 +21,7 @@ type CartFromCollectibleOrderProps = {
   itemType: OrderItemType;
 };
 
-export const useCartItemFromCollectibleOrder = ({
+export const useCartItem = ({
   collectibleOrder,
   chainId,
   collectionId,
@@ -51,25 +51,4 @@ export const useCartItemFromCollectibleOrder = ({
         orderId: !isTransfer ? orderId : undefined,
       }),
   );
-};
-
-export const useCartItem = (props?: UseCartItemProps) => {
-  // const { cartItems } = useSnapshot(cartState);
-  // let cartItem = undefined;
-  // const item = cartItems.find(
-  //   (i) =>
-  //     cartItemId(i) ===
-  //     cartItemId({
-  //       collectibleMetadata,
-  //       itemType,
-  //       orderId:
-  //         addToCartData.type === CartType.ORDERBOOK
-  //           ? addToCartData.item.orderId
-  //           : undefined,
-  //     }),
-  // );
-  // cartItem = item;
-  // return {
-  //   cartItem,
-  // };
 };
