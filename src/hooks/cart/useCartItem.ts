@@ -38,7 +38,7 @@ export const useCartItemFromCollectibleOrder = ({
     imageUrl: metadata.image || '',
     decimals: metadata.decimals,
   } satisfies CollectibleMetadata;
-  const orderId = order?.id.toString();
+  const orderId = order?.orderId.toString();
 
   const isTransfer = itemType === OrderItemType.TRANSFER;
 
