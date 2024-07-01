@@ -74,7 +74,8 @@ const CollectionSidebarContent = ({
 
   const path = usePathname();
   const mode = path.includes('/sell') ? 'sell' : 'buy';
-  const isBuy = mode === 'sell';
+  const isBuy = mode === 'buy';
+
 
   const availableOnlyToggle = {
     id: 'available-items-only',

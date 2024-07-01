@@ -10,7 +10,7 @@ import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
 
 const Layout = async ({
-  params: { chainParam, collectionId, mode },
+  params: { chainParam, collectionId },
   children,
 }: {
   children: React.ReactNode;
@@ -42,7 +42,6 @@ const Layout = async ({
         <CollectionControls
           chainId={chainId}
           collectionId={collectionId}
-          mode={mode}
         />
       }
       content={children}

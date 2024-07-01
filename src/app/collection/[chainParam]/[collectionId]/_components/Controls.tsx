@@ -6,18 +6,18 @@ import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
 
 import { Grid, Tabs, cn } from '$ui';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const CollectionControls = ({
   chainId,
   collectionId,
-  mode,
 }: {
   chainId: number;
   collectionId: string;
-  mode?: 'buy' | 'sell';
 }) => {
   const router = useRouter();
+  const path = usePathname();
+  const mode = path.includes('/sell') ? 'sell' : 'buy';
 
   return (
     <BaseCollectionControls
