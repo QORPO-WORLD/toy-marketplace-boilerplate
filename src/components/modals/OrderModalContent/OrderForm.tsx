@@ -107,7 +107,7 @@ export const OrderForm = ({
     ? currencyOptions.find((c) =>
         compareAddress(c.contractAddress, bestOrder.currencyAddress),
       ) || currencyOptions[0]
-    : currencyOptions[0]!;
+    : currencyOptions[0];
 
   const {
     control,

@@ -115,13 +115,13 @@ export const CollectionOfferModal = observer(() => {
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <Dialog.Title>{title}</Dialog.Title>
-          {collectionMetadata.data && tokenMetadata.data && (
+          {collectionMetadata.data && tokenMetadata.data && currencies && (
             <OrderForm
               type={type.get()}
               chainId={chainId.get()}
               collectionMetadata={collectionMetadata.data}
               tokenMetadata={tokenMetadata.data}
-              currencyOptions={currencies?.currencies ?? []}
+              currencyOptions={currencies.currencies}
               isERC1155={isERC1155}
               bestOrder={order}
               setOpen={(isOpen) => open.set(isOpen)}

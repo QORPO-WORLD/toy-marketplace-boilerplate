@@ -51,16 +51,20 @@ export const OrderModalContent = ({
   );
 
   return (
-    <OrderForm
-      type={type}
-      chainId={chainId}
-      collectionMetadata={collectionMetadata.data!}
-      tokenMetadata={tokenMetadata!}
-      currencyOptions={currencies?.currencies ?? []}
-      isERC1155={isERC1155}
-      bestOrder={bestOrder}
-      setOpen={setOpen}
-      royaltyPercentage={royaltyPercentage}
-    />
+    currencies &&
+    collectionMetadata.data &&
+    tokenMetadata && (
+      <OrderForm
+        type={type}
+        chainId={chainId}
+        collectionMetadata={collectionMetadata.data}
+        tokenMetadata={tokenMetadata}
+        currencyOptions={currencies.currencies}
+        isERC1155={isERC1155}
+        bestOrder={bestOrder}
+        setOpen={setOpen}
+        royaltyPercentage={royaltyPercentage}
+      />
+    )
   );
 };

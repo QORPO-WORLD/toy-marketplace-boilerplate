@@ -13,7 +13,7 @@ import {
   fetchListHighestOffers,
   fetchListLowestListings,
 } from './fetchers';
-import { Page } from './marketplace/marketplace.gen';
+import { Page } from '@0xsequence/indexer';
 import {
   type GetTokenMetadataArgs,
   type TokenCollectionFiltersArgs,

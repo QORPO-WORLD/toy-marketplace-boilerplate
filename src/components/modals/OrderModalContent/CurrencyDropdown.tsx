@@ -37,16 +37,16 @@ export const CurrencyDropdown = ({
           setSelectedCurrency(newSelectedCurrency);
         }
       }}
-      defaultValue={selectedCurrency.contractAddress}
+      defaultValue={selectedCurrency?.contractAddress}
     >
       <Select.Trigger className="h-12 w-full">
         <Flex className="w-full gap-2">
           <Image.Base
-            src={selectedCurrency.imageUrl}
-            alt={selectedCurrency.name}
+            src={selectedCurrency?.imageUrl}
+            alt={selectedCurrency?.name}
             className="h-5 w-5"
           />
-          <Text className="font-medium">{selectedCurrency.name}</Text>
+          <Text className="font-medium">{selectedCurrency?.name}</Text>
         </Flex>
       </Select.Trigger>
       <Select.Options container={getThemeManagerElement()}>

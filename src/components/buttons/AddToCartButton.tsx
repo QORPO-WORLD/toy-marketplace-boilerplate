@@ -45,7 +45,8 @@ export const AddToCartButton = ({
   const order = collectibleOrder.order;
 
   let onClick: () => void;
-  let label: ButtonLabel = ButtonLabel.ADD_TO_CART;
+  let label: ButtonLabel;
+
   const cartItem = useCartItem({
     collectibleOrder,
     chainId,
@@ -80,8 +81,8 @@ export const AddToCartButton = ({
             CollectionOfferModal$.state.set(state);
             CollectionOfferModal$.open.set(true);
           }
-          label = order ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
         };
+        label = order ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
       }
       break;
     case OrderItemType.SELL:
