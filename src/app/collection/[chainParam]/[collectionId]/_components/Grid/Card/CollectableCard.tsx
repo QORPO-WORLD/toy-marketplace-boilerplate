@@ -58,7 +58,7 @@ export const Card = ({
     <article
       className={cn(
         classNames.collectibleSelectionIndicator,
-        `relative flex h-full w-full flex-col align-top`,
+        `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
         'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
         !!cartItem ? `${getOrderTypeOutlineColor()}` : '',
         'z-10 overflow-hidden !outline transition-all',
