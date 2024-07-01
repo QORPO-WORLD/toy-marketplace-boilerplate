@@ -5,13 +5,10 @@ import {
   type CollectibleOrder,
 } from '~/lib/queries/marketplace/marketplace.gen';
 import {
-  formatDecimals,
   formatDisplay,
   textClassName,
   truncateAtMiddle,
 } from '~/lib/utils/helpers';
-
-import { useQuery } from '@tanstack/react-query';
 
 export const Footer = ({ metadata, order }: CollectibleOrder) => {
   const { tokenId, name } = metadata;
@@ -59,10 +56,6 @@ const Order = ({ height, order }: OrderProps) => {
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
 
-  const price = currency
-    ? formatDisplay(formatDecimals(order.priceAmountNet, currency.decimals))
-    : null;
-
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
       <Flex className="items-center gap-2">
@@ -74,11 +67,11 @@ const Order = ({ height, order }: OrderProps) => {
           className="ellipsis text-sm md:text-base"
           title={String(currency?.name)}
         >
-          {price || 'N/A'}
+          {formatDisplay(order.priceAmountFormatted) || 'N/A'}
         </Text>
       </Flex>
       <Badge variant="success">
-        Stock: <span className="ml-1">{order.quantityRemaining}</span>
+        Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
       </Badge>
     </Flex>
   );

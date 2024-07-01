@@ -3,6 +3,7 @@
 import { CurrencyAvatar } from '~/components/Avatars';
 import { classNames } from '~/config/classNames';
 import { useCollectionType } from '~/hooks/collection/useCollectionType';
+import { collectionQueries } from '~/lib/queries';
 import { type OrderRequest } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { removeFromCart, editQuantity } from '~/lib/stores/cart/Cart';
 import { type CartItem } from '~/lib/stores/cart/types';
@@ -24,7 +25,6 @@ import { formatDisplay } from '@0xsequence/kit';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 import { parseUnits } from 'viem';
-import { collectionQueries } from '~/lib/queries';
 
 interface OrderbookOrderItemProps {
   item: CartItem;
@@ -312,9 +312,7 @@ const OrderCollectibleSubtotal = ({
   const eachNum = Number(subtotalNum) / Number(quantityNum);
   const each = formatDisplay(eachNum);
 
-  const subtotal = formatDisplay(
-    formatDecimals(item.subtotal, currencyDecimals),
-  );
+  const subtotal = formatDecimals(item.subtotal, currencyDecimals);
 
   return (
     <Flex className="w-full flex-col justify-end gap-2">

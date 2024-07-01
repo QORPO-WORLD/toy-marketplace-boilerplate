@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { truncateAtMiddle } from '~/lib/utils/helpers';
+import { formatDisplay, truncateAtMiddle } from '~/lib/utils/helpers';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
 import { NetworkIcon } from './NetworkLabel';
@@ -51,7 +51,7 @@ export const CurrencyAvatar = ({
         // size={size}
         title={title ? (loading ? 'loading..' : String(title)) : undefined}
       >
-        {amount} {currency.symbol}
+        {formatDisplay(amount)} {currency.symbol}
       </Text>
     </Flex>
   );

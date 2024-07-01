@@ -204,7 +204,7 @@ export const OrderbookOrderComponents = () => {
                       <CurrencyAvatar
                         size="sm"
                         title={formattedSubtotal}
-                        amount={formatDisplay(formattedSubtotal)}
+                        amount={formattedSubtotal}
                         currency={{
                           src: currencyMetadata?.logoURI,
                           symbol: currencyMetadata?.symbol,
@@ -233,7 +233,7 @@ export const OrderbookOrderComponents = () => {
                       <CurrencyAvatar
                         size="sm"
                         title={formattedFeeAmount}
-                        amount={formatDisplay(formattedFeeAmount)}
+                        amount={formattedFeeAmount}
                         currency={{
                           src: currencyMetadata?.logoURI,
                           symbol: currencyMetadata?.symbol,
@@ -246,7 +246,7 @@ export const OrderbookOrderComponents = () => {
                       <CurrencyAvatar
                         size="sm"
                         title={formattedTotal}
-                        amount={formatDisplay(formattedTotal)}
+                        amount={formattedTotal}
                         currency={{
                           src: currencyMetadata?.logoURI,
                           symbol: currencyMetadata?.symbol,
