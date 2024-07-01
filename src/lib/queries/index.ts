@@ -13,7 +13,7 @@ import {
   fetchListHighestOffers,
   fetchListLowestListings,
 } from './fetchers';
-import { type Page } from '@0xsequence/indexer';
+import { Page } from './marketplace/marketplace.gen';
 import {
   type GetTokenMetadataArgs,
   type TokenCollectionFiltersArgs,
@@ -60,19 +60,27 @@ export const collectableQueries = {
   listLowestListing: (args: Parameters<typeof fetchListLowestListings>[0]) =>
     infiniteQueryOptions({
       queryKey: [...collectableQueries.listLowestListings(), args],
-      queryFn: () => fetchListLowestListings(args),
-      initialPageParam: undefined,
-      getNextPageParam: ({ page: pageResponse }) =>
-        pageResponse?.more ? pageResponse : undefined,
+      queryFn: ({ pageParam }) =>
+        fetchListLowestListings({
+          ...args,
+          page: pageParam,
+        }),
+      initialPageParam: { page: 1, pageSize: 30 },
+      getNextPageParam: (lastPage) =>
+        lastPage.page?.more ? lastPage.page : undefined,
     }),
   listHighestOffers: () => [...collectableQueries.lists(), 'highestOffers'],
   listHighestOffer: (args: Parameters<typeof fetchListHighestOffers>[0]) =>
     infiniteQueryOptions({
       queryKey: [...collectableQueries.listHighestOffers(), args],
-      queryFn: () => fetchListHighestOffers(args),
-      initialPageParam: undefined,
-      getNextPageParam: ({ page: pageResponse }) =>
-        pageResponse?.more ? pageResponse : undefined,
+      queryFn: ({ pageParam }) =>
+        fetchListHighestOffers({
+          ...args,
+          page: pageParam,
+        }),
+      initialPageParam: { page: 1, pageSize: 30 },
+      getNextPageParam: (lastPage) =>
+        lastPage.page?.more ? lastPage.page : undefined,
     }),
   details: () => [...collectableQueries.all(), 'details'],
   detail: (args: GetTokenMetadataArgs) =>
