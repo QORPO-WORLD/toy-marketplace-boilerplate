@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 import { OrderModalContent } from '~/components/modals/OrderModalContent';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import {
@@ -24,7 +25,6 @@ import { useCollectableData } from '../_hooks/useCollectableData';
 import { type OrderbookOrder } from '@0xsequence/indexer';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
-import { getOrderStatus } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -109,7 +109,7 @@ export const CollectibleTradeActions = ({
         chainId,
         itemType: OrderItemType.BUY,
         collectibleMetadata: {
-          collectionAddress: bestListings.order.collectionId.toString(),
+          collectionAddress: bestListings.order.contractAddress,
           tokenId: bestListing.tokenId,
           name: collectibleMetadata.data?.name || '',
           imageUrl: collectibleMetadata.data?.image || '',
@@ -137,7 +137,7 @@ export const CollectibleTradeActions = ({
         chainId,
         itemType: OrderItemType.SELL,
         collectibleMetadata: {
-          collectionAddress: bestOffers.order.collectionId.toString(),
+          collectionAddress: bestOffers.order.contractAddress,
           tokenId: bestOffer.tokenId,
           name: collectibleMetadata.data?.name || '',
           imageUrl: collectibleMetadata.data?.image || '',

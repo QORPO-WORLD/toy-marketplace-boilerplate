@@ -176,7 +176,7 @@ export const addCollectibleOrderToCart = ({
       chainId: order.chainId,
       itemType,
       collectibleMetadata: {
-        collectionAddress: order.collectionId.toString(),
+        collectionAddress: order.contractAddress,
         tokenId: order.tokenId,
         name: metadata.name || '',
         imageUrl: metadata.image || '',
@@ -214,7 +214,7 @@ export const addTransferOrderToCart = ({
       itemType,
       contractType,
       collectibleMetadata: {
-        collectionAddress: order.collectionId.toString(),
+        collectionAddress: order.contractAddress,
         tokenId: order.tokenId,
         name: metadata.name || '',
         imageUrl: metadata.image || '',
