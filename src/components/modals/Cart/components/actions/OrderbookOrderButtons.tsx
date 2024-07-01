@@ -81,7 +81,6 @@ export const OrderbookOrderButtons = ({
 
   const { address: userAddress, isConnected, connector } = useAccount();
   const { data: walletClient } = useWalletClient();
-  const { triggerCheckout } = useCheckoutModal();
 
   const { networkMismatch, targetChainId } = useNetworkSwitch({
     targetChainId: chainId,

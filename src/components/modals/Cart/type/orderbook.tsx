@@ -14,27 +14,16 @@ import { cartState, updateCartItemSubtotals } from '~/lib/stores/cart/Cart';
 import type { CartItem } from '~/lib/stores/cart/types';
 
 import { Accordion, Avatar, Flex, InformationIcon, Text, Tooltip } from '$ui';
-// import { OrderbookOrderButtons } from '../components/actions/OrderbookOrderButtons'
+import { OrderbookOrderButtons } from '../components/actions/OrderbookOrderButtons';
 import { OrderbookOrderItem } from '../components/items/OrderbookOrderItem';
 import { OrderSections } from './shared';
 import { formatDisplay } from '@0xsequence/kit';
 import { useQuery } from '@tanstack/react-query';
-import dynamic from 'next/dynamic';
 import { useSnapshot } from 'valtio';
 import { formatUnits } from 'viem';
 import { useAccount } from 'wagmi';
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-
-export const OrderbookOrderButtons = dynamic(
-  () =>
-    import('../components/actions/OrderbookOrderButtons').then(
-      (mod) => mod.OrderbookOrderButtons,
-    ),
-  {
-    ssr: false,
-  },
-);
 
 export const OrderbookOrderComponents = () => {
   const { address: accountAddress, isConnected, connector } = useAccount();
