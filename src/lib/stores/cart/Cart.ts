@@ -2,19 +2,16 @@ import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen
 import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
 import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 
-import {
-  type AddToCartData,
-  type CartItem,
-  type CartState,
-  type CollectibleMetadata,
-  OrderItemType,
-} from './types';
+
+
+import { type AddToCartData, type CartItem, type CartState, type CollectibleMetadata, OrderItemType } from './types';
 import { cartStateSchema } from './types';
 import { ContractType } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/kit';
 import * as ethers from 'ethers';
 import { proxy, subscribe } from 'valtio';
 import { derive } from 'valtio/utils';
+
 
 const CART_LOCAL_STORAGE_TAG = '@marketplace.cart';
 
@@ -176,7 +173,7 @@ export const addCollectibleOrderToCart = ({
       chainId: order.chainId,
       itemType,
       collectibleMetadata: {
-        collectionAddress: order.contractAddress,
+        collectionAddress: order.collectionContractAddress,
         tokenId: order.tokenId,
         name: metadata.name || '',
         imageUrl: metadata.image || '',
@@ -214,7 +211,7 @@ export const addTransferOrderToCart = ({
       itemType,
       contractType,
       collectibleMetadata: {
-        collectionAddress: order.contractAddress,
+        collectionAddress: order.collectionContractAddress,
         tokenId: order.tokenId,
         name: metadata.name || '',
         imageUrl: metadata.image || '',

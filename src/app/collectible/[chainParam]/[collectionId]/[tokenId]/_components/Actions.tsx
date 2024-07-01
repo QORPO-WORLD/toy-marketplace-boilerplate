@@ -109,7 +109,7 @@ export const CollectibleTradeActions = ({
         chainId,
         itemType: OrderItemType.BUY,
         collectibleMetadata: {
-          collectionAddress: bestListings.order.contractAddress,
+          collectionAddress: bestListings.order.collectionContractAddress,
           tokenId: bestListing.tokenId,
           name: collectibleMetadata.data?.name || '',
           imageUrl: collectibleMetadata.data?.image || '',
@@ -137,7 +137,7 @@ export const CollectibleTradeActions = ({
         chainId,
         itemType: OrderItemType.SELL,
         collectibleMetadata: {
-          collectionAddress: bestOffers.order.contractAddress,
+          collectionAddress: bestOffers.order.collectionContractAddress,
           tokenId: bestOffer.tokenId,
           name: collectibleMetadata.data?.name || '',
           imageUrl: collectibleMetadata.data?.image || '',
@@ -270,7 +270,7 @@ const getOrderbookOrder = (order?: Order) => {
   //TODO, unify Order and OrderbookOrder
   return {
     orderId: order.orderId,
-    tokenContract: order.contractAddress,
+    tokenContract: order.collectionContractAddress,
     tokenId: order.tokenId,
     isListing: order.side === OrderSide.listing,
     quantity: order.quantityInitial,
