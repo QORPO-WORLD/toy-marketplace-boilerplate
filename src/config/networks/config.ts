@@ -70,7 +70,7 @@ export const SUPPORTED_NETWORKS = [
   networkConfigFromViem({ name: 'polygon-zkevm', chain: polygonZkEvm }),
   networkConfigFromViem({ name: 'base', chain: base }),
   /* TESTNETS */
-  networkConfigFromViem({ name: 'polygon-amoy', chain: polygonAmoy }),
+  networkConfigFromViem({ name: 'amoy', chain: polygonAmoy }),
   networkConfigFromViem({ name: 'sepolia', chain: sepolia }),
   networkConfigFromViem({ name: 'arbitrum-sepolia', chain: arbitrumSepolia }),
   networkConfigFromViem({ name: 'avalanche-testnet', chain: avalancheFuji }),
