@@ -86,11 +86,18 @@ export const AddToCartButton = ({
       }
       break;
     case OrderItemType.SELL:
-      onClick = () =>
-        addCollectibleOrderToCart({
-          collectibleOrder,
-          itemType: OrderItemType.SELL,
-        });
+      onClick = () => {
+        const state: CollectionOfferModalState = {
+          chainId,
+          type: 'listing',
+          collectionAddress: collectionId,
+          tokenId: collectibleOrder.metadata.tokenId,
+          bestListing: collectibleOrder.order,
+        };
+
+        CollectionOfferModal$.state.set(state);
+        CollectionOfferModal$.open.set(true);
+      };
       label = ButtonLabel.SELL;
       break;
 
