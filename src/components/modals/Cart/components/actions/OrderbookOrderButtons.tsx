@@ -31,7 +31,6 @@ import {
 
 import { Button, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
-import { useCheckoutModal } from '@0xsequence/kit-checkout';
 import { useQueryClient } from '@tanstack/react-query';
 import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';

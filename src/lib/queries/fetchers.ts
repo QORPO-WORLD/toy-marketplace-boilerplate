@@ -48,7 +48,7 @@ export const fetchCollectionsMetadata = (args: BatchCollectionArgs) => {
   );
 };
 
-export const fetchCollectionMetadata = (args: CollectionArgs) => {
+export const fetchContractInfo = (args: CollectionArgs) => {
   const metadata = getMetadataClient(args.chainID);
 
   return metadata

@@ -1,7 +1,6 @@
 import {
   type BatchCollectionArgs,
   type CollectionArgs,
-  fetchCollectionMetadata,
   fetchCollectionsMetadata,
   fetchTokenMetadata,
   fetchCollectionFilters,
@@ -12,6 +11,7 @@ import {
   fetchLowestListing,
   fetchListHighestOffers,
   fetchListLowestListings,
+  fetchContractInfo,
 } from './fetchers';
 import { Page } from '@0xsequence/indexer';
 import {
@@ -34,7 +34,7 @@ export const collectionQueries = {
   detail: (args: CollectionArgs) =>
     queryOptions({
       queryKey: [...collectionQueries.details(), args],
-      queryFn: () => fetchCollectionMetadata(args),
+      queryFn: () => fetchContractInfo(args),
       // initialData: () => {
       //   const queryClient = getQueryClient();
       //   const data = queryClient.getQueryData([
