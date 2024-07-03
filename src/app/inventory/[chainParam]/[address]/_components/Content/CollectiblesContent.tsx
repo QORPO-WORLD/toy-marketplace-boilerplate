@@ -179,7 +179,6 @@ const CollectionSection = ({
                   alt={collectionMetadata?.name}
                   src={collectionMetadata?.logoURI}
                 />
-                <Avatar.Fallback />
               </Avatar.Base>
 
               <Text className="text-sm">
