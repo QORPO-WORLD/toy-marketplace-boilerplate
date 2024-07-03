@@ -1,6 +1,7 @@
 'use client';
 
 import { NotConnectedWarning } from '~/components/NotConnectedWarning';
+import { Box, Text } from '~/components/ui';
 import { getChainId } from '~/config/networks';
 import { collectableQueries } from '~/lib/queries';
 import { MarketplaceKind } from '~/lib/queries/marketplace/marketplace.gen';
@@ -46,6 +47,17 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
 
   const collectibles =
     collectiblesResponse.data?.pages.flatMap((p) => p.collectibles) ?? [];
+
+  //TODO: Implement error handling, loading states, and improve this message
+  if (collectibles.length === 0 && !collectiblesResponse.isLoading) {
+    return (
+      <Box className="flex items-center justify-center">
+        <Text className="text-foreground/60 text-lg">
+          You don't own any collectable matching your current filters
+        </Text>
+      </Box>
+    );
+  }
 
   return (
     <>
