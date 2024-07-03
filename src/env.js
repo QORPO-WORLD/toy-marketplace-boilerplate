@@ -10,6 +10,7 @@ export const env = createEnv({
     NEXT_PUBLIC_DOMAIN: z.string(),
     NEXT_PUBLIC_SEQUENCE_ACCESS_KEY: z.string(),
     NEXT_PUBLIC_SEQUENCE_PROJECT_ID: z.string(),
+    NEXT_PUBLIC_ENV: z.enum(['dev', 'next', 'production']),
   },
 
   runtimeEnv: {
@@ -19,6 +20,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
     NEXT_PUBLIC_SEQUENCE_PROJECT_ID:
       process.env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
+    NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
   },
   emptyStringAsUndefined: true,
 });

@@ -18,15 +18,13 @@ export const DEFAULT_NETWORK = ChainId.POLYGON;
 export const SEQUENCE_MARKET_V1_ADDRESS =
   '0xB537a160472183f2150d42EB1c3DD6684A55f74c';
 
-// TODO: remove this once we have a better way to determine if we are in dev mode
-const isDev = true;
-const devPrefix = isDev ? 'dev-' : '';
+const prefix = getPrefix();
 
 const SERVICES = {
   sequenceApi: 'https://api.sequence.app',
   metadata: 'https://metadata.sequence.app',
   indexer: 'https://${network}-indexer.sequence.app',
-  marketplaceApi: 'https://${dev}marketplace-api.sequence.app/${network}',
+  marketplaceApi: 'https://${prefix}marketplace-api.sequence.app/${network}',
   rpcNodeUrl: 'https://nodes.sequence.app/${network}/${accessKey}',
   directorySearchEndpoint:
     'https://api.sequence.build/rpc/Builder/DirectorySearchCollections',
@@ -42,7 +40,7 @@ export const indexerURL = (network: string) =>
   stringTemplate(SERVICES.indexer, { network: network });
 
 export const marketplaceApiURL = (network: string) =>
-  stringTemplate(SERVICES.marketplaceApi, { dev: devPrefix, network: network });
+  stringTemplate(SERVICES.marketplaceApi, { prefix, network: network });
 
 export const builderMarketplaceApi = () => SERVICES.builderMarketplaceApi;
 
@@ -51,3 +49,16 @@ export const rpcNodeURL = (network: string) =>
     network: network,
     accessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
   });
+
+function getPrefix() {
+  switch (env.NEXT_PUBLIC_ENV) {
+    case 'production':
+      return '';
+    case 'next':
+      return 'next-';
+    case 'dev':
+      return 'dev-';
+    default:
+      return '';
+  }
+}
