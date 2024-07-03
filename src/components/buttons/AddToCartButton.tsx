@@ -104,7 +104,7 @@ export const AddToCartButton = ({
     case OrderItemType.TRANSFER:
       onClick = () =>
         addTransferOrderToCart({
-          collectibleOrder,
+          metadata: collectibleOrder.metadata,
           itemType: OrderItemType.TRANSFER,
           contractType: contractType!,
         });

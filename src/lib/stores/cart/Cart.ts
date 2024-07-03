@@ -1,17 +1,23 @@
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
+import type {
+  CollectibleOrder,
+  TokenMetadata,
+} from '~/lib/queries/marketplace/marketplace.gen';
 import { BigIntReplacer, BigIntReviver } from '~/lib/utils/bigint';
 import { defaultSelectionQuantity } from '~/lib/utils/quantity';
 
-
-
-import { type AddToCartData, type CartItem, type CartState, type CollectibleMetadata, OrderItemType } from './types';
+import {
+  type AddToCartData,
+  type CartItem,
+  type CartState,
+  type CollectibleMetadata,
+  OrderItemType,
+} from './types';
 import { cartStateSchema } from './types';
 import { ContractType } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/kit';
 import * as ethers from 'ethers';
 import { proxy, subscribe } from 'valtio';
 import { derive } from 'valtio/utils';
-
 
 const CART_LOCAL_STORAGE_TAG = '@marketplace.cart';
 
@@ -194,40 +200,40 @@ export const addCollectibleOrderToCart = ({
 };
 
 type AddTransferOrderToCartProps = {
-  collectibleOrder: CollectibleOrder;
+  metadata: TokenMetadata;
   itemType: OrderItemType.TRANSFER;
   contractType: ContractType;
 };
 
 export const addTransferOrderToCart = ({
-  collectibleOrder: { order, metadata },
+  metadata,
   contractType,
   itemType,
 }: AddTransferOrderToCartProps) => {
-  if (!order) return;
-  _addToCart_({
-    item: {
-      chainId: order.chainId,
-      itemType,
-      contractType,
-      collectibleMetadata: {
-        collectionAddress: order.collectionContractAddress,
-        tokenId: order.tokenId,
-        name: metadata.name || '',
-        imageUrl: metadata.image || '',
-        decimals: metadata.decimals || 0,
-        chainId: order.chainId,
-      },
-      quantity: defaultSelectionQuantity({
-        type: itemType,
-        tokenDecimals: metadata.decimals || 0,
-        tokenAvailableAmount: BigInt(Number(order.quantityRemaining)),
-      }),
-    },
-    options: {
-      toggle: true,
-    },
-  });
+  // TODO: implement this
+  // _addToCart_({
+  //   item: {
+  //     chainId: order.chainId,
+  //     itemType,
+  //     contractType,
+  //     collectibleMetadata: {
+  //       collectionAddress: order.collectionContractAddress,
+  //       tokenId: order.tokenId,
+  //       name: metadata.name || '',
+  //       imageUrl: metadata.image || '',
+  //       decimals: metadata.decimals || 0,
+  //       chainId: order.chainId,
+  //     },
+  //     quantity: defaultSelectionQuantity({
+  //       type: itemType,
+  //       tokenDecimals: metadata.decimals || 0,
+  //       tokenAvailableAmount: BigInt(Number(order.quantityRemaining)),
+  //     }),
+  //   },
+  //   options: {
+  //     toggle: true,
+  //   },
+  // });
 };
 
 export const _addToCart_ = (data: AddToCartData) => {

@@ -21,12 +21,10 @@ import { formatDisplay } from '@0xsequence/kit';
 import { useQuery } from '@tanstack/react-query';
 import { useSnapshot } from 'valtio';
 import { formatUnits } from 'viem';
-import { useAccount } from 'wagmi';
 
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 
 export const OrderbookOrderComponents = () => {
-  const { address: accountAddress, isConnected, connector } = useAccount();
   const {
     cartItems = [],
     baseOrderInfo: { orderType },

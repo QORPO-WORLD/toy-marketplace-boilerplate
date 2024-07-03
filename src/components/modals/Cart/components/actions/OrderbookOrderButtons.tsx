@@ -61,14 +61,11 @@ export const OrderbookOrderButtons = ({
   orders,
   erc20Amount,
   erc20Address,
-  erc20Symbol,
-  erc20Decimals,
   platformFee,
   frontEndFeeRecipient,
   isLoading,
   hasMultipleCurrencies,
   containsInvalidOrder,
-  frontendFeePercentage,
 }: OrderbookOrderButtonsProps) => {
   const queryClient = useQueryClient();
   const {
