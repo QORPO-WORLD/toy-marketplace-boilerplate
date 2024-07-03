@@ -91,20 +91,22 @@ export const InventoryTabs = ({
   );
 
   return (
-    <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8">
-      <InfoBox label="Address" transparent>
-        <Text className="overflow-hidden text-lg font-semibold uppercase">
-          <ENSName address={inventoryAddress} truncateAt={6} />
-        </Text>
-      </InfoBox>
+    <>
+      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8">
+        <InfoBox label="Address" transparent>
+          <Text className="overflow-hidden text-lg font-semibold uppercase">
+            <ENSName address={inventoryAddress} truncateAt={6} />
+          </Text>
+        </InfoBox>
 
-      <InfoBox label="Collections" transparent>
-        <Text className="text-lg font-medium">{totalCollections}</Text>
-      </InfoBox>
+        <InfoBox label="Collections" transparent>
+          <Text className="text-lg font-medium">{totalCollections}</Text>
+        </InfoBox>
 
-      <InfoBox label="Collectibles" transparent>
-        <Text className="text-lg font-medium">{totalCollectibles}</Text>
-      </InfoBox>
+        <InfoBox label="Collectibles" transparent>
+          <Text className="text-lg font-medium">{totalCollectibles}</Text>
+        </InfoBox>
+      </Grid.Root>
 
       <Tabs.Root
         orientation="horizontal"
@@ -121,16 +123,16 @@ export const InventoryTabs = ({
       >
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-14">
-            <InventoryFilters
+            {/* <InventoryFilters
               totalResults={totalCollectibles}
               hasExcess={false}
-            />
+            /> */}
             <InventoryCollectiblesContent
               collectionBalances={filteredCollecionBalances}
             />
           </Flex>
         </Tabs.Content>
       </Tabs.Root>
-    </Grid.Root>
+    </>
   );
 };
