@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
 export const MarketConfigSchema = z.object({
-  hasCustomConfig: z.boolean().optional(),
-  dormantMarketplaceDomain: z.boolean().optional(),
   projectId: z.number(), // builder project Id
   publisherId: z.string(),
   title: z.string(),
