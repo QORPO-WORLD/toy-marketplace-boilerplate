@@ -53,7 +53,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     return (
       <Box className="flex items-center justify-center">
         <Text className="text-foreground/60 text-lg">
-          You don't own any collectable matching your current filters
+          You don&lsquo;t own any collectable matching your current filters
         </Text>
       </Box>
     );
