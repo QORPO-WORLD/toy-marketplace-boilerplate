@@ -54,6 +54,11 @@ export const AddToCartButton = ({
     itemType,
   });
 
+  //TODO: Hide transfer button, until its implemented
+  if (itemType === OrderItemType.TRANSFER) {
+    return null;
+  }
+
   switch (itemType) {
     case OrderItemType.BUY:
       if (cartItem) {
