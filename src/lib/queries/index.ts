@@ -13,7 +13,7 @@ import {
   fetchListLowestListings,
   fetchContractInfo,
 } from './fetchers';
-import { Page } from '@0xsequence/indexer';
+import type { Page } from '@0xsequence/indexer';
 import {
   type GetTokenMetadataArgs,
   type TokenCollectionFiltersArgs,

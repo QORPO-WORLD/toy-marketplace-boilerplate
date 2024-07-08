@@ -1,3 +1,4 @@
+import { invalidateLowestListings } from '../queries/utils';
 import type { CartItem } from './cart/Cart';
 import type { OrderItemType } from './cart/types';
 import { proxy } from 'valtio';
@@ -42,6 +43,9 @@ export const onTransactionFinish = (
 };
 
 export const onTransactionConfirmationModelClose = () => {
+  void invalidateLowestListings([
+    ...transactionState.transactionConfirmationModelState.cartItems,
+  ]);
   transactionState.transactionConfirmationModelState = {
     cartItems: [],
     cartType: undefined,
