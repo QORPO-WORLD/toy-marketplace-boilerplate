@@ -169,7 +169,6 @@ export interface CollectiblesFilter {
 }
 
 export interface Order {
-  collectibleId: number
   orderId: string
   marketplace: MarketplaceKind
   side: OrderSide
