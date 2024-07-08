@@ -9,8 +9,6 @@ type UseMarketplaceCurrenciesProps = {
   collectionId: string;
 };
 
-const currencies = new Set<Currency>();
-
 export const useCollectionCurrencies = ({
   chainId,
   collectionId,
@@ -20,6 +18,8 @@ export const useCollectionCurrencies = ({
       chainId,
     }),
   );
+
+  const currencies = new Set<Currency>();
 
   if (data && !!marketConfig$?.projectId?.get()) {
     const customCurrencies = marketConfig$.collections
