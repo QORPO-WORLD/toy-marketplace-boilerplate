@@ -7,7 +7,7 @@ export const env = createEnv({
   },
 
   client: {
-    NEXT_PUBLIC_DOMAIN: z.string(),
+    NEXT_PUBLIC_DOMAIN: z.string().url(),
     NEXT_PUBLIC_SEQUENCE_ACCESS_KEY: z.string(),
     NEXT_PUBLIC_SEQUENCE_PROJECT_ID: z.string(),
     NEXT_PUBLIC_ENV: z.enum(['dev', 'next', 'production']),
