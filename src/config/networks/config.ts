@@ -26,6 +26,7 @@ import {
   astarZkEVM,
   astarZkyoto,
   type Chain,
+  baseSepolia,
 } from 'viem/chains';
 
 export const SUPPORTED_NETWORKS = [
@@ -74,6 +75,7 @@ export const SUPPORTED_NETWORKS = [
   networkConfigFromViem({ name: 'sepolia', chain: sepolia }),
   networkConfigFromViem({ name: 'arbitrum-sepolia', chain: arbitrumSepolia }),
   networkConfigFromViem({ name: 'avalanche-testnet', chain: avalancheFuji }),
+  networkConfigFromViem({ name: 'base-sepolia', chain: baseSepolia }),
   networkConfigFromViem({ name: 'homeverse-testnet', chain: homeverseTestnet }),
   networkConfigFromViem({ name: 'astar-zkevm', chain: astarZkEVM }),
   networkConfigFromViem({ name: 'astar-zkyoto', chain: astarZkyoto }),
