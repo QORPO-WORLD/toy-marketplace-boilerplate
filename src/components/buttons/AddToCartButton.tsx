@@ -106,17 +106,17 @@ export const AddToCartButton = ({
       label = ButtonLabel.SELL;
       break;
 
-    case OrderItemType.TRANSFER:
-      onClick = () =>
-        addTransferOrderToCart({
-          metadata: collectibleOrder.metadata,
-          itemType: OrderItemType.TRANSFER,
-          contractType: contractType!,
-        });
-      label = cartItem
-        ? ButtonLabel.REMOVE_FROM_TRANSFERS
-        : ButtonLabel.TRANSFER;
-      break;
+    // case OrderItemType.TRANSFER:
+    //   onClick = () =>
+    //     addTransferOrderToCart({
+    //       metadata: collectibleOrder.metadata,
+    //       itemType: OrderItemType.TRANSFER,
+    //       contractType: contractType!,
+    //     });
+    //   label = cartItem
+    //     ? ButtonLabel.REMOVE_FROM_TRANSFERS
+    //     : ButtonLabel.TRANSFER;
+    //   break;
     default:
       const _: never = itemType;
       return _;
