@@ -57,6 +57,7 @@ export const filters$ = observable({
 
       if (newValues.length === 0) {
         filters$.filterOptions.set(otherFilters);
+        return;
       }
 
       filters$.filterOptions.set([
