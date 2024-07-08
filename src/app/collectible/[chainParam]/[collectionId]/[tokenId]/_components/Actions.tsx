@@ -98,7 +98,7 @@ export const CollectibleTradeActions = ({
     (isConnected && isBalanceLoading);
 
   const onClickBuy = () => {
-    if (!bestListing || !bestListings || !userBalance) return;
+    if (!bestListing || !bestListings) return;
     _addToCart_({
       item: {
         chainId,
@@ -114,7 +114,7 @@ export const CollectibleTradeActions = ({
         quantity: defaultSelectionQuantity({
           type: OrderItemType.BUY,
           tokenDecimals: collectibleMetadata.data?.decimals || 0,
-          tokenUserBalance: BigInt(userBalance.toString() || 0),
+          tokenUserBalance: BigInt(0),
           tokenAvailableAmount: BigInt(Number(bestListing.quantityRemaining)),
         }),
         orderId: bestListing.orderId,
@@ -126,7 +126,7 @@ export const CollectibleTradeActions = ({
   };
 
   const onClickSell = () => {
-    if (!bestOffer || !bestOffers) return;
+    if (!bestOffer || !bestOffers || !userBalance) return;
     _addToCart_({
       item: {
         chainId,
