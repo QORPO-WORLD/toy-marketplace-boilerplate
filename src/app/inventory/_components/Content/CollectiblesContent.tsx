@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
-
 import { Card } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
+import { Spinner } from '~/components/Spinner';
 import { balanceQueries, collectionQueries } from '~/lib/queries';
 import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
 import { OrderItemType } from '~/lib/stores/cart/types';
@@ -19,16 +18,9 @@ import {
   Text,
   cn,
 } from '$ui';
-import {
-  inventoryState,
-  getCollectionId,
-  setSearchResultAmountByCollection,
-} from '../Inventory';
-import type { GetTokenBalancesReturn, TokenBalance } from '@0xsequence/indexer';
+import type { TokenBalance } from '@0xsequence/indexer';
 import { ContractType } from '@0xsequence/metadata';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import Fuse from 'fuse.js';
-import { useSnapshot } from 'valtio';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
@@ -37,47 +29,26 @@ type InventoryCollectiblesContent = {
 export const InventoryCollectiblesContent = ({
   collectionBalances,
 }: InventoryCollectiblesContent) => {
-  const { searchResultAmount, searchText } = useSnapshot(inventoryState);
-
-  const allCollectionIds = collectionBalances.map((c) => {
-    return getCollectionId(c.contractAddress, c.chainId);
-  });
-
   return (
     <>
-      {searchText !== '' && searchResultAmount === 0 && (
-        <Text>No results found</Text>
-      )}
       <Accordion.Root
         type="multiple"
         className="w-full"
         defaultValue={collectionBalances.map((c) => c.contractAddress)}
       >
         {collectionBalances.map((c) => {
-          return (
-            <CollectionSection
-              key={c.contractAddress}
-              {...c}
-              allCollectionIds={allCollectionIds}
-            />
-          );
+          return <CollectionSection key={c.contractAddress} {...c} />;
         })}
       </Accordion.Root>
     </>
   );
 };
 
-interface CollectionSectionProps extends TokenBalance {
-  allCollectionIds: string[];
-}
-
 const CollectionSection = ({
   chainId,
   contractAddress,
   accountAddress,
-  balance,
-  allCollectionIds,
-}: CollectionSectionProps) => {
+}: TokenBalance) => {
   const {
     data: collectionUserBalanceResp,
     isLoading: isCollectionUserBalanceLoading,
@@ -93,65 +64,27 @@ const CollectionSection = ({
     }),
   );
 
-  const {
-    data: collectionMetadata,
-    isLoading: isCollectionMetadataLoading,
-    isError: isCollectionMetadataError,
-  } = useQuery(
-    collectionQueries.detail({
-      chainID: chainId.toString(),
-      collectionId: contractAddress,
-    }),
-  );
-
-  const { searchText } = useSnapshot(inventoryState);
+  const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
+    useQuery(
+      collectionQueries.detail({
+        chainID: chainId.toString(),
+        collectionId: contractAddress,
+      }),
+    );
 
   // const { isGridView } = useViewType();
 
   const isGridView = true;
 
-  const pageData: GetTokenBalancesReturn[] = collectionUserBalanceResp
-    ? collectionUserBalanceResp.pages
-    : [];
-
-  const unfilteredCollectibles = pageData.reduce(
-    (acc, data) => acc.concat(data.balances),
-    [] as TokenBalance[],
-  );
-
-  const fuzzySearchCollectibles = new Fuse(unfilteredCollectibles, {
-    keys: [
-      'tokenMetadata.name',
-      'tokenID',
-      {
-        name: 'contractAddress',
-        weight: 4,
-      },
-      {
-        name: 'contractInfo.name',
-        weight: 2,
-      },
-    ],
-    threshold: 0.3,
-  });
-
   const collectibles =
-    searchText === ''
-      ? unfilteredCollectibles
-      : fuzzySearchCollectibles.search(searchText).map((result) => result.item);
+    collectionUserBalanceResp?.pages.flatMap((p) => p.balances) || [];
 
-  useEffect(() => {
-    setSearchResultAmountByCollection(
-      allCollectionIds,
-      contractAddress,
-      chainId,
-      collectibles.length,
-    );
-  }, [searchText, collectibles]);
-
-  if (isCollectionUserBalanceLoading || collectibles.length === 0) {
-    return null;
+  if (isCollectionUserBalanceLoading || isCollectionMetadataLoading) {
+    return <Spinner label="Loading Inventory Collectibles" />;
   }
+
+  if (collectibles.length === 0)
+    return <Text className="w-full text-center text-pink">Empty.</Text>;
 
   const handleLoadMore = () => {
     if (isFetchingNextPage) {
@@ -192,7 +125,7 @@ const CollectionSection = ({
             </Flex>
 
             <Text className="ml-auto text-sm text-foreground/50">
-              ITEMS ({searchText === '' ? balance : collectibles.length})
+              ITEMS {collectibles.length}
             </Text>
           </Accordion.Trigger>
         </ScrollArea.Base>
@@ -215,7 +148,7 @@ const CollectionSection = ({
             );
           })}
         </ContentWrapper>
-        {hasNextPage && searchText === '' ? (
+        {hasNextPage ? (
           <Button
             className="mt-2"
             variant="secondary"

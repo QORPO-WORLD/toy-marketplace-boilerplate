@@ -9,7 +9,6 @@ import { compareAddress } from '~/lib/utils/helpers';
 
 import { Tabs, Flex, Text, Grid } from '$ui';
 import { InventoryCollectiblesContent } from './Content/CollectiblesContent';
-import { InventoryFilters } from './Filters';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
@@ -112,7 +111,6 @@ export const InventoryTabs = ({
         orientation="horizontal"
         activationMode="manual"
         defaultValue={inventoryTabsList.collectibles}
-        // variant="secondary"
         value={activeTab}
         onValueChange={(val) => {
           if (val) {
@@ -123,10 +121,6 @@ export const InventoryTabs = ({
       >
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-14">
-            {/* <InventoryFilters
-              totalResults={totalCollectibles}
-              hasExcess={false}
-            /> */}
             <InventoryCollectiblesContent
               collectionBalances={filteredCollecionBalances}
             />
