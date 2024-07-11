@@ -63,13 +63,9 @@ export const Routes = {
   ),
 
   // inventory
-  inventory: makeRoute(({ chainParam, isConnected, address }) => {
-    if (isConnected && address && chainParam) {
-      return `/inventory/${getChainName(chainParam)}/${address}`;
-    } else {
-      return `/inventory/${getChainName(DEFAULT_NETWORK)}/connect`;
-    }
-  }, inventoryParams),
+  inventory: makeRoute(() => {
+    return `/inventory`;
+  }),
 
   terms: makeRoute(() => '/terms'),
   privacy: makeRoute(() => '/privacy'),

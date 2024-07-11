@@ -4,11 +4,7 @@ import { Flex } from '$ui';
 import Inventory from './Inventory';
 import type { Metadata } from 'next';
 
-const InventoryPage = async ({
-  params,
-}: {
-  params: { chainParam: string; address: string };
-}) => {
+const InventoryPage = async () => {
   const marketConfig = await getMarketConfig();
   return (
     <Flex
@@ -17,11 +13,7 @@ const InventoryPage = async ({
         minHeight: 'calc(100vh - $$footerHeight - $$headerHeight)',
       }}
     >
-      <Inventory
-        chainParam={params.chainParam}
-        queryAccountAddress={params.address}
-        marketConfig={marketConfig}
-      />
+      <Inventory marketConfig={marketConfig} />
     </Flex>
   );
 };
