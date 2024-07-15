@@ -29,7 +29,8 @@ const SERVICES = {
   directorySearchEndpoint:
     'https://api.sequence.build/rpc/Builder/DirectorySearchCollections',
   imageProxy: 'https://imgproxy.sequence.xyz/',
-  builderMarketplaceApi: 'https://${prefix}api.sequence.build/marketplace/',
+  builderMarketplaceApi:
+    'https://${prefix}api.sequence.build/marketplace/${projectId}',
 };
 
 export const sequenceApiURL = stringTemplate(SERVICES.sequenceApi, {});
@@ -43,7 +44,10 @@ export const marketplaceApiURL = (network: string) =>
   stringTemplate(SERVICES.marketplaceApi, { prefix, network: network });
 
 export const builderMarketplaceApi = () =>
-  stringTemplate(SERVICES.builderMarketplaceApi, { prefix });
+  stringTemplate(SERVICES.builderMarketplaceApi, {
+    prefix,
+    projectId: env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
+  });
 
 export const rpcNodeURL = (network: string) =>
   stringTemplate(SERVICES.rpcNodeUrl, {
