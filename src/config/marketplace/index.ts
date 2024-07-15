@@ -10,9 +10,10 @@ export type MarketConfig = z.infer<typeof MarketConfigSchema> & {
 const fetchConfig = async () => {
   const response = await fetch(`${builderMarketplaceApi()}/config.json`);
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch marketplace config: ${response.statusText}`,
-    );
+    console.error(response);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    throw new Error(`Failed to fetch marketplace config: ${response.msg}`);
   }
 
   return MarketConfigSchema.parse(await response.json());
