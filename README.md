@@ -17,9 +17,6 @@ To create sample file from `.env.example`
 File:
 
 ```sh
-# Url of the marketplace you created in Builder
-NEXT_PUBLIC_DOMAIN="https://{SUBDOMAIN}.sequence.market"
-
 # Environment, must be set to "next" for now
 NEXT_PUBLIC_ENV="next"
 
