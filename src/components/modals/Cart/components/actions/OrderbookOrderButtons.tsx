@@ -21,6 +21,7 @@ import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 import {
@@ -29,12 +30,14 @@ import {
   type AcceptRequest,
 } from '~/lib/utils/txBundler';
 
-import { Button, toast } from '$ui';
+import { Button, Text, Box, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
+import type { CheckoutSettings } from '@0xsequence/kit-checkout'
+import { useCheckoutModal, useCheckoutWhitelistStatus } from '@0xsequence/kit-checkout'
 import { useQueryClient } from '@tanstack/react-query';
 import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
-import { useAccount, useWalletClient } from 'wagmi';
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -60,6 +63,8 @@ interface OrderbookOrderButtonsProps {
 export const OrderbookOrderButtons = ({
   orders,
   erc20Amount,
+  erc20Symbol,
+  erc20Decimals,
   erc20Address,
   platformFee,
   frontEndFeeRecipient,
@@ -77,6 +82,8 @@ export const OrderbookOrderButtons = ({
 
   const { address: userAddress, isConnected, connector } = useAccount();
   const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient()
+  const { triggerCheckout } = useCheckoutModal()
 
   const { networkMismatch, targetChainId } = useNetworkSwitch({
     targetChainId: chainId,
@@ -144,6 +151,104 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
 
+//   const { data: countryCodeData, isLoading: isLoadingCountryCode } =
+//   useCountryCode()
+// const isDev = !isProduction
+  const countryCode = 'US'
+  const isDev = true
+  const isWhitelisted = true
+
+  // const isNFTCheckoutValidCountry = sardineSupportedCountries.includes(
+  //   countryCode || ''
+  // )
+  // const isNFTCheckoutValidCurrency = isValidSardineCurrency(
+  //   defaultOrder.currency,
+  //   chainId
+  // )
+
+  const isNFTCheckoutValidCountry = true
+  const isNFTCheckoutValidCurrency = true
+  const isCheckoutWhitelisted = true
+
+  const showCreditCardButton =
+    cartType === OrderItemType.BUY &&
+    isNFTCheckoutValidCountry &&
+    isNFTCheckoutValidCurrency &&
+    isCheckoutWhitelisted
+
+
+  const renderBuyWithCreditCard = () => {
+    if (!showCreditCardButton) {
+      return null
+    }
+
+    const isTooManyItems = cartItems.length > 1
+    const tooManyItemsMessage = 'Only 1 item can be purchased at a time with a credit card'
+
+    const cartItem = cartItems[0]
+
+    const orderbook = new Orderbook({
+      chainId,
+      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
+    });
+
+    const checkoutSettings: CheckoutSettings = {
+      creditCardCheckout: {
+        chainId: cartItem?.chainId || 137,
+        contractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+        recipientAddress: userAddress!,
+        currencyQuantity: String(cartItem?.subtotal || 0n),
+        currencySymbol: erc20Symbol.toUpperCase(),
+        currencyAddress: erc20Address.toLowerCase(),
+        currencyDecimals: String(erc20Decimals),
+        nftId: cartItem?.collectibleMetadata.tokenId || '',
+        nftAddress: cartItem?.collectibleMetadata.collectionAddress || '',
+        nftQuantity: String(cartItem?.quantity || 0n),
+        nftDecimals: (cartItem?.collectibleMetadata.decimals || 0).toString(),
+        calldata: orderbook.acceptRequest_data({
+          orderId: BigInt(cartItem?.orderId || ''),
+          quantity: cartItem?.quantity || 0n,
+          receiver: userAddress!,
+          additionalFees: [platformFee],
+          additionalFeeReceivers: [frontEndFeeRecipient as Hex]
+        }),
+        approvedSpenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
+        isDev,
+        onSuccess: async (txnHash) => {
+          resetCart()
+
+          await publicClient?.waitForTransactionReceipt({
+            hash: txnHash as Hex,
+            confirmations: 5
+          })
+
+          postTransactionCacheClear()
+        },
+        onError: error => {
+          const errorMessage =
+            error instanceof Error ? error.message : 'unknown error'
+        }
+      },
+    }
+
+    const onClickNFTCheckout = () => {
+      triggerCheckout(checkoutSettings)
+    }
+
+    return (
+      <>
+        <Box title={isTooManyItems ? tooManyItemsMessage : undefined}>
+          <Button
+            className="w-full"
+            label="BUY WITH CREDIT CARD"
+            onClick={onClickNFTCheckout}
+          />
+          </Box>
+        <Text className="text-center">OR</Text>
+      </>
+    )
+  }
+
   if (!isConnected) {
     return (
       <ConnectButton
@@ -175,6 +280,7 @@ export const OrderbookOrderButtons = ({
   if (erc20Approval?.isUserInsufficientBalance) {
     return (
       <>
+        {renderBuyWithCreditCard()}
         <Button className="w-full" label="Insufficient Balance" disabled />
       </>
     );
@@ -443,6 +549,7 @@ export const OrderbookOrderButtons = ({
 
   return (
     <>
+      {cartType === OrderItemType.BUY && renderBuyWithCreditCard()}
       {!isBundled && renderCurrencyApprovalButton()}
       {!isBundled && renderERC1155ApprovalButton()}
       {!isBundled && renderERC721ApprovalButton()}
