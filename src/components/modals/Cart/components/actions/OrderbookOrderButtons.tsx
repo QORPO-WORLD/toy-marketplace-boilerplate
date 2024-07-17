@@ -140,6 +140,16 @@ export const OrderbookOrderButtons = ({
     disabled: !erc1155ApprovalEnabled,
   });
 
+  const { data: countryCodeData } = useCountryCode()
+
+  const isDev = env.NEXT_PUBLIC_ENV !== 'production'
+
+  const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
+    chainId: chainId || 137,
+    marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
+    isDev,
+  })
+
   if (!cartItems.length || !chainId || orders.length === 0) {
     return null;
   }
@@ -154,16 +164,7 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
 
-  const { data: countryCodeData } = useCountryCode()
-  const isDev = env.NEXT_PUBLIC_ENV !== 'production'
-
   const countryCode = isDev ? 'US' : countryCodeData
-
-  const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
-    chainId: chainId || 137,
-    marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
-    isDev,
-  })
 
   const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '')
   const isNFTCheckoutValidCurrency = checkCurrencyValidity(erc20Address, chainId)
@@ -189,6 +190,17 @@ export const OrderbookOrderButtons = ({
       contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
     });
 
+    const onCreditCardSuccesss = async (txnHash: string) => {
+      resetCart()
+
+      await publicClient?.waitForTransactionReceipt({
+        hash: txnHash as Hex,
+        confirmations: 5
+      })
+
+      postTransactionCacheClear()
+    }
+
     const checkoutSettings: CheckoutSettings = {
       creditCardCheckout: {
         chainId: cartItem?.chainId || 137,
@@ -211,15 +223,8 @@ export const OrderbookOrderButtons = ({
         }),
         approvedSpenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
         isDev,
-        onSuccess: async (txnHash) => {
-          resetCart()
-
-          await publicClient?.waitForTransactionReceipt({
-            hash: txnHash as Hex,
-            confirmations: 5
-          })
-
-          postTransactionCacheClear()
+        onSuccess: (txnHash) => {
+          onCreditCardSuccesss(txnHash).catch(e => console.error(e))
         },
         onError: error => {
           console.error(error)

@@ -104,12 +104,7 @@ export const SARDINE_SUPPORTED_COUNTRIES: string[] = [
   'VN'
 ]
 
-
-interface SardineSupportedCurrencies {
-  [index: number]: string[]
-}
-
-const SARDINE_SUPPORTED_CURRENCIES: SardineSupportedCurrencies = {
+const SARDINE_SUPPORTED_CURRENCIES: Record<number, string[]> = {
   [polygon.id]: [
     '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359'
   ],
