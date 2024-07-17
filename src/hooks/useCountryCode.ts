@@ -13,6 +13,6 @@ export const useCountryCode = () => useQuery({
     const countryCode = data.slice(countryCodeIndexStart, countryCodeIndexStart + 2)
     return countryCode
   },
-  staleTime: 6 * 60 * 60,
+  staleTime: 6 * 60 * 60 * 1000,
 })
 
