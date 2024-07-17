@@ -6,10 +6,12 @@ import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { getChain } from '~/config/networks';
+import { env } from '~/env';
 import type { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
+import { useCountryCode } from '~/hooks/useCountryCode';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
 import {
@@ -29,6 +31,7 @@ import {
   generateStepsOrderbookAcceptRequest,
   type AcceptRequest,
 } from '~/lib/utils/txBundler';
+import { checkCountryCodeValidity, checkCurrencyValidity } from '~/lib/utils/sardine';
 
 import { Button, Text, Box, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
@@ -151,31 +154,25 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
 
-//   const { data: countryCodeData, isLoading: isLoadingCountryCode } =
-//   useCountryCode()
-// const isDev = !isProduction
-  const countryCode = 'US'
-  const isDev = true
-  const isWhitelisted = true
+  const { data: countryCodeData } = useCountryCode()
+  const isDev = env.NEXT_PUBLIC_ENV !== 'production'
 
-  // const isNFTCheckoutValidCountry = sardineSupportedCountries.includes(
-  //   countryCode || ''
-  // )
-  // const isNFTCheckoutValidCurrency = isValidSardineCurrency(
-  //   defaultOrder.currency,
-  //   chainId
-  // )
+  const countryCode = isDev ? 'US' : countryCodeData
 
-  const isNFTCheckoutValidCountry = true
-  const isNFTCheckoutValidCurrency = true
-  const isCheckoutWhitelisted = true
+  const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
+    chainId: chainId || 137,
+    marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
+    isDev,
+  })
+
+  const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '')
+  const isNFTCheckoutValidCurrency = checkCurrencyValidity(erc20Address, chainId)
 
   const showCreditCardButton =
     cartType === OrderItemType.BUY &&
     isNFTCheckoutValidCountry &&
     isNFTCheckoutValidCurrency &&
     isCheckoutWhitelisted
-
 
   const renderBuyWithCreditCard = () => {
     if (!showCreditCardButton) {
@@ -225,8 +222,7 @@ export const OrderbookOrderButtons = ({
           postTransactionCacheClear()
         },
         onError: error => {
-          const errorMessage =
-            error instanceof Error ? error.message : 'unknown error'
+          console.error(error)
         }
       },
     }
