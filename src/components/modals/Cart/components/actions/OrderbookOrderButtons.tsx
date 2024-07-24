@@ -142,7 +142,8 @@ export const OrderbookOrderButtons = ({
 
   const { data: countryCodeData } = useCountryCode()
 
-  const isDev = env.NEXT_PUBLIC_ENV !== 'production'
+  // To test sardine integration on localhost, set isDev to true
+  const isDev = false
 
   const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
     chainId: chainId || 137,
@@ -244,7 +245,7 @@ export const OrderbookOrderButtons = ({
             label="BUY WITH CREDIT CARD"
             onClick={onClickNFTCheckout}
           />
-          </Box>
+        </Box>
         <Text className="text-center">OR</Text>
       </>
     )
