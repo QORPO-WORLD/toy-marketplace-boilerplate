@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { type MarketConfig } from '~/config/marketplace';
 import { createWagmiConfig } from '~/config/networks/wagmi';
@@ -12,7 +12,6 @@ import { ToastProvider, Tooltip } from '$ui';
 import { AccountEvents } from './accountEvents';
 import {
   KitProvider,
-  defaultSignInOptions,
   type KitConfig,
 } from '@0xsequence/kit';
 import { KitCheckoutProvider } from '@0xsequence/kit-checkout'
@@ -20,6 +19,7 @@ import { enableReactComponents } from '@legendapp/state/config/enableReactCompon
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
+import { useMount } from '@legendapp/state/react';
 
 const queryClient = getQueryClient();
 
@@ -34,36 +34,15 @@ export default function Providers({
 }) {
   enableReactComponents();
 
-  const walletAuthOptions = defaultSignInOptions.walletAuthOptions;
-  marketConfig.walletOptions.forEach((wallet) => {
-    switch (wallet) {
-      case 'coinbase':
-        walletAuthOptions.push('coinbase-wallet');
-        break;
-      case 'walletconnect':
-        walletAuthOptions.push('wallet-connect');
-        break;
-      case 'sequence':
-      case 'metamask':
-      case 'injected':
-      default:
-        walletAuthOptions.push(wallet);
-        return;
-    }
-  });
-
-  useEffect(() => {
+  useMount(() => {
     marketConfig$.set(marketConfig);
-  }, []);
+  });
 
   const kitConfig = {
     defaultTheme: 'dark',
     projectAccessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
     signIn: {
       projectName: marketConfig.title,
-      showEmailInput: defaultSignInOptions.showEmailInput,
-      socialAuthOptions: defaultSignInOptions.socialAuthOptions,
-      walletAuthOptions,
     },
   } satisfies KitConfig;
 
