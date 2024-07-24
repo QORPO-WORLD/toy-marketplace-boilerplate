@@ -15,6 +15,7 @@ import {
   defaultSignInOptions,
   type KitConfig,
 } from '@0xsequence/kit';
+import { KitCheckoutProvider } from '@0xsequence/kit-checkout'
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -72,14 +73,16 @@ export default function Providers({
     <WagmiProvider config={wagmiConfig} initialState={wagmiInitState}>
       <QueryClientProvider client={queryClient}>
         <KitProvider config={kitConfig}>
-          <QueryClientProvider client={queryClient}>
-            <Tooltip.Provider>
-              {children}
-              <ToastProvider />
-            </Tooltip.Provider>
-            <AccountEvents wagmiConfig={wagmiConfig} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
+          <KitCheckoutProvider>
+            <QueryClientProvider client={queryClient}>
+              <Tooltip.Provider>
+                {children}
+                <ToastProvider />
+              </Tooltip.Provider>
+              <AccountEvents wagmiConfig={wagmiConfig} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </KitCheckoutProvider>
         </KitProvider>
       </QueryClientProvider>
     </WagmiProvider>

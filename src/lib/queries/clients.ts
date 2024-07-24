@@ -9,9 +9,9 @@ import { SequenceAPIClient } from '@0xsequence/api';
 import { SequenceIndexer } from '@0xsequence/indexer';
 import { SequenceMetadata } from '@0xsequence/metadata';
 
-const SEQUENCE_ACCESS_KEY = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY;
+export const SEQUENCE_ACCESS_KEY = env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY;
 
-const getNetworkConfig = (chainId: number | string) => {
+export const getNetworkConfig = (chainId: number | string) => {
   const networkConfig = getChain(chainId);
   if (!networkConfig) {
     throw new Error(`No network config found for chainId: ${chainId}`);

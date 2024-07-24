@@ -6,10 +6,12 @@ import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSwitchButton } from '~/components/buttons/NetworkSwitchButton';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '~/config/consts';
 import { getChain } from '~/config/networks';
+import { env } from '~/env';
 import type { OrderWithID } from '~/hooks/orderbook/useOrderbookOrders';
 import { useERC20Approval } from '~/hooks/transactions/useERC20Approval';
 import { useERC721Approval } from '~/hooks/transactions/useERC721Approval';
 import { useERC1155Approval } from '~/hooks/transactions/useERC1155Approval';
+import { useCountryCode } from '~/hooks/useCountryCode';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 import { useNetworkSwitch } from '~/hooks/utils/useNetworkSwitch';
 import {
@@ -21,6 +23,7 @@ import {
   onTransactionFinish,
   setTransactionPendingState,
 } from '~/lib/stores/Transaction';
+import { Orderbook } from '~/lib/sdk/orderbook/clients/Orderbook';
 import { cartState, toggleCart, resetCart } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 import {
@@ -28,13 +31,16 @@ import {
   generateStepsOrderbookAcceptRequest,
   type AcceptRequest,
 } from '~/lib/utils/txBundler';
+import { checkCountryCodeValidity, checkCurrencyValidity } from '~/lib/utils/sardine';
 
-import { Button, toast } from '$ui';
+import { Button, Text, Box, toast } from '$ui';
 import { transactionNotification } from '../../../Notifications/transactionNotification';
+import type { CheckoutSettings } from '@0xsequence/kit-checkout'
+import { useCheckoutModal, useCheckoutWhitelistStatus } from '@0xsequence/kit-checkout'
 import { useQueryClient } from '@tanstack/react-query';
 import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
-import { useAccount, useWalletClient } from 'wagmi';
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -60,6 +66,8 @@ interface OrderbookOrderButtonsProps {
 export const OrderbookOrderButtons = ({
   orders,
   erc20Amount,
+  erc20Symbol,
+  erc20Decimals,
   erc20Address,
   platformFee,
   frontEndFeeRecipient,
@@ -77,6 +85,8 @@ export const OrderbookOrderButtons = ({
 
   const { address: userAddress, isConnected, connector } = useAccount();
   const { data: walletClient } = useWalletClient();
+  const publicClient = usePublicClient()
+  const { triggerCheckout } = useCheckoutModal()
 
   const { networkMismatch, targetChainId } = useNetworkSwitch({
     targetChainId: chainId,
@@ -130,6 +140,16 @@ export const OrderbookOrderButtons = ({
     disabled: !erc1155ApprovalEnabled,
   });
 
+  const { data: countryCodeData } = useCountryCode()
+
+  const isDev = env.NEXT_PUBLIC_ENV !== 'production'
+
+  const { data: isCheckoutWhitelisted = false } = useCheckoutWhitelistStatus({
+    chainId: chainId || 137,
+    marketplaceAddress: SEQUENCE_MARKET_V1_ADDRESS,
+    isDev,
+  })
+
   if (!cartItems.length || !chainId || orders.length === 0) {
     return null;
   }
@@ -143,6 +163,92 @@ export const OrderbookOrderButtons = ({
     void queryClient.invalidateQueries({ queryKey: collectionQueries.all() });
     void queryClient.invalidateQueries({ queryKey: balanceQueries.all() });
   };
+
+  const countryCode = isDev ? 'US' : countryCodeData
+
+  const isNFTCheckoutValidCountry = checkCountryCodeValidity(countryCode || '')
+  const isNFTCheckoutValidCurrency = checkCurrencyValidity(erc20Address, chainId)
+
+  const showCreditCardButton =
+    cartType === OrderItemType.BUY &&
+    isNFTCheckoutValidCountry &&
+    isNFTCheckoutValidCurrency &&
+    isCheckoutWhitelisted
+
+  const renderBuyWithCreditCard = () => {
+    if (!showCreditCardButton) {
+      return null
+    }
+
+    const isTooManyItems = cartItems.length > 1
+    const tooManyItemsMessage = 'Only 1 item can be purchased at a time with a credit card'
+
+    const cartItem = cartItems[0]
+
+    const orderbook = new Orderbook({
+      chainId,
+      contractAddress: SEQUENCE_MARKET_V1_ADDRESS as Hex,
+    });
+
+    const onCreditCardSuccesss = async (txnHash: string) => {
+      resetCart()
+
+      await publicClient?.waitForTransactionReceipt({
+        hash: txnHash as Hex,
+        confirmations: 5
+      })
+
+      postTransactionCacheClear()
+    }
+
+    const checkoutSettings: CheckoutSettings = {
+      creditCardCheckout: {
+        chainId: cartItem?.chainId || 137,
+        contractAddress: SEQUENCE_MARKET_V1_ADDRESS,
+        recipientAddress: userAddress!,
+        currencyQuantity: String(cartItem?.subtotal || 0n),
+        currencySymbol: erc20Symbol.toUpperCase(),
+        currencyAddress: erc20Address.toLowerCase(),
+        currencyDecimals: String(erc20Decimals),
+        nftId: cartItem?.collectibleMetadata.tokenId || '',
+        nftAddress: cartItem?.collectibleMetadata.collectionAddress || '',
+        nftQuantity: String(cartItem?.quantity || 0n),
+        nftDecimals: (cartItem?.collectibleMetadata.decimals || 0).toString(),
+        calldata: orderbook.acceptRequest_data({
+          orderId: BigInt(cartItem?.orderId || ''),
+          quantity: cartItem?.quantity || 0n,
+          receiver: userAddress!,
+          additionalFees: [platformFee],
+          additionalFeeReceivers: [frontEndFeeRecipient as Hex]
+        }),
+        approvedSpenderAddress: SEQUENCE_MARKET_V1_ADDRESS,
+        isDev,
+        onSuccess: (txnHash) => {
+          onCreditCardSuccesss(txnHash).catch(e => console.error(e))
+        },
+        onError: error => {
+          console.error(error)
+        }
+      },
+    }
+
+    const onClickNFTCheckout = () => {
+      triggerCheckout(checkoutSettings)
+    }
+
+    return (
+      <>
+        <Box title={isTooManyItems ? tooManyItemsMessage : undefined}>
+          <Button
+            className="w-full"
+            label="BUY WITH CREDIT CARD"
+            onClick={onClickNFTCheckout}
+          />
+          </Box>
+        <Text className="text-center">OR</Text>
+      </>
+    )
+  }
 
   if (!isConnected) {
     return (
@@ -175,6 +281,7 @@ export const OrderbookOrderButtons = ({
   if (erc20Approval?.isUserInsufficientBalance) {
     return (
       <>
+        {renderBuyWithCreditCard()}
         <Button className="w-full" label="Insufficient Balance" disabled />
       </>
     );
@@ -443,6 +550,7 @@ export const OrderbookOrderButtons = ({
 
   return (
     <>
+      {cartType === OrderItemType.BUY && renderBuyWithCreditCard()}
       {!isBundled && renderCurrencyApprovalButton()}
       {!isBundled && renderERC1155ApprovalButton()}
       {!isBundled && renderERC721ApprovalButton()}
