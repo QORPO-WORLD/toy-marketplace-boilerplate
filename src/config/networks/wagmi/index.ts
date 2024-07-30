@@ -4,20 +4,19 @@ import { SUPPORTED_NETWORKS } from '~/config/networks/config';
 import { env } from '~/env';
 
 import { cookieStorage } from './wagmiCookieStorage';
-import { type Wallet, getKitConnectWallets } from '@0xsequence/kit';
 import {
+  type Wallet,
+  getKitConnectWallets,
   sequence as sequenceWallet,
   coinbaseWallet,
   walletConnect,
-  injected,
   email,
   google,
   facebook,
   apple,
   twitch,
-  metamask,
   type SequenceOptions,
-} from '@0xsequence/kit-connectors';
+} from '@0xsequence/kit';
 import { findNetworkConfig, allNetworks } from '@0xsequence/network';
 import type { Chain, Transport } from 'viem';
 import { createConfig, http } from 'wagmi';
@@ -83,22 +82,20 @@ function getWalletConfigs(
   marketConfig: MarketConfig,
   sequenceWalletOptions: SequenceOptions,
 ): Wallet[] {
+  const walletConnectId = env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
+
   const walletObject = {
     sequence: sequenceWallet(sequenceWalletOptions),
-    metamask: metamask(),
-    walletconnect: walletConnect({
-      projectId: env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
-    }),
+    ...(walletConnectId ? { walletconnect: walletConnect({ projectId: walletConnectId }) } : {}),
     coinbase: coinbaseWallet({ appName: marketConfig.title }),
-    injected: injected(),
   } as const;
 
   const supportedWallets = marketConfig.walletOptions || [];
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return supportedWallets.length
     ? // @ts-expect-error -- Missing support for Ledger
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      supportedWallets.map((key) => walletObject[key]).filter(Boolean)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    supportedWallets.map((key) => walletObject[key]).filter(Boolean)
     : Object.values(walletObject);
 }
 

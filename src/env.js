@@ -10,6 +10,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SEQUENCE_ACCESS_KEY: z.string(),
     NEXT_PUBLIC_SEQUENCE_PROJECT_ID: z.string(),
     NEXT_PUBLIC_ENV: z.enum(['dev', 'next', 'production']),
+    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().optional(),
   },
 
   runtimeEnv: {
@@ -19,6 +20,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SEQUENCE_PROJECT_ID:
       process.env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
     NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
+    NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:
+      process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
   },
   emptyStringAsUndefined: true,
 });

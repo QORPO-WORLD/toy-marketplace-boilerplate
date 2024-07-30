@@ -24,6 +24,9 @@ NEXT_PUBLIC_ENV="next"
 NEXT_PUBLIC_SEQUENCE_ACCESS_KEY="XXXXXX"
 # Project ID from Builder, found in the URL of the project, e.g. https://sequence.build/project/{PROJECT_ID}
 NEXT_PUBLIC_SEQUENCE_PROJECT_ID="XXXXXX"
+
+# Optional: For integrating with WalletConnect, set the WalletConnect project ID
+# NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID="XXXXXX"
 ```
 
 For now we hardcoded port for app at `4420`
