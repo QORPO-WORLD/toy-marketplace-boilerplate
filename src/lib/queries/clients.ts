@@ -41,7 +41,7 @@ export const getMarketplaceClient = (chainId: number | string) => {
   const networkConfig = getNetworkConfig(chainId);
   return new SequenceMarketplace(
     networkConfig.marketplaceApiUrl,
-    // SEQUENCE_ACCESS_KEY,
+    SEQUENCE_ACCESS_KEY,
   );
 };
 

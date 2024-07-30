@@ -17,9 +17,6 @@ To create sample file from `.env.example`
 File:
 
 ```sh
-# Environment, must be set to "next" for now
-NEXT_PUBLIC_ENV="next"
-
 # API key from Builder > Settings > API keys. e.g. https://sequence.build/project/{PROJECT_ID}/settings/apikeys
 NEXT_PUBLIC_SEQUENCE_ACCESS_KEY="XXXXXX"
 # Project ID from Builder, found in the URL of the project, e.g. https://sequence.build/project/{PROJECT_ID}

@@ -18,19 +18,18 @@ export const DEFAULT_NETWORK = ChainId.POLYGON;
 export const SEQUENCE_MARKET_V1_ADDRESS =
   '0xB537a160472183f2150d42EB1c3DD6684A55f74c';
 
-const prefix = getPrefix();
 
 const SERVICES = {
   sequenceApi: 'https://api.sequence.app',
   metadata: 'https://metadata.sequence.app',
   indexer: 'https://${network}-indexer.sequence.app',
-  marketplaceApi: 'https://${prefix}marketplace-api.sequence.app/${network}',
+  marketplaceApi: 'https://marketplace-api.sequence.app/${network}',
   rpcNodeUrl: 'https://nodes.sequence.app/${network}/${accessKey}',
   directorySearchEndpoint:
     'https://api.sequence.build/rpc/Builder/DirectorySearchCollections',
   imageProxy: 'https://imgproxy.sequence.xyz/',
   builderMarketplaceApi:
-    'https://${prefix}api.sequence.build/marketplace/${projectId}',
+    'https://api.sequence.build/marketplace/${projectId}',
 };
 
 export const sequenceApiURL = stringTemplate(SERVICES.sequenceApi, {});
@@ -41,11 +40,10 @@ export const indexerURL = (network: string) =>
   stringTemplate(SERVICES.indexer, { network: network });
 
 export const marketplaceApiURL = (network: string) =>
-  stringTemplate(SERVICES.marketplaceApi, { prefix, network: network });
+  stringTemplate(SERVICES.marketplaceApi, { network: network });
 
 export const builderMarketplaceApi = () =>
   stringTemplate(SERVICES.builderMarketplaceApi, {
-    prefix,
     projectId: env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
   });
 
@@ -55,15 +53,3 @@ export const rpcNodeURL = (network: string) =>
     accessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
   });
 
-function getPrefix() {
-  switch (env.NEXT_PUBLIC_ENV) {
-    case 'production':
-      return '';
-    case 'next':
-      return 'next-';
-    case 'dev':
-      return 'dev-';
-    default:
-      return '';
-  }
-}
