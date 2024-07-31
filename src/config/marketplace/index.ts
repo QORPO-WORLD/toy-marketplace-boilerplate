@@ -32,6 +32,6 @@ export const getMarketConfig = async (): Promise<MarketConfig> => {
   return {
     ...config,
     cssString,
-    manifestUrl: `${builderMarketplaceApi()}}/manifest.json`,
+    manifestUrl: `${builderMarketplaceApi()}/manifest.json`,
   };
 };
