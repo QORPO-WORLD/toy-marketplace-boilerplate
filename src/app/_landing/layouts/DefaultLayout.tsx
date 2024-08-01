@@ -24,15 +24,19 @@ export const DefaultLayout = ({
         <BannerImage
           className="max-h-[300px] w-full rounded-md md:max-h-[unset] md:w-[300px]"
           src={landingBannerUrl}
+          title={title}
+          description={shortDescription}
         />
-        <Flex className="flex-col gap-2">
-          <Flex className="items-center justify-between">
-            <Title title={title} className="ellipsis-unset" />
-            <Socials socials={socials} className="hidden md:flex" />
+        {landingBannerUrl ? (
+          <Flex className="flex-col gap-2">
+            <Flex className="items-center justify-between">
+              <Title title={title} className="ellipsis-unset" />
+              <Socials socials={socials} className="hidden md:flex" />
+            </Flex>
+            <Description description={shortDescription} />
+            <Socials socials={socials} className="md:hidden" />
           </Flex>
-          <Description description={shortDescription} />
-          <Socials socials={socials} className="md:hidden" />
-        </Flex>
+        ) : null}
       </Flex>
       <LandingCollections collections={collections} />
     </Flex>
