@@ -1,5 +1,7 @@
 # marketplace-boilerplate
 
+A starter White-label Marketplace boilerplate, powered by Sequence.
+
 ## Setup
 
 1. Set up a white-label marketplace in builder https://docs.sequence.xyz/solutions/marketplaces/white-label-marketplace
