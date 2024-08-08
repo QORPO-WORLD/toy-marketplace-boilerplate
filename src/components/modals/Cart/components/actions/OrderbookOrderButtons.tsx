@@ -42,6 +42,7 @@ import { snapshot, useSnapshot } from 'valtio';
 import type { Hex } from 'viem';
 import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 import type { GetWalletClientData } from 'wagmi/query';
+import { BuyWithCrypto } from './NewOrderButton';
 
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -556,6 +557,7 @@ export const OrderbookOrderButtons = ({
       {!isBundled && renderERC1155ApprovalButton()}
       {!isBundled && renderERC721ApprovalButton()}
       {renderOrderButton()}
+      <BuyWithCrypto  />
     </>
   );
 };
