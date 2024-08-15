@@ -52,7 +52,6 @@
     "fuse.js": "^7.0.0",
     "markdown-to-jsx": "^7.4.7",
     "next": "^14.2.5",
-    "next-compose-plugins": "^2.2.1",
     "query-string": "^9.1.0",
     "radash": "^12.1.0",
     "react": "^18.3.1",
@@ -65,7 +64,6 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.10",
     "tailwindcss-animate": "^1.0.7",
-    "timeago.js": "^4.0.2",
     "valtio": "^1.13.2",
     "viem": "^2.19.6",
     "wagmi": "^2.12.5",
@@ -82,7 +80,6 @@
     "@typescript-eslint/parser": "^7.17.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.5",
-    "postcss": "^8.4.41",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "typescript": "^5.5.4"
