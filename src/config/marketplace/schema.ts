@@ -1,3 +1,4 @@
+import { ChainId } from '@0xsequence/network';
 import { z } from 'zod';
 
 export const MarketConfigSchema = z.object({
@@ -36,7 +37,7 @@ export const MarketConfigSchema = z.object({
   collections: z.array(
     z.object({
       collectionAddress: z.string(),
-      chainId: z.number(),
+      chainId: z.nativeEnum(ChainId),
       exchanges: z.array(z.string()).optional(),
       marketplaceFeePercentage: z.number(),
       bannerUrl: z.string().optional(),

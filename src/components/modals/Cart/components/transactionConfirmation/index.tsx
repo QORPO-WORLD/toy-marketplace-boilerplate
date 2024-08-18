@@ -71,7 +71,7 @@ export const TransactionConfirmationModal = ({
 
                 <Button asChild variant="secondary" size="sm">
                   <a
-                    href={`${network?.explorerUrl}/tx/${transactionId}`}
+                    href={`${network?.blockExplorer?.rootUrl}tx/${transactionId}`}
                     target="_blank"
                   >
                     <LinkIcon />

@@ -6,16 +6,9 @@ export const BASIS_DENOMINATOR_1000 = 1000;
 // https://github.com/0xsequence/niftyswap/blob/master/src/contracts/exchange/NiftyswapExchange20.sol#L55
 export const BASIS_DENOMINATOR_10000 = 10000;
 
-export const getPlatformFeeRecipient = (chainId: number | string) => {
-  const customPlatformFeeRecipient = SUPPORTED_NETWORKS.find(
-    (n) => n.chainId == chainId,
-  )?.customPlatformFeeRecipient;
 
-  if (customPlatformFeeRecipient) {
-    return customPlatformFeeRecipient;
-  } else {
-    return DEFAULT_PLATFORM_FEE_RECIPIENT;
-  }
+export const getPlatformFeeRecipient = (chainId: number | string) => {
+  return SUPPORTED_NETWORKS.find((n) => n.chainId == chainId)?.platformFeeRecipient || DEFAULT_PLATFORM_FEE_RECIPIENT;
 };
 
 export const getFrontEndFeeAmount = (

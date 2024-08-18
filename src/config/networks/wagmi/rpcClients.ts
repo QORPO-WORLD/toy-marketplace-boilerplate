@@ -1,21 +1,23 @@
 import { getChain } from '..';
+import { getDefaultChains } from '@0xsequence/kit';
 import { createPublicClient, http } from 'viem';
 
 export const getPublicClient = (chainId: number) => {
   const networkConfig = getChain(chainId);
-  if (!networkConfig) {
+  const chain = getDefaultChains([chainId])[0];
+  if (!networkConfig || !chain) {
     throw new Error(`Invalid chainId: ${chainId}`);
   }
 
   return createPublicClient({
     chain: {
-      ...networkConfig.viemChainConfig,
+      ...chain,
       rpcUrls: {
         default: {
-          http: [networkConfig.readOnlyNodeURL],
+          http: [networkConfig.rpcUrl],
         },
         public: {
-          http: [networkConfig.readOnlyNodeURL],
+          http: [networkConfig.rpcUrl],
         },
       },
     },

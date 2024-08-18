@@ -15,8 +15,6 @@ export const getChainName = (nameOrId: nameOrId) => getChain(nameOrId)?.name;
 export const getChainId = (nameOrId: nameOrId) => getChain(nameOrId)?.chainId;
 export const getPresentableChainName = (nameOrId: nameOrId) =>
   getChain(nameOrId)?.title;
-export const getViemChain = (nameOrId: nameOrId) =>
-  getChain(nameOrId)?.viemChainConfig;
 
 export const getCurrencyIconUrl = (chainId: number): string => {
   return `https://assets.sequence.info/images/networks/medium/${chainId}.webp`;

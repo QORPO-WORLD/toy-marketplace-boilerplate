@@ -29,9 +29,9 @@ export const SimpleLabel = ({
 }: SimpleLabelProps) => {
   const formattedAmount = !isNaN(Number(amount))
     ? Intl.NumberFormat('en-US', {
-        notation: 'standard',
-        maximumFractionDigits: 3,
-      }).format(Number(amount))
+      notation: 'standard',
+      maximumFractionDigits: 3,
+    }).format(Number(amount))
     : amount;
 
   return (
@@ -81,9 +81,9 @@ export const CurrencyLabel = ({
 
   const formattedAmount = !isNaN(Number(amount))
     ? Intl.NumberFormat('en-US', {
-        notation: 'standard',
-        maximumFractionDigits: 18,
-      }).format(Number(amount))
+      notation: 'standard',
+      maximumFractionDigits: 18,
+    }).format(Number(amount))
     : amount;
 
   const formattedAmountUSDC =
@@ -100,8 +100,7 @@ export const CurrencyLabel = ({
     >
       <Text
         className={cn(
-          `font-bold text-foreground/90 text-${size.text} w-${
-            loading ? '[100%]' : 'full'
+          `font-bold text-foreground/90 text-${size.text} w-${loading ? '[100%]' : 'full'
           }`,
         )}
         loading={loading}
@@ -231,7 +230,7 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
     if (isCopied) setTimeout(onClear, 2000);
   }, [isCopied]);
 
-  const explorerUrl = getChain(chainId)?.explorerUrl;
+  const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
   return (
     <Flex className="items-center gap-2">
@@ -259,7 +258,7 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
       </Tooltip.Root> */}
 
       <Button asChild variant="link" title={address} className="px-0 uppercase">
-        <a href={`${explorerUrl}/address/${address}`} target="_blank">
+        <a href={`${explorerUrl}address/${address}`} target="_blank">
           <LinkIcon />
 
           {address ? <ENSName address={address} truncateAt={4} /> : 'unknown'}
