@@ -29,9 +29,9 @@ export const SimpleLabel = ({
 }: SimpleLabelProps) => {
   const formattedAmount = !isNaN(Number(amount))
     ? Intl.NumberFormat('en-US', {
-      notation: 'standard',
-      maximumFractionDigits: 3,
-    }).format(Number(amount))
+        notation: 'standard',
+        maximumFractionDigits: 3,
+      }).format(Number(amount))
     : amount;
 
   return (
@@ -81,9 +81,9 @@ export const CurrencyLabel = ({
 
   const formattedAmount = !isNaN(Number(amount))
     ? Intl.NumberFormat('en-US', {
-      notation: 'standard',
-      maximumFractionDigits: 18,
-    }).format(Number(amount))
+        notation: 'standard',
+        maximumFractionDigits: 18,
+      }).format(Number(amount))
     : amount;
 
   const formattedAmountUSDC =
@@ -100,7 +100,8 @@ export const CurrencyLabel = ({
     >
       <Text
         className={cn(
-          `font-bold text-foreground/90 text-${size.text} w-${loading ? '[100%]' : 'full'
+          `font-bold text-foreground/90 text-${size.text} w-${
+            loading ? '[100%]' : 'full'
           }`,
         )}
         loading={loading}

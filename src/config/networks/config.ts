@@ -5,7 +5,7 @@ import {
   metadataURL,
   sequenceApiURL,
   marketplaceApiURL,
-  indexerURL
+  indexerURL,
 } from '../consts';
 import type { NetworkConfig } from './type';
 import { allNetworks } from '@0xsequence/network';

@@ -105,8 +105,8 @@ function getWalletConfigs(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return supportedWallets.length
     ? // @ts-expect-error -- Missing support for Ledger
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    supportedWallets.map((key) => walletObject[key]).filter(Boolean)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      supportedWallets.map((key) => walletObject[key]).filter(Boolean)
     : Object.values(walletObject);
 }
 
@@ -126,7 +126,6 @@ interface GetWaasConnectors {
   appName: string;
   waasConfigKey: string;
 }
-
 
 const googleClientId = env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 const appleClientId = env.NEXT_PUBLIC_APPLE_CLIENT_ID;
