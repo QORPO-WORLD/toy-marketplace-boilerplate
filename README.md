@@ -28,7 +28,7 @@ NEXT_PUBLIC_SEQUENCE_PROJECT_ID="XXXXXX"
 # NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID="XXXXXX"
 ```
 
-For now we hardcoded port for app at `4420`
+App will run at port `4420`.
 
 ## Start
 
