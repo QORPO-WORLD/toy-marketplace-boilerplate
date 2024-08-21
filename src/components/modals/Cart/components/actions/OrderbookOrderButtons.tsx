@@ -453,8 +453,10 @@ export const OrderbookOrderButtons = ({
           quantity: item.quantity,
           address: userAddress || '',
           tokenId: item.collectibleMetadata.tokenId,
-          additionalFees: [BigInt(platformFee?.toString() || 0n)],
-          additionalFeeRecipients: [frontEndFeeRecipient as Hex],
+          additionalFees: platformFee ? [BigInt(platformFee?.toString())] : [],
+          additionalFeeRecipients: platformFee
+            ? [frontEndFeeRecipient as Hex]
+            : [],
         })) as [AcceptRequest, ...AcceptRequest[]],
       });
 

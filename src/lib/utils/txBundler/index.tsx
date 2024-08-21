@@ -240,15 +240,19 @@ export const generateStepsOrderbookAcceptRequest = (
         throw 'No create order data provided';
       }
 
+      const additionalFeeReceivers = acceptRequests[0]
+        .additionalFeeRecipients as Hex[];
+      const additionalFees = acceptRequests[0].additionalFees;
+
       return await orderbook.acceptRequestBatch(
         {
           orderIds: acceptRequests.map((r) => BigInt(r.orderId)),
           quantities: acceptRequests.map((r) => r.quantity),
           receivers: acceptRequests.map((r) => r.address) as Hex[],
-          additionalFeeReceivers: [
-            ...acceptRequests[0].additionalFeeRecipients,
-          ] as Hex[],
-          additionalFees: [...acceptRequests[0].additionalFees],
+          additionalFeeReceivers: additionalFees
+            ? additionalFeeReceivers
+            : ([] as Hex[]),
+          additionalFees: additionalFees ? additionalFees : [],
         },
         walletClient,
       );

@@ -365,6 +365,12 @@ export const OrderForm = ({
         const orderSubtotalRaw =
           BigInt(bestOrder.pricePerToken) * fillableTokenAmountRaw;
 
+        const additionalFees = getFrontEndFeeAmount(
+          orderSubtotalRaw,
+          feePerceentage,
+        );
+        const additionalFeeRecipients = [getPlatformFeeRecipient(chainId)];
+
         action = {
           partialOrders: [
             {
@@ -372,10 +378,10 @@ export const OrderForm = ({
               quantity: fillableTokenAmountRaw,
               address: address!,
               tokenId: bestOrder.tokenId,
-              additionalFeeRecipients: [getPlatformFeeRecipient(chainId)],
-              additionalFees: [
-                getFrontEndFeeAmount(orderSubtotalRaw, feePerceentage),
-              ],
+              additionalFeeRecipients: additionalFees
+                ? additionalFeeRecipients
+                : [],
+              additionalFees: additionalFees ? [additionalFees] : [],
             },
           ],
         };
