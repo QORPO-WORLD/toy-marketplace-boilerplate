@@ -1,6 +1,5 @@
 import { DEFAULT_NETWORK } from '~/config/consts';
 import { type MarketConfig } from '~/config/marketplace';
-import { SUPPORTED_NETWORKS } from '~/config/networks/config';
 import { env } from '~/env';
 
 import { cookieStorage } from './wagmiCookieStorage';
@@ -19,6 +18,7 @@ import {
   emailWaas,
   appleWaas,
   googleWaas,
+  getDefaultChains,
 } from '@0xsequence/kit';
 import { findNetworkConfig, allNetworks } from '@0xsequence/network';
 import type { Chain, Transport } from 'viem';
@@ -71,15 +71,9 @@ export const createWagmiConfig = (marketConfig: MarketConfig) => {
 
 function getChainConfigs(marketConfig: MarketConfig): [Chain, ...Chain[]] {
   const supportedChainIds = new Set(
-    marketConfig.collections?.map((c) => c.chainId),
+    marketConfig.collections.map((c) => c.chainId),
   );
-  const chains = SUPPORTED_NETWORKS.map((n) => n.viemChainConfig).filter((c) =>
-    supportedChainIds.has(c.id),
-  ) as [Chain, ...Chain[]];
-  if (!chains.length) {
-    throw new Error('No supported networks found');
-  }
-  return chains;
+  return getDefaultChains([...supportedChainIds]);
 }
 
 function getTransportConfigs(
@@ -133,8 +127,6 @@ interface GetWaasConnectors {
   waasConfigKey: string;
 }
 
-const defaultChainId = defaultNetwork;
-
 const googleClientId = env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 const appleClientId = env.NEXT_PUBLIC_APPLE_CLIENT_ID;
 
@@ -146,7 +138,7 @@ function getWaasConnectors({
     emailWaas({
       projectAccessKey,
       waasConfigKey,
-      network: defaultChainId,
+      network: defaultNetwork,
     }),
 
     coinbaseWallet({
@@ -166,20 +158,21 @@ function getWaasConnectors({
         projectAccessKey,
         googleClientId,
         waasConfigKey,
-        network: defaultChainId,
+        network: defaultNetwork,
       }),
     );
   }
+
   // if (appleClientId) {
   //   wallets.push(
   //     appleWaas({
   //       projectAccessKey,
   //       appleClientId,
-  //       appleRedirectURI,
+  //       appleRedirectURI: 'https://sequence.app', // TODO: Update this
   //       waasConfigKey,
-  //       network: defaultChainId,
+  //       network: defaultNetwork,
   //     })
-  //   )
+  // )
   // }
 
   return getKitConnectWallets(projectAccessKey, wallets);

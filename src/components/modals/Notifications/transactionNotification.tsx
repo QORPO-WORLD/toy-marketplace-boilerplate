@@ -41,9 +41,9 @@ export const transactionNotification = async ({
               <Button variant="muted" size="xs" asChild>
                 <a
                   target="_blank"
-                  href={`${network?.explorerUrl}/tx/${txHash}`}
+                  href={`${network?.blockExplorer?.rootUrl}/tx/${txHash}`}
                 >
-                  Click to view on {network?.explorerName}
+                  Click to view on {network?.blockExplorer?.name}
                 </a>
               </Button>
             </>
@@ -59,9 +59,9 @@ export const transactionNotification = async ({
               <Button variant="muted" size="xs" asChild>
                 <a
                   target="_blank"
-                  href={`${network?.explorerUrl}/tx/${txHash}`}
+                  href={`${network?.blockExplorer?.rootUrl}tx/${txHash}`}
                 >
-                  Click to view on {network?.explorerName}
+                  Click to view on {network?.blockExplorer?.name}
                 </a>
               </Button>
             </>

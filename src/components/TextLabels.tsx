@@ -231,7 +231,7 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
     if (isCopied) setTimeout(onClear, 2000);
   }, [isCopied]);
 
-  const explorerUrl = getChain(chainId)?.explorerUrl;
+  const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
   return (
     <Flex className="items-center gap-2">
@@ -259,7 +259,7 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
       </Tooltip.Root> */}
 
       <Button asChild variant="link" title={address} className="px-0 uppercase">
-        <a href={`${explorerUrl}/address/${address}`} target="_blank">
+        <a href={`${explorerUrl}address/${address}`} target="_blank">
           <LinkIcon />
 
           {address ? <ENSName address={address} truncateAt={4} /> : 'unknown'}

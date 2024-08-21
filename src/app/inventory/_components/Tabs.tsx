@@ -79,6 +79,7 @@ export const InventoryTabs = ({
       !!marketConfig?.collections?.find(
         (wcc) =>
           compareAddress(wcc.collectionAddress, c.contractAddress) &&
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
           wcc.chainId === c.chainId,
       ),
   );
