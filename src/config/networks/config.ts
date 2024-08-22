@@ -22,7 +22,7 @@ export const SUPPORTED_NETWORKS = allNetworks
       builderMarketplaceUrl: builderMarketplaceApi(),
     };
 
-    if ((network.name = 'avalanche' || network.name === 'optimism')) {
+    if (network.name === 'avalanche' || network.name === 'optimism') {
       return {
         ...network,
         platformFeeRecipient: PLATFORM_FEE_RECIPIENT_AVALANCHE_OPTIMISM,
