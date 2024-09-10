@@ -66,6 +66,8 @@ export const createWagmiConfig = (marketConfig: MarketConfig) => {
     ssr: true,
     storage: cookieStorage,
     transports,
+    multiInjectedProviderDiscovery:
+      marketConfig?.walletOptions?.includes('metamask') ?? false,
   });
 };
 
