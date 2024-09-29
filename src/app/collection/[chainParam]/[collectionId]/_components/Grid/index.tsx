@@ -5,11 +5,11 @@ import { forwardRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import type { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
+import { type CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 export type CollectiblesGridProps = {
   data: CollectibleOrder[];

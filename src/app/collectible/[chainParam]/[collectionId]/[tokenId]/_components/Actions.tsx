@@ -11,7 +11,7 @@ import {
   MarketplaceKind,
   type Order,
   OrderSide,
-} from '~/lib/queries/marketplace/marketplace.gen';
+} from '@0xsequence/marketplace-sdk';
 import { _addToCart_ } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 import { defaultSelectionQuantity } from '~/lib/utils/quantity';

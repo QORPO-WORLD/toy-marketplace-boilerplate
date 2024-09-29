@@ -5,7 +5,7 @@ import {
   type CollectionOfferModalState,
 } from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
 import { useCartItem } from '~/hooks/cart/useCartItem';
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
+import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 import {
   addCollectibleOrderToCart,
   addTransferOrderToCart,

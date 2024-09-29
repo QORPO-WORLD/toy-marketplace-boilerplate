@@ -18,7 +18,7 @@ import {
 import { useOrderbookOrderMatch } from '~/hooks/orderbook/useOrderbookOrderMatch';
 import { getFrontEndFeeAmount, getPlatformFeeRecipient } from '~/lib/fees';
 import { balanceQueries } from '~/lib/queries';
-import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
+import type { Currency } from '@0xsequence/marketplace-sdk';
 import { getERC20Contract } from '~/lib/sdk/niftyswap-v2';
 import { formatDecimals, formatDisplay } from '~/lib/utils/helpers';
 import {

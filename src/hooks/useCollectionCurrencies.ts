@@ -1,6 +1,6 @@
 import { currencyQueries } from '~/lib/queries';
 import type { Currency } from '~/lib/queries/marketplace/marketplace.gen';
-import { marketConfig$ } from '~/lib/stores/marketConfig';
+import { marketplaceConfig$ } from '~/lib/stores/marketplaceConfig';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -21,8 +21,8 @@ export const useCollectionCurrencies = ({
 
   const currencies = new Set<Currency>();
 
-  if (data && !!marketConfig$?.projectId?.get()) {
-    const customCurrencies = marketConfig$.collections
+  if (data && !!marketplaceConfig$?.projectId?.get()) {
+    const customCurrencies = marketplaceConfig$.collections
       .find((collection) => collection.collectionAddress.get() === collectionId)
       ?.currencyOptions.get();
 

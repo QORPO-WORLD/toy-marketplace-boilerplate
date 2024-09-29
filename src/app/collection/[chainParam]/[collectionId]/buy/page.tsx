@@ -1,8 +1,8 @@
 'use client';
 
-import { getChainId } from '~/config/networks';
+import { getChainId } from '~/lib/utils/getChain';
 import { collectableQueries } from '~/lib/queries';
-import { MarketplaceKind } from '~/lib/queries/marketplace/marketplace.gen';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { type Routes } from '~/lib/routes';
 import { OrderItemType } from '~/lib/stores/cart/types';
 

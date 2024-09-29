@@ -5,7 +5,7 @@ import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { Spinner } from '~/components/Spinner';
 import { balanceQueries, collectionQueries } from '~/lib/queries';
-import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
+import { type TokenMetadata } from '@0xsequence/marketplace-sdk';
 import { OrderItemType } from '~/lib/stores/cart/types';
 
 import {

@@ -9,7 +9,7 @@ import {
   type Order,
   OrderSide,
   OrderStatus as OrderStatusMarket,
-} from '~/lib/queries/marketplace/marketplace.gen';
+} from '@0xsequence/marketplace-sdk';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import {
