@@ -1,10 +1,11 @@
+import { ssrClient } from '~/sdk-config';
 
 import { BigLeftBanner } from './_landing/layouts/BigLeftBanner';
 import { DefaultLayout } from './_landing/layouts/DefaultLayout';
 import { FloatingBanner } from './_landing/layouts/FloatingHeader';
 
 const LandingPage = async () => {
-  const marketPlaceC
+  const marketplaceConfig = await ssrClient().getMarketplaceConfig();
 
   switch (marketplaceConfig.landingPageLayout) {
     case 'floating_header': {
