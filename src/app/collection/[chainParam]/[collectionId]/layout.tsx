@@ -1,7 +1,7 @@
-import { getMarketplaceConfig } from '~/config/marketplace';
 import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
 import { compareAddress } from '~/lib/utils/helpers';
+import { ssrClient } from '~/sdk-config';
 
 import CollectionBanner from './_components/Banner';
 import CollectionControls from './_components/Controls';
@@ -17,6 +17,7 @@ const Layout = async ({
   params: typeof Routes.collection.params;
 }) => {
   const chainId = getChainId(chainParam)!;
+  const { getMarketplaceConfig } = ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
 
   const collectionConfig = marketplaceConfig.collections?.find(

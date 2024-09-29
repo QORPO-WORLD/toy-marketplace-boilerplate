@@ -1,10 +1,11 @@
-import { getMarketplaceConfig } from '~/config/marketplace';
+import { ssrClient } from '~/sdk-config';
 
 import { Flex } from '$ui';
 import Inventory from './Inventory';
 import type { Metadata } from 'next';
 
 const InventoryPage = async () => {
+  const { getMarketplaceConfig } = ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return (
     <Flex

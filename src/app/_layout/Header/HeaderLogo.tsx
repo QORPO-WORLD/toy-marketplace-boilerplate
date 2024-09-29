@@ -1,10 +1,11 @@
 import { Logo } from '~/components/Logo';
-import { getMarketplaceConfig } from '~/config/marketplace';
 import { truncateAtMiddle } from '~/lib/utils/helpers';
+import { ssrClient } from '~/sdk-config';
 
 import Link from 'next/link';
 
 export async function HeaderLogo() {
+  const { getMarketplaceConfig } = ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return (
     <Link
