@@ -2,11 +2,11 @@
 
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
-import { SUPPORTED_NETWORKS } from '~/config/networks/config';
 import { useIsClient } from '~/hooks/ui/useIsClient';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog } from '$ui';
+import { type ChainId, networks } from '@0xsequence/network';
 import { useAccount } from 'wagmi';
 
 export const NetworkButton = () => {
@@ -21,7 +21,7 @@ export const NetworkButton = () => {
 
   if (chain?.id) {
     const getNetworkButton = () => {
-      if (!SUPPORTED_NETWORKS.map((n) => n.chainId).includes(chain?.id)) {
+      if (networks[chain.id as ChainId] === undefined) {
         return <Button variant="destructive" label="Unsupported Network" />;
       }
       return (
