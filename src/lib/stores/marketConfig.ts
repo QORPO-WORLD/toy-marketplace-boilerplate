@@ -1,5 +1,5 @@
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { observable } from '@legendapp/state';
 
-export const marketConfig$ = observable<MarketConfig>();
+export const marketplaceConfig$ = observable<MarketplaceConfig>();

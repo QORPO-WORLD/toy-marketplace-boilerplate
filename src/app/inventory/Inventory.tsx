@@ -3,14 +3,14 @@
 import { Spinner } from '~/components/Spinner';
 import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, Image, Text } from '$ui';
 import { InventoryTabs } from './_components/Tabs';
 import { useAccount } from 'wagmi';
 
-const Inventory = ({ marketConfig }: { marketConfig: MarketConfig }) => {
+const Inventory = ({ marketplaceConfig }: { marketplaceConfig: MarketplaceConfig }) => {
   const {
     isConnected,
     chain,
@@ -60,7 +60,7 @@ const Inventory = ({ marketConfig }: { marketConfig: MarketConfig }) => {
     <InventoryTabs
       chainId={walletChainId!}
       inventoryAddress={address!}
-      marketConfig={marketConfig}
+      marketplaceConfig={marketplaceConfig}
     />
   );
 };

@@ -1,11 +1,11 @@
-import { getMarketConfig } from '~/config/marketplace';
+import { getMarketplaceConfig } from '~/config/marketplace';
 
 import { Flex } from '$ui';
 import Inventory from './Inventory';
 import type { Metadata } from 'next';
 
 const InventoryPage = async () => {
-  const marketConfig = await getMarketConfig();
+  const marketplaceConfig = await getMarketplaceConfig();
   return (
     <Flex
       className="mx-auto h-full w-full max-w-[1400px] flex-col gap-24 py-12"
@@ -13,7 +13,7 @@ const InventoryPage = async () => {
         minHeight: 'calc(100vh - $$footerHeight - $$headerHeight)',
       }}
     >
-      <Inventory marketConfig={marketConfig} />
+      <Inventory marketplaceConfig={marketplaceConfig} />
     </Flex>
   );
 };

@@ -5,7 +5,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { collectionQueries } from '~/lib/queries';
 
 import {
@@ -27,14 +27,14 @@ import Head from 'next/head';
 interface CollectionHeaderProps {
   chainId: number;
   collectionAddress: string;
-  marketConfig: MarketConfig;
+  marketplaceConfig: MarketplaceConfig;
 }
 
 const MIN_HEIGHT = 140;
 const CollectionHeader = ({
   chainId,
   collectionAddress,
-  marketConfig,
+  marketplaceConfig,
 }: CollectionHeaderProps) => {
   const collectionMetadata = useQuery(
     collectionQueries.detail({
@@ -49,7 +49,7 @@ const CollectionHeader = ({
   const symbol = collection?.symbol;
   const image = collection?.extensions?.ogImage;
   const description = collection?.extensions?.description;
-  const socials = marketConfig.socials;
+  const socials = marketplaceConfig.socials;
 
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(

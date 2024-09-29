@@ -1,4 +1,4 @@
-import { getMarketConfig } from '~/config/marketplace';
+import { getMarketplaceConfig } from '~/config/marketplace';
 import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
 import { compareAddress } from '~/lib/utils/helpers';
@@ -17,9 +17,9 @@ const Layout = async ({
   params: typeof Routes.collection.params;
 }) => {
   const chainId = getChainId(chainParam)!;
-  const marketConfig = await getMarketConfig();
+  const marketplaceConfig = await getMarketplaceConfig();
 
-  const collectionConfig = marketConfig.collections?.find(
+  const collectionConfig = marketplaceConfig.collections?.find(
     (c) =>
       compareAddress(c.collectionAddress, collectionId) && chainId == c.chainId,
   );
@@ -35,7 +35,7 @@ const Layout = async ({
         <CollectionHeader
           chainId={chainId}
           collectionAddress={collectionId}
-          marketConfig={marketConfig}
+          marketplaceConfig={marketplaceConfig}
         />
       }
       controls={

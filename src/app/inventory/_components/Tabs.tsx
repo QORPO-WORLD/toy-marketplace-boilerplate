@@ -3,7 +3,7 @@
 import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
-import type { MarketConfig } from '~/config/marketplace';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { balanceQueries } from '~/lib/queries';
 import { compareAddress } from '~/lib/utils/helpers';
 
@@ -16,7 +16,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 type InventoryTabsProps = {
   chainId: number;
   inventoryAddress: string;
-  marketConfig: MarketConfig;
+  marketplaceConfig: MarketplaceConfig;
 };
 
 const inventoryTabsList = {
@@ -26,7 +26,7 @@ const inventoryTabsList = {
 export const InventoryTabs = ({
   chainId,
   inventoryAddress,
-  marketConfig,
+  marketplaceConfig,
 }: InventoryTabsProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -76,7 +76,7 @@ export const InventoryTabs = ({
 
   const filteredCollecionBalances: TokenBalance[] = collectionBalances!.filter(
     (c) =>
-      !!marketConfig?.collections?.find(
+      !!marketplaceConfig?.collections?.find(
         (wcc) =>
           compareAddress(wcc.collectionAddress, c.contractAddress) &&
           // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
