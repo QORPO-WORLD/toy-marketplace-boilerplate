@@ -1,6 +1,4 @@
-import { collectionQueries } from '~/lib/queries';
-
-import { useQuery } from '@tanstack/react-query';
+import { useCollection } from '@0xsequence/marketplace-sdk/react';
 
 interface UseCollectionTypeProps {
   chainId: number;
@@ -13,12 +11,10 @@ export const useCollectionType = ({
   chainId,
   collectionAddress,
 }: UseCollectionTypeProps) => {
-  const { data: collectionMetadata, isLoading } = useQuery(
-    collectionQueries.detail({
-      chainID: chainId.toString(),
-      collectionId: collectionAddress,
-    }),
-  );
+  const { data: collectionMetadata, isLoading } = useCollection({
+    chainId: chainId.toString(),
+    collectionAddress,
+  });
 
   const isERC721 = collectionMetadata
     ? collectionMetadata.type === 'ERC721'
