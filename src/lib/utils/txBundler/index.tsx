@@ -140,7 +140,7 @@ export const generateStepsOrderbookAcceptRequest = (
     const bundledOrderAction = async ({
       acceptRequests,
     }: AcceptRequestParams) => {
-      const txns: ethers.providers.TransactionRequest[] = [];
+      const txns: ethers.TransactionRequest[] = [];
 
       if (requireERC721Approval) {
         const erc721ApprovalAllTx = getErc721ApproveAllTransaction(
@@ -307,7 +307,7 @@ export const generateStepsOrderbookOrder = (
       createOrder,
       partialOrders,
     }: CreateRequestParams) => {
-      const txns: ethers.providers.TransactionRequest[] = [];
+      const txns: ethers.TransactionRequest[] = [];
 
       if (requireERC721Approval) {
         const erc721ApprovalAllTx = getErc721ApproveAllTransaction(

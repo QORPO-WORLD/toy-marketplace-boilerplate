@@ -14,8 +14,8 @@ import { ethers } from 'ethers';
 export const getErc1155ApproveAllTransaction = (
   tokenAddress: string,
   spender: string,
-): ethers.providers.TransactionRequest => {
-  const erc1155Interface = new ethers.utils.Interface(ERC1155_ABI);
+): ethers.TransactionRequest => {
+  const erc1155Interface = new ethers.Interface(ERC1155_ABI);
   const erc1155Data = erc1155Interface.encodeFunctionData('setApprovalForAll', [
     spender,
     true,
@@ -30,8 +30,8 @@ export const getErc1155ApproveAllTransaction = (
 export const getErc721ApproveAllTransaction = (
   tokenAddress: string,
   spender: string,
-): ethers.providers.TransactionRequest => {
-  const erc721Interface = new ethers.utils.Interface(ERC721_ABI);
+): ethers.TransactionRequest => {
+  const erc721Interface = new ethers.Interface(ERC721_ABI);
   const erc721Data = erc721Interface.encodeFunctionData('setApprovalForAll', [
     spender,
     true,
@@ -46,12 +46,12 @@ export const getErc721ApproveAllTransaction = (
 export const getErc20ApproveTransaction = (
   currencyAddress: string,
   spender: string,
-): ethers.providers.TransactionRequest => {
-  const erc20Interface = new ethers.utils.Interface(ERC20_ABI);
+): ethers.TransactionRequest => {
+  const erc20Interface = new ethers.Interface(ERC20_ABI);
 
   const erc20Data = erc20Interface.encodeFunctionData('approve', [
     spender,
-    ethers.constants.MaxUint256,
+    ethers.MaxUint256,
   ]);
 
   const erc20ApprovalTx = {
@@ -67,7 +67,7 @@ export const getCreateRequestTransaction = (
 ) => {
   const { isListing, isERC1155, tokenContract, currency } = generateStepsParams;
 
-  const orderbookInterface = new ethers.utils.Interface(Orderbook_ABI);
+  const orderbookInterface = new ethers.Interface(Orderbook_ABI);
 
   /*
     struct RequestParams {
@@ -110,7 +110,7 @@ export const getCreateRequestTransaction = (
 
 type PartialOrders = [AcceptRequest, ...AcceptRequest[]];
 export const getAcceptRequestBatchTx = (partialOrders: PartialOrders) => {
-  const orderbookInterface = new ethers.utils.Interface(Orderbook_ABI);
+  const orderbookInterface = new ethers.Interface(Orderbook_ABI);
 
   const acceptRequestBatchData = orderbookInterface.encodeFunctionData(
     'acceptRequestBatch',

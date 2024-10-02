@@ -36,10 +36,10 @@ export const RemoveLiquidityType = `tuple(
 
 export type SellTokensObj20 = {
   recipient: string;
-  minCurrency: number | string | ethers.BigNumber;
+  minCurrency: number | string | ethers.BigNumberish;
   extraFeeRecipients: string[];
-  extraFeeAmounts: number[] | string[] | ethers.BigNumber[];
-  deadline: number | string | ethers.BigNumber;
+  extraFeeAmounts: number[] | string[] | ethers.BigNumberish[];
+  deadline: number | string | ethers.BigNumberish;
 };
 
 export type AddLiquidityObj = {
@@ -54,27 +54,27 @@ export type RemoveLiquidityObj = {
 };
 
 export function getSellTokenData(obj: SellTokensObj20) {
-  return ethers.utils.defaultAbiCoder.encode(
+  return ethers.AbiCoder.defaultAbiCoder().encode(
     ['bytes4', SellTokens20Type],
     [methodsSignature.SELLTOKENS, obj],
   );
 }
 
 export const getAddLiquidityData = (
-  maxCurrency: ethers.BigNumber[],
+  maxCurrency: ethers.BigNumberish[],
   deadline: number,
 ) => {
   const addLiquidityObj = { maxCurrency, deadline } as AddLiquidityObj;
 
-  return ethers.utils.defaultAbiCoder.encode(
+  return ethers.AbiCoder.defaultAbiCoder().encode(
     ['bytes4', AddLiquidityType],
     [methodsSignature.ADDLIQUIDITY, addLiquidityObj],
   );
 };
 
 export const getRemoveLiquidityData = (
-  minCurrency: ethers.BigNumber[],
-  minTokens: ethers.BigNumber[],
+  minCurrency: ethers.BigNumberish[],
+  minTokens: ethers.BigNumberish[],
   deadline: number,
 ) => {
   const removeLiquidityObj = {
@@ -83,7 +83,7 @@ export const getRemoveLiquidityData = (
     deadline,
   } as RemoveLiquidityObj;
 
-  return ethers.utils.defaultAbiCoder.encode(
+  return ethers.AbiCoder.defaultAbiCoder().encode(
     ['bytes4', RemoveLiquidityType],
     [methodsSignature.REMOVELIQUIDITY, removeLiquidityObj],
   );

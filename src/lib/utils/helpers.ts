@@ -1,5 +1,5 @@
-import type { BigNumber, BigNumberish } from 'ethers';
-import { formatUnits } from 'ethers/lib/utils';
+import type { BigNumberish } from 'ethers';
+import { formatUnits } from 'ethers';
 
 export const truncateAtMiddle = (text: string, truncateAt: number) => {
   let finalText = text;
@@ -101,7 +101,7 @@ export const formatDisplay = (_val: number | string): string => {
 
 export const formatDecimals = (
   bn: BigNumberish,
-  decimals: string | number | BigNumber = 0,
+  decimals: string | number | BigNumberish = 0,
 ): string => {
   // sanitize extremety formats such as "1e+99",
   // convert to hex before feeding into any BigNumber instance
