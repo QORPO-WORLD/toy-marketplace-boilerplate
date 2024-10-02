@@ -18,6 +18,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { WagmiProvider, type State } from 'wagmi';
 
+import '@0xsequence/design-system/styles.css'
+
 const queryClient = getQueryClient();
 
 export default function Providers({
