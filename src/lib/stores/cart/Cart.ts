@@ -348,13 +348,13 @@ export const cartState = derive(
 
       return {
         tokenIds: state.cartItems.map((ci) =>
-          ethers.BigNumber.from(ci.collectibleMetadata.tokenId).toString(),
+          BigInt(ci.collectibleMetadata.tokenId).toString(),
         ),
         tokenAmounts: state.cartItems.map((ci) =>
-          ethers.BigNumber.from(ci.quantity).toString(),
+          BigInt(ci.quantity).toString(),
         ),
         subtotals: state.cartItems.map((ci) =>
-          ethers.BigNumber.from(ci.subtotal).toString(),
+          BigInt(ci.subtotal).toString(),
         ),
       };
     },

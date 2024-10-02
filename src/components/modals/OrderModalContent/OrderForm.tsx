@@ -54,7 +54,6 @@ import { compareAddress } from '@0xsequence/kit';
 import type { ContractInfo, TokenMetadata } from '@0xsequence/metadata';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { addDays } from 'date-fns';
-import { BigNumber, constants } from 'ethers';
 import type { Hex } from 'viem';
 import { formatUnits } from 'viem';
 import { useAccount, useSwitchChain, useWalletClient } from 'wagmi';
@@ -261,10 +260,10 @@ export const OrderForm = ({
       },
     });
 
-  let balance = constants.Zero;
+  let balance = BigInt(0);
 
   try {
-    balance = BigNumber.from(userCurrencyBalance || 0);
+    balance = BigInt(userCurrencyBalance || 0);
   } catch {}
 
   const formattedCurrencyBalance = formatDecimals(
