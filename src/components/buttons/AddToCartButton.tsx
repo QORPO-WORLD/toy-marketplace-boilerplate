@@ -39,6 +39,8 @@ export const AddToCartButton = ({
   let onClick: () => void;
   let label: ButtonLabel;
 
+  const cartItem = {};
+
   switch (itemType) {
     case OrderItemType.BUY:
       if (cartItem) {
