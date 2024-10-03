@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react';
 
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
@@ -10,7 +9,7 @@ import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
-import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import {
   collectionOptions,
   useConfig,
@@ -96,7 +95,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
               {name}
             </Text>
 
-            <NetworkIcon size="xs" chainId={chainId} />
+            <NetworkImage size="xs" chainId={chainId} />
           </Flex>
 
           <Text
