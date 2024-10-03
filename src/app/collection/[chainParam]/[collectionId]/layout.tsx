@@ -1,6 +1,5 @@
-import { getChainId } from '~/config/networks';
 import type { Routes } from '~/lib/routes';
-import { compareAddress } from '~/lib/utils/helpers';
+import { getChainId } from '~/lib/utils/getChain';
 import { ssrClient } from '~/sdk-config';
 
 import CollectionBanner from './_components/Banner';
@@ -8,6 +7,7 @@ import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
+import { compareAddress } from '@0xsequence/marketplace-sdk';
 
 const Layout = async ({
   params: { chainParam, collectionId },

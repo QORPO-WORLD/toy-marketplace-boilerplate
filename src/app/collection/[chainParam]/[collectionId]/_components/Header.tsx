@@ -3,10 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-import { collectionQueries } from '~/lib/queries';
 
 import {
   Grid,
@@ -20,9 +17,11 @@ import {
   ChevronUpIcon,
   BugIcon,
 } from '$ui';
-import { useQuery } from '@tanstack/react-query';
+import { NetworkImage } from '@0xsequence/design-system';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
+import { useCollection } from 'node_modules/@0xsequence/marketplace-sdk/dist/react/hooks/useCollection';
 
 interface CollectionHeaderProps {
   chainId: number;
@@ -36,12 +35,10 @@ const CollectionHeader = ({
   collectionAddress,
   marketplaceConfig,
 }: CollectionHeaderProps) => {
-  const collectionMetadata = useQuery(
-    collectionQueries.detail({
-      chainID: chainId.toString(),
-      collectionId: collectionAddress,
-    }),
-  );
+  const collectionMetadata = useCollection({
+    chainId: chainId.toString(),
+    collectionAddress,
+  });
 
   const { data: collection, isLoading, isError } = collectionMetadata;
   const name = collection?.name;
@@ -144,7 +141,7 @@ const CollectionHeader = ({
             name="collection-type-and-network"
             className="flex items-center gap-2"
           >
-            {chainId && <NetworkIcon chainId={chainId} size="sm" />}
+            {chainId && <NetworkImage chainId={chainId} size="sm" />}
 
             <ContractTypeBadge
               chainId={chainId}

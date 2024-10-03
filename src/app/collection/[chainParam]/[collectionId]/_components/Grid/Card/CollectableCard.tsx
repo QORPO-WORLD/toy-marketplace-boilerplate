@@ -1,13 +1,12 @@
 import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import { getChainId } from '~/config/networks';
-import { useCartItem } from '~/hooks/cart/useCartItem';
-import type { CollectibleOrder } from '~/lib/queries/marketplace/marketplace.gen';
 import { Routes } from '~/lib/routes';
 import { OrderItemType } from '~/lib/stores/cart/types';
+import { getChainId } from '~/lib/utils/getChain';
 
 import { Footer } from './Footer';
+import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 import { type ContractType } from '@0xsequence/metadata';
 import Link from 'next/link';
 
@@ -47,12 +46,12 @@ export const Card = ({
   const { tokenId } = data.metadata;
   const chainId = getChainId(chainParam)!;
 
-  const cartItem = useCartItem({
-    collectibleOrder: data,
-    chainId,
-    collectionId,
-    itemType,
-  });
+  // const cartItem = useCartItem({
+  //   collectibleOrder: data,
+  //   chainId,
+  //   collectionId,
+  //   itemType,
+  // });
 
   return (
     <article
@@ -60,7 +59,7 @@ export const Card = ({
         classNames.collectibleSelectionIndicator,
         `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
         'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
-        !!cartItem ? `${getOrderTypeOutlineColor()}` : '',
+        // !!cartItem ? `${getOrderTypeOutlineColor()}` : '',
         'z-10 overflow-hidden !outline transition-all',
       )}
     >

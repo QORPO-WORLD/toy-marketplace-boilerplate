@@ -6,11 +6,9 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { CollectionOfferModal } from '../_components/ListingOfferModal';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { useListCollectables } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;
@@ -26,13 +24,14 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
 
   const collectiblesResponse = useListCollectables({
     chainId,
-    contractAddress: collectionId,
-    filter: {
+    collectionAddress: collectionId,
+    filters: {
       searchText: text,
       includeEmpty,
       properties,
       marketplaces: [MarketplaceKind.sequence_marketplace_v1],
     },
+    includeOrders: 'lowestListing',
   });
 
   const collectibles =
@@ -45,7 +44,6 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
         itemType={OrderItemType.BUY}
         data={collectibles}
       />
-      <CollectionOfferModal />
     </>
   );
 });

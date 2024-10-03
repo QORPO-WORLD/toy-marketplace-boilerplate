@@ -8,7 +8,6 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { CollectionOfferModal } from '../_components/ListingOfferModal';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { useListCollectables } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
@@ -28,14 +27,15 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
 
   const collectiblesResponse = useListCollectables({
     chainId,
-    colle: collectionId,
-    filter: {
+    collectionAddress: collectionId,
+    filters: {
       searchText: text,
       includeEmpty: !filters$.showAvailableOnly.get(),
       properties,
       inAccounts: address ? [address] : undefined,
       marketplaces: [MarketplaceKind.sequence_marketplace_v1],
     },
+    includeOrders: 'highestOffer',
   });
 
   if (!address) {
@@ -63,7 +63,6 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
         itemType={OrderItemType.SELL}
         data={collectibles}
       />
-      <CollectionOfferModal />
     </>
   );
 });

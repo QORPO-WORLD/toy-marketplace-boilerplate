@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { cartState, toggleCart } from '~/lib/stores/cart/Cart';
 
 import { Button, Box, cn, CartIcon, Text } from '$ui';
-import { useSnapshot } from 'valtio';
 
 export const OrderCartButton = () => {
   return (
@@ -21,7 +20,7 @@ export const OrderCartButton = () => {
   );
 };
 const CartItemsBadge = () => {
-  const { cartItems } = useSnapshot(cartState);
+  const cartItems = []; //TODO
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {

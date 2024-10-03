@@ -1,18 +1,10 @@
 'use client';
 
-import {
-  CollectionOfferModal$,
-  type CollectionOfferModalState,
-} from '~/app/collection/[chainParam]/[collectionId]/_components/ListingOfferModal';
-import { useCartItem } from '~/hooks/cart/useCartItem';
-import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
-import {
-  addCollectibleOrderToCart,
-  addTransferOrderToCart,
-} from '~/lib/stores/cart/Cart';
+import { addCollectibleOrderToCart } from '~/lib/stores/cart/Cart';
 import { OrderItemType } from '~/lib/stores/cart/types';
 
 import { Button } from '$ui';
+import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 import type { ContractType } from '@0xsequence/metadata';
 import { usePathname } from 'next/navigation';
 
@@ -47,18 +39,6 @@ export const AddToCartButton = ({
   let onClick: () => void;
   let label: ButtonLabel;
 
-  const cartItem = useCartItem({
-    collectibleOrder,
-    chainId,
-    collectionId,
-    itemType,
-  });
-
-  //TODO: Hide transfer button, until its implemented
-  if (itemType === OrderItemType.TRANSFER) {
-    return null;
-  }
-
   switch (itemType) {
     case OrderItemType.BUY:
       if (cartItem) {
@@ -76,33 +56,13 @@ export const AddToCartButton = ({
               itemType: OrderItemType.BUY,
             });
           } else {
-            const state: CollectionOfferModalState = {
-              chainId,
-              type: 'offer',
-              collectionAddress: collectionId,
-              tokenId: collectibleOrder.metadata.tokenId,
-            };
-
-            CollectionOfferModal$.state.set(state);
-            CollectionOfferModal$.open.set(true);
           }
         };
         label = order ? ButtonLabel.ADD_TO_CART : ButtonLabel.PLACE_OFFER;
       }
       break;
     case OrderItemType.SELL:
-      onClick = () => {
-        const state: CollectionOfferModalState = {
-          chainId,
-          type: 'listing',
-          collectionAddress: collectionId,
-          tokenId: collectibleOrder.metadata.tokenId,
-          bestListing: collectibleOrder.order,
-        };
-
-        CollectionOfferModal$.state.set(state);
-        CollectionOfferModal$.open.set(true);
-      };
+      onClick = () => {};
       label = ButtonLabel.SELL;
       break;
 

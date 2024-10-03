@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
 import { classNames } from '~/config/classNames';
-import { formatDisplay, truncateAtMiddle } from '~/lib/utils/helpers';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
-import { NetworkIcon } from './NetworkLabel';
+import { NetworkIcon, NetworkImage } from '@0xsequence/design-system';
+import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
 
 /* ************* CURRENCY AVATAR ***************** */
@@ -119,7 +119,7 @@ export const CollectionAvatar = ({
       </Avatar.Base>
 
       <Text className="text-foreground/90 font-medium">{name}</Text>
-      {chainId ? <NetworkIcon size="sm" chainId={chainId} /> : null}
+      {chainId ? <NetworkImage size="sm" chainId={chainId} /> : null}
     </Flex>
   );
 };
@@ -195,7 +195,7 @@ export const PoolAvatar = memo(
               loading={loading}
               title={`${tokenId}`}
             >
-              #{truncateAtMiddle(`${tokenId}`, 10)}
+              #{truncateMiddle(`${tokenId}`, 10)}
             </Text>
           ) : null}
         </Flex>
