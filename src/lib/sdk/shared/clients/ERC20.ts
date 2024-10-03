@@ -44,7 +44,7 @@ export class ERC20 {
       address: erc20Address as Hex,
       abi: ERC20_ABI,
       functionName: 'approve',
-      args: [spender as Hex, BigInt(ethers.constants.MaxUint256.toString())],
+      args: [spender as Hex, BigInt(ethers.MaxUint256.toString())],
     });
 
     return txHash;
@@ -54,7 +54,7 @@ export class ERC20 {
     return encodeFunctionData({
       abi: ERC20_ABI,
       functionName: 'approve',
-      args: [spender as Hex, BigInt(ethers.constants.MaxUint256.toString())],
+      args: [spender as Hex, BigInt(ethers.MaxUint256.toString())],
     });
   };
 

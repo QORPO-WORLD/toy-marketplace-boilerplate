@@ -129,7 +129,7 @@ const OrderCollectibleMetadata = ({
   });
 
   const formattedPrice = price
-    ? formatDecimals(ethers.BigNumber.from(price), currencyDecimals)
+    ? formatDecimals(BigInt(price), currencyDecimals)
     : undefined;
 
   const displayPrice = !isLoading ? formattedPrice : '-------';
@@ -299,13 +299,10 @@ const OrderCollectibleSubtotal = ({
   currencyDecimals,
   isLoading,
 }: OrderCollectibleSubtotalProps) => {
-  const subtotalNum = formatDecimals(
-    ethers.BigNumber.from(item.subtotal),
-    currencyDecimals,
-  );
+  const subtotalNum = formatDecimals(BigInt(item.subtotal), currencyDecimals);
 
   const quantityNum = formatDecimals(
-    ethers.BigNumber.from(item.quantity),
+    BigInt(item.quantity),
     item.collectibleMetadata.decimals,
   );
 

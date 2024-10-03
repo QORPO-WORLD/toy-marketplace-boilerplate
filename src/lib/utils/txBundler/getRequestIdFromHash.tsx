@@ -38,17 +38,17 @@ export const getRequestIdFromHash = async (
       log.address,
       SEQUENCE_MARKET_V1_ADDRESS,
     );
-    const eventSignature = ethers.utils.id(
+    const eventSignature = ethers.id(
       'RequestCreated(uint256,address,address,uint256,bool,uint256,address,uint256,uint256)',
     );
     const isRequestCreatedEvent = eventSignature === (log.topics[0] as string);
     if (isOrderbookContract && isRequestCreatedEvent) {
-      const creatorAddress = ethers.utils.defaultAbiCoder
+      const creatorAddress = ethers.AbiCoder.defaultAbiCoder()
         .decode(['address'], log.topics[2] as string)
         .toString();
       const isCreator = compareAddress(creatorAddress, signerAddress);
       if (isCreator) {
-        requestId = ethers.utils.defaultAbiCoder
+        requestId = ethers.AbiCoder.defaultAbiCoder()
           .decode(['uint256'], log.topics[1] as string)
           .toString();
       }

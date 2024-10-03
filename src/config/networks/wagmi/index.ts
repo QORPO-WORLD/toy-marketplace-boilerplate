@@ -145,7 +145,7 @@ function getWaasConnectors({
 
     coinbaseWallet({
       appName,
-    }) as Wallet,
+    }),
   ];
 
   if (walletConnectProjectId) {
