@@ -25,16 +25,8 @@ export const Header = () => {
 
       <Grid.Child name="." />
 
-      <Grid.Child name="inventory-button" className="bg-background/30">
-        <InventoryButton />
-      </Grid.Child>
-
       <Grid.Child name="wallet-button" className="bg-background/30">
         <WalletButton />
-      </Grid.Child>
-
-      <Grid.Child name="order-button" className="bg-background/30">
-        <OrderCartButton />
       </Grid.Child>
 
       <Grid.Child name="network-button" className="mr-2 bg-background/30">
