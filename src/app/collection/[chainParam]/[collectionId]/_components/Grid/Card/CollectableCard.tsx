@@ -6,13 +6,17 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { Footer } from './Footer';
 import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
-import { type ContractType } from '@0xsequence/metadata';
 import Link from 'next/link';
 
 export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
-  const { collectionId, chainParam } = Routes.collection.useParams();
+  const { collectionId, chainParam, mode } = Routes.collection.useParams();
   return (
-    <Card data={data} chainParam={chainParam} collectionId={collectionId} />
+    <Card
+      data={data}
+      chainParam={chainParam}
+      collectionId={collectionId}
+      orderSide={mode || 'buy'}
+    />
   );
 };
 
@@ -20,14 +24,14 @@ type CardProps = {
   data: CollectibleOrder;
   chainParam: string | number;
   collectionId: string;
-  contractType?: ContractType;
+  orderSide: 'buy' | 'sell';
 };
 
 export const Card = ({
   data,
   chainParam,
   collectionId,
-  contractType,
+  orderSide,
 }: CardProps) => {
   const { tokenId } = data.metadata;
   const chainId = getChainId(chainParam)!;
@@ -64,7 +68,7 @@ export const Card = ({
         chainId={chainId}
         collectionId={collectionId}
         collectibleOrder={data}
-        contractType={contractType}
+        orderSide={orderSide}
       />
     </article>
   );

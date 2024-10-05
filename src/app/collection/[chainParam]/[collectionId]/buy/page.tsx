@@ -40,7 +40,6 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     <>
       <CollectiblesGrid
         endReached={collectiblesResponse.fetchNextPage}
-        itemType={OrderItemType.BUY}
         data={collectibles}
       />
     </>

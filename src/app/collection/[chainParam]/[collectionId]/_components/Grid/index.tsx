@@ -12,14 +12,12 @@ import { type CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 export type CollectiblesGridProps = {
   data: CollectibleOrder[];
-  itemType: any;
   endReached?: () => void;
 };
 
 export const CollectiblesGrid = ({
   endReached,
   data,
-  itemType,
 }: CollectiblesGridProps) => {
   return (
     <VirtuosoGrid
@@ -28,9 +26,7 @@ export const CollectiblesGrid = ({
       components={{
         List: GridContainer,
       }}
-      itemContent={(index, data) => (
-        <CollectibleCard key={index} itemType={itemType} data={data} />
-      )}
+      itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
       endReached={endReached}
       data={data}
     />
@@ -38,7 +34,7 @@ export const CollectiblesGrid = ({
 };
 
 type GridContainerProps = {
-  className: string;
+  className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };

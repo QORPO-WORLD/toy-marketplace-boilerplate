@@ -9,17 +9,16 @@
     "lint": "next lint",
     "lint:fix": "next lint && prettier --write --ignore-path .prettierignore .",
     "start": "next start -p 4444",
-    "check": "tsc --noEmit",
-    "knip": "knip",
-    "postinstall": "(cp -n .env.example .env) || echo already exists"
+    "check": "tsc --noEmit"
   },
   "dependencies": {
-    "0xsequence": "^2.0.10",
+    "0xsequence": "^2.0.11",
     "@0xsequence/api": "^2.0.10",
     "@0xsequence/design-system": "^1.7.8",
     "@0xsequence/indexer": "^2.0.10",
     "@0xsequence/kit": "^4.0.5",
     "@0xsequence/kit-checkout": "^4.0.5",
+    "@0xsequence/marketplace-sdk": "file:../marketplace-sdk",
     "@0xsequence/metadata": "^2.0.10",
     "@0xsequence/network": "^2.0.10",
     "@0xsequence/waas": "^2.0.10",

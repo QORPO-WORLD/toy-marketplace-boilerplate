@@ -18,8 +18,6 @@ const collectionParams = z.object({
   mode: swapModeEnum.optional(),
 });
 
-const tab = ['details', 'listings', 'offers'] as const;
-
 const collectibleParams = z.object({
   chainParam,
   collectionId,

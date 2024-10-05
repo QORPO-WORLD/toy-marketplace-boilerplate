@@ -9,6 +9,7 @@ import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
+import { NetworkImage } from '@0xsequence/design-system';
 import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import {
   collectionOptions,
