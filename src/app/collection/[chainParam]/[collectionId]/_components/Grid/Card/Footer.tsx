@@ -1,11 +1,11 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
-import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
 
 import {
   type Order,
   type CollectibleOrder,
   truncateMiddle,
 } from '@0xsequence/marketplace-sdk';
+import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 
 export const Footer = ({ metadata, order }: CollectibleOrder) => {
   const { tokenId, name } = metadata;
@@ -43,9 +43,8 @@ type OrderProps = {
 };
 
 const Order = ({ height, order }: OrderProps) => {
-  const { currencies } = useCollectionCurrencies({
+  const { data: currencies } = useCurrencies({
     chainId: order.chainId,
-    collectionId: order.collectionContractAddress,
   });
 
   const currency = currencies?.find(
@@ -63,7 +62,7 @@ const Order = ({ height, order }: OrderProps) => {
           className="ellipsis text-sm md:text-base"
           title={String(currency?.name)}
         >
-          {formatDisplay(order.priceAmountFormatted) || 'N/A'}
+          {order.priceAmountFormatted || 'N/A'}
         </Text>
       </Flex>
       <Badge variant="success">

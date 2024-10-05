@@ -2,25 +2,17 @@
 
 import { useState } from 'react';
 
-import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
-import { OrderItemType } from '~/lib/stores/cart/types';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
-import { type OrderbookOrder } from '@0xsequence/indexer';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
-  MarketplaceKind,
-  type Order,
-  OrderSide,
-  SEQUENCE_MARKET_V1_ADDRESS,
-} from '@0xsequence/marketplace-sdk';
-import {
+  useCurrencies,
   useHighestOffer,
   useLowestListing,
   useTokenBalances,
 } from '@0xsequence/marketplace-sdk/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -36,9 +28,9 @@ export const CollectibleTradeActions = ({
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
   const [isListingModalOpen, setIsListingModalOpen] = useState(false);
 
-  const { currencies } = useCollectionCurrencies({
-    chainId: chainId,
-    collectionId: collectionAddress,
+  const { data: currencies } = useCurrencies({
+    chainId,
+    collectionAddress,
   });
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];

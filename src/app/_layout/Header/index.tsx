@@ -1,9 +1,7 @@
 import { classNames } from '~/config/classNames';
 
 import { Grid, cn } from '$ui';
-import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
-import { OrderCartButton } from './Buttons/OrderCartButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
 

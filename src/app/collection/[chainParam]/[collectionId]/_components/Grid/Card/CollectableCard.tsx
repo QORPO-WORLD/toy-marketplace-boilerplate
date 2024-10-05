@@ -2,7 +2,6 @@ import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
-import { OrderItemType } from '~/lib/stores/cart/types';
 import { getChainId } from '~/lib/utils/getChain';
 
 import { Footer } from './Footer';
@@ -10,21 +9,10 @@ import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 import { type ContractType } from '@0xsequence/metadata';
 import Link from 'next/link';
 
-export const CollectibleCard = ({
-  data,
-  itemType,
-}: {
-  data: CollectibleOrder;
-  itemType: OrderItemType;
-}) => {
+export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
   const { collectionId, chainParam } = Routes.collection.useParams();
   return (
-    <Card
-      data={data}
-      itemType={itemType}
-      chainParam={chainParam}
-      collectionId={collectionId}
-    />
+    <Card data={data} chainParam={chainParam} collectionId={collectionId} />
   );
 };
 
@@ -33,7 +21,6 @@ type CardProps = {
   chainParam: string | number;
   collectionId: string;
   contractType?: ContractType;
-  itemType: OrderItemType;
 };
 
 export const Card = ({
@@ -41,17 +28,9 @@ export const Card = ({
   chainParam,
   collectionId,
   contractType,
-  itemType,
 }: CardProps) => {
   const { tokenId } = data.metadata;
   const chainId = getChainId(chainParam)!;
-
-  // const cartItem = useCartItem({
-  //   collectibleOrder: data,
-  //   chainId,
-  //   collectionId,
-  //   itemType,
-  // });
 
   return (
     <article
@@ -59,7 +38,6 @@ export const Card = ({
         classNames.collectibleSelectionIndicator,
         `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
         'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
-        // !!cartItem ? `${getOrderTypeOutlineColor()}` : '',
         'z-10 overflow-hidden !outline transition-all',
       )}
     >
@@ -90,14 +68,4 @@ export const Card = ({
       />
     </article>
   );
-};
-
-const getOrderTypeOutlineColor = (type?: OrderItemType) => {
-  switch (type) {
-    case OrderItemType.TRANSFER: {
-      return '!outline-pink';
-    }
-    default:
-      return '!outline-foreground/50';
-  }
 };

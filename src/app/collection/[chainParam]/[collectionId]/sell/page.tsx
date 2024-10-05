@@ -3,7 +3,6 @@
 import { NotConnectedWarning } from '~/components/NotConnectedWarning';
 import { Box, Text } from '~/components/ui';
 import { type Routes } from '~/lib/routes';
-import { OrderItemType } from '~/lib/stores/cart/types';
 import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';

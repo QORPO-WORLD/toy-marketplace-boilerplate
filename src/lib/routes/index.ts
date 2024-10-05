@@ -27,15 +27,9 @@ const collectibleParams = z.object({
 });
 
 const chainToName = (chainParam: number | string) => {
-  const chainName = getChain(chainParam).name;
+  const chainName = getChain(chainParam)?.name;
   return chainName ?? chainParam;
 };
-
-const inventoryParams = z.object({
-  chainParam: chainParam.optional(),
-  isConnected: z.boolean(),
-  address: isAddress.optional(),
-});
 
 export const Routes = {
   // Landing
