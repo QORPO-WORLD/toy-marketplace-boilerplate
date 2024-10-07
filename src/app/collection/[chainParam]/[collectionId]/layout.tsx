@@ -7,7 +7,6 @@ import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
-import { compareAddress } from '@0xsequence/marketplace-sdk';
 
 const Layout = async ({
   params: { chainParam, collectionId },
@@ -22,7 +21,8 @@ const Layout = async ({
 
   const collectionConfig = marketplaceConfig.collections?.find(
     (c) =>
-      compareAddress(c.collectionAddress, collectionId) && chainId == c.chainId,
+      c.collectionAddress.toLowerCase() == collectionId.toLowerCase() &&
+      chainId == c.chainId,
   );
 
   return (
