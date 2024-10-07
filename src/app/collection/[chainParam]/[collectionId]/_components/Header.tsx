@@ -19,9 +19,9 @@ import {
 } from '$ui';
 import { NetworkImage } from '@0xsequence/design-system';
 import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
-import { useCollection } from 'node_modules/@0xsequence/marketplace-sdk/dist/react/hooks/useCollection';
 
 interface CollectionHeaderProps {
   chainId: number;
