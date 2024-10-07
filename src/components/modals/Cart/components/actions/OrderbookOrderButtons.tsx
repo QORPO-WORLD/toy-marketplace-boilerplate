@@ -331,21 +331,23 @@ export const OrderbookOrderButtons = ({
       txData: transactionData,
       collectionAddress,
       recipientAddress: userAddress,
-      onSuccess: async (txnHash: string) => {
-        await transactionNotification({
+      onSuccess: (txnHash: string) => {
+        transactionNotification({
           network: getChain(chainId)!,
           txHash: txnHash,
-        });
+        })
+          .then(() => {
+            postTransactionCacheClear();
 
-        postTransactionCacheClear();
+            onTransactionFinish({
+              transactionId: txnHash,
+              cartItems: snapshot(cartState.cartItems),
+              cartType: cartType,
+            });
 
-        onTransactionFinish({
-          transactionId: txnHash,
-          cartItems: snapshot(cartState.cartItems),
-          cartType: cartType,
-        });
-
-        resetCart();
+            resetCart();
+          })
+          .catch((e) => console.error(e));
       },
       onError: (error: Error) => {
         showErrorToast(error);
