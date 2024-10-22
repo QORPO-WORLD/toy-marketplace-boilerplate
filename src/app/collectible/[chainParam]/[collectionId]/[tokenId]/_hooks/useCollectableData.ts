@@ -3,7 +3,7 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import {
   useCollection,
-  useCollectable,
+  useCollectible
 } from '@0xsequence/marketplace-sdk/react';
 
 export const useCollectableData = () => {
@@ -11,10 +11,10 @@ export const useCollectableData = () => {
 
   const chainId = getChainId(chainParam)!;
 
-  const collectibleMetadata = useCollectable({
+  const collectibleMetadata = useCollectible({
     chainId,
     collectionAddress: collectionId,
-    tokenId,
+    collectibleId: tokenId
   });
 
   const collectionMetadata = useCollection({

@@ -11,12 +11,8 @@ import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
 import { NetworkImage } from '@0xsequence/design-system';
 import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-import {
-  collectionOptions,
-  useConfig,
-} from '@0xsequence/marketplace-sdk/react';
-import { useSuspenseQuery } from '@tanstack/react-query';
 import NextLink from 'next/link';
+import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 
 type CollectionCard = MarketplaceConfig['collections'][number];
 
@@ -29,15 +25,10 @@ export const CollectionCard = (params: CollectionCard) => {
 };
 
 const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
-  const { data } = useSuspenseQuery(
-    collectionOptions(
-      {
-        collectionAddress,
-        chainId: chainId.toString(),
-      },
-      useConfig(),
-    ),
-  );
+  const { data } = useCollection ({
+    chainId,
+    collectionAddress,
+  });
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const image = data?.extensions.ogImage || bannerUrl || placeholderImgUrl;

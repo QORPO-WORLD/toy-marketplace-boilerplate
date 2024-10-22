@@ -6,8 +6,9 @@ import { getChainId } from '~/lib/utils/getChain';
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
-import { useListCollectables } from '@0xsequence/marketplace-sdk/react';
+import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
+import { OrderSide } from 'packages/marketplace-sdk/dist';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;
@@ -21,7 +22,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const properties = filters$.filterOptions.get();
   const includeEmpty = !filters$.showAvailableOnly.get();
 
-  const collectiblesResponse = useListCollectables({
+  const collectiblesResponse = useListCollectibles({
     chainId,
     collectionAddress: collectionId,
     filters: {
@@ -30,7 +31,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       properties,
       marketplaces: [MarketplaceKind.sequence_marketplace_v1],
     },
-    includeOrders: 'lowestListing',
+    side: OrderSide.listing
   });
 
   const collectibles =

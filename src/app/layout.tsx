@@ -1,22 +1,21 @@
 import { classNames } from '~/config/classNames';
-import { ssrClient, config } from '~/sdk-config';
+import { ssrClient } from '~/marketplace-sdk/ssr';
 import '~/styles/globals.scss';
 
 import { cn } from '$ui';
 import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
-import { MarketplaceSdkProvider } from '@0xsequence/marketplace-sdk/react';
 import type { Metadata } from 'next';
+import Providers from './_providers';
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { getMarketplaceConfig, getInitialState } = ssrClient();
-  const marketPlaceConfig = await getMarketplaceConfig();
-
-  const { fontUrl, cssString, faviconUrl } = marketPlaceConfig;
+  const { getInitialState, getMarketplaceConfig, config } = ssrClient();
+  const { fontUrl, cssString, faviconUrl } = await getMarketplaceConfig();
+  const initialState = await getInitialState();
 
   return (
     <html lang="en">
@@ -28,15 +27,13 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <body className={cn(classNames.themeManager, inter.className)}>
-        <MarketplaceSdkProvider
-          config={config}
-          initialState={await getInitialState()}
-        >
+      <Providers sdkInitialState={initialState} sdkConfig={config}>
+        <body className={cn(classNames.themeManager, inter.className)}>
+        
           <Layout>{children}</Layout>
-        </MarketplaceSdkProvider>
       </body>
-    </html>
+      </Providers>
+      </html>
   );
 }
 
