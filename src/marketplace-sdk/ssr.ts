@@ -14,7 +14,7 @@ export const ssrClient = () => {
   console.log('headersList', headersList);
 
   const projectId =
-    cookieJar.get(OverwriteCookie.MARKETPLACE_PROJECT)?.value || '34598';
+    cookieJar.get(OverwriteCookie.MARKETPLACE_PROJECT)?.value || '13639';
   // env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID;
 
   const marketplaceEnv = (cookieJar.get(OverwriteCookie.MARKETPLACE_ENV)
@@ -35,7 +35,7 @@ export const ssrClient = () => {
       ...config,
       projectId,
       _internal: {
-        devAccessKey: 'AQAAAAAAAALqQrVIDQd03id03-auO31aLwg',
+        devAccessKey: "AQAAAAAAADVH8R2AGuQhwQ1y8NaEf1T7PJM",
         nextAccessKey: 'AQAAAAAAAIcmrjntYCvGTL15FFHVD2ic_dE',
         builderEnv,
         marketplaceEnv,
