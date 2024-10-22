@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "build:sdk": "cd packages/marketplace-sdk && pnpm run build",
     "dev": "next dev -p 4444",
     "lint": "next lint",
     "lint:fix": "next lint && prettier --write --ignore-path .prettierignore .",
@@ -68,6 +69,9 @@
     "viem": "^2.21.15",
     "wagmi": "^2.12.16",
     "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "rollup": "3.29.5"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.58.1",
