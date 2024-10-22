@@ -27,8 +27,8 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2(6k4puyvijtaszaxec7mdjxe6pa)
       '@0xsequence/marketplace-sdk':
-        specifier: file:../marketplace-sdk
-        version: file:../marketplace-sdk(ag6v3qmy5r2jeva4ngo2olrmdq)
+        specifier: file:./packages/marketplace-sdk
+        version: file:packages/marketplace-sdk(ag6v3qmy5r2jeva4ngo2olrmdq)
       '@0xsequence/metadata':
         specifier: ^2.0.17
         version: 2.0.17
@@ -322,8 +322,8 @@ packages:
       viem: '>= 2.0.0'
       wagmi: '>= 2.0.0'
 
-  '@0xsequence/marketplace-sdk@file:../marketplace-sdk':
-    resolution: {directory: ../marketplace-sdk, type: directory}
+  '@0xsequence/marketplace-sdk@file:packages/marketplace-sdk':
+    resolution: {directory: packages/marketplace-sdk, type: directory}
     peerDependencies:
       '@0xsequence/api': ^2.0.13
       '@0xsequence/design-system': ^1.7.8
@@ -6609,7 +6609,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@0xsequence/marketplace-sdk@file:../marketplace-sdk(ag6v3qmy5r2jeva4ngo2olrmdq)':
+  '@0xsequence/marketplace-sdk@file:packages/marketplace-sdk(ag6v3qmy5r2jeva4ngo2olrmdq)':
     dependencies:
       '@0xsequence/api': 2.0.17
       '@0xsequence/design-system': 1.7.8(@types/react-dom@18.3.1)(@types/react@18.3.11)(framer-motion@8.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
