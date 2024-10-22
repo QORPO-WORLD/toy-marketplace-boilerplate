@@ -1,5 +1,5 @@
 import { classNames } from '~/config/classNames';
-import { ssrClient } from '~/marketplace-sdk/ssr';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import '~/styles/globals.scss';
 
 import { cn } from '$ui';
@@ -7,6 +7,7 @@ import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
 import type { Metadata } from 'next';
 import Providers from './_providers';
+import '@0xsequence/marketplace-sdk/styles'
 
 export default async function RootLayout({
   children,

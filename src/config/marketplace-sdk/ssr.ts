@@ -18,7 +18,7 @@ export const ssrClient = () => {
   // env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID;
 
   const marketplaceEnv = (cookieJar.get(OverwriteCookie.MARKETPLACE_ENV)
-    ?.value || 'development') as Env;
+    ?.value || 'production') as Env;
 
   const builderEnv = (cookieJar.get(OverwriteCookie.BUILDER_ENV)?.value ||
     'production') as Env;
@@ -36,7 +36,6 @@ export const ssrClient = () => {
       projectId,
       _internal: {
         devAccessKey: "AQAAAAAAADVH8R2AGuQhwQ1y8NaEf1T7PJM",
-        nextAccessKey: 'AQAAAAAAAIcmrjntYCvGTL15FFHVD2ic_dE',
         builderEnv,
         marketplaceEnv,
         metadataEnv,

@@ -6,7 +6,7 @@ import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
-import { ssrClient } from '~/marketplace-sdk/ssr';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 const Layout = async ({
   params: { chainParam, collectionId },

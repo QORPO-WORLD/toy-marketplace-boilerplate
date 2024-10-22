@@ -1,4 +1,4 @@
-import { ssrClient } from '~/marketplace-sdk/ssr';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import { BigLeftBanner } from './_landing/layouts/BigLeftBanner';
 import { DefaultLayout } from './_landing/layouts/DefaultLayout';
 import { FloatingBanner } from './_landing/layouts/FloatingHeader';
