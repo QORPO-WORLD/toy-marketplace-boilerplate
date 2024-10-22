@@ -27,13 +27,12 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <Providers sdkInitialState={initialState} sdkConfig={config}>
-        <body className={cn(classNames.themeManager, inter.className)}>
-        
+      <body className={cn(classNames.themeManager, inter.className)}>
+        <Providers sdkInitialState={initialState} sdkConfig={config}>
           <Layout>{children}</Layout>
+        </Providers>
       </body>
-      </Providers>
-      </html>
+    </html>
   );
 }
 
