@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { classNames } from '~/config/classNames';
 
 import { Avatar, Flex, Image, Text, cn } from '$ui';
-import { NetworkIcon, NetworkImage } from '@0xsequence/design-system';
+import { NetworkImage } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
 
@@ -109,7 +109,7 @@ export const PoolAvatar = memo(
 
             {chainId ? (
               <Flex className="min-w-[20px]">
-                <NetworkIcon chainId={chainId} loading={loading} />
+                <NetworkImage size='sm' chainId={chainId} />
               </Flex>
             ) : null}
           </Flex>
