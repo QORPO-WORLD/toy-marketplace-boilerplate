@@ -53,7 +53,7 @@ export const Card = ({
         })}
         className="peer h-full p-2"
       >
-        <Image.Base
+        <Image
           src={data.metadata.image}
           containerClassName="bg-foreground/10 aspect-square rounded-sm overflow-hidden"
           className="aspect-square rounded-[inherit] hover:scale-125 ease-in duration-150"

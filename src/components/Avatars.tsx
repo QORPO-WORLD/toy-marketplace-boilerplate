@@ -82,7 +82,7 @@ export const PoolAvatar = memo(
 
     const Content = () => (
       <>
-        <Image.Base
+        <Image
           src={src}
           className={cn('h-[40px] w-[30px] min-w-[30px]', imageClassName)}
           loading={loading}
