@@ -14,7 +14,7 @@ export type UseListCollectiblesArgs = {
 	chainId: ChainId;
 	collectionAddress: string;
 	side: OrderSide;
-	filters: CollectiblesFilter;
+	filter: CollectiblesFilter;
 };
 
 export type UseListCollectiblesReturn = ReturnType<typeof fetchCollectibles>;
