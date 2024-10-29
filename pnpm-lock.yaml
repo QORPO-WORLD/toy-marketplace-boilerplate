@@ -18,11 +18,11 @@ importers:
         specifier: ^2.0.12
         version: 2.0.13
       '@0xsequence/kit':
-        specifier: ^4.4.0
-        version: 4.4.0(3iumxbbfhkkchc6tq3ea4c5zue)
+        specifier: ^4.4.1
+        version: 4.4.1(3iumxbbfhkkchc6tq3ea4c5zue)
       '@0xsequence/kit-checkout':
-        specifier: ^4.4.0
-        version: 4.4.0(nijzh5ndoeccwgh7ic6hz4x2rm)
+        specifier: ^4.4.1
+        version: 4.4.1(3r5p6oc4ikfkmscm7e5uslvfcy)
       '@0xsequence/metadata':
         specifier: ^2.0.12
         version: 2.0.13
@@ -284,14 +284,14 @@ packages:
   '@0xsequence/indexer@2.0.21':
     resolution: {integrity: sha512-nv6vfAlx9EhxJE3xFUGkJjmw8nOAD8VUP0VtOWWXzOaUhpC6ty52mtB8OYRLCEDkrsUzJ7mXCy7Qr/LwZcC7MA==}
 
-  '@0xsequence/kit-checkout@4.4.0':
-    resolution: {integrity: sha512-IxhUq0UYKwWzlZd/hR5j6jE9dGfjmwuPpHd9WxwRWywJBsjiRrLlPk7NdcBPu03ww+Et1u+zT3shHAvdgU6mpw==}
+  '@0xsequence/kit-checkout@4.4.1':
+    resolution: {integrity: sha512-E+V2/4CUC+jexDmG7+nXB17DkHj7HBilGvyOaeJx7lonvESKBJKbhm3yNc4ZOqSEREz39palzkJOGvm2GvuXgQ==}
     peerDependencies:
       0xsequence: '>= 2.0.20'
       '@0xsequence/api': '>= 2.0.20'
       '@0xsequence/design-system': '>= 1.7.8'
       '@0xsequence/indexer': '>= 2.0.20'
-      '@0xsequence/kit': 4.4.0
+      '@0xsequence/kit': 4.4.1
       '@0xsequence/metadata': '>= 2.0.20'
       '@0xsequence/network': '>= 2.0.20'
       '@0xsequence/waas': '>= 2.0.20'
@@ -303,8 +303,8 @@ packages:
       viem: '>= 2.0.0'
       wagmi: '>= 2.0.0'
 
-  '@0xsequence/kit@4.4.0':
-    resolution: {integrity: sha512-CoZlEjnWQI7dKbFbXtuGMtaDK4FxjOLLDDcdJBtGXQhZUNEt7Wk/Py92QSrND2GuY0OQl6z5ztmA4BxGEb+fPQ==}
+  '@0xsequence/kit@4.4.1':
+    resolution: {integrity: sha512-NHhtAqhJkZs+rZGFybY/WuCj299AKjYcaDILZ6t8D19jV7aO/piMrYTVbGIGI++SsY8K00yO7DGVapaQW30rrw==}
     peerDependencies:
       0xsequence: '>= 2.0.20'
       '@react-oauth/google': '>= 0.11.1'
@@ -6591,13 +6591,13 @@ snapshots:
 
   '@0xsequence/indexer@2.0.21': {}
 
-  '@0xsequence/kit-checkout@4.4.0(nijzh5ndoeccwgh7ic6hz4x2rm)':
+  '@0xsequence/kit-checkout@4.4.1(3r5p6oc4ikfkmscm7e5uslvfcy)':
     dependencies:
       0xsequence: 2.0.13(bufferutil@4.0.8)(ethers@6.13.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@0xsequence/api': 2.0.13
       '@0xsequence/design-system': 1.7.8(@types/react-dom@18.3.0)(@types/react@18.3.4)(framer-motion@8.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@0xsequence/indexer': 2.0.13
-      '@0xsequence/kit': 4.4.0(3iumxbbfhkkchc6tq3ea4c5zue)
+      '@0xsequence/kit': 4.4.1(3iumxbbfhkkchc6tq3ea4c5zue)
       '@0xsequence/metadata': 2.0.13
       '@0xsequence/network': 2.0.13(ethers@6.13.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@0xsequence/waas': 2.0.13(ethers@6.13.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))
@@ -6611,7 +6611,7 @@ snapshots:
       viem: 2.20.0(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.23.8)
       wagmi: 2.12.7(@tanstack/query-core@5.52.0)(@tanstack/react-query@5.52.0(react@18.3.1))(@types/react@18.3.4)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.3(@babel/core@7.25.2)(@babel/preset-env@7.24.8(@babel/core@7.25.2))(@types/react@18.3.4)(bufferutil@4.0.8)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(typescript@5.5.4)(utf-8-validate@5.0.10)(viem@2.20.0(bufferutil@4.0.8)(typescript@5.5.4)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)
 
-  '@0xsequence/kit@4.4.0(3iumxbbfhkkchc6tq3ea4c5zue)':
+  '@0xsequence/kit@4.4.1(3iumxbbfhkkchc6tq3ea4c5zue)':
     dependencies:
       0xsequence: 2.0.13(bufferutil@4.0.8)(ethers@6.13.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@0xsequence/api': 2.0.21
