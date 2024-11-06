@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
+import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { Spinner } from '~/components/Spinner';
 
@@ -71,12 +71,6 @@ const CollectionSection = ({
   const collectibles =
     collectionBalances?.pages.flatMap((p) => p.balances) || [];
 
-    collectibles.map((c) => {
-      console.log(c.tokenMetadata)
-    })
-
-    return null
-
   if (collectionBalancesLoading || isCollectionMetadataLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
   }
@@ -125,11 +119,16 @@ const CollectionSection = ({
         <ContentWrapper isGridView={isGridView}>
           {collectibles.map((c) => {
             return isGridView ? (
-              <Card
-                data={{ metadata: c.tokenMetadata as TokenMetadata }}
-                chainParam={chainId}
-                collectionId={collectionAddress}
-                key={c.tokenID}
+              <CollectibleCard
+                data={{
+                  metadata: {
+                    ...(c.tokenMetadata as TokenMetadata),
+                    tokenId: c.tokenID!,
+                  },
+                }}
+                collectionAddress={collectionAddress}
+                chainId={String(chainId)}
+                tokenId={c.tokenID!}
                 orderSide="transfer"
               />
             ) : (

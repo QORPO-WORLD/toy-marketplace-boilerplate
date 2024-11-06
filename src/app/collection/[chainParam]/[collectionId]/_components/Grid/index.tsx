@@ -26,7 +26,16 @@ export const CollectiblesGrid = ({
       components={{
         List: GridContainer,
       }}
-      itemContent={(index, data) => <CollectibleCard key={index} data={data} />}
+      itemContent={(index, data) => (
+        <CollectibleCard
+          key={index}
+          data={data}
+          tokenId={data.metadata.tokenId}
+          collectionAddress={data.order?.collectionContractAddress!}
+          chainId={String(data.order?.chainId)}
+          orderSide="buy"
+        />
+      )}
       endReached={endReached}
       data={data}
     />

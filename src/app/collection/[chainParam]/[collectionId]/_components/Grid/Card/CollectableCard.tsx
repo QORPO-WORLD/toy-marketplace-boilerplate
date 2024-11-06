@@ -4,36 +4,28 @@ import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
 
 import { Footer } from './Footer';
-import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
+import type { CollectibleOrder, Order } from '@0xsequence/marketplace-sdk';
 import Link from 'next/link';
 
-export const CollectibleCard = ({ data }: { data: CollectibleOrder }) => {
-  const { collectionId, chainParam, mode } = Routes.collection.useParams();
-  return (
-    <Card
-      data={data}
-      chainParam={chainParam}
-      collectionId={collectionId}
-      orderSide={mode || 'buy'}
-    />
-  );
-};
-
-type CardProps = {
+type CollectibleCardProps = {
   data: CollectibleOrder;
-  chainParam: string | number;
-  collectionId: string;
   orderSide: 'buy' | 'sell' | 'transfer';
+  tokenId: string;
+  collectionAddress: string;
+  chainId: string;
+  receivedOffer?: Order;
+  collectibleName?: string;
 };
 
-export const Card = ({
+export const CollectibleCard = ({
   data,
-  chainParam,
-  collectionId,
   orderSide,
-}: CardProps) => {
-  const { tokenId } = data.metadata;
-
+  tokenId,
+  collectionAddress,
+  chainId,
+  receivedOffer,
+  collectibleName,
+}: CollectibleCardProps) => {
   return (
     <article
       className={cn(
@@ -45,8 +37,8 @@ export const Card = ({
     >
       <Link
         href={Routes.collectible({
-          chainParam,
-          collectionId,
+          chainParam: chainId,
+          collectionId: collectionAddress,
           tokenId,
         })}
         className="peer h-full p-2"
@@ -63,7 +55,12 @@ export const Card = ({
           'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
           '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
         )}
-        orderSide={orderSide}
+        chainId={chainId}
+        orderSide={orderSide || 'buy'}
+        tokenId={tokenId}
+        collectionAddress={collectionAddress}
+        receivedOffer={receivedOffer}
+        collectibleName={collectibleName}
       />
     </article>
   );
