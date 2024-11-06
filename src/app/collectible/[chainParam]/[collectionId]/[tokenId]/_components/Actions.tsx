@@ -7,8 +7,16 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
+import {
+  useCreateListingModal,
+  useCurrencies,
+  useHighestOffer,
+  useLowestListing,
+  useMakeOfferModal,
+  useSellModal,
+  useTokenBalances,
+} from '@0xsequence/marketplace-sdk/react';
 import { useAccount } from 'wagmi';
-import { useCreateListingModal, useCurrencies, useHighestOffer, useLowestListing, useMakeOfferModal, useTokenBalances } from '@0xsequence/marketplace-sdk/react';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -20,9 +28,9 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-  const { show: showListModal, close: closeListModal } =
-    useCreateListingModal();
-  const { show: showOfferModal, close: closeOfferModal } = useMakeOfferModal();
+  const { show: showListModal } = useCreateListingModal();
+  const { show: showOfferModal } = useMakeOfferModal();
+  const { show: showSellModal } = useSellModal();
 
   const { data: currencies } = useCurrencies({
     chainId,
@@ -31,18 +39,19 @@ export const CollectibleTradeActions = ({
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
-  const { data: bestOffers, isLoading: isLoadingBestOffers } = useHighestOffer({
-    chainId: String(chainId),
-    collectionAddress,
-    tokenId: tokenId,
-    filter: {
-      marketplace: [MarketplaceKind.sequence_marketplace_v1],
-      currencies: currencyAddresses,
-    },
-    query: {
-      enabled: !!currencies,
-    },
-  });
+  const { data: highestOffer, isLoading: isLoadingHighestOffer } =
+    useHighestOffer({
+      chainId: String(chainId),
+      collectionAddress,
+      tokenId: tokenId,
+      filter: {
+        marketplace: [MarketplaceKind.sequence_marketplace_v1],
+        currencies: currencyAddresses,
+      },
+      query: {
+        enabled: !!currencies,
+      },
+    });
 
   const { data: bestListings, isLoading: isLoadingBestListings } =
     useLowestListing({
@@ -80,7 +89,7 @@ export const CollectibleTradeActions = ({
   const item721AlreadyOwned = !!userBalance && !isERC1155;
 
   const isLoading =
-    isLoadingBestOffers ||
+    isLoadingHighestOffer ||
     isLoadingBestListings ||
     (isConnected && isBalanceLoading);
 
@@ -90,8 +99,15 @@ export const CollectibleTradeActions = ({
   };
 
   const onClickSell = () => {
-    if (!bestOffers || !userBalance) return;
-    //todo sell
+    if (!highestOffer?.order) return;
+
+    showSellModal({
+      collectionAddress,
+      chainId: String(chainId),
+      tokenId,
+      collectibleName: collectibleMetadata.data?.name,
+      order: highestOffer.order,
+    });
   };
 
   const onClickOffer = () => {
@@ -113,7 +129,7 @@ export const CollectibleTradeActions = ({
   const buyDisabled = !bestListings || item721AlreadyOwned;
   const offerDisabled = !isConnected;
   const listingDisabled = !isConnected || !userBalance;
-  const sellDisabled = !bestOffers || !userBalance;
+  const sellDisabled = !highestOffer?.order || !userBalance;
 
   return (
     <Flex className="flex-col gap-4">
