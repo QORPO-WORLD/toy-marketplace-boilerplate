@@ -10,9 +10,6 @@ export const ssrClient = () => {
 
   const headersList = headers();
 
-  console.log('cookieJar', cookieJar);
-  console.log('headersList', headersList);
-
   const projectId =
     cookieJar.get(OverwriteCookie.MARKETPLACE_PROJECT)?.value || '13639';
   // env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID;
