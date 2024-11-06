@@ -5,11 +5,14 @@ import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
 import { Tabs, Flex, Text, Grid, Button } from '$ui';
-import { ContractType, type TokenBalance } from '@0xsequence/indexer';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useMarketplaceConfig, useTokenBalances } from '@0xsequence/marketplace-sdk/react';
-import { compareAddress } from '@0xsequence/marketplace-sdk';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
+import { ContractType, type TokenBalance } from '@0xsequence/indexer';
+import { compareAddress } from '@0xsequence/marketplace-sdk';
+import {
+  useMarketplaceConfig,
+  useTokenBalances,
+} from '@0xsequence/marketplace-sdk/react';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 type InventoryTabsProps = {
   chainId: number;
@@ -24,7 +27,7 @@ export const InventoryTabs = ({
   chainId,
   accountAddress,
 }: InventoryTabsProps) => {
-   const config = useMarketplaceConfig();
+  const config = useMarketplaceConfig();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -36,22 +39,20 @@ export const InventoryTabs = ({
     searchParams?.get('activeTab') ?? inventoryTabsList.collectibles;
   searchParams.set('activeTab', activeTab);
 
-    const {
-        data: userTokenBalancesRespPage,
-        isLoading: isUserTokenBalancesLoading,
-        isError: isUserTokenBalancesError,
-    } = useTokenBalances({
-        chainId,
-        accountAddress
-    });
+  const {
+    data: balancesData,
+    isLoading: balancesLoading,
+    isError: errorGettingBalances,
+  } = useTokenBalances({
+    chainId,
+    accountAddress,
+  });
 
-    console.log(userTokenBalancesRespPage);
-
-  if (isUserTokenBalancesLoading) {
+  if (balancesLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
   }
 
-  if (isUserTokenBalancesError) {
+  if (errorGettingBalances) {
     return (
       <Text className="w-full text-center text-destructive">
         Error occured. Failed to fetch the wallet collectible balances.
@@ -59,24 +60,27 @@ export const InventoryTabs = ({
     );
   }
 
-  if (!userTokenBalancesRespPage) {
+  if (!balancesData) {
     return <Text className="w-full text-center text-pink">Empty.</Text>;
   }
 
-  const userTokenBalancesResp = userTokenBalancesRespPage.pages[0];
+  const balances = balancesData.pages[0];
 
   // collectible balances and counts
-  const collectionBalances = userTokenBalancesResp?.balances.filter(
+  const collectionBalances = balances?.balances.filter(
     (b) => b.contractType != ContractType.ERC20,
   );
 
   const filteredCollecionBalances: TokenBalance[] = collectionBalances!.filter(
-    (c) =>
+    (balanceCollection) =>
       !!config.data?.collections?.find(
-        (wcc) =>
-          compareAddress(wcc.collectionAddress, c.contractAddress) &&
+        (marketplaceCollection) =>
+          compareAddress(
+            marketplaceCollection.collectionAddress,
+            balanceCollection.contractAddress,
+          ) &&
           // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          wcc.chainId === c.chainId,
+          marketplaceCollection.chainId === balanceCollection.chainId,
       ),
   );
 
@@ -119,7 +123,7 @@ export const InventoryTabs = ({
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-14">
             <InventoryCollectiblesContent
-                collectionBalances={filteredCollecionBalances}
+              collectionBalances={filteredCollecionBalances}
             />
           </Flex>
         </Tabs.Content>
