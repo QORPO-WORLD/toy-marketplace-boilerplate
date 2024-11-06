@@ -1,9 +1,7 @@
-import { ContractType, StepType } from '@internal';
-import { observer } from '@legendapp/state/react';
-import { useCollection } from '@react-hooks/useCollection';
-import { useGenerateOfferTransaction } from '@react-hooks/useGenerateOfferTransaction';
-import { useState } from 'react';
-import { useAccount, useSwitchChain } from 'wagmi';
+import { ContractType } from '@internal';
+import { Show, observer } from '@legendapp/state/react';
+import { type Hex, erc20Abi, parseUnits } from 'viem';
+import { useAccount, useReadContract } from 'wagmi';
 import {
 	ActionModal,
 	type ActionModalProps,
@@ -13,117 +11,104 @@ import FloorPriceText from '../_internal/components/floorPriceText';
 import PriceInput from '../_internal/components/priceInput';
 import QuantityInput from '../_internal/components/quantityInput';
 import TokenPreview from '../_internal/components/tokenPreview';
-import { makeOfferModal$ } from './_store';
+import { makeOfferModal$, useHydrate } from './_store';
+import { useSwitchChainModal } from '../_internal/components/switchChainModal';
+import type { Messages } from '../../../../types/messages';
 
 export type ShowMakeOfferModalArgs = {
 	collectionAddress: string;
 	chainId: string;
 	collectibleId: string;
+	messages?: Messages;
 };
 
 export const useMakeOfferModal = () => {
+	const { chainId: accountChainId } = useAccount();
+	const { show: showSwitchNetworkModal } = useSwitchChainModal();
+
+	const openModal = (args: ShowMakeOfferModalArgs) => {
+		makeOfferModal$.open(args);
+	};
+
+	const handleShowModal = (args: ShowMakeOfferModalArgs) => {
+		const isSameChain = accountChainId === Number(args.chainId);
+
+		if (!isSameChain) {
+			showSwitchNetworkModal({
+				chainIdToSwitchTo: Number(args.chainId),
+				onSwitchChain: () => openModal(args),
+				messages: args.messages?.switchChain,
+			});
+			return;
+		}
+
+		openModal(args);
+	};
+
 	return {
-		show: (args: ShowMakeOfferModalArgs) => makeOfferModal$.open(args),
+		show: handleShowModal,
 		close: () => makeOfferModal$.close(),
 	};
 };
 
-export const MakeOfferModal = observer(() => {
-	return makeOfferModal$.isOpen.get() ? <Modal /> : null;
-});
+export const MakeOfferModal = () => {
+	return (
+		<Show if={makeOfferModal$.isOpen}>
+			<Modal />
+		</Show>
+	);
+};
 
-const Modal = observer(() => {
-	const { chainId, collectionAddress, collectibleId } =
-		makeOfferModal$.state.get();
+const Modal = () => {
+	useHydrate();
+	return <ModalContent />;
+};
 
-	const { data: collection, isLoading: collectionLoading } = useCollection({
+const ModalContent = observer(() => {
+	const {
 		chainId,
 		collectionAddress,
+		collectibleId,
+		collectionName,
+		collectionType,
+		offerPrice,
+	} = makeOfferModal$.state.get();
+
+	const { steps } = makeOfferModal$.get();
+
+	const { address: accountAddress } = useAccount();
+	const { data: balance, isSuccess: isBalanceSuccess } = useReadContract({
+		address:
+			makeOfferModal$.state.offerPrice.currency.contractAddress.get() as Hex,
+		abi: erc20Abi,
+		functionName: 'balanceOf',
+		args: [accountAddress as Hex],
 	});
 
-	const offerPrice$ = makeOfferModal$.state.offerPrice;
-
-	const { chainId: currentChainId } = useAccount();
-
-	const { data, isSuccess } = useGenerateOfferTransaction({
-		chainId: chainId,
-	});
-
-	const [tokenApprovalNeeded, setTokenApprovalNeeded] = useState(false);
-
-	// Call generateListingTransaction if the currency is changed, to check if token approval is needed
-	// useObserve(offerPrice$.currency.contractAddress, ({ value }) => {
-	// 	generateOfferTransaction({
-	// 		collectionAddress,
-	// 		orderbook: OrderbookKind.sequence_marketplace_v1,
-	// 		offer: {
-	// 			tokenId: '1',
-	// 			quantity: '1',
-	// 			expiry: Date.now().toString(),
-	// 			// biome-ignore lint/style/noNonNullAssertion: <explanation>
-	// 			currencyAddress: value!,
-	// 			pricePerToken: '0',
-	// 		},
-	// 		// biome-ignore lint/style/noNonNullAssertion: <explanation>
-	// 		maker: accountAddress!,
-	// 		contractType: ContractType.ERC721,
-	// 	});
-	// });
-
-	if (isSuccess) {
-		setTokenApprovalNeeded(
-			!!data?.steps.some((step) => step.id === StepType.tokenApproval),
-		);
+	let balanceError = '';
+	if (
+		isBalanceSuccess &&
+		parseUnits(offerPrice.amountRaw, offerPrice.currency.decimals) >
+			(balance || 0)
+	) {
+		balanceError = 'Insufficient balance';
 	}
-
-	const { switchChainAsync } = useSwitchChain();
-	const [switchChainPending, setSwitchChainPending] = useState(false);
-	const handleSwitchChain = async () => {
-		setSwitchChainPending(true);
-		await switchChainAsync({ chainId: Number(chainId) });
-		setSwitchChainPending(false);
-	};
-
-	const [approveTokenPending, setApproveTokenPending] = useState(false);
-	const handleApproveToken = async () => {
-		setApproveTokenPending(true);
-		console.log('Approve token');
-		console.log(data);
-		setApproveTokenPending(false);
-	};
-
-	const [createOfferPending, setCreateOfferPending] = useState(false);
-	const handleCreateOffer = async () => {
-		setCreateOfferPending(true);
-
-		setCreateOfferPending(false);
-	};
 
 	const ctas = [
 		{
-			label: 'Switch chain',
-			onClick: handleSwitchChain,
-			hidden: Number(chainId) === currentChainId,
-			pending: switchChainPending,
-			variant: 'glass' as const,
-		},
-		{
 			label: 'Approve TOKEN',
-			onClick: handleApproveToken,
-			hidden: !tokenApprovalNeeded,
-			pending: approveTokenPending,
+			onClick: steps.tokenApproval.execute,
+			hidden: !steps.tokenApproval.isNeeded(),
+			pending: steps.tokenApproval.pending,
 			variant: 'glass' as const,
 		},
 		{
 			label: 'Make offer',
-			onClick: handleCreateOffer,
-			pending: createOfferPending,
+			onClick: steps.createOffer.execute,
+			pending: steps.createOffer.pending,
+			disabled: steps.tokenApproval.isNeeded() || offerPrice.amountRaw === '0',
 		},
 	] satisfies ActionModalProps['ctas'];
-
-	if (collectionLoading) {
-		return null;
-	}
 
 	return (
 		<ActionModal
@@ -135,7 +120,7 @@ const Modal = observer(() => {
 			ctas={ctas}
 		>
 			<TokenPreview
-				collectionName={collection?.name}
+				collectionName={collectionName}
 				collectionAddress={collectionAddress}
 				collectibleId={collectibleId}
 				chainId={chainId}
@@ -144,10 +129,11 @@ const Modal = observer(() => {
 			<PriceInput
 				chainId={chainId}
 				collectionAddress={collectionAddress}
-				$listingPrice={offerPrice$}
+				$listingPrice={makeOfferModal$.state.offerPrice}
+				error={balanceError}
 			/>
 
-			{collection?.type === ContractType.ERC1155 && (
+			{collectionType === ContractType.ERC1155 && (
 				<QuantityInput
 					chainId={chainId}
 					$quantity={makeOfferModal$.state.quantity}
@@ -156,16 +142,16 @@ const Modal = observer(() => {
 				/>
 			)}
 
-			{!!offerPrice$.get() && (
+			{!!offerPrice && (
 				<FloorPriceText
+					tokenId={collectibleId}
 					chainId={chainId}
 					collectionAddress={collectionAddress}
-					// biome-ignore lint/style/noNonNullAssertion: <explanation>
-					price={offerPrice$.get()!}
+					price={offerPrice}
 				/>
 			)}
 
-			<ExpirationDateSelect />
+			<ExpirationDateSelect $date={makeOfferModal$.state.expiry} />
 		</ActionModal>
 	);
 });

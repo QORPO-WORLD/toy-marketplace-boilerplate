@@ -1,4 +1,4 @@
-import { Box, NetworkImage, Text } from '@0xsequence/design-system';
+import { Box, NetworkImage, Skeleton, Text } from '@0xsequence/design-system';
 import { useMarketplaceConfig } from '@react-hooks/useMarketplaceConfig';
 import { useRoyaltyPercentage } from '@react-hooks/useRoyaltyPercentage';
 import type { Price } from '@types';
@@ -33,26 +33,23 @@ export default function TransactionDetails({
 			collectibleId,
 		});
 
-	if (!price || marketplaceConfigLoading || royaltyPercentageLoading) {
-		return null;
-	}
+	const priceLoading =
+		!price || marketplaceConfigLoading || royaltyPercentageLoading;
 
-	let amountFormatted = formatUnits(
-		BigInt(price.amountRaw),
-		price.currency.decimals,
-	);
+	let formattedAmount =
+		price && formatUnits(BigInt(price.amountRaw), price.currency.decimals);
 
-	if (royaltyPercentage !== undefined) {
-		amountFormatted = (
-			parseFloat(amountFormatted) -
-			(parseFloat(amountFormatted) * Number(royaltyPercentage)) / 100
+	if (royaltyPercentage !== undefined && formattedAmount) {
+		formattedAmount = (
+			Number.parseFloat(formattedAmount) -
+			(Number.parseFloat(formattedAmount) * Number(royaltyPercentage)) / 100
 		).toString();
 	}
 
-	if (marketplaceFeePercentage !== undefined) {
-		amountFormatted = (
-			parseFloat(amountFormatted) -
-			(parseFloat(amountFormatted) * marketplaceFeePercentage) / 100
+	if (marketplaceFeePercentage !== undefined && formattedAmount) {
+		formattedAmount = (
+			Number.parseFloat(formattedAmount) -
+			(Number.parseFloat(formattedAmount) * marketplaceFeePercentage) / 100
 		).toString();
 	}
 
@@ -70,9 +67,13 @@ export default function TransactionDetails({
 			<Box display="flex" alignItems="center" gap="2">
 				<NetworkImage chainId={Number(chainId)} size="xs" />
 
-				<Text fontSize={'small'} color={'text100'}>
-					{amountFormatted} {price.currency.symbol}
-				</Text>
+				{priceLoading ? (
+					<Skeleton width="16" height={'4'} />
+				) : (
+					<Text fontSize={'small'} color={'text100'}>
+						{formattedAmount} {price.currency.symbol}
+					</Text>
+				)}
 			</Box>
 		</Box>
 	);

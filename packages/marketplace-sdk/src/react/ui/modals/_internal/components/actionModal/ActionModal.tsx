@@ -3,13 +3,6 @@
 import type React from 'react';
 import type { ComponentProps } from 'react';
 
-import type { ActionModalState } from './store';
-import {
-	cta as ctaStyle,
-	closeButton,
-	dialogContent,
-	dialogOverlay,
-} from './styles.css';
 import {
 	Box,
 	Button,
@@ -21,6 +14,13 @@ import { getProviderEl } from '@internal';
 import type { Observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { Close, Content, Overlay, Portal, Root } from '@radix-ui/react-dialog';
+import type { ActionModalState } from './store';
+import {
+	closeButton,
+	cta as ctaStyle,
+	dialogContent,
+	dialogOverlay,
+} from './styles.css';
 
 export interface ActionModalProps {
 	store: Observable<ActionModalState>;
@@ -29,7 +29,7 @@ export interface ActionModalProps {
 	children: React.ReactNode;
 	ctas: {
 		label: string;
-		onClick: () => Promise<void>;
+		onClick: () => void;
 		pending?: boolean;
 		disabled?: boolean;
 		hidden?: boolean;
@@ -43,7 +43,7 @@ export const ActionModal = observer(
 			<Root open={store.isOpen.get()}>
 				<Portal container={getProviderEl()}>
 					<Overlay className={dialogOverlay} />
-					<Content className={dialogContent}>
+					<Content className={dialogContent.narrow}>
 						<Box
 							display="flex"
 							flexGrow={'1'}
@@ -65,20 +65,22 @@ export const ActionModal = observer(
 							{children}
 
 							<Box width="full" display="flex" flexDirection="column" gap="2">
-								{ctas.map((cta) => (
-									<Button
-										key={cta.label}
-										className={ctaStyle}
-										onClick={cta.onClick}
-										variant={cta.variant || 'primary'}
-										hidden={cta.hidden}
-										pending={cta.pending}
-										disabled={cta.disabled}
-										size="lg"
-										width="full"
-										label={cta.label}
-									/>
-								))}
+								{ctas.map(
+									(cta) =>
+										!cta.hidden && (
+											<Button
+												key={cta.label}
+												className={ctaStyle}
+												onClick={cta.onClick}
+												variant={cta.variant || 'primary'}
+												pending={cta.pending}
+												disabled={cta.disabled}
+												size="lg"
+												width="full"
+												label={cta.label}
+											/>
+										),
+								)}
 							</Box>
 						</Box>
 						<Close className={closeButton} asChild onClick={onClose}>

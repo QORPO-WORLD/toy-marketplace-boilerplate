@@ -1,5 +1,6 @@
 import {
 	type ChainId,
+	type Currency,
 	type QueryArg,
 	configKeys,
 	currencyKeys,
@@ -7,7 +8,7 @@ import {
 	getQueryClient,
 } from '@internal';
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import type { Currency, MarketplaceConfig, SdkConfig } from '@types';
+import type { MarketplaceConfig, SdkConfig } from '@types';
 import { useConfig } from './useConfig';
 
 export type UseCurrenciesArgs = {
@@ -27,19 +28,24 @@ const selectCurrencies = (data: Currency[], args: UseCurrenciesArgs) => {
 	// if collectionAddress is passed, filter currencies based on collection currency options
 	if (args.collectionAddress) {
 		const queryClient = getQueryClient();
-		const marketplaceConfigCache = queryClient.getQueryData<MarketplaceConfig>([
-			...configKeys.marketplace,
-		]);
+		const marketplaceConfigCache = queryClient.getQueriesData({
+			queryKey: configKeys.marketplace,
+		})[0][1] as MarketplaceConfig;
 
 		const collection = marketplaceConfigCache?.collections.find(
 			(collection) => collection.collectionAddress === args.collectionAddress,
 		);
 
+		if (!collection) {
+			throw new Error("Collection doesn't exist");
+		}
+
 		return data.filter(
 			(currency) =>
-				collection?.currencyOptions?.includes(currency.contractAddress) ||
-				currency.nativeCurrency ||
-				currency.defaultChainCurrency === !!args.includeNativeCurrency,
+				collection.currencyOptions?.includes(currency.contractAddress) ||
+				// biome-ignore lint/suspicious/noDoubleEquals: <explanation>
+				currency.nativeCurrency == args.includeNativeCurrency ||
+				currency.defaultChainCurrency,
 		);
 	}
 	// if includeNativeCurrency is true, return all currencies
@@ -60,6 +66,7 @@ export const currenciesOptions = (
 		queryKey: [...currencyKeys.lists, args.chainId],
 		queryFn: () => fetchCurrencies(args.chainId, config),
 		select: (data) => selectCurrencies(data, args),
+		enabled: args.query?.enabled,
 	});
 };
 

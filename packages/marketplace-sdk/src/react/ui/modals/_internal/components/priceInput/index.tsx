@@ -1,26 +1,33 @@
-import { Box, NetworkImage, NumericInput } from '@0xsequence/design-system';
+import { Box, NumericInput, TokenImage } from '@0xsequence/design-system';
 import type { Observable } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import type { Price } from '@types';
 import { useState } from 'react';
 import CurrencyOptionsSelect from '../currencyOptionsSelect';
 import { priceInputWrapper } from './styles.css';
+import { parseUnits } from 'viem';
 
 type PriceInputProps = {
 	collectionAddress: string;
 	chainId: string;
 	$listingPrice: Observable<Price | undefined>;
+	error?: string;
 };
 
 const PriceInput = observer(function PriceInput({
 	chainId,
 	collectionAddress,
 	$listingPrice,
+	error,
 }: PriceInputProps) {
 	const [inputPrice, setInputPrice] = useState('');
 	const changeListingPrice = (value: string) => {
 		setInputPrice(value);
-		$listingPrice.amountRaw.set(value);
+		const parsedAmount = parseUnits(
+			value,
+			Number($listingPrice.currency.decimals.get()),
+		);
+		$listingPrice.amountRaw.set(parsedAmount.toString());
 	};
 
 	return (
@@ -32,7 +39,7 @@ const PriceInput = observer(function PriceInput({
 				display="flex"
 				alignItems="center"
 			>
-				<NetworkImage chainId={Number(chainId)} size="xs" />
+				<TokenImage src={$listingPrice.currency.imageUrl.get()} size="xs" />
 			</Box>
 
 			<NumericInput
@@ -53,6 +60,11 @@ const PriceInput = observer(function PriceInput({
 				onChange={(event) => changeListingPrice(event.target.value)}
 				width="full"
 			/>
+			{error && (
+				<Box color="negative" fontSize="small">
+					{error}
+				</Box>
+			)}
 		</Box>
 	);
 });
