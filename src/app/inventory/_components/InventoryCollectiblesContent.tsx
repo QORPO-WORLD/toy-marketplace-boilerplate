@@ -120,12 +120,6 @@ const CollectionSection = ({
           {collectibles.map((c) => {
             return isGridView ? (
               <CollectibleCard
-                data={{
-                  metadata: {
-                    ...(c.tokenMetadata as TokenMetadata),
-                    tokenId: c.tokenID!,
-                  },
-                }}
                 collectionAddress={collectionAddress}
                 chainId={String(chainId)}
                 tokenId={c.tokenID!}

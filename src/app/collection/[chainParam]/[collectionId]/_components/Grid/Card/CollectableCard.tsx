@@ -4,11 +4,12 @@ import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
 
 import { Footer } from './Footer';
-import type { CollectibleOrder, Order } from '@0xsequence/marketplace-sdk';
+import type { Order } from '@0xsequence/marketplace-sdk';
+import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';
 
 type CollectibleCardProps = {
-  data: CollectibleOrder;
+  order?: Order;
   orderSide: 'buy' | 'sell' | 'transfer';
   tokenId: string;
   collectionAddress: string;
@@ -18,7 +19,7 @@ type CollectibleCardProps = {
 };
 
 export const CollectibleCard = ({
-  data,
+  order,
   orderSide,
   tokenId,
   collectionAddress,
@@ -26,6 +27,15 @@ export const CollectibleCard = ({
   receivedOffer,
   collectibleName,
 }: CollectibleCardProps) => {
+  const { data: collectible, isLoading: collectibleLoading } = useCollectible({
+    chainId,
+    collectionAddress,
+    collectibleId: tokenId,
+  });
+
+  // TODO: Handle this better later
+  if (collectibleLoading) return null;
+
   return (
     <article
       className={cn(
@@ -44,11 +54,11 @@ export const CollectibleCard = ({
         className="peer h-full p-2"
       >
         <Image
-          src={data.metadata.image}
+          src={collectible?.image}
           containerClassName="bg-foreground/10 aspect-square rounded-sm overflow-hidden"
           className="aspect-square rounded-[inherit] hover:scale-125 ease-in duration-150"
         />
-        <Footer {...data} />
+        <Footer tokenMetadata={collectible!} order={order} />
       </Link>
       <AddToCartButton
         className={cn(

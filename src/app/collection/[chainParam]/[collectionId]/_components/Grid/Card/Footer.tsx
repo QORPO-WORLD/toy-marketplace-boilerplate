@@ -1,14 +1,16 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
 
-import {
-  type Order,
-  type CollectibleOrder,
-  truncateMiddle,
-} from '@0xsequence/marketplace-sdk';
+import { TokenMetadata } from '@0xsequence/indexer';
+import { type Order, truncateMiddle } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 
-export const Footer = ({ metadata, order }: CollectibleOrder) => {
-  const { tokenId, name } = metadata;
+type FooterProps = {
+  tokenMetadata: TokenMetadata;
+  order?: Order;
+};
+
+export const Footer = ({ tokenMetadata, order }: FooterProps) => {
+  const { tokenId, name } = tokenMetadata;
 
   const height = 'h-[24px]';
   return (
