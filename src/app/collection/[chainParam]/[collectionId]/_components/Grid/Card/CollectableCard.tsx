@@ -2,7 +2,6 @@ import { AddToCartButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
-import { getChainId } from '~/lib/utils/getChain';
 
 import { Footer } from './Footer';
 import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
@@ -24,7 +23,7 @@ type CardProps = {
   data: CollectibleOrder;
   chainParam: string | number;
   collectionId: string;
-  orderSide: 'buy' | 'sell';
+  orderSide: 'buy' | 'sell' | 'transfer';
 };
 
 export const Card = ({
@@ -34,7 +33,6 @@ export const Card = ({
   orderSide,
 }: CardProps) => {
   const { tokenId } = data.metadata;
-  const chainId = getChainId(chainParam)!;
 
   return (
     <article
@@ -65,9 +63,6 @@ export const Card = ({
           'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
           '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
         )}
-        chainId={chainId}
-        collectionId={collectionId}
-        collectibleOrder={data}
         orderSide={orderSide}
       />
     </article>

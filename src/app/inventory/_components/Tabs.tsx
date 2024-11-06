@@ -4,16 +4,16 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
-import { Tabs, Flex, Text, Grid } from '$ui';
+import { Tabs, Flex, Text, Grid, Button } from '$ui';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useMarketplaceConfig } from '@0xsequence/marketplace-sdk/react';
+import { useMarketplaceConfig, useTokenBalances } from '@0xsequence/marketplace-sdk/react';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 
 type InventoryTabsProps = {
   chainId: number;
-  inventoryAddress: string;
+  accountAddress: string;
 };
 
 const inventoryTabsList = {
@@ -22,7 +22,7 @@ const inventoryTabsList = {
 
 export const InventoryTabs = ({
   chainId,
-  inventoryAddress,
+  accountAddress,
 }: InventoryTabsProps) => {
    const config = useMarketplaceConfig();
   const router = useRouter();
@@ -35,8 +35,17 @@ export const InventoryTabs = ({
   const activeTab =
     searchParams?.get('activeTab') ?? inventoryTabsList.collectibles;
   searchParams.set('activeTab', activeTab);
-  
 
+    const {
+        data: userTokenBalancesRespPage,
+        isLoading: isUserTokenBalancesLoading,
+        isError: isUserTokenBalancesError,
+    } = useTokenBalances({
+        chainId,
+        accountAddress
+    });
+
+    console.log(userTokenBalancesRespPage);
 
   if (isUserTokenBalancesLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
@@ -82,7 +91,7 @@ export const InventoryTabs = ({
       <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8">
         <InfoBox label="Address" transparent>
           <Text className="overflow-hidden text-lg font-semibold uppercase">
-            <ENSName address={inventoryAddress} truncateAt={6} />
+            <ENSName address={accountAddress} truncateAt={6} />
           </Text>
         </InfoBox>
 
@@ -110,7 +119,7 @@ export const InventoryTabs = ({
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-14">
             <InventoryCollectiblesContent
-              collectionBalances={filteredCollecionBalances}
+                collectionBalances={filteredCollecionBalances}
             />
           </Flex>
         </Tabs.Content>

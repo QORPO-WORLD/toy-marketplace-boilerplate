@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '$ui';
-import type { CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 const orderTypes = {
   buy: {
@@ -10,6 +9,10 @@ const orderTypes = {
   },
   sell: {
     label: 'Sell',
+    onClick: () => {},
+  },
+  transfer: {
+    label: 'Transfer',
     onClick: () => {},
   },
   order: {
@@ -22,25 +25,17 @@ const orderTypes = {
   },
 };
 
-type OrderSide = 'buy' | 'sell';
+type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing';
 
 type AddToCartButtonProps = {
   className?: string;
-  chainId: number;
-  collectionId: string;
-  collectibleOrder: CollectibleOrder;
   orderSide: OrderSide;
 };
 
 export const AddToCartButton = ({
   className,
-  chainId,
-  collectionId,
-  collectibleOrder,
   orderSide,
 }: AddToCartButtonProps) => {
-  const order = collectibleOrder.order;
-
   const onClick = () => {};
   const { label } = orderTypes[orderSide];
 

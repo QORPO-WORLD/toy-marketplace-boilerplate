@@ -2,11 +2,7 @@
 
 import { Card } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { Spinner } from '~/components/Spinner';
-import { balanceQueries, collectionQueries } from '~/lib/queries';
-import { type TokenMetadata } from '~/lib/queries/marketplace/marketplace.gen';
-import { OrderItemType } from '~/lib/stores/cart/types';
 
 import {
   Accordion,
@@ -18,7 +14,13 @@ import {
   Text,
   cn,
 } from '$ui';
+import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
+import { OrderSide, TokenMetadata } from '@0xsequence/marketplace-sdk';
+import {
+  useCollection,
+  useTokenBalances,
+} from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
@@ -46,58 +48,46 @@ export const InventoryCollectiblesContent = ({
 
 const CollectionSection = ({
   chainId,
-  contractAddress,
+  contractAddress: collectionAddress,
   accountAddress,
 }: TokenBalance) => {
   const {
-    data: collectionUserBalanceResp,
-    isLoading: isCollectionUserBalanceLoading,
-    isError: isCollectionUserBalanceError,
-    fetchNextPage,
+    data: collectionBalances,
+    isLoading: collectionBalancesLoading,
     isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery(
-    balanceQueries.list({
-      chainId,
-      contractAddress,
-      accountAddress,
-    }),
-  );
+  } = useTokenBalances({
+    chainId,
+    accountAddress,
+    contractAddress: collectionAddress,
+  });
 
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
-    useQuery(
-      collectionQueries.detail({
-        chainID: chainId.toString(),
-        collectionId: contractAddress,
-      }),
-    );
+    useCollection({ chainId, collectionAddress });
 
   // const { isGridView } = useViewType();
 
   const isGridView = true;
 
   const collectibles =
-    collectionUserBalanceResp?.pages.flatMap((p) => p.balances) || [];
+    collectionBalances?.pages.flatMap((p) => p.balances) || [];
 
-  if (isCollectionUserBalanceLoading || isCollectionMetadataLoading) {
+    collectibles.map((c) => {
+      console.log(c.tokenMetadata)
+    })
+
+    return null
+
+  if (collectionBalancesLoading || isCollectionMetadataLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
   }
 
   if (collectibles.length === 0)
     return <Text className="w-full text-center text-pink">Empty.</Text>;
 
-  const handleLoadMore = () => {
-    if (isFetchingNextPage) {
-      return;
-    }
-
-    void fetchNextPage();
-  };
-
   return (
     <Accordion.Item
-      disabled={isCollectionUserBalanceLoading || isCollectionUserBalanceError}
-      value={contractAddress}
+      disabled={collectionBalancesLoading}
+      value={collectionAddress}
       className="mb-8 max-w-[100vw] bg-transparent px-0 focus-within:ring-0 md:px-3"
     >
       <Flex
@@ -115,12 +105,12 @@ const CollectionSection = ({
               </Avatar.Base>
 
               <Text className="text-sm">
-                {collectionMetadata?.name || contractAddress}
+                {collectionMetadata?.name || collectionAddress}
               </Text>
-              <NetworkIcon chainId={Number(collectionMetadata?.chainId)} />
+              <NetworkImage chainId={Number(collectionMetadata?.chainId)} />
               <ContractTypeBadge
                 chainId={chainId}
-                collectionAddress={contractAddress}
+                collectionAddress={collectionAddress}
               />
             </Flex>
 
@@ -138,25 +128,15 @@ const CollectionSection = ({
               <Card
                 data={{ metadata: c.tokenMetadata as TokenMetadata }}
                 chainParam={chainId}
-                collectionId={contractAddress}
+                collectionId={collectionAddress}
                 key={c.tokenID}
-                itemType={OrderItemType.TRANSFER}
-                contractType={getContractType(c.contractInfo!.type)}
+                orderSide="transfer"
               />
             ) : (
               <InventoryRow />
             );
           })}
         </ContentWrapper>
-        {hasNextPage ? (
-          <Button
-            className="mt-2"
-            variant="secondary"
-            label="Load More"
-            onClick={handleLoadMore}
-            loading={isFetchingNextPage}
-          />
-        ) : null}
       </Accordion.Content>
     </Accordion.Item>
   );

@@ -9,6 +9,7 @@ import { Button, Dialog, Flex, Text } from '$ui';
 import { useAccount } from 'wagmi';
 import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { BaseImage } from '~/components/ui/Image/image';
+import { InventoryTabs } from './_components/Tabs';
 
 const Inventory = ({ marketConfig }: { marketConfig: MarketplaceConfig }) => {
   const {
@@ -57,9 +58,10 @@ const Inventory = ({ marketConfig }: { marketConfig: MarketplaceConfig }) => {
   }
 
   return (
-    <div>
-        Inventory
-    </div>
+    <InventoryTabs
+      chainId={walletChainId!}
+      accountAddress={address!}
+    />
   );
 };
 
