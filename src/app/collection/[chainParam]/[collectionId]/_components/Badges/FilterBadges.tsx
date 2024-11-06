@@ -16,9 +16,9 @@ import { classNames } from '~/config/classNames';
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
 import { StringAndArrayBadge } from './StringAndArrayBadge';
-import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
+import { useFilters } from '@0xsequence/marketplace-sdk/react';
 
 type FilterBadgesProps = {
   chainId: number;

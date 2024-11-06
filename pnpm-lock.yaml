@@ -27,8 +27,8 @@ importers:
         specifier: ^4.3.2
         version: 4.3.2(wqp3ycwc6nnoybdnegnbxixamm)
       '@0xsequence/marketplace-sdk':
-        specifier: file:packages/marketplace-sdk
-        version: file:packages/marketplace-sdk(xaefcx2765qsonbkdvxivmxd2a)
+        specifier: ^0.0.1
+        version: 0.0.1(xaefcx2765qsonbkdvxivmxd2a)
       '@0xsequence/metadata':
         specifier: ^2.0.18
         version: 2.0.18
@@ -204,6 +204,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.11.0
         version: 8.11.0(eslint@9.13.0(jiti@2.3.3))(typescript@5.6.3)
+      esbuild-plugin-alias:
+        specifier: ^0.2.1
+        version: 0.2.1
       eslint:
         specifier: ^9.13.0
         version: 9.13.0(jiti@2.3.3)
@@ -322,21 +325,21 @@ packages:
       viem: '>= 2.0.0'
       wagmi: '>= 2.0.0'
 
-  '@0xsequence/marketplace-sdk@file:packages/marketplace-sdk':
-    resolution: {directory: packages/marketplace-sdk, type: directory}
+  '@0xsequence/marketplace-sdk@0.0.1':
+    resolution: {integrity: sha512-Gr6dN8LX7oCTaH5KdAC9pSOrXzYKkhiQrao+NDT1xWcbnvlq8Ou4TDIxa/L5JtkFPWxSvByuASWR7GY0TOA/Pw==}
     peerDependencies:
-      '@0xsequence/api': ^2.0.17
+      '@0xsequence/api': ^2.0.13
       '@0xsequence/design-system': ^1.7.8
-      '@0xsequence/indexer': ^2.0.17
+      '@0xsequence/indexer': ^2.0.13
       '@0xsequence/kit': ^4.3.2
       '@0xsequence/kit-checkout': ^4.3.2
-      '@0xsequence/metadata': ^2.0.17
-      '@0xsequence/network': ^2.0.17
+      '@0xsequence/metadata': ^2.0.13
+      '@0xsequence/network': ^2.0.13
       '@tanstack/react-query': 5.59.14
       react: ^18.3.1
       react-dom: ^18.3.1
-      viem: ^2.21.32
-      wagmi: ^2.12.22
+      viem: ^2.21.25
+      wagmi: ^2.12.17
 
   '@0xsequence/metadata@2.0.12':
     resolution: {integrity: sha512-1+ogbAAHZqGvYZKEXlNUFV0s/n85Wg8N30FSVFHdKLEJi+NhehnVYIa7cz9ENzMi8mpD27gk1yC2UQYZpm7+DA==}
@@ -3657,6 +3660,9 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
 
+  esbuild-plugin-alias@0.2.1:
+    resolution: {integrity: sha512-jyfL/pwPqaFXyKnj8lP8iLk6Z0m099uXR45aSN8Av1XD4vhvQutxxPzgA2bTcAwQpa1zCXDcWOlhFgyP3GKqhQ==}
+
   escalade@3.2.0:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
@@ -6552,7 +6558,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@0xsequence/marketplace-sdk@file:packages/marketplace-sdk(xaefcx2765qsonbkdvxivmxd2a)':
+  '@0xsequence/marketplace-sdk@0.0.1(xaefcx2765qsonbkdvxivmxd2a)':
     dependencies:
       '@0xsequence/api': 2.0.18
       '@0xsequence/design-system': 1.7.8(@types/react-dom@18.3.1)(@types/react@18.3.12)(framer-motion@8.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -11297,6 +11303,8 @@ snapshots:
       is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
+
+  esbuild-plugin-alias@0.2.1: {}
 
   escalade@3.2.0: {}
 

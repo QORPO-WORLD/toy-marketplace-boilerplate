@@ -11,8 +11,8 @@ import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionCardSkeleton } from './Skeleton';
 import { NetworkImage } from '@0xsequence/design-system';
 import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import NextLink from 'next/link';
-import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 
 type CollectionCard = MarketplaceConfig['collections'][number];
 
@@ -25,7 +25,7 @@ export const CollectionCard = (params: CollectionCard) => {
 };
 
 const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
-  const { data } = useCollection ({
+  const { data } = useCollection({
     chainId,
     collectionAddress,
   });

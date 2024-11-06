@@ -5,10 +5,9 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
-import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
+import { MarketplaceKind, OrderSide } from '@0xsequence/marketplace-sdk';
 import { observer } from '@legendapp/state/react';
-import { OrderSide } from 'packages/marketplace-sdk/dist';
+import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;

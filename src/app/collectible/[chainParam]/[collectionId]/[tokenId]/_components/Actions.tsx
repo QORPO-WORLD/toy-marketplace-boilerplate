@@ -7,15 +7,8 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
-import {
-  useCreateListingModal,
-  useCurrencies,
-  useHighestOffer,
-  useLowestListing,
-  useMakeOfferModal,
-  useTokenBalances,
-} from '@0xsequence/marketplace-sdk/react';
 import { useAccount } from 'wagmi';
+import { useCreateListingModal, useCurrencies, useHighestOffer, useLowestListing, useMakeOfferModal, useTokenBalances } from '@0xsequence/marketplace-sdk/react';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -56,7 +49,7 @@ export const CollectibleTradeActions = ({
       chainId,
       collectionAddress,
       tokenId,
-      filter: {
+      filters: {
         marketplace: [MarketplaceKind.sequence_marketplace_v1],
       },
       query: {

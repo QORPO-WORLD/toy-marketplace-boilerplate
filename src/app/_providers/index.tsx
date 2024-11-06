@@ -7,13 +7,7 @@ import {
   type MarketplaceConfig,
   type SdkConfig,
 } from '@0xsequence/marketplace-sdk';
-import {
-  createWagmiConfig,
-  getQueryClient,
-  marketplaceConfigOptions,
-  MarketplaceProvider,
-  ModalProvider,
-} from '@0xsequence/marketplace-sdk/react';
+import { createWagmiConfig, getQueryClient, marketplaceConfigOptions, MarketplaceProvider, ModalProvider } from '@0xsequence/marketplace-sdk/react';
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
