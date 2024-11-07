@@ -1,4 +1,4 @@
-import { CollectibleActionButton } from '~/components/buttons/AddToCartButton';
+import { CollectibleActionButton } from '~/components/buttons/CollectibleActionButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
