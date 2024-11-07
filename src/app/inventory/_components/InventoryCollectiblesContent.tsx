@@ -55,12 +55,13 @@ const CollectionSection = ({
     data: collectionBalances,
     isLoading: collectionBalancesLoading,
     isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
   } = useTokenBalances({
     chainId,
     accountAddress,
     contractAddress: collectionAddress,
   });
-
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
 
@@ -70,6 +71,14 @@ const CollectionSection = ({
 
   const collectibles =
     collectionBalances?.pages.flatMap((p) => p.balances) || [];
+
+  const handleLoadMore = () => {
+    if (isFetchingNextPage) {
+      return;
+    }
+
+    void fetchNextPage();
+  };
 
   if (collectionBalancesLoading || isCollectionMetadataLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
@@ -130,6 +139,16 @@ const CollectionSection = ({
             );
           })}
         </ContentWrapper>
+
+        {hasNextPage ? (
+          <Button
+            className="mt-2"
+            variant="secondary"
+            label="Load More"
+            onClick={handleLoadMore}
+            loading={isFetchingNextPage}
+          />
+        ) : null}
       </Accordion.Content>
     </Accordion.Item>
   );

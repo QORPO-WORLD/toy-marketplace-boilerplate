@@ -29,7 +29,6 @@ export const CollectiblesGrid = ({
       itemContent={(index, data) => (
         <CollectibleCard
           key={index}
-          data={data}
           tokenId={data.metadata.tokenId}
           collectionAddress={data.order?.collectionContractAddress!}
           chainId={String(data.order?.chainId)}
