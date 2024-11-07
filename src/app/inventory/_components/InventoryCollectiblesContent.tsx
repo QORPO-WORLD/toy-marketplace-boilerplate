@@ -16,13 +16,11 @@ import {
 } from '$ui';
 import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
-import { OrderSide, TokenMetadata } from '@0xsequence/marketplace-sdk';
 import {
   useCollection,
   useTokenBalances,
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
@@ -130,9 +128,8 @@ const CollectionSection = ({
             return isGridView ? (
               <CollectibleCard
                 collectionAddress={collectionAddress}
-                chainId={String(chainId)}
                 tokenId={c.tokenID!}
-                orderSide="transfer"
+                collectionChainId={String(c.chainId)}
               />
             ) : (
               <InventoryRow />

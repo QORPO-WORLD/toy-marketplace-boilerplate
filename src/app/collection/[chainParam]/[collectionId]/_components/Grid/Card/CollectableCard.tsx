@@ -7,26 +7,24 @@ import { Footer } from './Footer';
 import type { Order } from '@0xsequence/marketplace-sdk';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';
+import { useAccount } from 'wagmi';
 
 type CollectibleCardProps = {
   order?: Order;
-  orderSide: 'buy' | 'sell' | 'transfer';
   tokenId: string;
   collectionAddress: string;
-  chainId: string;
-  receivedOffer?: Order;
+  collectionChainId: string;
 };
 
 export const CollectibleCard = ({
   order,
-  orderSide,
   tokenId,
   collectionAddress,
-  chainId,
-  receivedOffer,
+  collectionChainId,
 }: CollectibleCardProps) => {
+  const { isConnected, chainId: accountChainId } = useAccount();
   const { data: collectible, isLoading: collectibleLoading } = useCollectible({
-    chainId,
+    chainId: collectionChainId,
     collectionAddress,
     collectibleId: tokenId,
   });
@@ -45,7 +43,7 @@ export const CollectibleCard = ({
     >
       <Link
         href={Routes.collectible({
-          chainParam: chainId,
+          chainParam: collectionChainId,
           collectionId: collectionAddress,
           tokenId,
         })}
@@ -58,16 +56,18 @@ export const CollectibleCard = ({
         />
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
-      <CollectibleActionButton
-        className={cn(
-          'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
-          '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
-        )}
-        chainId={chainId}
-        tokenId={tokenId}
-        collectionAddress={collectionAddress}
-        collectibleName={collectible?.name}
-      />
+      {isConnected && accountChainId && (
+        <CollectibleActionButton
+          className={cn(
+            'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
+            '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
+          )}
+          tokenId={tokenId}
+          collectionChainId={collectionChainId}
+          collectionAddress={collectionAddress}
+          collectibleName={collectible?.name}
+        />
+      )}
     </article>
   );
 };

@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '$ui';
-import { Order } from '@0xsequence/marketplace-sdk';
 import {
   useCreateListingModal,
   useHighestOffer,
@@ -11,6 +10,7 @@ import {
   useTokenBalances,
   useTransferModal,
 } from '@0xsequence/marketplace-sdk/react';
+import { usePathname } from 'next/navigation';
 import { Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
@@ -20,24 +20,25 @@ type CollectibleActionButtonProps = {
   className?: string;
   tokenId: string;
   collectionAddress: string;
-  chainId: string;
   collectibleName?: string;
+  collectionChainId: string;
 };
 
 export const CollectibleActionButton = ({
   className,
   tokenId,
   collectionAddress,
-  chainId,
   collectibleName,
+  collectionChainId,
 }: CollectibleActionButtonProps) => {
+  const pathname = usePathname();
   const { address: accountAddress } = useAccount();
   const { show: showCreateListingModal } = useCreateListingModal();
   const { show: showMakeOfferModal } = useMakeOfferModal();
   const { show: showSellModal } = useSellModal();
   const { show: showTransferModal } = useTransferModal();
   const { data: tokenBalancesData } = useTokenBalances({
-    chainId,
+    chainId: collectionChainId!,
     contractAddress: collectionAddress,
     accountAddress,
     tokenId,
@@ -45,12 +46,12 @@ export const CollectibleActionButton = ({
   const collectibleBalance = tokenBalancesData?.pages[0]?.balances[0];
   const userOwnsCollectible = !!collectibleBalance;
   const { data: highestOffer } = useHighestOffer({
-    chainId,
+    chainId: collectionChainId,
     collectionAddress,
     tokenId,
   });
   const { data: lowestListing } = useLowestListing({
-    chainId,
+    chainId: collectionChainId,
     collectionAddress,
     tokenId,
   });
@@ -82,6 +83,11 @@ export const CollectibleActionButton = ({
     orderSide = 'listing';
   }
 
+  // inventory page
+  if (pathname === '/inventory') {
+    orderSide = 'transfer';
+  }
+
   if (!orderSide) return null;
 
   let orderTypes:
@@ -106,7 +112,7 @@ export const CollectibleActionButton = ({
         showSellModal({
           tokenId,
           collectionAddress,
-          chainId,
+          chainId: collectionChainId,
           order: highestOffer.order!,
           collectibleName: collectibleName!,
         });
@@ -118,7 +124,7 @@ export const CollectibleActionButton = ({
         showTransferModal({
           tokenId,
           collectionAddress: collectionAddress as Hex,
-          chainId,
+          chainId: collectionChainId,
         });
       },
     },
@@ -127,7 +133,7 @@ export const CollectibleActionButton = ({
       onClick: () => {
         showMakeOfferModal({
           collectionAddress,
-          chainId,
+          chainId: collectionChainId,
           collectibleId: tokenId,
         });
       },
@@ -137,7 +143,7 @@ export const CollectibleActionButton = ({
       onClick: () => {
         showCreateListingModal({
           collectionAddress,
-          chainId,
+          chainId: collectionChainId,
           collectibleId: tokenId,
         });
       },

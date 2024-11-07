@@ -6,6 +6,7 @@ import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
+import { getChain } from '~/lib/utils/getChain';
 
 import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
@@ -21,6 +22,7 @@ export const CollectiblesGrid = ({
   collectibleOrders,
 }: CollectiblesGridProps) => {
   const { chainParam, collectionId } = Routes.collection.useParams();
+  const chain = getChain(chainParam);
 
   return (
     <VirtuosoGrid
@@ -34,8 +36,7 @@ export const CollectiblesGrid = ({
           key={index}
           tokenId={data.metadata.tokenId}
           collectionAddress={collectionId}
-          chainId={String(chainParam)}
-          orderSide="buy"
+          collectionChainId={String(chain?.chainId)}
         />
       )}
       endReached={endReached}
