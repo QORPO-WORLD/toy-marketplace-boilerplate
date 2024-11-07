@@ -67,3 +67,5 @@ export const generateMetadata = async (): Promise<Metadata> => {
     },
   };
 };
+
+export const runtime = 'edge';

@@ -1,6 +1,6 @@
 import { Flex, Grid, Text, cn } from '$ui';
 import { CollectionCard } from './Card/index';
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type LandingCollectionsProps = {
   collections: MarketplaceConfig['collections'];

@@ -3,15 +3,14 @@
 import { Spinner } from '~/components/Spinner';
 import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
+import { BaseImage } from '~/components/ui/Image/image';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, Text } from '$ui';
-import { useAccount } from 'wagmi';
-import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-import { BaseImage } from '~/components/ui/Image/image';
 import { InventoryTabs } from './_components/Tabs';
+import { useAccount } from 'wagmi';
 
-const Inventory = ({ marketConfig }: { marketConfig: MarketplaceConfig }) => {
+const Inventory = () => {
   const {
     isConnected,
     chain,
@@ -57,12 +56,7 @@ const Inventory = ({ marketConfig }: { marketConfig: MarketplaceConfig }) => {
     );
   }
 
-  return (
-    <InventoryTabs
-      chainId={walletChainId!}
-      accountAddress={address!}
-    />
-  );
+  return <InventoryTabs chainId={walletChainId!} accountAddress={address!} />;
 };
 
 export default Inventory;
@@ -84,3 +78,5 @@ const SwitchNetworkButton = () => {
     </Dialog.Root>
   );
 };
+
+export const runtime = 'edge';
