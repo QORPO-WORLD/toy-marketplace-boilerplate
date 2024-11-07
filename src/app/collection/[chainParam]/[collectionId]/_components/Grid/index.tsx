@@ -5,20 +5,23 @@ import { forwardRef } from 'react';
 import { VirtuosoGrid } from 'react-virtuoso';
 
 import { classNames } from '~/config/classNames';
+import { Routes } from '~/lib/routes';
 
 import { Grid, cn } from '$ui';
 import { CollectibleCard } from './Card/CollectableCard';
 import { type CollectibleOrder } from '@0xsequence/marketplace-sdk';
 
 export type CollectiblesGridProps = {
-  data: CollectibleOrder[];
+  collectibleOrders: CollectibleOrder[];
   endReached?: () => void;
 };
 
 export const CollectiblesGrid = ({
   endReached,
-  data,
+  collectibleOrders,
 }: CollectiblesGridProps) => {
+  const { chainParam, collectionId } = Routes.collection.useParams();
+
   return (
     <VirtuosoGrid
       className="@container/collectiblesGridContainer"
@@ -30,13 +33,13 @@ export const CollectiblesGrid = ({
         <CollectibleCard
           key={index}
           tokenId={data.metadata.tokenId}
-          collectionAddress={data.order?.collectionContractAddress!}
-          chainId={String(data.order?.chainId)}
+          collectionAddress={collectionId}
+          chainId={String(chainParam)}
           orderSide="buy"
         />
       )}
       endReached={endReached}
-      data={data}
+      data={collectibleOrders}
     />
   );
 };

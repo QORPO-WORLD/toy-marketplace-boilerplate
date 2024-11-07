@@ -15,7 +15,6 @@ type CollectibleCardProps = {
   collectionAddress: string;
   chainId: string;
   receivedOffer?: Order;
-  collectibleName?: string;
 };
 
 export const CollectibleCard = ({
@@ -25,7 +24,6 @@ export const CollectibleCard = ({
   collectionAddress,
   chainId,
   receivedOffer,
-  collectibleName,
 }: CollectibleCardProps) => {
   const { data: collectible, isLoading: collectibleLoading } = useCollectible({
     chainId,
@@ -70,7 +68,7 @@ export const CollectibleCard = ({
         tokenId={tokenId}
         collectionAddress={collectionAddress}
         receivedOffer={receivedOffer}
-        collectibleName={collectibleName}
+        collectibleName={collectible?.name}
       />
     </article>
   );
