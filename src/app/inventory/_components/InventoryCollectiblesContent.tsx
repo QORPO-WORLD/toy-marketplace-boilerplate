@@ -94,7 +94,7 @@ const CollectionSection = ({
       className="mb-8 max-w-[100vw] bg-transparent px-0 focus-within:ring-0 md:px-3"
     >
       <Flex
-        className="sticky z-40 bg-background py-2"
+        className="sticky z-20 bg-background py-2"
         style={{ top: 'calc(var(--headerHeight))' }}
       >
         <ScrollArea.Base orientation="horizontal" className="max-w-full">
