@@ -1,4 +1,4 @@
-import { AddToCartButton } from '~/components/buttons/AddToCartButton';
+import { CollectibleActionButton } from '~/components/buttons/AddToCartButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
@@ -58,16 +58,14 @@ export const CollectibleCard = ({
         />
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
-      <AddToCartButton
+      <CollectibleActionButton
         className={cn(
           'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
           '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
         )}
         chainId={chainId}
-        orderSide={orderSide || 'buy'}
         tokenId={tokenId}
         collectionAddress={collectionAddress}
-        receivedOffer={receivedOffer}
         collectibleName={collectible?.name}
       />
     </article>

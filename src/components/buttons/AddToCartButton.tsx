@@ -4,42 +4,93 @@ import { Button } from '$ui';
 import { Order } from '@0xsequence/marketplace-sdk';
 import {
   useCreateListingModal,
+  useHighestOffer,
+  useLowestListing,
   useMakeOfferModal,
   useSellModal,
+  useTokenBalances,
   useTransferModal,
 } from '@0xsequence/marketplace-sdk/react';
 import { Hex } from 'viem';
+import { useAccount } from 'wagmi';
 
-type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing';
+type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing' | undefined;
 
-type AddToCartButtonProps = {
+type CollectibleActionButtonProps = {
   className?: string;
-  orderSide: OrderSide;
   tokenId: string;
   collectionAddress: string;
   chainId: string;
-  receivedOffer?: Order;
   collectibleName?: string;
 };
 
-export const AddToCartButton = ({
+export const CollectibleActionButton = ({
   className,
-  orderSide,
   tokenId,
   collectionAddress,
   chainId,
-  receivedOffer,
   collectibleName,
-}: AddToCartButtonProps) => {
+}: CollectibleActionButtonProps) => {
+  const { address: accountAddress } = useAccount();
   const { show: showCreateListingModal } = useCreateListingModal();
   const { show: showMakeOfferModal } = useMakeOfferModal();
   const { show: showSellModal } = useSellModal();
   const { show: showTransferModal } = useTransferModal();
+  const { data: tokenBalancesData } = useTokenBalances({
+    chainId,
+    contractAddress: collectionAddress,
+    accountAddress,
+    tokenId,
+  });
+  const collectibleBalance = tokenBalancesData?.pages[0]?.balances[0];
+  const userOwnsCollectible = !!collectibleBalance;
+  const { data: highestOffer } = useHighestOffer({
+    chainId,
+    collectionAddress,
+    tokenId,
+  });
+  const { data: lowestListing } = useLowestListing({
+    chainId,
+    collectionAddress,
+    tokenId,
+  });
 
-  const orderTypes = {
+  let orderSide: OrderSide = undefined;
+
+  // sellable collectible
+  if (userOwnsCollectible && highestOffer?.order) {
+    orderSide = 'sell';
+  }
+
+  // buyable collectible
+  if (!userOwnsCollectible && lowestListing?.order) {
+    orderSide = 'buy';
+  }
+
+  // transferable collectible
+  if (userOwnsCollectible && !highestOffer?.order) {
+    orderSide = 'transfer';
+  }
+
+  // offerable collectible
+  if (!userOwnsCollectible && !lowestListing?.order) {
+    orderSide = 'order';
+  }
+
+  // listable collectible
+  if (userOwnsCollectible && !lowestListing?.order) {
+    orderSide = 'listing';
+  }
+
+  if (!orderSide) return null;
+
+  let orderTypes:
+    | Record<NonNullable<OrderSide>, { label: string; onClick: () => void }>
+    | undefined = undefined;
+
+  orderTypes = {
     buy: {
       label: 'Buy',
-      // TODO: Implement buy
       onClick: () => {
         console.log('buy');
       },
@@ -47,16 +98,16 @@ export const AddToCartButton = ({
     sell: {
       label: 'Sell',
       onClick: () => {
-        if (!receivedOffer || !collectibleName)
+        if (!highestOffer || !collectibleName)
           throw new Error(
-            'receivedOffer and collectibleName are required for sell',
+            'highestOffer and collectibleName are required for sell',
           );
 
         showSellModal({
           tokenId,
           collectionAddress,
           chainId,
-          order: receivedOffer!,
+          order: highestOffer.order!,
           collectibleName: collectibleName!,
         });
       },
@@ -85,13 +136,14 @@ export const AddToCartButton = ({
       label: 'Create Listing',
       onClick: () => {
         showCreateListingModal({
-          collectionAddress: '0x0',
-          chainId: '1',
-          collectibleId: '0',
+          collectionAddress,
+          chainId,
+          collectibleId: tokenId,
         });
       },
     },
   };
+
   const { label } = orderTypes[orderSide];
 
   return (
