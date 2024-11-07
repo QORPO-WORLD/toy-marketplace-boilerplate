@@ -53,7 +53,7 @@ export const CollectibleTradeActions = ({
       },
     });
 
-  const { data: bestListings, isLoading: isLoadingBestListings } =
+  const { data: lowestListing, isLoading: loadingLowestListing } =
     useLowestListing({
       chainId,
       collectionAddress,
@@ -84,29 +84,26 @@ export const CollectibleTradeActions = ({
       },
     });
 
-  const userBalance = userBalanceResp?.pages?.[0]?.balances[0]?.balance;
+  const tokenBalance = userBalanceResp?.pages?.[0]?.balances[0]?.balance;
 
-  const item721AlreadyOwned = !!userBalance && !isERC1155;
+  const item721AlreadyOwned = !!tokenBalance && !isERC1155;
 
   const isLoading =
     isLoadingHighestOffer ||
-    isLoadingBestListings ||
+    loadingLowestListing ||
     (isConnected && isBalanceLoading);
 
   const onClickBuy = () => {
-    if (!bestListings || !bestListings) return;
     //TODO: buy
   };
 
   const onClickSell = () => {
-    if (!highestOffer?.order) return;
-
     showSellModal({
       collectionAddress,
       chainId: String(chainId),
       tokenId,
       collectibleName: collectibleMetadata.data?.name,
-      order: highestOffer.order,
+      order: highestOffer!.order!,
     });
   };
 
@@ -126,10 +123,10 @@ export const CollectibleTradeActions = ({
     });
   };
 
-  const buyDisabled = !bestListings || item721AlreadyOwned;
-  const offerDisabled = !isConnected;
-  const listingDisabled = !isConnected || !userBalance;
-  const sellDisabled = !highestOffer?.order || !userBalance;
+  const buyDisabled = !isConnected || !lowestListing || item721AlreadyOwned;
+  const offerDisabled = !isConnected || item721AlreadyOwned;
+  const listingDisabled = !isConnected || !tokenBalance;
+  const sellDisabled = !isConnected || !highestOffer?.order || !tokenBalance;
 
   return (
     <Flex className="flex-col gap-4">
