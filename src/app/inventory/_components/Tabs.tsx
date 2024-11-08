@@ -60,11 +60,12 @@ export const InventoryTabs = ({
     );
   }
 
-  if (!balancesData) {
+  const balances = balancesData?.pages[0];
+  const isEmptyInventory = !balances || balances.balances.length === 0;
+
+  if (isEmptyInventory) {
     return <Text className="w-full text-center text-pink">Empty.</Text>;
   }
-
-  const balances = balancesData.pages[0];
 
   // collectible balances and counts
   const collectionBalances = balances?.balances.filter(
