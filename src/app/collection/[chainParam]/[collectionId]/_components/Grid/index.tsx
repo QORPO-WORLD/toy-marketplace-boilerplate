@@ -37,6 +37,7 @@ export const CollectiblesGrid = ({
           tokenId={data.metadata.tokenId}
           collectionAddress={collectionId}
           collectionChainId={String(chain?.chainId)}
+          order={data.order}
         />
       )}
       endReached={endReached}

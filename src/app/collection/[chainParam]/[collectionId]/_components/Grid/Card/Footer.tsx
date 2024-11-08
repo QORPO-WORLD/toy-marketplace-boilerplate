@@ -64,7 +64,7 @@ const Order = ({ height, order }: OrderProps) => {
           className="ellipsis text-sm md:text-base"
           title={String(currency?.name)}
         >
-          {order.priceAmountFormatted || 'N/A'}
+          {order.priceAmountFormatted || 'N/A'} {currency?.symbol}
         </Text>
       </Flex>
       <Badge variant="success">
