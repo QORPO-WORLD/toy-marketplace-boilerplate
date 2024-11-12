@@ -21,6 +21,7 @@ import {
   useListBalances
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
+import { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];
@@ -127,7 +128,7 @@ const CollectionSection = ({
           {collectibles.map((c) => {
             return isGridView ? (
               <CollectibleCard
-                collectionAddress={collectionAddress}
+                collectionAddress={collectionAddress as Hex}
                 tokenId={c.tokenID!}
                 collectionChainId={String(c.chainId)}
               />

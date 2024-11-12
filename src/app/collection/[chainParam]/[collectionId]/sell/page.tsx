@@ -25,7 +25,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const properties = filters$.filterOptions.get();
 
   const collectiblesResponse = useListCollectibles({
-    chainId,
+    chainId: String(chainId),
     collectionAddress: collectionId,
     filter: {
       searchText: text,

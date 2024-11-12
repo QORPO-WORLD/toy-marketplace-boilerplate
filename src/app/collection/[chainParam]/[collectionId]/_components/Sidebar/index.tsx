@@ -15,10 +15,11 @@ import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
+import { Hex } from 'viem';
 
 type CollectionSidebarProps = {
   chainId: number;
-  collectionAddress: string;
+  collectionAddress: Hex;
 };
 
 export const CollectionSidebar = ({
@@ -66,7 +67,7 @@ const CollectionSidebarContent = ({
   // const { isConnected } = useAccount();
 
   const collectableFilters = useFilters({
-    chainId: chainId.toString(),
+    chainId: String(chainId),
     collectionAddress,
   });
 
