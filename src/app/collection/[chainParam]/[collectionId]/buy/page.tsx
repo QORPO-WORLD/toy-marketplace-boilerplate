@@ -22,7 +22,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
   const includeEmpty = !filters$.showAvailableOnly.get();
 
   const collectiblesResponse = useListCollectibles({
-    chainId,
+    chainId:String(chainId),
     collectionAddress: collectionId,
     filter: {
       searchText: text,

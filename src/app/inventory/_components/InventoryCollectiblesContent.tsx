@@ -18,7 +18,7 @@ import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
 import {
   useCollection,
-  useTokenBalances,
+  useListBalances
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
 
@@ -55,7 +55,7 @@ const CollectionSection = ({
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useTokenBalances({
+  } = useListBalances({
     chainId,
     accountAddress,
     contractAddress: collectionAddress,

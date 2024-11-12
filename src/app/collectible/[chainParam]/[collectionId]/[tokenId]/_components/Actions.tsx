@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
-import { Button, Dialog, Flex, ScrollArea, Text } from '$ui';
+import { Button, Dialog, Flex, ScrollArea, Text, toast } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
@@ -14,14 +14,15 @@ import {
   useLowestListing,
   useMakeOfferModal,
   useSellModal,
-  useTokenBalances,
+  useBalanceOfCollectible,
 } from '@0xsequence/marketplace-sdk/react';
-import { useAccount } from 'wagmi';
+import { useAccount, useConnectorClient, useConnectors } from 'wagmi';
+import { Hex } from 'viem';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
   tokenId: string;
-  collectionAddress: string;
+  collectionAddress: Hex;
 }
 export const CollectibleTradeActions = ({
   chainId,
@@ -55,7 +56,7 @@ export const CollectibleTradeActions = ({
 
   const { data: lowestListing, isLoading: loadingLowestListing } =
     useLowestListing({
-      chainId,
+      chainId: String(chainId),
       collectionAddress,
       tokenId,
       filters: {
@@ -73,18 +74,16 @@ export const CollectibleTradeActions = ({
   const { address, isConnected } = useAccount();
 
   const { data: userBalanceResp, isLoading: isBalanceLoading } =
-    useTokenBalances({
+    useBalanceOfCollectible({
       chainId: chainId,
-      contractAddress: collectionAddress,
-      tokenId,
-      includeMetadata: false,
-      accountAddress: address as string,
+      collectionAddress,
+      collectableId: tokenId,
       query: {
         enabled: !!isConnected && !!address,
       },
     });
 
-  const tokenBalance = userBalanceResp?.pages?.[0]?.balances[0]?.balance;
+  const tokenBalance = userBalanceResp?.balance;
 
   const item721AlreadyOwned = !!tokenBalance && !isERC1155;
 
@@ -104,6 +103,13 @@ export const CollectibleTradeActions = ({
       tokenId,
       collectibleName: collectibleMetadata.data?.name,
       order: highestOffer!.order!,
+      messages: {
+        sellCollectible: {
+          onUnknownError: (error: any) => {
+            console.log(error);
+          },
+        },
+      },
     });
   };
 
@@ -120,6 +126,16 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
+      messages: {
+        createListing: {
+          onSuccess: () => {
+            toast.success('Listing created successfully');
+          },
+          onUnknownError: (error: any) => {
+            toast.warning('An error occurred while creating the listing');
+          },
+        },
+      },
     });
   };
 

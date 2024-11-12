@@ -9,8 +9,8 @@ import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
 import {
+  useListBalances,
   useMarketplaceConfig,
-  useTokenBalances,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
@@ -43,7 +43,7 @@ export const InventoryTabs = ({
     data: balancesData,
     isLoading: balancesLoading,
     isError: errorGettingBalances,
-  } = useTokenBalances({
+  } = useListBalances({
     chainId,
     accountAddress,
   });

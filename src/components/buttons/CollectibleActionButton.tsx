@@ -7,7 +7,7 @@ import {
   useLowestListing,
   useMakeOfferModal,
   useSellModal,
-  useTokenBalances,
+  useBalanceOfCollectible,
   useTransferModal,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname } from 'next/navigation';
@@ -19,7 +19,7 @@ type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing' | undefined;
 type CollectibleActionButtonProps = {
   className?: string;
   tokenId: string;
-  collectionAddress: string;
+  collectionAddress: Hex;
   collectibleName?: string;
   collectionChainId: string;
 };
@@ -32,18 +32,16 @@ export const CollectibleActionButton = ({
   collectionChainId,
 }: CollectibleActionButtonProps) => {
   const pathname = usePathname();
-  const { address: accountAddress } = useAccount();
   const { show: showCreateListingModal } = useCreateListingModal();
   const { show: showMakeOfferModal } = useMakeOfferModal();
   const { show: showSellModal } = useSellModal();
   const { show: showTransferModal } = useTransferModal();
-  const { data: tokenBalancesData } = useTokenBalances({
+  const { data: tokenBalancesData } = useBalanceOfCollectible({
     chainId: collectionChainId!,
-    contractAddress: collectionAddress,
-    accountAddress,
-    tokenId,
+    collectionAddress,
+    collectableId: tokenId,
   });
-  const collectibleBalance = tokenBalancesData?.pages[0]?.balances[0];
+  const collectibleBalance = tokenBalancesData?.balance;
   const userOwnsCollectible = !!collectibleBalance;
   const { data: highestOffer } = useHighestOffer({
     chainId: collectionChainId,
@@ -135,6 +133,13 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
+          messages: {
+            makeOffer: {
+              onUnknownError: (error: any) => {
+                console.error('Unknown error', error);
+              },
+            },
+          },
         });
       },
     },
@@ -145,6 +150,13 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
+          messages: {
+            createListing: {
+              onUnknownError: (error: any) => {
+                console.error('Unknown error', error);
+              },
+            },
+          },
         });
       },
     },
