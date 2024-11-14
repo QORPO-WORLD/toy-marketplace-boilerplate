@@ -4,8 +4,6 @@ const config = {
   parserOptions: {
     project: true,
   },
-  // TODO: Remove ts-ignore after fixing the issue
-  // @ts-ignore
   plugins: ['@typescript-eslint'],
   extends: [
     'next/core-web-vitals',
