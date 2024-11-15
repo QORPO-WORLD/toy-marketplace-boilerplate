@@ -15,7 +15,7 @@ import { observer } from '@legendapp/state/react';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
-import { Hex } from 'viem';
+import { type Hex } from 'viem';
 
 type CollectionSidebarProps = {
   chainId: number;

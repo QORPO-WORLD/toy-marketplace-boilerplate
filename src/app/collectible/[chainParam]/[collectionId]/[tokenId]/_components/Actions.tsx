@@ -17,7 +17,7 @@ import {
   useBalanceOfCollectible,
 } from '@0xsequence/marketplace-sdk/react';
 import { useAccount, useConnectorClient, useConnectors } from 'wagmi';
-import { Hex } from 'viem';
+import { type Hex } from 'viem';
 
 interface CollectibleTradeActionsProps {
   chainId: number;

@@ -11,7 +11,7 @@ import {
   useTransferModal,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname } from 'next/navigation';
-import { Hex } from 'viem';
+import { type Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
 type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing' | undefined;
@@ -37,7 +37,7 @@ export const CollectibleActionButton = ({
   const { show: showSellModal } = useSellModal();
   const { show: showTransferModal } = useTransferModal();
   const { data: tokenBalancesData } = useBalanceOfCollectible({
-    chainId: collectionChainId!,
+    chainId: collectionChainId,
     collectionAddress,
     collectableId: tokenId,
   });
@@ -112,7 +112,7 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           order: highestOffer.order!,
-          collectibleName: collectibleName!,
+          collectibleName: collectibleName,
         });
       },
     },
@@ -121,7 +121,7 @@ export const CollectibleActionButton = ({
       onClick: () => {
         showTransferModal({
           tokenId,
-          collectionAddress: collectionAddress as Hex,
+          collectionAddress: collectionAddress,
           chainId: collectionChainId,
         });
       },

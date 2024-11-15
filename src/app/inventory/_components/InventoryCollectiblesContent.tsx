@@ -21,7 +21,7 @@ import {
   useListBalances
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
-import { Hex } from 'viem';
+import { type Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];

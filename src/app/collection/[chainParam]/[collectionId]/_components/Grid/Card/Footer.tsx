@@ -1,6 +1,6 @@
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
 
-import { TokenMetadata } from '@0xsequence/indexer';
+import { type TokenMetadata } from '@0xsequence/indexer';
 import { type Order, truncateMiddle } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 

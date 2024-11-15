@@ -72,7 +72,7 @@ export const InventoryTabs = ({
     (b) => b.contractType != ContractType.ERC20,
   );
 
-  const filteredCollecionBalances: TokenBalance[] = collectionBalances!.filter(
+  const filteredCollecionBalances: TokenBalance[] = collectionBalances.filter(
     (balanceCollection) =>
       !!config.data?.collections?.find(
         (marketplaceCollection) =>

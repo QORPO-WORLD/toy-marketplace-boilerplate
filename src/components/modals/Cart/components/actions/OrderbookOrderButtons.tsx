@@ -223,9 +223,7 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC1155') as
-        | GenericStep
-        | undefined;
+      const approveStep = steps.find((s) => s.id === 'approveERC1155');
       if (!approveStep) return;
 
       setTransactionPendingState(true);
@@ -262,9 +260,7 @@ export const OrderbookOrderButtons = ({
     const onApprove = async () => {
       if (!walletClient || !collectionAddress) return;
 
-      const approveStep = steps.find((s) => s.id === 'approveERC721') as
-        | GenericStep
-        | undefined;
+      const approveStep = steps.find((s) => s.id === 'approveERC721');
       if (!approveStep) return;
 
       setTransactionPendingState(true);
