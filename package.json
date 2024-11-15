@@ -69,9 +69,6 @@
     "wagmi": "^2.12.32",
     "zod": "^3.23.8"
   },
-  "peerDependencies": {
-    "rollup": "3.29.5"
-  },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.60.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
