@@ -16,9 +16,9 @@ import { classNames } from '~/config/classNames';
 import { filters$ } from '../FilterStore';
 import { IntBadge } from './IntBadge';
 import { StringAndArrayBadge } from './StringAndArrayBadge';
+import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
-import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { type Hex } from 'viem';
 
 type FilterBadgesProps = {
@@ -75,14 +75,19 @@ export const FilterBadges = observer(
                   }
                   return null;
                 case PropertyType.INT:
-                  return (
-                    <IntBadge
-                      key={i}
-                      name={filter.name}
-                      min={filter.values[0]}
-                      max={filter.values[1]}
-                    />
-                  );
+                  if (filter?.values.length == 2) {
+                    const min = filter.values[0] as number;
+                    const max = filter.values[2] as number;
+                    return (
+                      <IntBadge
+                        key={i}
+                        name={filter.name}
+                        min={min}
+                        max={max}
+                      />
+                    );
+                  }
+                  return null;
               }
             })}
 

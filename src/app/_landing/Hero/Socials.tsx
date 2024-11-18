@@ -1,7 +1,5 @@
 'use client';
 
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-
 import {
   Button,
   DiscordIcon,
@@ -13,6 +11,7 @@ import {
   YoutubeIcon,
   cn,
 } from '$ui';
+import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type SocialsProps = {
   socials: MarketplaceConfig['socials'];
@@ -51,9 +50,10 @@ export const Socials = ({ socials, className }: SocialsProps) => {
               }
             }
 
+            const href = val as string;
             return (
               <Button asChild key={i} variant="muted">
-                <a target="_blank" href={val}>
+                <a target="_blank" href={href}>
                   {icon}
                 </a>
               </Button>
