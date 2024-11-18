@@ -77,7 +77,7 @@ export const FilterBadges = observer(
                 case PropertyType.INT:
                   if (filter?.values.length == 2) {
                     const min = filter.values[0] as number;
-                    const max = filter.values[2] as number;
+                    const max = filter.values[1] as number;
                     return (
                       <IntBadge
                         key={i}
