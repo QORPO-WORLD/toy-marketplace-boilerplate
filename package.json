@@ -12,7 +12,7 @@
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@0xsequence/api": "^2.0.26",
+		"0xsequence": "^2.0.26",
 		"@0xsequence/design-system": "^1.8.0",
 		"@0xsequence/indexer": "^2.0.26",
 		"@0xsequence/kit": "^4.4.4",
@@ -20,7 +20,6 @@
 		"@0xsequence/marketplace-sdk": "workspace:*",
 		"@0xsequence/metadata": "^2.0.26",
 		"@0xsequence/network": "^2.0.26",
-		"@0xsequence/waas": "^2.0.26",
 		"@google/model-viewer": "^3.5.0",
 		"@legendapp/state": "3.0.0-beta.13",
 		"@radix-ui/react-accordion": "^1.2.1",
@@ -44,8 +43,6 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tanstack/react-query": "^5.60.5",
 		"@tanstack/react-query-devtools": "^5.60.5",
-		"@wagmi/core": "^2.14.6",
-		"0xsequence": "^2.0.26",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"date-fns": "^4.1.0",
@@ -78,6 +75,7 @@
 		"@types/react-dom": "^18.3.1",
 		"@typescript-eslint/eslint-plugin": "^8.14.0",
 		"@typescript-eslint/parser": "^8.14.0",
+		"@vanilla-extract/next-plugin": "^2.4.6",
 		"esbuild-plugin-alias": "^0.2.1",
 		"eslint": "^8.57.1",
 		"eslint-config-next": "^14.2.18",
