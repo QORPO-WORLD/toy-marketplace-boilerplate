@@ -25,7 +25,8 @@ export const CollectibleTradeActions = ({
 	tokenId,
 	collectionAddress,
 }: CollectibleTradeActionsProps) => {
-	const { onError: onListingError, show: showListModal } = useCreateListingModal();
+	const { onError: onListingError, show: showListModal } =
+		useCreateListingModal();
 	const { show: showOfferModal } = useMakeOfferModal();
 	const { show: showSellModal } = useSellModal();
 
@@ -33,8 +34,6 @@ export const CollectibleTradeActions = ({
 		chainId,
 		collectionAddress,
 	});
-
-	
 
 	const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
@@ -118,16 +117,6 @@ export const CollectibleTradeActions = ({
 			collectionAddress,
 			chainId: String(chainId),
 			collectibleId: tokenId,
-			messages: {
-				createListing: {
-					onSuccess: () => {
-						toast.success('Listing created successfully');
-					},
-					onUnknownError: (error: any) => {
-						toast.warning('An error occurred while creating the listing');
-					},
-				},
-			},
 		});
 	};
 
