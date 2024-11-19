@@ -16,7 +16,7 @@ const Layout = async ({
   params: typeof Routes.collection.params;
 }) => {
   const chainId = getChainId(chainParam)!;
-  const { getMarketplaceConfig } = ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
 
   const collectionConfig = marketplaceConfig.collections?.find(

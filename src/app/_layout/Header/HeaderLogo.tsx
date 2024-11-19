@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 export async function HeaderLogo() {
-  const { getMarketplaceConfig } = ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return (
     <Link

@@ -14,7 +14,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { getInitialState, getMarketplaceConfig, config } = ssrClient();
+  const { getInitialState, getMarketplaceConfig, config } = await ssrClient();
   const { fontUrl, cssString, faviconUrl } = await getMarketplaceConfig();
   const initialState = await getInitialState();
 
@@ -38,7 +38,7 @@ export default async function RootLayout({
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const { getMarketplaceConfig } = ssrClient();
+  const { getMarketplaceConfig } = await ssrClient();
   const marketplaceConfig = await getMarketplaceConfig();
   return {
     title: {

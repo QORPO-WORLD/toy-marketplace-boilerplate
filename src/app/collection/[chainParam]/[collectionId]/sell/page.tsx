@@ -11,12 +11,14 @@ import { MarketplaceKind, OrderSide } from '@0xsequence/marketplace-sdk';
 import { observer } from '@legendapp/state/react';
 import { useAccount } from 'wagmi';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
+import { use } from 'react';
 
-type CollectionBuyPageParams = {
+type CollectionBuyPageParams = Promise<{
   params: typeof Routes.collection.params;
-};
+}>
 
-const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
+const CollectionBuyPage = observer((props: {params:CollectionBuyPageParams}) => {
+  const { params } = use(props.params);
   const chainId = getChainId(params.chainParam)!;
   const { collectionId } = params;
   const { address, isConnected } = useAccount();
