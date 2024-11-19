@@ -8,6 +8,7 @@ import { Layout } from './_layout';
 import type { Metadata } from 'next';
 import Providers from './_providers';
 import '@0xsequence/marketplace-sdk/styles'
+import '../config/xmlhttp-config'
 
 export default async function RootLayout({
   children,
@@ -68,4 +69,4 @@ export const generateMetadata = async (): Promise<Metadata> => {
   };
 };
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
