@@ -3,11 +3,10 @@ import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import '~/styles/globals.scss';
 
 import { cn } from '$ui';
-import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
-import type { Metadata } from 'next';
 import Providers from './_providers';
-import '@0xsequence/marketplace-sdk/styles'
+import '@0xsequence/marketplace-sdk/styles';
+import type { Metadata } from 'next';
 
 export default async function RootLayout({
   children,
@@ -28,7 +27,7 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <body className={cn(classNames.themeManager, inter.className)}>
+      <body className={cn(classNames.themeManager)}>
         <Providers sdkInitialState={initialState} sdkConfig={config}>
           <Layout>{children}</Layout>
         </Providers>
