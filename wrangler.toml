@@ -1,0 +1,6 @@
+name = "marketplace-boilerplate"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2024-07-03"
+compatibility_flags = [ "nodejs_compat" ]
+[build]
+command = "pnpx @cloudflare/next-on-pages@1"
