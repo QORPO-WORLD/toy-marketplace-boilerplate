@@ -12,7 +12,6 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "0xsequence": "^2.0.26",
     "@0xsequence/design-system": "^1.8.0",
     "@0xsequence/indexer": "^2.0.26",
     "@0xsequence/kit": "^4.4.4",
