@@ -88,7 +88,8 @@
   "packageManager": "pnpm@9.13.2",
   "pnpm": {
     "overrides": {
-      "cross-fetch": "4.0.0"
+      "cross-fetch": "4.0.0",
+      "node-fetch": "npm:whatwg-url"
     }
   }
 }
