@@ -8,7 +8,6 @@ import { Layout } from './_layout';
 import type { Metadata } from 'next';
 import Providers from './_providers';
 import '@0xsequence/marketplace-sdk/styles'
-import '../config/xmlhttp-config'
 
 export default async function RootLayout({
   children,
