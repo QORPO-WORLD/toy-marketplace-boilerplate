@@ -24,10 +24,10 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-  const { onError: onListingError, show: showListModal } =
-    useCreateListingModal();
-  const { show: showOfferModal } = useMakeOfferModal();
-  const { show: showSellModal } = useSellModal();
+	const { show: showListModal } = useCreateListingModal();
+	const { show: showOfferModal } = useMakeOfferModal();
+	const { show: showSellModal } = useSellModal();
+	const { show: showBuyModal } = useBuyModal();
 
   const { data: currencies } = useCurrencies({
     chainId,
@@ -36,28 +36,28 @@ export const CollectibleTradeActions = ({
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
-  const { data: highestOffer, isLoading: isLoadingHighestOffer } =
-    useHighestOffer({
-      chainId: String(chainId),
-      collectionAddress,
-      tokenId: tokenId,
-      filter: {
-        currencies: currencyAddresses,
-      },
-      query: {
-        enabled: !!currencies,
-      },
-    });
+	const { data: highestOffer, isLoading: isLoadingHighestOffer } =
+		useHighestOffer({
+			chainId: String(chainId),
+			collectionAddress,
+			tokenId: tokenId,
+			filter: {
+				currencies: currencyAddresses,
+			},
+			query: {
+				enabled: !!currencies,
+			},
+		});
 
-  const { data: lowestListing, isLoading: loadingLowestListing } =
-    useLowestListing({
-      chainId: String(chainId),
-      collectionAddress,
-      tokenId,
-      query: {
-        enabled: !!currencies,
-      },
-    });
+	const { data: lowestListing, isLoading: loadingLowestListing } =
+		useLowestListing({
+			chainId: String(chainId),
+			collectionAddress,
+			tokenId,
+			query: {
+				enabled: !!currencies,
+			},
+		});
 
   const { collectionMetadata, collectibleMetadata } = useCollectableData();
 
@@ -85,19 +85,23 @@ export const CollectibleTradeActions = ({
     loadingLowestListing ||
     (isConnected && isBalanceLoading);
 
-  const onClickBuy = () => {
-    //TODO: buy
-  };
+	const onClickBuy = () => {
+		showBuyModal({
+			chainId: String(chainId),
+			collectionAddress,
+			tokenId,
+			order: lowestListing!.order!,
+		});
+	};
 
-  const onClickSell = () => {
-    showSellModal({
-      collectionAddress,
-      chainId: String(chainId),
-      tokenId,
-      collectibleName: collectibleMetadata.data?.name,
-      order: highestOffer!.order!,
-    });
-  };
+	const onClickSell = () => {
+		showSellModal({
+			collectionAddress,
+			chainId: String(chainId),
+			tokenId,
+			order: highestOffer!.order!,
+		});
+	};
 
   const onClickOffer = () => {
     showOfferModal({
