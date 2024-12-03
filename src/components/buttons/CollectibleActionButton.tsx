@@ -114,7 +114,6 @@ export const CollectibleActionButton = ({
 					collectionAddress,
 					chainId: collectionChainId,
 					order: highestOffer.order!,
-					collectibleName: collectibleName,
 				});
 			},
 		},

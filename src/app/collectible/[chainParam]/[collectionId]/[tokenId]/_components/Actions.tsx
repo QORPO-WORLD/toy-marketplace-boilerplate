@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Flex, Text, toast } from '$ui';
-import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
+import { Button, Flex, Text } from '$ui';
 import {
 	useBalanceOfCollectible,
+	useBuyModal,
 	useCreateListingModal,
 	useCurrencies,
 	useHighestOffer,
@@ -25,10 +25,10 @@ export const CollectibleTradeActions = ({
 	tokenId,
 	collectionAddress,
 }: CollectibleTradeActionsProps) => {
-	const { onError: onListingError, show: showListModal } =
-		useCreateListingModal();
+	const { show: showListModal } = useCreateListingModal();
 	const { show: showOfferModal } = useMakeOfferModal();
 	const { show: showSellModal } = useSellModal();
+	const { show: showBuyModal } = useBuyModal();
 
 	const { data: currencies } = useCurrencies({
 		chainId,
@@ -43,7 +43,6 @@ export const CollectibleTradeActions = ({
 			collectionAddress,
 			tokenId: tokenId,
 			filter: {
-				marketplace: [MarketplaceKind.sequence_marketplace_v1],
 				currencies: currencyAddresses,
 			},
 			query: {
@@ -56,9 +55,6 @@ export const CollectibleTradeActions = ({
 			chainId: String(chainId),
 			collectionAddress,
 			tokenId,
-			filters: {
-				marketplace: [MarketplaceKind.sequence_marketplace_v1],
-			},
 			query: {
 				enabled: !!currencies,
 			},
@@ -91,7 +87,12 @@ export const CollectibleTradeActions = ({
 		(isConnected && isBalanceLoading);
 
 	const onClickBuy = () => {
-		//TODO: buy
+		showBuyModal({
+			chainId: String(chainId),
+			collectionAddress,
+			tokenId,
+			order: lowestListing!.order!,
+		});
 	};
 
 	const onClickSell = () => {
@@ -99,7 +100,6 @@ export const CollectibleTradeActions = ({
 			collectionAddress,
 			chainId: String(chainId),
 			tokenId,
-			collectibleName: collectibleMetadata.data?.name,
 			order: highestOffer!.order!,
 		});
 	};
