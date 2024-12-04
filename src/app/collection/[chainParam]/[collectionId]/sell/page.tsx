@@ -7,7 +7,7 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { MarketplaceKind, OrderSide } from '@0xsequence/marketplace-sdk';
+import { OrderSide } from '@0xsequence/marketplace-sdk';
 import { observer } from '@legendapp/state/react';
 import { useAccount } from 'wagmi';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
@@ -32,7 +32,6 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       includeEmpty: !filters$.showAvailableOnly.get(),
       properties,
       inAccounts: address ? [address] : undefined,
-      marketplaces: [MarketplaceKind.sequence_marketplace_v1],
     },
     side: OrderSide.listing
   });

@@ -1,6 +1,7 @@
 'use client';
 
-import { Button, Flex, Text, toast } from '$ui';
+import { Button, Flex, Text } from '$ui';
+import { type Hex } from 'viem';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
   useBalanceOfCollectible,
@@ -10,8 +11,8 @@ import {
   useLowestListing,
   useMakeOfferModal,
   useSellModal,
+  useBuyModal,
 } from '@0xsequence/marketplace-sdk/react';
-import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -24,10 +25,10 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-	const { show: showListModal } = useCreateListingModal();
-	const { show: showOfferModal } = useMakeOfferModal();
-	const { show: showSellModal } = useSellModal();
-	const { show: showBuyModal } = useBuyModal();
+  const { show: showListModal } = useCreateListingModal();
+  const { show: showOfferModal } = useMakeOfferModal();
+  const { show: showSellModal } = useSellModal();
+  const { show: showBuyModal } = useBuyModal();
 
   const { data: currencies } = useCurrencies({
     chainId,
@@ -36,30 +37,30 @@ export const CollectibleTradeActions = ({
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
 
-	const { data: highestOffer, isLoading: isLoadingHighestOffer } =
-		useHighestOffer({
-			chainId: String(chainId),
-			collectionAddress,
-			tokenId: tokenId,
-			filter: {
-				currencies: currencyAddresses,
-			},
-			query: {
-				enabled: !!currencies,
-			},
-		});
+  const { data: highestOffer, isLoading: isLoadingHighestOffer } =
+    useHighestOffer({
+      chainId: String(chainId),
+      collectionAddress,
+      tokenId: tokenId,
+      filter: {
+        currencies: currencyAddresses,
+      },
+      query: {
+        enabled: !!currencies,
+      },
+    });
 
-	const { data: lowestListing, isLoading: loadingLowestListing } =
-		useLowestListing({
-			chainId: String(chainId),
-			collectionAddress,
-			tokenId,
-			query: {
-				enabled: !!currencies,
-			},
-		});
+  const { data: lowestListing, isLoading: loadingLowestListing } =
+    useLowestListing({
+      chainId: String(chainId),
+      collectionAddress,
+      tokenId,
+      query: {
+        enabled: !!currencies,
+      },
+    });
 
-  const { collectionMetadata, collectibleMetadata } = useCollectableData();
+  const { collectionMetadata } = useCollectableData();
 
   const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
 
@@ -85,23 +86,23 @@ export const CollectibleTradeActions = ({
     loadingLowestListing ||
     (isConnected && isBalanceLoading);
 
-	const onClickBuy = () => {
-		showBuyModal({
-			chainId: String(chainId),
-			collectionAddress,
-			tokenId,
-			order: lowestListing!.order!,
-		});
-	};
+  const onClickBuy = () => {
+    showBuyModal({
+      chainId: String(chainId),
+      collectionAddress,
+      tokenId,
+      order: lowestListing!.order!,
+    });
+  };
 
-	const onClickSell = () => {
-		showSellModal({
-			collectionAddress,
-			chainId: String(chainId),
-			tokenId,
-			order: highestOffer!.order!,
-		});
-	};
+  const onClickSell = () => {
+    showSellModal({
+      collectionAddress,
+      chainId: String(chainId),
+      tokenId,
+      order: highestOffer!.order!,
+    });
+  };
 
   const onClickOffer = () => {
     showOfferModal({
