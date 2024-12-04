@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Flex, Text } from '$ui';
+import { Button, Flex, Text, toast } from '$ui';
 import { type Hex } from 'viem';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
@@ -26,7 +26,11 @@ export const CollectibleTradeActions = ({
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
   const { show: showListModal } = useCreateListingModal();
-  const { show: showOfferModal } = useMakeOfferModal();
+  const { show: showOfferModal } = useMakeOfferModal({
+    onError: (error) => {
+      toast.error(error.message);
+    }
+  });
   const { show: showSellModal } = useSellModal();
   const { show: showBuyModal } = useBuyModal();
 
