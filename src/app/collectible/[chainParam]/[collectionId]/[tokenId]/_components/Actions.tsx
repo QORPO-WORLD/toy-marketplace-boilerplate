@@ -1,18 +1,18 @@
 'use client';
 
 import { Button, Flex, Text, toast } from '$ui';
-import { type Hex } from 'viem';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
   useBalanceOfCollectible,
+  useBuyModal,
   useCreateListingModal,
   useCurrencies,
   useHighestOffer,
   useLowestListing,
   useMakeOfferModal,
   useSellModal,
-  useBuyModal,
 } from '@0xsequence/marketplace-sdk/react';
+import { type Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -29,10 +29,17 @@ export const CollectibleTradeActions = ({
   const { show: showOfferModal } = useMakeOfferModal({
     onError: (error) => {
       toast.error(error.message);
-    }
+    },
   });
   const { show: showSellModal } = useSellModal();
-  const { show: showBuyModal } = useBuyModal();
+  const { show: showBuyModal } = useBuyModal({
+    onSuccess(hash) {
+      console.log('Buy transaction sent with hash: ', hash);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   const { data: currencies } = useCurrencies({
     chainId,
