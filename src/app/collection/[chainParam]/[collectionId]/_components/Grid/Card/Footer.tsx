@@ -71,7 +71,7 @@ const Order = ({ height, order }: OrderProps) => {
 				</Text>
 			</Flex>
 			<Badge variant="success">
-				Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
+				Stock: <span className="ml-1">{order.quantityRemaining}</span>
 			</Badge>
 		</Flex>
 	);
