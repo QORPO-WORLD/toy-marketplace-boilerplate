@@ -1,6 +1,7 @@
 import { Logo } from '~/components/Logo';
-import Link from 'next/link';
 import { ssrClient } from '~/config/marketplace-sdk/ssr';
+
+import Link from 'next/link';
 
 export async function HeaderLogo() {
   const { getMarketplaceConfig } = ssrClient();

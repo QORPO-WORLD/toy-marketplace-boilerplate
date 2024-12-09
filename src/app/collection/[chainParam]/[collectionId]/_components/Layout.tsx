@@ -1,8 +1,8 @@
 import { Box, Flex, Grid, Text, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 import { FilterBadges } from './Badges';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;

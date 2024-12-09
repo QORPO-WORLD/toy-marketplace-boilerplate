@@ -2,15 +2,15 @@
 
 import { NotConnectedWarning } from '~/components/NotConnectedWarning';
 import { Box, Text } from '~/components/ui';
-import { type Routes } from '~/lib/routes';
+import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { OrderSide } from '@0xsequence/marketplace-sdk';
+import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
 import { useAccount } from 'wagmi';
-import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 
 type CollectionBuyPageParams = {
   params: typeof Routes.collection.params;
@@ -33,7 +33,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       properties,
       inAccounts: address ? [address] : undefined,
     },
-    side: OrderSide.listing
+    side: OrderSide.listing,
   });
 
   if (!address) {

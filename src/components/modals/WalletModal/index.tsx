@@ -7,13 +7,13 @@ import ENSName from '~/components/ENSName';
 import { sequence } from '0xsequence';
 import {
   Button,
+  CheckmarkIcon,
+  CopyIcon,
   Dialog,
+  DisconnectIcon,
   Flex,
   Text,
   WalletIcon,
-  CopyIcon,
-  DisconnectIcon,
-  CheckmarkIcon,
 } from '$ui';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -34,7 +34,7 @@ export const WalletModalContent = () => {
       if (wallet) {
         void wallet.openWallet();
       }
-    } catch (e) { }
+    } catch (e) {}
   };
 
   return (

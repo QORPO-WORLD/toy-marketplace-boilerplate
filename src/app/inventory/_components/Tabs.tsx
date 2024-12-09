@@ -4,7 +4,7 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
-import { Tabs, Flex, Text, Grid, Button } from '$ui';
+import { Button, Flex, Grid, Tabs, Text } from '$ui';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
@@ -12,7 +12,7 @@ import {
   useListBalances,
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type InventoryTabsProps = {
   chainId: number;

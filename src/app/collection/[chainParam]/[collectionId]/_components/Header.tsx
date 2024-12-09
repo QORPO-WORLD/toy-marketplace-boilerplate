@@ -6,19 +6,19 @@ import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { classNames } from '~/config/classNames';
 
 import {
-  Grid,
-  Text,
-  Button,
-  Box,
   Avatar,
-  cn,
-  GlobeIcon,
+  Box,
+  BugIcon,
+  Button,
   ChevronDownIcon,
   ChevronUpIcon,
-  BugIcon,
+  GlobeIcon,
+  Grid,
+  Text,
+  cn,
 } from '$ui';
 import { NetworkImage } from '@0xsequence/design-system';
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
@@ -154,7 +154,7 @@ const CollectionHeader = ({
           <Grid.Child name="collection-social" className="flex gap-2">
             {socials?.website ? (
               <Button asChild variant="ghost">
-                <a href={socials.website} target="_blank">
+                <a href={socials.website} target="_blank" rel="noreferrer">
                   <GlobeIcon />
                 </a>
               </Button>

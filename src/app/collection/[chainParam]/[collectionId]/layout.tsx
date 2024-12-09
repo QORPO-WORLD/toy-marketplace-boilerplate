@@ -1,3 +1,4 @@
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import type { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
@@ -6,7 +7,6 @@ import CollectionControls from './_components/Controls';
 import CollectionHeader from './_components/Header';
 import { CollectionViewPageLayout } from './_components/Layout';
 import { CollectionSidebar } from './_components/Sidebar';
-import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 const Layout = async ({
   params: { chainParam, collectionId },

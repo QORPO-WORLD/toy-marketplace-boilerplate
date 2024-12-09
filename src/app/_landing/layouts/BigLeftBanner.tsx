@@ -1,13 +1,12 @@
 'use client';
 
-import { type MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-
 import { Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
 import { Description } from '../Hero/Description';
 import { Socials } from '../Hero/Socials';
 import { Title } from '../Hero/Title';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 export const BigLeftBanner = ({
   collections,

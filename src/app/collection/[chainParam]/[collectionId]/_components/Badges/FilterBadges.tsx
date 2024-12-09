@@ -3,13 +3,13 @@
 import { useCallback } from 'react';
 
 import {
-  Grid,
-  Flex,
-  cn,
   Badge,
   CloseIcon,
+  Flex,
+  Grid,
   ScrollArea,
   Text,
+  cn,
 } from '~/components/ui';
 import { classNames } from '~/config/classNames';
 
@@ -19,7 +19,7 @@ import { StringAndArrayBadge } from './StringAndArrayBadge';
 import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import { PropertyType } from '@0xsequence/metadata';
 import { observer } from '@legendapp/state/react';
-import { type Hex } from 'viem';
+import type { Hex } from 'viem';
 
 type FilterBadgesProps = {
   chainId: number;

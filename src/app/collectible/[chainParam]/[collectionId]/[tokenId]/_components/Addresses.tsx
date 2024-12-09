@@ -36,7 +36,11 @@ export const CollectibleAddresses = ({
             label: a.label,
             children: (
               <Button asChild variant="ghost" size="sm" className="uppercase">
-                <a href={`${explorerUrl}address/${a.address}`} target="_blank">
+                <a
+                  href={`${explorerUrl}address/${a.address}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <LinkIcon />
                   <ENSName address={a.address} truncateAt={4} />
                 </a>

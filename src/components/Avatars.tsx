@@ -109,7 +109,7 @@ export const PoolAvatar = memo(
 
             {chainId ? (
               <Flex className="min-w-[20px]">
-                <NetworkImage size='sm' chainId={chainId} />
+                <NetworkImage size="sm" chainId={chainId} />
               </Flex>
             ) : null}
           </Flex>

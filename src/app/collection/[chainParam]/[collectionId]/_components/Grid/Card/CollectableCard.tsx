@@ -7,8 +7,8 @@ import { Footer } from './Footer';
 import type { Order } from '@0xsequence/marketplace-sdk';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';
+import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
-import { type Hex } from 'viem';
 
 type CollectibleCardProps = {
   order?: Order;

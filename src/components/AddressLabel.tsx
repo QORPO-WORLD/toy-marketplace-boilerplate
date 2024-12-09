@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getChain } from '~/lib/utils/getChain';
 
@@ -58,7 +58,11 @@ export const AddressLabel = ({ address, chainId }: AddressLabelProps) => {
       </Tooltip.Root> */}
 
       <Button asChild variant="link" title={address} className="px-0 uppercase">
-        <a href={`${explorerUrl}address/${address}`} target="_blank">
+        <a
+          href={`${explorerUrl}address/${address}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           <LinkIcon />
 
           {address ? <ENSName address={address} truncateAt={4} /> : 'unknown'}

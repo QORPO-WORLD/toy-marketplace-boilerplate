@@ -1,6 +1,6 @@
 import { env } from '~/env';
 
-import { type SdkConfig } from '@0xsequence/marketplace-sdk';
+import type { SdkConfig } from '@0xsequence/marketplace-sdk';
 
 const embeddedWallet = env.NEXT_PUBLIC_WAAS_CONFIG_KEY
   ? ({

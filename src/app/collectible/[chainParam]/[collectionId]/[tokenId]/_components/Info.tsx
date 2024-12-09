@@ -48,7 +48,7 @@ export const CollectibleInfo = ({
             >
               {collectionName ?? '<unknown>'}
             </NextLink>
-            <NetworkImage size="sm" chainId={chainId} className='bg-red-300' />
+            <NetworkImage size="sm" chainId={chainId} className="bg-red-300" />
           </Flex>
         </Flex>
         <ContractTypeBadge

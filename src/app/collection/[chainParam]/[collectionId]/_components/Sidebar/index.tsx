@@ -1,20 +1,20 @@
 'use client';
 
-import { useState, type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 import { classNames } from '~/config/classNames';
 import { useIsMinWidth } from '~/hooks/ui/useIsMinWidth';
 
-import { Button, Switch, Flex, cn, Label, ScrollArea, Box, Portal } from '$ui';
+import { Box, Button, Flex, Label, Portal, ScrollArea, Switch, cn } from '$ui';
 import { filters$ } from '../FilterStore';
 import { AddressesLinks } from './Addresses';
 import { PropertyFilters } from './PropertyFilters';
 import { SEQUENCE_MARKET_V1_ADDRESS } from '@0xsequence/marketplace-sdk';
+import { useFilters } from '@0xsequence/marketplace-sdk/react';
 import type { ObservableBoolean } from '@legendapp/state';
 import { observer } from '@legendapp/state/react';
 import { usePathname } from 'next/navigation';
-import { useFilters } from '@0xsequence/marketplace-sdk/react';
-import { type Hex } from 'viem';
+import type { Hex } from 'viem';
 
 type CollectionSidebarProps = {
   chainId: number;

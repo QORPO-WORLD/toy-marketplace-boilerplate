@@ -2,8 +2,8 @@ import { Routes } from '~/lib/routes';
 import { getChainId } from '~/lib/utils/getChain';
 
 import {
+  useCollectible,
   useCollection,
-  useCollectible
 } from '@0xsequence/marketplace-sdk/react';
 
 export const useCollectableData = () => {
@@ -14,7 +14,7 @@ export const useCollectableData = () => {
   const collectibleMetadata = useCollectible({
     chainId: String(chainId),
     collectionAddress: collectionId,
-    collectibleId: tokenId
+    collectibleId: tokenId,
   });
 
   const collectionMetadata = useCollection({

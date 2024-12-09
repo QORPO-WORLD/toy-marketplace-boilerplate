@@ -18,10 +18,10 @@ import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
 import {
   useCollection,
-  useListBalances
+  useListBalances,
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
-import { type Hex } from 'viem';
+import type { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
   collectionBalances: TokenBalance[];

@@ -12,7 +12,7 @@ import {
   useMakeOfferModal,
   useSellModal,
 } from '@0xsequence/marketplace-sdk/react';
-import { type Hex } from 'viem';
+import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
 
 interface CollectibleTradeActionsProps {
@@ -25,14 +25,13 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-
   const onError = (error: Error) => {
     toast.error(error.message);
-  }
+  };
 
   const { show: showListModal } = useCreateListingModal({ onError });
   const { show: showOfferModal } = useMakeOfferModal({
-    onError
+    onError,
   });
   const { show: showSellModal } = useSellModal({ onError });
   const { show: showBuyModal } = useBuyModal({
