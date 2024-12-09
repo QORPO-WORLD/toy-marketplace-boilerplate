@@ -19,6 +19,8 @@ export const Header = () => {
       / auto auto 1fr auto auto auto auto auto auto`}
     >
       <Grid.Child name="logo" className="flex items-center">
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore Server Component */}
         <HeaderLogo />
       </Grid.Child>
 
