@@ -25,20 +25,21 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-  const { show: showListModal } = useCreateListingModal();
+
+  const onError = (error: Error) => {
+    toast.error(error.message);
+  }
+
+  const { show: showListModal } = useCreateListingModal({ onError });
   const { show: showOfferModal } = useMakeOfferModal({
-    onError: (error) => {
-      toast.error(error.message);
-    },
+    onError
   });
-  const { show: showSellModal } = useSellModal();
+  const { show: showSellModal } = useSellModal({ onError });
   const { show: showBuyModal } = useBuyModal({
     onSuccess(hash) {
       console.log('Buy transaction sent with hash: ', hash);
     },
-    onError: (error) => {
-      toast.error(error.message);
-    },
+    onError,
   });
 
   const { data: currencies } = useCurrencies({
