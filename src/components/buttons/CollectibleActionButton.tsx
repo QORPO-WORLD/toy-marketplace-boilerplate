@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '$ui';
+import { Button, toast } from '$ui';
 import {
 	useBalanceOfCollectible,
 	useBuyModal,
@@ -34,10 +34,15 @@ export const CollectibleActionButton = ({
 }: CollectibleActionButtonProps) => {
 	const { address } = useAccount();
 	const pathname = usePathname();
-	const { show: showCreateListingModal } = useCreateListingModal();
-	const { show: showMakeOfferModal } = useMakeOfferModal();
-	const { show: showSellModal } = useSellModal();
-	const { show: showBuyModal } = useBuyModal();
+
+	const onError = (error: Error) => {
+		toast.error(error.message);
+	}
+
+	const { show: showCreateListingModal } = useCreateListingModal({ onError });
+	const { show: showMakeOfferModal } = useMakeOfferModal({ onError });
+	const { show: showSellModal } = useSellModal({ onError });
+	const { show: showBuyModal } = useBuyModal({ onError });
 	const { show: showTransferModal } = useTransferModal();
 	const { data: tokenBalancesData } = useBalanceOfCollectible({
 		chainId: collectionChainId,
