@@ -3,6 +3,7 @@
 import { Button } from '$ui';
 import {
 	useBalanceOfCollectible,
+	useBuyModal,
 	useCreateListingModal,
 	useHighestOffer,
 	useLowestListing,
@@ -36,6 +37,7 @@ export const CollectibleActionButton = ({
 	const { show: showCreateListingModal } = useCreateListingModal();
 	const { show: showMakeOfferModal } = useMakeOfferModal();
 	const { show: showSellModal } = useSellModal();
+	const { show: showBuyModal } = useBuyModal();
 	const { show: showTransferModal } = useTransferModal();
 	const { data: tokenBalancesData } = useBalanceOfCollectible({
 		chainId: collectionChainId,
@@ -98,7 +100,16 @@ export const CollectibleActionButton = ({
 		buy: {
 			label: 'Buy',
 			onClick: () => {
-				console.log('buy');
+				if (!lowestListing || !collectibleName)
+					throw new Error(
+						'lowestListing and collectibleName are required for buy',
+					);
+				showBuyModal({
+					tokenId,
+					collectionAddress,
+					chainId: collectionChainId,
+					order: lowestListing.order!,
+				});
 			},
 		},
 		sell: {
