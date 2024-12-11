@@ -1,3 +1,4 @@
+@import './font.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,6 +10,10 @@
     --scrollbar-color-track: var(--background);
     --scrollbar-width: thin;
     --scrollbar-width-legacy: 7px;
+
+    --font-DMSans: DMSans;
+    --font-RedHatDisplay: RedHatDisplay;
+    --font-X-Heighting: X-Heighting;
 
     /* Modern browsers with `scrollbar-*` support */
     @supports (scrollbar-width: auto) {
@@ -33,7 +38,7 @@
     }
   }
   body {
-    font-family: var(--font-main);
+    font-family: var(--font-RedHatDisplay);
   }
 
   .privacy-policy-page-container {

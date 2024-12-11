@@ -27,7 +27,7 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <body className={cn(classNames.themeManager)}>
+      <body className={cn(classNames.themeManager, 'bg-[#CBBFD0]')}>
         <Providers sdkInitialState={initialState} sdkConfig={config}>
           <Layout>{children}</Layout>
         </Providers>
