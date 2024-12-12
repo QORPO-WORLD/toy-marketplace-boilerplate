@@ -1,0 +1,5 @@
+@mixin respond-to-small {
+  @media (max-width: 776px) {
+    @content;
+  }
+}

@@ -13,6 +13,7 @@ export default {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         main: '#F47469',
+        yellow: '#F3DAAA',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 

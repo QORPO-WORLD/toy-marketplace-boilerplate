@@ -10,7 +10,7 @@ import ProfileBox from './Buttons/ProfileBox/ProfileBox';
 export const Header = () => {
   return (
 
-    <header className='flex items-center justify-between pt-[1.44rem] px-[1.69rem]'>
+    <header className='flex items-center justify-between pt-[1.44rem] px-[1.69rem] absolute w-full'>
         <HeaderLogo /> 
         <div className='flex items-center text-white uppercase'>
                 <a className='block py-[0.88rem] px-[1.75rem]' href="#" target='_blank' rel='noopener noreferrer'>missions</a>

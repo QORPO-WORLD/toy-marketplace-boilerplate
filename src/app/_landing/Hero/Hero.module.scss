@@ -1,0 +1,16 @@
+.banner {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    height: 80.3370787%;
+    aspect-ratio: 0.339826387;
+    background-image: url('/images/banner/toy-logo-bg.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 5.07rem;
+    top: 50%;
+    transform: translateY(-45%);
+  }
+}
