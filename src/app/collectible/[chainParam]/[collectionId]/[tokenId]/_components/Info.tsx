@@ -6,6 +6,7 @@ import { Avatar, Flex, Text, cn } from '$ui';
 import { NetworkImage } from '@0xsequence/design-system';
 import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
+import { getChainName } from '~/lib/utils/getChain';
 
 type CollectibleInfoProps = {
   collectionName: string | undefined;
@@ -44,7 +45,7 @@ export const CollectibleInfo = ({
                 'text-md font-medium text-foreground/90 underline-offset-4 hover:underline focus:underline',
                 loading ? 'loading' : '',
               )}
-              href={''}
+              href={`/collection/${getChainName(chainId)}/${collectionAddress}/buy`}
             >
               {collectionName ?? '<unknown>'}
             </NextLink>
