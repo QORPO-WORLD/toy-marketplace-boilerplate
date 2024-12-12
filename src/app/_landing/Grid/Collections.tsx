@@ -13,14 +13,7 @@ export const LandingCollections = ({
 }: LandingCollectionsProps) => {
   return (
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
-      <Text className="size-sm font-bold text-foreground/50">Collections</Text>
-      <Grid.Root
-        className={cn(
-          'grid-flow-row auto-rows-[minmax(380px,381px)] grid-cols-[repeat(auto-fill,minmax(260px,1fr))] grid-rows-[minmax(380px,381px)] gap-4',
-          'md:grid-cols-[repeat(auto-fill,minmax(320px,1fr))]',
-          className,
-        )}
-      >
+      <Grid.Root className={cn('grid grid-cols-2 gap-8', className)}>
         {collections.map((d) => {
           return <CollectionCard key={d.collectionAddress} {...d} />;
         })}

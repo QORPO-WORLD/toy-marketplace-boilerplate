@@ -1,4 +1,5 @@
 import { Box, Flex, cn } from '$ui';
+import Banner from '../../../components/ui/Banner/Banner';
 import FlipCard from '../../../components/ui/FlipCard/FlipCard';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
 import { flipCardData } from '../../../mockdata/flipCardData';
@@ -52,8 +53,22 @@ export const FloatingBanner = ({
           <FlipCard data={flipCardData[3]!} color="#7795FF" />
         </div>
       </div>
-      <Box className="mx-auto w-full max-w-[1200px] px-3">
-        <LandingCollections collections={collections || []} />
+      <Box className="mx-auto w-full px-5">
+        <p className="title text-white text-start leading-none mb-8">
+          our <br /> collections
+        </p>
+        <Banner
+          title="Founders’ collection"
+          title2="Citizen Zero"
+          bgSrc="/images/banner/cc-banner-bg.png"
+        />
+        <LandingCollections collections={collections.slice(0, 2) || []} />
+        <Banner
+          title="Aneemate genesis"
+          title2="zero"
+          bgSrc="/images/banner/anmt-banner-bg.png"
+        />
+        <LandingCollections collections={collections.slice(2, 5) || []} />
       </Box>
     </Flex>
   );

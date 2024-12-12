@@ -62,7 +62,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
             muted
             playsInline
             src={image}
-            className="min-h-[60%] w-full flex-1 rounded-b-none object-cover"
+            className="w-full flex-1 rounded-b-none object-cover"
           />
         ) : (
           <img
