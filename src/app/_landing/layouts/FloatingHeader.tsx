@@ -1,5 +1,3 @@
-import { type MarketConfig } from '~/config/marketplace';
-
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
@@ -9,13 +7,11 @@ import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
-<<<<<<< Updated upstream
-=======
 import { Description } from '../Hero/Description';
 import { Socials } from '../Hero/Socials';
 import { Title } from '../Hero/Title';
-import type { MarketConfig } from '@0xsequence/marketplace-sdk';
->>>>>>> Stashed changes
+import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { MarkOptions } from 'perf_hooks';
 
 export const FloatingBanner = ({
   collections,
@@ -24,7 +20,7 @@ export const FloatingBanner = ({
   title,
   shortDescription,
   logoUrl,
-}: MarketConfig) => {
+}: MarketplaceConfig) => {
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
       <BannerImage>
@@ -81,11 +77,7 @@ export const FloatingBanner = ({
           <LandingCollections collections={collections.slice(2, 5) || []} />
         </div>
       </Box>
-<<<<<<< Updated upstream
       <Box className="mx-auto w-full px-5 pb-20">
-=======
-      <Box className="mx-auto w-full px-5">
->>>>>>> Stashed changes
         <p className="title text-white text-left mb-8">FAQ</p>
         <div className="flex flex-col gap-4">
           <FAQBox />
