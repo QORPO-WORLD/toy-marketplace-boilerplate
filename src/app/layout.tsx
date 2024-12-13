@@ -3,7 +3,6 @@ import { ssrClient } from '~/config/marketplace-sdk/ssr';
 import '~/styles/globals.scss';
 
 import { cn } from '$ui';
-import { inter } from '../styles/fonts';
 import { Layout } from './_layout';
 import Providers from './_providers';
 import '@0xsequence/marketplace-sdk/styles';
@@ -28,10 +27,8 @@ export default async function RootLayout({
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
-      <body
-        className={cn(classNames.themeManager, inter.className, 'bg-[#CBBFD0]')}
-      >
-        <Providers wagmiInitState={wagmiInitState} marketConfig={marketConfig}>
+      <body className={cn(classNames.themeManager, 'bg-[#CBBFD0]')}>
+        <Providers sdkInitialState={initialState} sdkConfig={config}>
           <Layout>{children}</Layout>
         </Providers>
         <svg className="svg-path">

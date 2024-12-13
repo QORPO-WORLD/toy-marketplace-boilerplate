@@ -20,12 +20,10 @@ export const DefaultLayout = ({
       )}
     >
       <Flex className="min-h-[120px] flex-col gap-4 md:flex-row">
-        {/* <BannerImage
-          className="max-h-[300px] w-full rounded-md md:max-h-[unset] md:w-[300px]"
-          src={landingBannerUrl}
-          title={title}
-          description={shortDescription}
-        /> */}
+      <BannerImage>
+        <p className=''>check our</p>
+        <p>collections</p>
+        </BannerImage>
         {landingBannerUrl ? (
           <Flex className="flex-col gap-2">
             <Flex className="items-center justify-between">

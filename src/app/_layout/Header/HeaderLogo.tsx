@@ -1,5 +1,5 @@
 import { Logo } from '~/components/Logo';
-import { getMarketConfig } from '~/config/marketplace';
+import { ssrClient } from '~/config/marketplace-sdk/ssr';
 
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ export function HeaderLogo() {
       href="/"
       className="my-auto flex items-center text-xl font-bold text-foreground/90"
     >
-      <Logo />
+        <Logo/>
     </Link>
   );
 }

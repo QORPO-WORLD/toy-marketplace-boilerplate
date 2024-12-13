@@ -7,7 +7,7 @@ import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
-import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 export const FloatingBanner = ({
   collections,
@@ -73,8 +73,8 @@ export const FloatingBanner = ({
           <LandingCollections collections={collections.slice(2, 5) || []} />
         </div>
       </Box>
-      <Box className="mx-auto w-full px-5">
-        <p className="title text-white text-left">FAQ</p>
+      <Box className="mx-auto w-full px-5 pb-20">
+        <p className="title text-white text-left mb-8">FAQ</p>
         <div className="flex flex-col gap-4">
           <FAQBox />
           <FAQBox />
