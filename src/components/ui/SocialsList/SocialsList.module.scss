@@ -1,0 +1,115 @@
+.social_list {
+  display: flex;
+  align-items: center;
+  gap: 1.06625em;
+  // @include respond-to-small {
+  //     gap: 1.2075rem;
+  //     margin-bottom: 1.29625rem;
+  // }
+}
+
+.social_item {
+  a {
+    background-color: #db5179;
+  }
+  &:hover {
+    a {
+      transform: scale(1.2);
+    }
+  }
+
+  &:nth-child(1) {
+    a {
+      img {
+        width: 1.2801875em;
+        height: 1.2801875em;
+        //  @include respond-to-small {
+        //     width: 1.45625rem;
+        //     height: 1.45625rem;
+        // }
+      }
+    }
+  }
+
+  &:nth-child(2) {
+    a {
+      img {
+        width: 0.990625em;
+        height: 0.9225em;
+        // @include respond-to-small {
+        //     width: 1.125625rem;
+        //     height: 1.048125rem;
+        // }
+      }
+    }
+  }
+
+  &:nth-child(3) {
+    a {
+      img {
+        width: 1.050625em;
+        height: 0.89125em;
+        // @include respond-to-small {
+        //     width: 1.19375rem;
+        //     height: 1.0125rem;
+        // }
+      }
+    }
+  }
+
+  &:nth-child(4) {
+    a {
+      img {
+        width: 1.1425em;
+        height: 1.1425em;
+        // @include respond-to-small {
+        //     width: 1.298125rem;
+        //     height: 1.298125rem;
+        // }
+      }
+    }
+  }
+
+  &:nth-child(5) {
+    a {
+      img {
+        width: 1.301875em;
+        height: 0.91375em;
+        // @include respond-to-small {
+        //     width: 1.47875rem;
+        //     height: 1.47875rem;
+        // }
+      }
+    }
+  }
+
+  &:nth-child(6) {
+    a {
+      img {
+        width: 0.9875em;
+        height: 1.069375em;
+        // @include respond-to-small {
+        //     width: 1.121875rem;
+        //     height: 1.214375rem;
+        // }
+      }
+    }
+  }
+
+  a {
+    display: block;
+    width: 2.28125em;
+    height: 2.28125em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.7125em;
+    transition: transform 0.2s ease-in-out;
+
+    // @include respond-to-small {
+    //     width: 2.594375rem;
+    //     height: 2.594375rem;
+    //     border-radius: 0.80875rem;
+    // }
+  }
+}

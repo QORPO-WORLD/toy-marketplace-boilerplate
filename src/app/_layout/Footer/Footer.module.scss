@@ -1,0 +1,111 @@
+.footer {
+  bottom: 0;
+  left: 50%;
+  margin: 0 auto;
+  max-width: 106.5625rem;
+  width: 100%;
+  padding: 2.4875rem 2.535rem 2rem;
+  background: #483f51;
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
+  backdrop-filter: blur(6.25rem);
+  font-size: calc(8px + 0.42vw);
+  color: white;
+
+  //   @include respond-to-small {
+  //     padding-top: 2.14rem;
+  //     padding-inline: 0.840625rem;
+  //     padding-bottom: 1rem;
+  //     flex-direction: column;
+  //     backdrop-filter: blur(0.6rem);
+  //   }
+}
+
+.address {
+  font-family: RedHatDisplay;
+  font-size: 0.8rem;
+  text-align: center;
+  // @include respond-to-small {
+  //   font-size: 0.7rem;
+  // }
+}
+
+.footer_navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1.6rem;
+  // @include respond-to-small {
+  //   flex-direction: column;
+  //   margin-bottom: 2.7rem;
+  // }
+}
+
+.logo {
+  margin-right: 1.764375em;
+  width: 8.25em;
+  margin-right: auto;
+  // @include respond-to-small {
+  //   margin-right: 0;
+  //   margin-bottom: 1.963125rem;
+  //   width: 9.9525rem;
+  // }
+}
+
+.link_container {
+  display: flex;
+  gap: 1.75em;
+  margin-right: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  // @include respond-to-small {
+  //   margin: 0 auto;
+  //   gap: 1.375rem;
+  //   order: 2;
+  // }
+  a {
+    font-family: RedHatDisplay;
+    font-size: 1rem;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    //   @include respond-to-small {
+    //     font-size: 0.994375rem;
+    //   }
+  }
+}
+
+.top_border {
+  width: 55.542522%;
+  height: 0.48375rem;
+  display: flex;
+  justify-content: end;
+  gap: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  // @include respond-to-small {
+  //   display: none;
+  // }
+  div {
+    background-color: var(--white);
+    height: 100%;
+    border-radius: 0.1875rem;
+  }
+  :nth-child(1) {
+    width: 16.2618796%;
+  }
+  :nth-child(2) {
+    width: 0.875rem;
+    flex-shrink: 0;
+  }
+  :nth-child(3) {
+    width: 0.875rem;
+    flex-shrink: 0;
+  }
+  :nth-child(4) {
+    width: 72.967265%;
+  }
+}
