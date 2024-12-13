@@ -13,7 +13,12 @@ export const LandingCollections = ({
 }: LandingCollectionsProps) => {
   return (
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
-      <Grid.Root className={cn('grid grid-cols-2 gap-8', className)}>
+      <Grid.Root
+        className={cn(
+          `grid grid-cols-${collections.length < 3 ? '2' : '3'} gap-10`,
+          className,
+        )}
+      >
         {collections.map((d) => {
           return <CollectionCard key={d.collectionAddress} {...d} />;
         })}

@@ -1,5 +1,6 @@
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
+import FAQBox from '../../../components/ui/FAQBox/FAQBox';
 import FlipCard from '../../../components/ui/FlipCard/FlipCard';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
 import { flipCardData } from '../../../mockdata/flipCardData';
@@ -21,8 +22,8 @@ export const FloatingBanner = ({
       <BannerImage>
         <div className="flex flex-col h-full z-10 relative">
           <div className="pt-[8rem]">
-            <p className="title text-white">check our</p>
-            <p className="title text-yellow">collections</p>
+            <p className="title text-white text-center">check our</p>
+            <p className="title text-yellow text-center">collections</p>
           </div>
           <div className="flex h-full items-end justify-center translate-x-[-2rem]">
             <NFTCard
@@ -57,18 +58,30 @@ export const FloatingBanner = ({
         <p className="title text-white text-start leading-none mb-8">
           our <br /> collections
         </p>
-        <Banner
-          title="Founders’ collection"
-          title2="Citizen Zero"
-          bgSrc="/images/banner/cc-banner-bg.png"
-        />
-        <LandingCollections collections={collections.slice(0, 2) || []} />
-        <Banner
-          title="Aneemate genesis"
-          title2="zero"
-          bgSrc="/images/banner/anmt-banner-bg.png"
-        />
-        <LandingCollections collections={collections.slice(2, 5) || []} />
+        <div className="flex flex-col gap-10">
+          <Banner
+            title="Founders’ collection"
+            title2="Citizen Zero"
+            bgSrc="/images/banner/cc-banner-bg.png"
+          />
+          <LandingCollections collections={collections.slice(0, 2) || []} />
+          <Banner
+            title="Aneemate genesis"
+            title2="zero"
+            bgSrc="/images/banner/anmt-banner-bg.png"
+          />
+          <LandingCollections collections={collections.slice(2, 5) || []} />
+        </div>
+      </Box>
+      <Box className="mx-auto w-full px-5 pb-20">
+        <p className="title text-white text-left mb-8">FAQ</p>
+        <div className="flex flex-col gap-4">
+          <FAQBox />
+          <FAQBox />
+          <FAQBox />
+          <FAQBox />
+          <FAQBox />
+        </div>
       </Box>
     </Flex>
   );
