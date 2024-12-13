@@ -1,3 +1,5 @@
+import { type MarketConfig } from '~/config/marketplace';
+
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
@@ -7,7 +9,6 @@ import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
-import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 export const FloatingBanner = ({
   collections,
@@ -16,7 +17,7 @@ export const FloatingBanner = ({
   title,
   shortDescription,
   logoUrl,
-}: MarketplaceConfig) => {
+}: MarketConfig) => {
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
       <BannerImage>
