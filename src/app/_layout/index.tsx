@@ -24,7 +24,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         / 1fr auto
       `}
     >
-      <Grid.Child className="sticky top-0 z-50 bg-transparent" name="header">
+      <Grid.Child
+        className="absolute top-0 z-50 bg-transparent w-full"
+        name="header"
+      >
         <Header />
       </Grid.Child>
 

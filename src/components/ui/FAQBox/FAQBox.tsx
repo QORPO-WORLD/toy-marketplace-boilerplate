@@ -11,7 +11,7 @@ function FAQBox() {
       className="py-[1.5rem] px-[2rem] bg-[#4035061A] rounded-[1.25rem] border border-[#403545] cursor-pointer"
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between">
         <p className="text-[2rem] font-DMSans font-bold text-[#00000099]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit?
         </p>
@@ -24,7 +24,7 @@ function FAQBox() {
         />
       </div>
       <div
-        className="overflow-hidden transition-all duration-[655ms] ease-out"
+        className="overflow-hidden transition-all duration-[655ms] ease-out mb-4"
         style={{
           height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
         }}

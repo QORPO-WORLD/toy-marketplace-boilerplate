@@ -51,7 +51,7 @@ export const CollectionViewPageLayout = ({
     case 'default': {
       return (
         <Grid.Root
-          className={cn(defaultGridContainerClassName, 'mt-12')}
+          className={cn(defaultGridContainerClassName, 'mt-0 gap-0')}
           template={`
             [row1-start] "collection-header collection-header" min-content [row1-end]
             [row2-start] "collection-details collection-details" min-content [row2-end]

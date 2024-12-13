@@ -47,6 +47,7 @@ const CollectionHeader = ({
   const image = collection?.extensions?.ogImage;
   const description = collection?.extensions?.description;
   const socials = marketplaceConfig.socials;
+  console.log('collectionMetadata', collection);
 
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(
@@ -95,7 +96,14 @@ const CollectionHeader = ({
 
   return (
     <>
-      <Head>
+      <div className="h-dvh py-2 px-2 mx-[-2rem]">
+        <div className='rounded-[3.125rem] bg-[url("/images/banner/collection-page-banner-cc.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12'>
+          <div className="">
+            <p className="title text-center text-white">{name}</p>
+          </div>
+        </div>
+      </div>
+      {/* <Head>
         {image ? <link rel="preload" as="image" href={image} /> : null}
       </Head>
 
@@ -219,7 +227,7 @@ const CollectionHeader = ({
             </Button>
           ) : null}
         </Grid.Child>
-      </Grid.Root>
+      </Grid.Root> */}
     </>
   );
 };
