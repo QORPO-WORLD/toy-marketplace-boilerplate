@@ -19,7 +19,7 @@ const defaultGridContainerClassName = [
   classNames.collectionViewLayout,
   '@container/collectionViewContainer',
   'px-2 md:px-4 xl:px-8',
-  'min-h-screen gap-y-8 md:gap-y-12',
+  'min-h-screen gap-y-8 md:gap-y-0',
 ] as const;
 
 export const CollectionViewPageLayout = ({
