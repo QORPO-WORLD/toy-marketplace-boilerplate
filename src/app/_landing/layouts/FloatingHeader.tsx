@@ -3,11 +3,11 @@ import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
 import FlipCard from '../../../components/ui/FlipCard/FlipCard';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
-import { MarketConfig } from '../../../config/marketplace';
 import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
+import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 export const FloatingBanner = ({
   collections,
