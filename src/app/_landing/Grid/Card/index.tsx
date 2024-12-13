@@ -58,7 +58,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
             loading="lazy"
           />
           <div className="flex items-center gap-[0.6rem]">
-            <p className="text-[2rem] uppercase truncate">{name}</p>
+            <p className="text-[2rem] uppercase">{name}</p>
             <img
               className="w-[1.5rem] h-[1.5rem] block"
               src="/icons/shield-icon.svg"
