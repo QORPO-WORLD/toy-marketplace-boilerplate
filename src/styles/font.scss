@@ -40,3 +40,38 @@
   font-weight: 600;
   font-style: italic;
 }
+
+@font-face {
+  font-family: X-Heighting;
+  src: url('/fonts/X-Heighting.otf');
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/fonts/DMSans-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/fonts/DMSans-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/fonts/DMSans-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/fonts/DMSans-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: RedHatDisplay;
+  src: url('/fonts/RedHatDisplay-Light.ttf');
+  font-weight: 400;
+}

@@ -11,7 +11,8 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-
+        main: '#F47469',
+        yellow: '#F3DAAA',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
@@ -53,7 +54,9 @@ export default {
         },
       },
       fontFamily: {
-        main: 'var(--font-main)',
+        main: 'var(--font-X-Heighting)',
+        RedHatDisplay: 'var(--font-RedHatDisplay)',
+        DMSans: 'var(--font-DMSans)',
       },
       borderRadius: {
         lg: `var(--radius)`,

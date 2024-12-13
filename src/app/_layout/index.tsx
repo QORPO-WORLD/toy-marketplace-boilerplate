@@ -11,7 +11,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       className={cn(
         classNames.mainLayout,
         'font-main',
-        'bg-background',
+        'bg-[#CBBFD0]',
         'min-h-[100vh] w-full',
         '[--headerHeight:56px]',
         '[--collectionControlsHeight:41px]',

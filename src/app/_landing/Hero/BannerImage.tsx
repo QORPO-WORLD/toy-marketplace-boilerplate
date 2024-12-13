@@ -1,42 +1,20 @@
-'use client';
-
-import { Box, Image, cn } from '$ui';
-import { Description } from './Description';
-import { Title } from './Title';
+import styles from './Hero.module.scss';
 
 type BannerImageProps = {
-  src?: string;
-  className?: string;
-  title?: string;
-  description?: string;
+  children: React.ReactNode;
 };
 
-export const BannerImage = ({
-  src,
-  className,
-  title,
-  description,
-}: BannerImageProps) => {
-  if (!!src) {
-    return (
-      <Image.Base
-        src={src}
-        containerClassName={cn('h-full rounded-none', className)}
-        className="object-cover"
-        fallbackSrc=""
-      />
-    );
-  }
-
+export const BannerImage = ({ children }: BannerImageProps) => {
   return (
-    <Box
-      className={cn(
-        'h-full rounded-none flex justify-center flex-col text-center',
-        className,
-      )}
-    >
-      <Title title={title ?? 'unknown'} />
-      <Description description={description ?? ''} />
-    </Box>
+    <div className="h-dvh py-2 px-2">
+      <div
+        className={
+          'rounded-[3.125rem] bg-[url("/images/banner/banner-bg.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] ' +
+          styles.banner
+        }
+      >
+        {children}
+      </div>
+    </div>
   );
 };

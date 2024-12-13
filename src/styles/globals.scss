@@ -1,6 +1,9 @@
+@import './font.scss';
+@import './text';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'mixins';
 
 @layer base {
   html {
@@ -9,6 +12,15 @@
     --scrollbar-color-track: var(--background);
     --scrollbar-width: thin;
     --scrollbar-width-legacy: 7px;
+
+    --font-DMSans: DMSans;
+    --font-RedHatDisplay: RedHatDisplay;
+    --font-X-Heighting: X-Heighting;
+    --gradient-main: linear-gradient(
+      -90deg,
+      rgba(217, 79, 121, 1) 0%,
+      rgba(244, 116, 105, 1) 100%
+    );
 
     /* Modern browsers with `scrollbar-*` support */
     @supports (scrollbar-width: auto) {
@@ -33,7 +45,7 @@
     }
   }
   body {
-    font-family: var(--font-main);
+    font-family: var(--font-RedHatDisplay);
   }
 
   .privacy-policy-page-container {
@@ -251,4 +263,10 @@
   .main-layout:has(.landing-floating-header) {
     --orderCartRightOffset: 0px;
   }
+}
+
+.svg-path {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
