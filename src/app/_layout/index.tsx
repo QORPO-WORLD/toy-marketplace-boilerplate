@@ -40,13 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </Grid.Child>
 
-      <Grid.Child
-        name="footer"
-        className="bottom-0 z-10 bg-inherit md:sticky"
-        style={{
-          width: 'calc(100% - var(--orderCartRightOffset))',
-        }}
-      >
+      <Grid.Child name="footer">
         <Footer />
       </Grid.Child>
 

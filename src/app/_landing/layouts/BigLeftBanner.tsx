@@ -21,12 +21,12 @@ export const BigLeftBanner = ({
       className={cn('mt-0 w-full gap-4 px-3 lg:px-0 lg:pr-3')}
       style={{ height: 'calc(100% - var(--footerHeight)' }}
     >
-      <BannerImage
+      {/* <BannerImage
         className="hidden w-[50%] lg:flex"
         src={landingBannerUrl}
         title={title}
         description={shortDescription}
-      />
+      /> */}
       {landingBannerUrl ? (
         <Flex className="w-full flex-col gap-4 py-4">
           <Flex className="w-full justify-between">
