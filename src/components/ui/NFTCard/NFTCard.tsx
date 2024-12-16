@@ -37,7 +37,7 @@ function NFTCard({
           <div className={styles.info_cotnainer_1}>
             <img
               className={styles.nft_card_icon_big}
-              src="/icons/amount-icon.svg"
+              src="/market/icons/amount-icon.svg"
               alt="icon"
             />
             <p className={styles.number}>{nftNumber}</p>
@@ -47,7 +47,7 @@ function NFTCard({
             <div className={styles.icon_container}>
               <img
                 className={styles.nft_card_icon_small}
-                src="/icons/amount-icon.svg"
+                src="/market/icons/amount-icon.svg"
                 alt="icon"
               />
             </div>
@@ -55,7 +55,7 @@ function NFTCard({
           <div className={styles.cart_container}>
             <img
               className={styles.nft_card_icon_small}
-              src="/icons/cart-icon.svg"
+              src="/market/icons/cart-icon.svg"
               alt="icon"
             />
           </div>

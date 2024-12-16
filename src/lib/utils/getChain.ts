@@ -22,5 +22,5 @@ export const getPresentableChainName = (nameOrId: ChainNameOrId) =>
   getChain(nameOrId)?.title;
 
 export const getCurrencyIconUrl = (chainId: number): string => {
-  return `https://assets.sequence.info/images/networks/medium/${chainId}.webp`;
+  return `https://assets.sequence.info/market/images/networks/medium/${chainId}.webp`;
 };

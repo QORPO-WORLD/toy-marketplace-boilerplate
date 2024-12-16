@@ -10,7 +10,11 @@ export const NotConnectedWarning = ({ isConnected }: Props) => {
 
   return (
     <Flex className="my-auto flex-col items-center justify-center gap-4">
-      <Image alt="Cube" src="/images/cubes.svg" className="h-[80px] w-[80px]" />
+      <Image
+        alt="Cube"
+        src="/market/images/cubes.svg"
+        className="h-[80px] w-[80px]"
+      />
 
       <Text className="text-xl font-extrabold" as="h4">
         Not Connected

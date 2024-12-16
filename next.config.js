@@ -7,7 +7,8 @@ const withVanillaExtract = createVanillaExtractPlugin();
 /** @type {import("next").NextConfig} */
 const config = {
   transpilePackages: ['@0xsequence/marketplace-sdk'],
-   basePath: '/market'
+  basePath: '/market',
+  assetPrefix: '/market/',
 };
 
 export default withVanillaExtract(config);

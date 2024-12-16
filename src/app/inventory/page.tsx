@@ -30,7 +30,7 @@ const Inventory = () => {
       <Flex className="my-auto flex-col items-center justify-center gap-4">
         <BaseImage
           alt="Cube"
-          src="/images/cubes.svg"
+          src="/market/images/cubes.svg"
           className="h-[80px] w-[80px]"
         />
 

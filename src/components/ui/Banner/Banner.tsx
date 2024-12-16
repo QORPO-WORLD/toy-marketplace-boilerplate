@@ -20,7 +20,7 @@ function Banner({ bgSrc, title, title2 }: BannerProps) {
           <p className="title text-[6rem] text-white leading-none">{title2}</p>
           <Image
             className="w-[3.125rem] h-[3.86rem]"
-            src="/icons/shield-icon.svg"
+            src="/market/icons/shield-icon.svg"
             width={3}
             height={4}
             alt="shield"

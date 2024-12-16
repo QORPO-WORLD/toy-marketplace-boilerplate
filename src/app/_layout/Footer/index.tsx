@@ -21,7 +21,7 @@ export const Footer = () => {
       <div className={styles.footer_navigation}>
         <img
           className={styles.logo}
-          src="/icons/toy-logo-full.svg"
+          src="/market/icons/toy-logo-full.svg"
           loading="lazy"
           alt="logo"
         />

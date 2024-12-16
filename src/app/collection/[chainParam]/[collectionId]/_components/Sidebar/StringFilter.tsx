@@ -61,7 +61,7 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
             No Results
           </Text>
         )}
-        <ScrollArea.Base className="mt-2 flex h-fit flex-col max-h-9">
+        <ScrollArea.Base className="mt-2 flex h-fit flex-col max-h-96">
           {options.map((property, i) => {
             const isChecked = checks.includes(property);
             return (
