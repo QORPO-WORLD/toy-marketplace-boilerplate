@@ -8,15 +8,15 @@ import { type VariantProps, cva } from 'class-variance-authority';
 
 const switchRootVariants = cva(
   [
-    'peer inline-flex h-[16px] w-[28px] shrink-0 cursor-pointer items-center transition-colors',
-    'rounded-full border border-foreground/30 bg-background',
+    'peer inline-flex h-[1.625rem] w-[3.4375rem] shrink-0 cursor-pointer items-center transition-colors',
+    'rounded-full border border-[#403545] bg-[#4035451A]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
-        default: 'data-[state=checked]:bg-background',
+        default: 'data-[state=checked]:bg-[#40354580]',
         pink: 'data-[state=checked]:bg-pink/10',
       },
     },
@@ -28,8 +28,8 @@ const switchRootVariants = cva(
 
 const switchThumbVariants = cva(
   [
-    'pointer-events-none block h-2.5 w-2.5 rounded-full bg-foreground/30 shadow-lg ring-0 transition-transform',
-    'data-[state=checked]:translate-x-3.5 data-[state=unchecked]:translate-x-0.5',
+    'pointer-events-none block h-[85%] aspect-square rounded-full bg-[#403545] shadow-lg ring-0 transition-transform',
+    'data-[state=checked]:translate-x-[140%] data-[state=unchecked]:translate-x-0.5',
   ],
   {
     variants: {

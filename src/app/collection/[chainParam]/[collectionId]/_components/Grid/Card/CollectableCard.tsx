@@ -38,7 +38,7 @@ export const CollectibleCard = ({
       className={cn(
         classNames.collectibleSelectionIndicator,
         `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
-        'rounded-md bg-foreground/5 outline outline-2 outline-transparent',
+        'rounded-[1.5625rem] bg-white outline outline-2 outline-transparent',
         'z-10 overflow-hidden !outline transition-all',
       )}
     >
@@ -52,15 +52,15 @@ export const CollectibleCard = ({
       >
         <Image
           src={collectible?.image}
-          containerClassName="bg-foreground/10 aspect-square rounded-sm overflow-hidden"
-          className="aspect-square rounded-[inherit] hover:scale-125 ease-in duration-150"
+          containerClassName="bg-foreground/10 aspect-square rounded-[1.5625rem] overflow-hidden mb-2"
+          className="aspect-square rounded-[inherit] hover:scale-110 ease-in duration-150"
         />
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
       {isConnected && accountChainId && (
         <CollectibleActionButton
           className={cn(
-            'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible',
+            'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible bg-main-gradient text-xl color-white hover:text-[1.35rem]',
             '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
           )}
           tokenId={tokenId}

@@ -1,3 +1,5 @@
+import { use, useEffect } from 'react';
+
 import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
 
 import type { TokenMetadata } from '@0xsequence/indexer';
@@ -15,22 +17,22 @@ type FooterProps = {
 export const Footer = ({ tokenMetadata, order }: FooterProps) => {
   const { tokenId, name } = tokenMetadata;
 
-  const height = 'h-[24px]';
+  const height = 'h-[1.5rem]';
   return (
     <>
-      <Text
+      {/* <Text
         className={cn(
           height,
-          'md:text-md text-left text-xs font-medium text-foreground/50 max-lines-[1]',
+          'md:text-md text-left text-xl font-main uppercase text-[#483F50] max-lines-[1]',
         )}
       >
         #{truncateMiddle(tokenId, 10) || '--'}
-      </Text>
+      </Text> */}
 
       <Text
         className={cn(
           height,
-          'md:text-md ellipsis block text-left font-semibold text-foreground',
+          'md:text-md text-left text-xl font-main uppercase text-[#483F50] max-lines-[1] truncate',
         )}
         title={name}
       >
@@ -58,7 +60,7 @@ const Order = ({ height, order }: OrderProps) => {
 
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
-      <Flex className="items-center gap-2">
+      {/* <Flex className="items-center gap-2">
         <Avatar.Base size="xs">
           <Avatar.Image src={currency?.imageUrl} />
           <Avatar.Fallback>{currency?.name}</Avatar.Fallback>
@@ -72,7 +74,10 @@ const Order = ({ height, order }: OrderProps) => {
       </Flex>
       <Badge variant="success">
         Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
-      </Badge>
+      </Badge> */}
+      <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase">
+        {order.priceAmountFormatted}
+      </p>
     </Flex>
   );
 };

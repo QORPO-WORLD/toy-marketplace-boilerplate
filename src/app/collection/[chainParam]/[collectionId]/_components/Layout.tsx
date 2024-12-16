@@ -51,7 +51,7 @@ export const CollectionViewPageLayout = ({
     case 'default': {
       return (
         <Grid.Root
-          className={cn(defaultGridContainerClassName, 'mt-0 gap-0')}
+          className={cn(defaultGridContainerClassName, 'mt-0 gap-0 mb-56')}
           template={`
             [row1-start] "collection-header collection-header" min-content [row1-end]
             [row2-start] "collection-details collection-details" min-content [row2-end]
@@ -69,9 +69,9 @@ export const CollectionViewPageLayout = ({
           <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
           <Grid.Child
             name="collection-controls"
-            className="sticky z-19"
+            className="sticky z-40"
             style={{
-              top: 'calc(var(--headerHeight) - 1px)',
+              top: '0',
             }}
           >
             {controls}

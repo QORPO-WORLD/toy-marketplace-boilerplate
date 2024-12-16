@@ -45,20 +45,20 @@ export const FilterBadges = observer(
     return (
       <Grid.Child
         name="collection-filter-badges"
-        className="sticky z-40 mb-6 bg-background py-4"
+        className="sticky z-40 bg-[#CBBFD0] py-4 px-2"
         style={{
-          top: 'calc(var(--headerHeight) + var(--collectionControlsHeight) - 8px)',
+          top: '6rem',
         }}
       >
         <ScrollArea.Base orientation="horizontal" className="max-w-full">
           <Flex className={cn(classNames.collectionFilterBadges, 'w-0 gap-2')}>
             {searchText && (
-              <Badge size="lg" variant="outline">
+              <Badge className="text-[#483F50]" size="lg" variant="outline">
                 Search: &quot
-                <Text className="text-foreground">{searchText}</Text>
+                <Text className="text-[#483F50]">{searchText}</Text>
                 &quot;
                 <CloseIcon
-                  className="ml-2 cursor-pointer"
+                  className="ml-3 cursor-pointer"
                   onClick={() => {
                     filters$.clearSearchText();
                   }}
@@ -95,7 +95,7 @@ export const FilterBadges = observer(
               <Badge
                 size="lg"
                 variant="outlinePrimary"
-                className="cursor-pointer"
+                className="cursor-pointer text-[#483F50] font-DMSans uppercase font-bold"
                 onClick={() => {
                   filters$.clearAllFilters();
                 }}

@@ -10,15 +10,15 @@ import { type VariantProps, cva } from 'class-variance-authority';
 const inputBoxVariants = cva([
   'flex h-fit w-full items-center rounded-md border border-input bg-transparent text-foreground',
   'divide-x divide-input',
-  'ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+  'ring-offset-background focus-within:outline-none',
 ]);
 
 const inputVariants = cva(
   [
-    'h-full w-full bg-transparent outline-none',
+    'h-full w-full bg-transparent outline-none text-[#483F50] font-DMSans capitalize',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'file:border-0 file:bg-transparent file:text-sm file:font-medium',
-    'placeholder:text-muted-foreground/60',
+    'file:border-0 file:bg-transparent file:text-base file:font-medium',
+    'placeholder:text-muted-[#483F50]',
   ],
   {
     variants: {
@@ -82,12 +82,14 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         className={cn('divide-none', className)}
         prefix={
           <SearchIcon
-            className={cn('ml-2 h-5 w-6 text-inherit', iconClassname)}
+            className={cn('ml-2 h-5 w-6 text-[#483F50] ', iconClassname)}
           />
         }
         suffix={
           <>
-            {props.value && !loading ? <CloseIcon onClick={onClear} /> : null}
+            {props.value && !loading ? (
+              <CloseIcon className="text-[#483F50] mr-2" onClick={onClear} />
+            ) : null}
             {loading ? <LoadingIcon /> : null}
           </>
         }

@@ -28,9 +28,9 @@ export const CollectibleImage = ({
 
   if (isHtml(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center bg-foreground/5">
+      <Box className="align-center flex justify-center w-fit">
         <iframe
-          className="aspect-square max-h-[500px] w-full"
+          className="aspect-square max-h-[36.6875rem] w-full"
           src={fileSrc}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           sandbox="allow-scripts"
@@ -44,9 +44,9 @@ export const CollectibleImage = ({
 
   if (isVideo(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center bg-foreground/5">
+      <Box className="align-center flex justify-center w-fit">
         <video
-          className="aspect-square max-h-[500px]"
+          className="aspect-square max-h-[36.6875rem]"
           autoPlay
           loop
           controls

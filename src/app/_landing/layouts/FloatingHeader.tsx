@@ -45,9 +45,9 @@ export const FloatingBanner = ({
           </div>
         </div>
       </BannerImage>
-      <div className="px-5">
+      <div className="px-5 w-full overflow-hidden">
         <p className="title text-start text-white mb-9">Our benefits</p>
-        <div className="h-[31.5rem] flex justify-between gap-5">
+        <div className="h-[31.5rem] flex justify-between gap-5 pb-4">
           <FlipCard data={flipCardData[0]!} color="#A3EAFA" />
           <FlipCard data={flipCardData[1]!} color="#F3FAA3" />
           <FlipCard data={flipCardData[2]!} color="#FAA3A9" />

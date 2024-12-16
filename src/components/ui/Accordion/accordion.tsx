@@ -25,8 +25,9 @@ const AccordionItem = React.forwardRef<
   <AccordionPrimitive.Item
     ref={ref}
     className={cn(
-      'rounded-md bg-foreground/[0.08] px-3 py-2.5',
-      'ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring',
+      'px-3 py-2.5 outline-none',
+      'ring-offset-background focus-within:outline-none',
+      'rounded-[1.4rem] border border-[#403545] bg-[#4035451A]',
       className,
     )}
     {...props}
@@ -43,13 +44,13 @@ const AccordionTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         'flex flex-1 items-center justify-between transition-all [&[data-state=open]>svg]:rotate-180',
-        'text-sm font-medium text-foreground/70 outline-none focus:outline-none',
+        'text-[1.25rem] font-DMSans font-semibold text-[#483F50] outline-none capitalize focus:outline-none',
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronDownIcon className="h-4 w-4 fill-inherit stroke-inherit transition-transform duration-200" />
+      <ChevronDownIcon className="h-4 w-4 fill-black stroke-black transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -62,7 +63,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      'overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+      'overflow-hidden text-[1.25rem] text-black transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
       'mt-3',
       className,
     )}

@@ -47,7 +47,6 @@ const CollectionHeader = ({
   const image = collection?.extensions?.ogImage;
   const description = collection?.extensions?.description;
   const socials = marketplaceConfig.socials;
-  console.log('collectionMetadata', collection);
 
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(

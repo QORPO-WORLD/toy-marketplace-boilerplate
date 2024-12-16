@@ -13,7 +13,7 @@ export default function Page() {
   const { collectibleMetadata, collectionId, chainId } = useCollectableData();
   return (
     <>
-      <CollectibleImage
+      {/* <CollectibleImage
         id={collectibleMetadata.data?.tokenId}
         src={collectibleMetadata.data?.image}
         loading={collectibleMetadata.isLoading}
@@ -50,7 +50,23 @@ export default function Page() {
             chainId={chainId}
           />
         </CollectibleAccordionItem>
-      </Accordion.Root>
+      </Accordion.Root> */}
+      <div className="pt-[11.0625rem] px-4 flex items-center justify-center">
+        <div className="flex flex-col gap-[1.625rem] shrink-55">
+          <CollectibleImage
+            id={collectibleMetadata.data?.tokenId}
+            src={collectibleMetadata.data?.image}
+            loading={collectibleMetadata.isLoading}
+            animationSrc={collectibleMetadata.data?.animation_url}
+          />
+          <p className="text-white font-DMSans text-[16px] font-semibold leading-[207%]">
+            {collectibleMetadata.data?.description}
+          </p>
+        </div>
+        <div className="shrink-0 ">
+          <div></div>
+        </div>
+      </div>
     </>
   );
 }

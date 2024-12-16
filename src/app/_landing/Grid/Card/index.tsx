@@ -47,7 +47,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       })}
     >
       <div
-        className="w-full aspect-[1.55] bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem]"
+        className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem]"
         style={{ backgroundImage: `url(${image})` }}
       >
         <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">

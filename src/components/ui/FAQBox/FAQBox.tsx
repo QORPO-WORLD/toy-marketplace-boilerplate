@@ -24,9 +24,10 @@ function FAQBox() {
         />
       </div>
       <div
-        className="overflow-hidden transition-all duration-[655ms] ease-out mb-4"
+        className={`overflow-hidden transition-all duration-[655ms] ease-out `}
         style={{
           height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+          marginTop: isOpen ? '1rem' : '0rem',
         }}
       >
         <div ref={contentRef}>

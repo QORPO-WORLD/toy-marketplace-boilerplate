@@ -14,8 +14,15 @@ export const StringAndArrayBadge = ({ filter }: StringAndArrayBadge) => {
   const { name, values = [] } = filter;
 
   return (
-    <Badge size="lg" variant="outline" className="capitalize">
-      {name}:&nbsp;<Text className="text-foreground">{values.join(', ')}</Text>
+    <Badge
+      size="lg"
+      variant="outline"
+      className="text-[#483F50] font-DMSans uppercase font-bold"
+    >
+      {name}:&nbsp;
+      <Text className="text-[#483F50] font-DMSans capitalize font-medium">
+        {values.join(', ').toLocaleLowerCase()}
+      </Text>
       <CloseIcon
         className="ml-2 cursor-pointer"
         onClick={() => {

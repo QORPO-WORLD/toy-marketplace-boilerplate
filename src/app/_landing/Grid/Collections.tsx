@@ -15,7 +15,7 @@ export const LandingCollections = ({
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
       <Grid.Root
         className={cn(
-          `grid grid-cols-${collections.length < 3 ? '2' : '3'} gap-10`,
+          `grid grid-cols-${collections.length < 3 ? '2' : '3'} gap-10 h-[31.8125rem]`,
           className,
         )}
       >

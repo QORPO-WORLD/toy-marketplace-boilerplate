@@ -40,11 +40,10 @@ export const CollectionSidebar = ({
 
   return (
     <Flex
-      className={'sticky w-[300px]'}
+      className={'sticky w-[18.75rem]'}
       style={{
-        top: 'calc(var(--headerHeight) + var(--collectionControlsHeight) + 20px)',
-        height:
-          'calc(100vh - var(--headerHeight) - var(--footerHeight) - var(--collectionControlsHeight) - 20px)',
+        top: '6rem',
+        height: '',
       }}
     >
       <CollectionSidebarContent
@@ -197,7 +196,12 @@ const FilterSwitch = observer(({ filter }: { filter: FilterOptions }) => {
         {...filter}
         checked={checked}
       />
-      <Label htmlFor={filter.id}>{filter.children}</Label>
+      <Label
+        className="text-[#483F50] font-DMSans text-[1.25rem] font-semibold"
+        htmlFor={filter.id}
+      >
+        {filter.children}
+      </Label>
     </div>
   );
 });
