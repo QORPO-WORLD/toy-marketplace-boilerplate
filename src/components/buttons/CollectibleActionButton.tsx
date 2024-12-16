@@ -135,11 +135,11 @@ export const CollectibleActionButton = ({
     transfer: {
       label: 'Transfer',
       onClick: () => {
-        showTransferModal({
-          tokenId,
-          collectionAddress: collectionAddress,
-          chainId: collectionChainId,
-        });
+        // showTransferModal({
+        //   tokenId,
+        //   collectionAddress: collectionAddress,
+        //   chainId: collectionChainId,
+        // });
       },
     },
     order: {

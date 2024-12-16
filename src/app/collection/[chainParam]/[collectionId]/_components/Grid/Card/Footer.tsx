@@ -1,6 +1,4 @@
-import { use, useEffect } from 'react';
-
-import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
+import { Flex, Text, cn } from '~/components/ui';
 
 import type { TokenMetadata } from '@0xsequence/indexer';
 import {

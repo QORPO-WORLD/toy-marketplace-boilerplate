@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 
 function FAQBox() {
   const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef<any>(null); // To measure the height of the content
+  const contentRef = useRef<HTMLDivElement>(null); // To measure the height of the content
 
   return (
     <div
