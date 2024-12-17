@@ -71,6 +71,8 @@ export const CollectibleTradeActions = ({
       },
     });
 
+  console.log(lowestListing);
+
   const { collectionMetadata } = useCollectableData();
 
   const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
@@ -138,29 +140,31 @@ export const CollectibleTradeActions = ({
 
   return (
     <Flex className="flex-col gap-4">
-      <Flex className="flex-row gap-4">
-        <Button
-          size="lg"
-          className="w-full justify-between"
-          loading={isLoading}
-          disabled={buyDisabled}
-          onClick={onClickBuy}
-        >
-          <Text className="text-inherit">Buy</Text>
-        </Button>
-        <Flex className="w-full flex-col gap-3">
+      <Flex className="flex-row gap-3 flex-1 w-full">
+        {lowestListing?.order && (
           <Button
-            className="w-full justify-between"
+            size="lg"
+            className="btn-main flex-1"
+            loading={isLoading}
+            disabled={buyDisabled}
+            onClick={onClickBuy}
+          >
+            <Text className="text-inherit">Buy</Text>
+          </Button>
+        )}
+        {!offerDisabled && (
+          <Button
+            className="btn-main variant-black flex-1 "
             onClick={onClickOffer}
             size="lg"
             loading={false}
             disabled={offerDisabled}
           >
-            <Text className="text-inherit">Offer</Text>
+            <Text className="text-inherit">make Offer</Text>
           </Button>
-        </Flex>
+        )}
       </Flex>
-      <Flex className="flex-row gap-4">
+      {/* <Flex className="flex-row gap-4">
         <Button
           className="w-full justify-between"
           size="lg"
@@ -182,7 +186,7 @@ export const CollectibleTradeActions = ({
             <Text className="text-inherit">List</Text>
           </Button>
         </Flex>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };

@@ -6,6 +6,7 @@ import {
   truncateMiddle,
 } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
+import Image from 'next/image';
 
 type FooterProps = {
   tokenMetadata: TokenMetadata;
@@ -56,6 +57,15 @@ const Order = ({ height, order }: OrderProps) => {
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
 
+  const setMarketPlaceLogo = (marketplace: string) => {
+    switch (marketplace) {
+      case 'opensea':
+        return '/market/icons/opensea-logo.svg';
+      default:
+        return '';
+    }
+  };
+
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
       {/* <Flex className="items-center gap-2">
@@ -74,8 +84,17 @@ const Order = ({ height, order }: OrderProps) => {
         Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
       </Badge> */}
       <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase">
-        {order.priceAmountFormatted}
+        {order.priceAmountFormatted} TOY
       </p>
+      {order.marketplace && (
+        <Image
+          className="w-[1.375rem] h-[1.375rem]"
+          src={setMarketPlaceLogo(order.marketplace)}
+          width={22}
+          height={22}
+          alt={order.marketplace}
+        />
+      )}
     </Flex>
   );
 };

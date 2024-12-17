@@ -28,7 +28,7 @@ export const CollectibleAddresses = ({
     <Box className="@container/addressesBox">
       <InfoGrid
         className={cn(
-          'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3',
+          'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3 w-full',
         )}
         values={addresses.map((a) => {
           const explorerUrl = getChain(a.chainId)?.blockExplorer?.rootUrl;
