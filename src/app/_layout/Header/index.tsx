@@ -10,7 +10,7 @@ import { HeaderLogo } from './HeaderLogo';
 
 export const Header = () => {
   return (
-    <header className="flex items-center justify-between pt-[1.44rem] px-[1.69rem] absolute w-full">
+    <header className="flex items-center justify-between pt-[1.44rem] px-[2.5rem] absolute w-full mb:px-4">
       <HeaderLogo />
       <div className="flex items-center text-white uppercase mb:hidden">
         <a

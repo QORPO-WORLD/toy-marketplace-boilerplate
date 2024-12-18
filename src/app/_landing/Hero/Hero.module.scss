@@ -12,5 +12,13 @@
     right: 5.07rem;
     top: 50%;
     transform: translateY(-45%);
+    @media screen and (max-width: 768px) {
+      transform-origin: center;
+      transform: translate(50%, 33.9826387%) rotate(-90deg);
+      height: 342px;
+      top: auto;
+      bottom: 52.1px;
+      right: 50%;
+    }
   }
 }

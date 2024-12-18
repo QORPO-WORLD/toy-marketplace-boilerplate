@@ -2,6 +2,7 @@ import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
 import FlipCard from '../../../components/ui/FlipCard/FlipCard';
+import MobileSwiper from '../../../components/ui/MobileSwiper/MobileSwiper';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
 import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
@@ -19,13 +20,13 @@ export const FloatingBanner = ({
 }: MarketplaceConfig) => {
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
-      <BannerImage>
-        <div className="flex flex-col h-full z-10 relative">
+      <BannerImage logo>
+        <div className="flex flex-col h-full z-10 relative mb:overflow-hidden">
           <div className="pt-[8rem]">
             <p className="title text-white text-center">check our</p>
             <p className="title text-yellow text-center">collections</p>
           </div>
-          <div className="flex h-full items-end justify-center translate-x-[-2rem]">
+          <div className="flex h-full items-end justify-center translate-x-[-2rem] mb:hidden">
             <NFTCard
               data={nftCardData[0]!}
               className="h-[39rem] w-auto bg-[#E7E6FB] translate-x-[8rem] translate-y-10 rotate-[-15deg]"
@@ -43,15 +44,31 @@ export const FloatingBanner = ({
               className="h-[39rem] w-auto bg-[#FBF2DD] translate-x-[-8rem] translate-y-28 rotate-[-23deg]"
             />
           </div>
+          <div className="w-full hidden mb:block">
+            <NFTCard
+              data={nftCardData[0]!}
+              className="h-[31rem] w-auto bg-[#E7E6FB] translate-x-[4rem] translate-y-10 rotate-[-15deg]"
+            />
+          </div>
         </div>
       </BannerImage>
-      <div className="px-5 w-full overflow-hidden">
+      <div className="px-5 w-full overflow-hidden mb:overflow-visible">
         <p className="title text-start text-white mb-9">Our benefits</p>
-        <div className="h-[31.5rem] flex justify-between gap-5 pb-4">
+        <div className="h-[31.5rem] flex justify-between gap-5 pb-4 mb:hidden">
           <FlipCard data={flipCardData[0]!} color="#A3EAFA" />
           <FlipCard data={flipCardData[1]!} color="#F3FAA3" />
           <FlipCard data={flipCardData[2]!} color="#FAA3A9" />
           <FlipCard data={flipCardData[3]!} color="#7795FF" />
+        </div>
+        <div className="w-full relative hidden mb:block">
+          <MobileSwiper
+            arrOfComponents={[
+              <FlipCard data={flipCardData[0]!} color="#A3EAFA" />,
+              <FlipCard data={flipCardData[1]!} color="#F3FAA3" />,
+              <FlipCard data={flipCardData[2]!} color="#FAA3A9" />,
+              <FlipCard data={flipCardData[3]!} color="#7795FF" />,
+            ]}
+          />
         </div>
       </div>
       <Box className="mx-auto w-full px-5">
