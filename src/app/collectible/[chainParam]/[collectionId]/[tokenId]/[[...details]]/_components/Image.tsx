@@ -28,7 +28,7 @@ export const CollectibleImage = ({
 
   if (isHtml(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center w-fit">
+      <Box className="align-center flex justify-center w-fit overflow-hidden rounded-[1.5625rem]">
         <iframe
           className="aspect-square max-h-[36.6875rem] w-full"
           src={fileSrc}
@@ -44,12 +44,11 @@ export const CollectibleImage = ({
 
   if (isVideo(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center w-fit">
+      <Box className="align-center flex justify-center w-fit overflow-hidden rounded-[1.5625rem]">
         <video
           className="aspect-square max-h-[36.6875rem]"
           autoPlay
           loop
-          controls
           playsInline
           muted
         >

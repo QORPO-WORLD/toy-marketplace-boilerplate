@@ -17,7 +17,7 @@ function FAQBox() {
         </p>
         <img
           className="transition duration-150 ease-out"
-          src="/icons/arrow-icon.svg"
+          src="/market/icons/arrow-icon.svg"
           style={{
             transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
           }}

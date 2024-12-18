@@ -62,13 +62,13 @@ export const FloatingBanner = ({
           <Banner
             title="Founders’ collection"
             title2="Citizen Zero"
-            bgSrc="/images/banner/cc-banner-bg.png"
+            bgSrc="/market/images/banner/cc-banner-bg.png"
           />
           <LandingCollections collections={collections.slice(0, 2) || []} />
           <Banner
             title="Aneemate genesis"
             title2="zero"
-            bgSrc="/images/banner/anmt-banner-bg.png"
+            bgSrc="/market/images/banner/anmt-banner-bg.png"
           />
           <LandingCollections collections={collections.slice(2, 5) || []} />
         </div>

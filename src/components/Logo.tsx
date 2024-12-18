@@ -7,6 +7,11 @@ const defaultMobileLogoUrl = '/logo/152x152.png';
 
 export const Logo = () => {
   return (
-    <Image src="/images/Logo.svg" width="56" height="42" alt="logo"></Image>
+    <Image
+      src="/market/images/Logo.svg"
+      width="56"
+      height="42"
+      alt="logo"
+    ></Image>
   );
 };

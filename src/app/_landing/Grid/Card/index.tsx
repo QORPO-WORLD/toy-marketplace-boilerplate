@@ -53,15 +53,15 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
         <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
           <img
             className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
-            src="/images/logos/cc-logo.png"
+            src="/market/images/logos/cc-logo.png"
             alt="logo"
             loading="lazy"
           />
-          <div className="flex items-center gap-[0.6rem]">
+          <div className="flex items-center gap-[0.6rem] overflow-hidden">
             <p className="text-[2rem] uppercase truncate">{name}</p>
             <img
               className="w-[1.5rem] h-[1.5rem] block"
-              src="/icons/shield-icon.svg"
+              src="/market/icons/shield-icon.svg"
               alt="ethereum"
               loading="lazy"
             />
@@ -69,7 +69,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
           <div className="ml-auto w-[3.562rem] aspect-square rounded-full bg-[#E5FF03] flex items-center justify-center">
             <img
               className="w-[1.5rem] h-[1.5rem] block"
-              src="/icons/cart-icon.svg"
+              src="/market/icons/cart-icon.svg"
               alt="ethereum"
               loading="lazy"
             />

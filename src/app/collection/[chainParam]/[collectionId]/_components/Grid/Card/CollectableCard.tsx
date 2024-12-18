@@ -37,7 +37,7 @@ export const CollectibleCard = ({
     <article
       className={cn(
         classNames.collectibleSelectionIndicator,
-        `relative flex h-full w-full flex-col align-top m-[0.1rem]`,
+        `relative flex h-full w-full flex-col align-top m-[0.1rem] pb-8`,
         'rounded-[1.5625rem] bg-white outline outline-2 outline-transparent',
         'z-10 overflow-hidden !outline transition-all',
       )}

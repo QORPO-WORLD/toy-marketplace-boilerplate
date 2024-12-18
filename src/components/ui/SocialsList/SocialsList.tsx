@@ -10,7 +10,7 @@ function SocialsList() {
           rel="noopener noreferrer"
         >
           <img
-            src="/icons/discord-icon.svg"
+            src="/market/icons/discord-icon.svg"
             loading="lazy"
             alt="discord-icon"
           />
@@ -22,7 +22,7 @@ function SocialsList() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="/icons/x-icon.svg" loading="lazy" alt="x-icon" />
+          <img src="/market/icons/x-icon.svg" loading="lazy" alt="x-icon" />
         </a>
       </li>
       <li className={styles.social_item}>
@@ -32,7 +32,7 @@ function SocialsList() {
           rel="noopener noreferrer"
         >
           <img
-            src="/icons/telegram-icon.svg"
+            src="/market/icons/telegram-icon.svg"
             loading="lazy"
             alt="telegram-icon"
           />
@@ -45,7 +45,7 @@ function SocialsList() {
           rel="noopener noreferrer"
         >
           <img
-            src="/icons/instagram-icon.svg"
+            src="/market/icons/instagram-icon.svg"
             loading="lazy"
             alt="instagram-icon"
           />
@@ -54,7 +54,7 @@ function SocialsList() {
       <li className={styles.social_item}>
         <a href="">
           <img
-            src="/icons/youtube-icon.svg"
+            src="/market/icons/youtube-icon.svg"
             width="2.3125rem"
             height="1.6875rem"
             loading="lazy"
@@ -65,7 +65,7 @@ function SocialsList() {
       <li className={styles.social_item}>
         <a href="">
           <img
-            src="/icons/twitch-icon.svg"
+            src="/market/icons/twitch-icon.svg"
             width="1.8125rem"
             height="1.9375rem"
             loading="lazy"
