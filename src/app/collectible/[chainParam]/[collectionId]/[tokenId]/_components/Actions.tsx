@@ -8,6 +8,7 @@ import {
   useBuyModal,
   useCreateListingModal,
   useCurrencies,
+  useCurrencyOptions,
   useHighestOffer,
   useLowestListing,
   useMakeOfferModal,
@@ -43,10 +44,12 @@ export const CollectibleTradeActions = ({
     },
     onError,
   });
-
+  const currencyOptions = useCurrencyOptions({
+    collectionAddress
+  });
   const { data: currencies } = useCurrencies({
     chainId,
-    collectionAddress,
+    currencyOptions
   });
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
