@@ -37,8 +37,6 @@ export default function Page() {
 
   const { data } = collectibleMetadata;
 
-  console.log('collectionDataOrder', data);
-
   const setMarketPlaceLogo = (marketplace?: string) => {
     switch (marketplace) {
       case 'opensea':

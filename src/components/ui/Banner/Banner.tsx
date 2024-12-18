@@ -2,7 +2,6 @@
 
 import { Routes } from '../../../lib/routes';
 import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
-import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
@@ -19,13 +18,6 @@ function Banner({ bgSrc, title, title2, collection }: BannerProps) {
   }
 
   const { chainId, collectionAddress } = collection;
-  const { data } = useCollection({
-    chainId,
-    collectionAddress,
-  });
-
-  console.log(data);
-
   return (
     <NextLink
       href={Routes.collection({

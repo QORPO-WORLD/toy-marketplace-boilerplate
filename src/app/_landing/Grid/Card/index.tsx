@@ -40,7 +40,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const contractType = data?.type;
 
   const setBackGroundImage = (collectionAddress: `0x${string}`) => {
-    switch (collectionAddress) {
+    switch (collectionAddress as CollectionsEnum) {
       case CollectionsEnum.WEAPON_VARIANTS:
         return 'url(/market/images/banner/weapon-variants-bg.png)';
       case CollectionsEnum.HEROES_VARIANT:
@@ -48,7 +48,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       case CollectionsEnum.LOOT_BOXES:
         return 'url(/market/images/banner/loot-boxes-bg.png)';
       default:
-        '';
+        return '';
     }
   };
 

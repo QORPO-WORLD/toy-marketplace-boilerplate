@@ -22,8 +22,6 @@ export const FloatingBanner = ({
   shortDescription,
   logoUrl,
 }: MarketplaceConfig) => {
-  console.log(collections);
-
   const findCollection = (collectionAddress: string) => {
     return collections.find((c) => c.collectionAddress === collectionAddress);
   };

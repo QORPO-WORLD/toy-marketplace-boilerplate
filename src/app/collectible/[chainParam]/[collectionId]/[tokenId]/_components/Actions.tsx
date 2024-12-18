@@ -77,8 +77,6 @@ export const CollectibleTradeActions = ({
       },
     });
 
-  console.log(lowestListing);
-
   const { collectionMetadata } = useCollectableData();
 
   const isERC1155 = collectionMetadata.data?.type === 'ERC1155';
