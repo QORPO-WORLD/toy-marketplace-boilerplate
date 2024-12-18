@@ -26,7 +26,7 @@ export const CollectiblesGrid = ({
 
   return (
     <VirtuosoGrid
-      className="@container/collectiblesGridContainer w-[99.9%]"
+      className="@container/collectiblesGridContainer w-[99.9%] mb:w-[95%] mb:mx-auto"
       useWindowScroll
       components={{
         List: GridContainer,
@@ -61,7 +61,7 @@ const GridContainer = forwardRef(
         className={cn(
           `${classNames.collectiblesGrid} ${className}`,
           'auto-rows-[minmax(25rem,min-content) grid-flow-row',
-          'grid-rows-[repeat(auto-fill,minmax(18.75rem, min-content))] grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-1',
+          'grid-rows-[repeat(auto-fill,minmax(18.75rem, min-content))] grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-5',
           '@md/collectiblesGridContainer:grid-rows-[repeat(auto-fill,minmax(21.875rem, min-content))] @md/collectiblesGridContainer:grid-cols-[repeat(auto-fill,minmax(13.75rem,1fr))]',
           '@lg/collectiblesGridContainer:grid-rows-[repeat(auto-fill,minmax(21.875rem, min-content))] @lg/collectiblesGridContainer:grid-cols-[repeat(auto-fill,minmax(14.0625rem,1fr))]',
           '@xl/collectiblesGridContainer:grid-rows-[repeat(auto-fill,minmax(25rem, min-content))] @xl/collectiblesGridContainer:grid-cols-[repeat(auto-fill,minmax(15rem,1fr))]',

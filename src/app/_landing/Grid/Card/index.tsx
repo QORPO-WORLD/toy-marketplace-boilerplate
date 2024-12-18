@@ -8,6 +8,7 @@ import { Routes } from '~/lib/routes';
 import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
+import { CollectionsEnum } from '../../../../enum/enum';
 import { CollectionCardSkeleton } from './Skeleton';
 import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
@@ -38,6 +39,19 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const logoURI = data?.logoURI;
   const contractType = data?.type;
 
+  const setBackGroundImage = (collectionAddress: `0x${string}`) => {
+    switch (collectionAddress) {
+      case CollectionsEnum.WEAPON_VARIANTS:
+        return 'url(/market/images/banner/weapon-variants-bg.png)';
+      case CollectionsEnum.HEROES_VARIANT:
+        return 'url(/market/images/banner/heroes-variants-bg.png)';
+      case CollectionsEnum.LOOT_BOXES:
+        return 'url(/market/images/banner/loot-boxes-bg.png)';
+      default:
+        '';
+    }
+  };
+
   return (
     <NextLink
       href={Routes.collection({
@@ -48,7 +62,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
     >
       <div
         className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem] mb:h-[421px]"
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: setBackGroundImage(collectionAddress) }}
       >
         <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
           <img

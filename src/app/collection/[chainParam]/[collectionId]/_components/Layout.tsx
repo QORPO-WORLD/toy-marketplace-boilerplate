@@ -18,7 +18,7 @@ type CollectionViewPageLayoutProps = {
 const defaultGridContainerClassName = [
   classNames.collectionViewLayout,
   '@container/collectionViewContainer',
-  'px-2 md:px-4 xl:px-8',
+  'px-2 md:px-4 xl:px-8 mb:px-0',
   'min-h-screen gap-y-8 md:gap-y-0',
 ] as const;
 
@@ -69,7 +69,7 @@ export const CollectionViewPageLayout = ({
           <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
           <Grid.Child
             name="collection-controls"
-            className="sticky z-40"
+            className="sticky z-20"
             style={{
               top: '0',
             }}

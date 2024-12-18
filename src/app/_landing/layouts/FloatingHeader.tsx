@@ -90,19 +90,23 @@ export const FloatingBanner = ({
             title="Founders’ collection"
             title2="Citizen Zero"
             bgSrc="/market/images/banner/cc-banner-bg.png"
-            collection={
-              findCollection(
-                CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
-              ) as Collection | undefined
-            }
+            collection={findCollection(
+              CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
+            )}
           />
-          <LandingCollections collections={collections.slice(0, 2) || []} />
+          <LandingCollections
+            collections={[
+              findCollection(CollectionsEnum.HEROES_VARIANT)!,
+              findCollection(CollectionsEnum.LOOT_BOXES)!,
+              findCollection(CollectionsEnum.WEAPON_VARIANTS)!,
+            ]}
+          />
           <Banner
             title="Aneemate genesis"
             title2="zero"
             bgSrc="/market/images/banner/anmt-banner-bg.png"
+            collection={findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)}
           />
-          <LandingCollections collections={collections.slice(2, 5) || []} />
         </div>
       </Box>
       <Box className="mx-auto w-full px-5 pb-20">

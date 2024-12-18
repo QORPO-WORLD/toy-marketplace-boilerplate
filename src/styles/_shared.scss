@@ -12,7 +12,7 @@
 }
 
 .btn-main {
-  @apply flex w-full max-w-[16.9375rem] items-center justify-center rounded-[2.6875rem] border border-[rgba(255,255,255,0.40)] bg-main-gradient px-7 py-[0.875rem] text-[1.5rem] font-normal uppercase leading-normal text-white;
+  @apply flex w-full max-w-[16.9375rem] items-center justify-center rounded-[2.6875rem] border border-[rgba(255,255,255,0.40)] bg-main-gradient px-7 py-[0.875rem] text-[1.5rem] font-normal uppercase leading-normal text-white mb:max-w-full mb:py-1;
   &:hover {
     @apply shadow-[0_0_10px_rgba(0,0,0,0.25)] shadow-main;
   }

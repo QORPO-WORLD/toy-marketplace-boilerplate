@@ -95,8 +95,8 @@ const CollectionHeader = ({
 
   return (
     <>
-      <div className="h-dvh py-2 px-2 mx-[-2rem] mb-8">
-        <div className='rounded-[3.125rem] bg-[url("/market/images/banner/collection-page-banner-cc.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12'>
+      <div className="h-dvh p-2 mx-[-2rem] mb-8 mb:p-0 mb:mx-0 mb:mb-0">
+        <div className='rounded-[3.125rem] mb:rounded-none bg-[url("/market/images/banner/collection-page-banner-cc.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12'>
           <div className="">
             <p className="title text-center text-white">{name}</p>
           </div>

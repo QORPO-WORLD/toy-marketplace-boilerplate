@@ -45,7 +45,7 @@ export const FilterBadges = observer(
     return (
       <Grid.Child
         name="collection-filter-badges"
-        className="sticky z-40 bg-[#CBBFD0] py-4 px-2"
+        className="sticky z-20 bg-[#CBBFD0] py-4 px-2"
         style={{
           top: '6rem',
         }}

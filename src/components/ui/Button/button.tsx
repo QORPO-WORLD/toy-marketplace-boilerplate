@@ -7,7 +7,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 const buttonVariants = cva(
   [
     'btn',
-    'flex w-fit items-center justify-center gap-2 transition-all rounded-[2.6875rem]',
+    'flex items-center justify-center gap-2 transition-all rounded-[2.6875rem]',
     'pre-wrap whitespace-nowrap text-sm',
     'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     'disabled:pointer-events-none disabled:opacity-50',

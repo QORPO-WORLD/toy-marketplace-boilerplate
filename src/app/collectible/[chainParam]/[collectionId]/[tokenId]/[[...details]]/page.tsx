@@ -68,15 +68,15 @@ export default function Page() {
 
   return (
     <>
-      <div className="pt-[11.0625rem] flex px-[11.1875rem] gap-[1.3125rem]">
-        <div className="flex flex-col gap-[1.625rem] w-[37.384412153%] shrink-0">
+      <div className="pt-[11.0625rem] flex px-[11.1875rem] gap-[1.3125rem] mb:flex-col mb:px-4 mb:pt-[123px]">
+        <div className="flex flex-col gap-[1.625rem] w-[37.384412153%] shrink-0 mb:w-full">
           <CollectibleImage
             id={collectibleMetadata.data?.tokenId}
             src={collectibleMetadata.data?.image}
             loading={collectibleMetadata.isLoading}
             animationSrc={collectibleMetadata.data?.animation_url}
           />
-          <p className="text-white font-DMSans text-[16px] font-semibold leading-[207%]">
+          <p className="text-white font-DMSans text-[16px] font-semibold leading-[207%] mb:hidden">
             {collectibleMetadata.data?.description}
           </p>
         </div>
@@ -101,11 +101,11 @@ export default function Page() {
             </div>
           </div>
           <div className="flex flex-col w-full  py-[1.75rem] px-[2.5625rem] gap-10 rounded-[25px] border border-white bg-[rgba(87,77,95,0.80)] backdrop-blur-[10px]">
-            <p className="text-[2rem] font-normal leading-[86.94%] uppercase text-white">
+            <p className="text-[2rem] font-normal leading-[86.94%] uppercase text-white mb:text-[24px]">
               {data?.name}
             </p>
-            <div>
-              {/* <div>
+            {/* <div>
+              <div>
                 <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white font-bold">
                   Price
                 </p>
@@ -114,8 +114,8 @@ export default function Page() {
                     {lowestListing?.order?.priceAmountFormatted} TOY
                   </p>
                 </div>
-              </div> */}
-            </div>
+              </div>
+            </div> */}
             {lowestListing?.order?.marketplace && (
               <div className="flex items-center gap-[0.5625rem]">
                 <Image
@@ -130,6 +130,15 @@ export default function Page() {
                 </p>
               </div>
             )}
+            <div className="mb:hidden">
+              <CollectibleTradeActions
+                chainId={chainId}
+                collectionAddress={collectionId}
+                tokenId={tokenId}
+              />
+            </div>
+          </div>
+          <div className=" hidden mb:block">
             <CollectibleTradeActions
               chainId={chainId}
               collectionAddress={collectionId}

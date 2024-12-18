@@ -37,7 +37,7 @@ export const CollectibleCard = ({
     <article
       className={cn(
         classNames.collectibleSelectionIndicator,
-        `relative flex h-full w-full flex-col align-top m-[0.1rem] pb-8`,
+        `relative flex h-full w-full flex-col align-top m-[0.1rem] pb-8 mb:pb-0`,
         'rounded-[1.5625rem] bg-white outline outline-2 outline-transparent',
         'z-10 overflow-hidden !outline transition-all',
       )}
@@ -61,7 +61,7 @@ export const CollectibleCard = ({
         <CollectibleActionButton
           className={cn(
             'bottom-0 m-0 w-full !rounded-none ease-in-out hover:visible peer-hover:visible bg-main-gradient text-xl color-white hover:text-[1.35rem]',
-            '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute',
+            '[@media(hover:hover)]:invisible [@media(hover:hover)]:absolute mb:text-[24px] mb:py-[24px]',
           )}
           tokenId={tokenId}
           collectionChainId={collectionChainId}

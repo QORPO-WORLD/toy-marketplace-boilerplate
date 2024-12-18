@@ -149,7 +149,7 @@ export const CollectibleTradeActions = ({
 
   return (
     <Flex className="flex-col gap-4">
-      <Flex className="flex-row gap-3 flex-1 w-full">
+      <Flex className="flex-row gap-3 flex-1 w-full mb:flex-col">
         {lowestListing?.order && (
           <Button
             size="lg"

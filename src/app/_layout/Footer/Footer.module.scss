@@ -12,22 +12,22 @@
   font-size: calc(8px + 0.42vw);
   color: white;
 
-  //  @media  (max-width: 776px) {
-  //     padding-top: 2.14rem;
-  //     padding-inline: 0.840625rem;
-  //     padding-bottom: 1rem;
-  //     flex-direction: column;
-  //     backdrop-filter: blur(0.6rem);
-  //   }
+  @media (max-width: 776px) {
+    padding-top: 2.14rem;
+    padding-inline: 0.840625rem;
+    padding-bottom: 1rem;
+    flex-direction: column;
+    backdrop-filter: blur(0.6rem);
+  }
 }
 
 .address {
   font-family: RedHatDisplay;
   font-size: 0.8rem;
   text-align: center;
-  //@media  (max-width: 776px) {
-  //   font-size: 0.7rem;
-  // }
+  @media (max-width: 776px) {
+    font-size: 0.7rem;
+  }
 }
 
 .footer_navigation {
@@ -35,21 +35,21 @@
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 1.6rem;
-  //@media  (max-width: 776px) {
-  //   flex-direction: column;
-  //   margin-bottom: 2.7rem;
-  // }
+  @media (max-width: 776px) {
+    flex-direction: column;
+    margin-bottom: 2.7rem;
+  }
 }
 
 .logo {
   margin-right: 1.764375em;
   width: 8.25em;
   margin-right: auto;
-  //@media  (max-width: 776px) {
-  //   margin-right: 0;
-  //   margin-bottom: 1.963125rem;
-  //   width: 9.9525rem;
-  // }
+  @media (max-width: 776px) {
+    margin-right: 0;
+    margin-bottom: 1.963125rem;
+    width: 9.9525rem;
+  }
 }
 
 .link_container {
@@ -59,19 +59,19 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  //@media  (max-width: 776px) {
-  //   margin: 0 auto;
-  //   gap: 1.375rem;
-  //   order: 2;
-  // }
+  @media (max-width: 776px) {
+    margin: 0 auto;
+    gap: 1.375rem;
+    order: 2;
+  }
   a {
     font-family: RedHatDisplay;
     font-size: 1rem;
     text-wrap: nowrap;
     white-space: nowrap;
-    //  @media  (max-width: 776px) {
-    //     font-size: 0.994375rem;
-    //   }
+    @media (max-width: 776px) {
+      font-size: 0.994375rem;
+    }
   }
 }
 
@@ -86,9 +86,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  //@media  (max-width: 776px) {
-  //   display: none;
-  // }
+  @media (max-width: 776px) {
+    display: none;
+  }
   div {
     background-color: var(--white);
     height: 100%;

@@ -38,7 +38,10 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
         {capitalize(name)}
         <Flex className="ml-auto items-center gap-3">
           {checks.length ? (
-            <Text as="span" className="text-[#483F50] mr-2 text-xs">
+            <Text
+              as="span"
+              className="text-[#483F50] mr-2 text-xs mb:text-white"
+            >
               {checks.length} SELECTED
             </Text>
           ) : null}
@@ -57,7 +60,7 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
           />
         ) : null}
         {options.length === 0 && (
-          <Text as="span" className="text-[#483F50]">
+          <Text as="span" className="text-[#483F50 mb:text-white">
             No Results
           </Text>
         )}
@@ -71,7 +74,7 @@ export const StringFilter = observer(({ filter }: FilterProps) => {
               >
                 <Label
                   htmlFor={property}
-                  className="w-full py-2 pl-2 text-[#483F50] text-[1.125rem] font-DMSans capitalize"
+                  className="w-full py-2 pl-2 text-[#483F50] text-[1.125rem] font-DMSans capitalize mb:text-white"
                 >
                   {property.toLowerCase()}
                 </Label>

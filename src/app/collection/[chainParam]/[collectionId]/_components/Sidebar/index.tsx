@@ -157,7 +157,7 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <Portal>
-      <Box className="fixed bottom-0 left-1/2 z-20 -translate-x-1/2 rounded-md bg-background">
+      <Box className="fixed bottom-[12px] left-1/2 z-[60] -translate-x-1/2 rounded-md bg-background">
         <Button
           className="!rounded-[inherit]"
           variant="muted"
@@ -176,10 +176,10 @@ function MobileSidebarWrapper({ children }: { children: React.ReactNode }) {
           isOpen
             ? 'visible left-0 bg-background/50 backdrop-blur-sm'
             : 'invisible left-[-100vw] bg-transparent backdrop-blur-0',
-          'fixed top-14 z-30 h-[calc(100vh-3.5rem)] w-screen transition-all',
+          'fixed top-14 z-[61] h-dvh w-screen transition-all mb:top-0',
         )}
       >
-        <Box className="h-full max-w-[300px] border-r border-r-border bg-background px-2">
+        <Box className="h-full max-w-[300px] border-r border-r-border bg-[#483F51] px-2">
           {children}
         </Box>
       </Box>
@@ -197,7 +197,7 @@ const FilterSwitch = observer(({ filter }: { filter: FilterOptions }) => {
         checked={checked}
       />
       <Label
-        className="text-[#483F50] font-DMSans text-[1.25rem] font-semibold"
+        className="text-[#483F50] font-DMSans text-[1.25rem] font-semibold mb:text-white"
         htmlFor={filter.id}
       >
         {filter.children}

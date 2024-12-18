@@ -8,7 +8,7 @@ import { CloseIcon, LoadingIcon, SearchIcon } from '../icons';
 import { type VariantProps, cva } from 'class-variance-authority';
 
 const inputBoxVariants = cva([
-  'flex h-fit w-full items-center rounded-md border border-input bg-transparent text-foreground',
+  'flex h-fit w-full items-center rounded-md border border-input bg-transparent text-foreground ',
   'divide-x divide-input',
   'ring-offset-background focus-within:outline-none',
 ]);
@@ -82,13 +82,19 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         className={cn('divide-none', className)}
         prefix={
           <SearchIcon
-            className={cn('ml-2 h-5 w-6 text-[#483F50] ', iconClassname)}
+            className={cn(
+              'ml-2 h-5 w-6 text-[#483F50] mb:text-white',
+              iconClassname,
+            )}
           />
         }
         suffix={
           <>
             {props.value && !loading ? (
-              <CloseIcon className="text-[#483F50] mr-2" onClick={onClear} />
+              <CloseIcon
+                className="text-[#483F50] mr-2 mb:text-white"
+                onClick={onClear}
+              />
             ) : null}
             {loading ? <LoadingIcon /> : null}
           </>

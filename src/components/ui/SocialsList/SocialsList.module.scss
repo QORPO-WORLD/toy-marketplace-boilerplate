@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   gap: 1.06625em;
-  //@media  (max-width: 776px) {
-  //     gap: 1.2075rem;
-  //     margin-bottom: 1.29625rem;
-  // }
+  @media (max-width: 776px) {
+    gap: 1.2075rem;
+    margin-bottom: 1.29625rem;
+  }
 }
 
 .social_item {
@@ -23,10 +23,10 @@
       img {
         width: 1.2801875em;
         height: 1.2801875em;
-        // @media  (max-width: 776px) {
-        //     width: 1.45625rem;
-        //     height: 1.45625rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.45625rem;
+          height: 1.45625rem;
+        }
       }
     }
   }
@@ -36,10 +36,10 @@
       img {
         width: 0.990625em;
         height: 0.9225em;
-        //@media  (max-width: 776px) {
-        //     width: 1.125625rem;
-        //     height: 1.048125rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.125625rem;
+          height: 1.048125rem;
+        }
       }
     }
   }
@@ -49,10 +49,10 @@
       img {
         width: 1.050625em;
         height: 0.89125em;
-        //@media  (max-width: 776px) {
-        //     width: 1.19375rem;
-        //     height: 1.0125rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.19375rem;
+          height: 1.0125rem;
+        }
       }
     }
   }
@@ -62,10 +62,10 @@
       img {
         width: 1.1425em;
         height: 1.1425em;
-        //@media  (max-width: 776px) {
-        //     width: 1.298125rem;
-        //     height: 1.298125rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.298125rem;
+          height: 1.298125rem;
+        }
       }
     }
   }
@@ -75,10 +75,10 @@
       img {
         width: 1.301875em;
         height: 0.91375em;
-        //@media  (max-width: 776px) {
-        //     width: 1.47875rem;
-        //     height: 1.47875rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.47875rem;
+          height: 1.47875rem;
+        }
       }
     }
   }
@@ -88,10 +88,10 @@
       img {
         width: 0.9875em;
         height: 1.069375em;
-        //@media  (max-width: 776px) {
-        //     width: 1.121875rem;
-        //     height: 1.214375rem;
-        // }
+        @media (max-width: 776px) {
+          width: 1.121875rem;
+          height: 1.214375rem;
+        }
       }
     }
   }
@@ -106,10 +106,10 @@
     border-radius: 0.7125em;
     transition: transform 0.2s ease-in-out;
 
-    //@media  (max-width: 776px) {
-    //     width: 2.594375rem;
-    //     height: 2.594375rem;
-    //     border-radius: 0.80875rem;
-    // }
+    @media (max-width: 776px) {
+      width: 2.594375rem;
+      height: 2.594375rem;
+      border-radius: 0.80875rem;
+    }
   }
 }

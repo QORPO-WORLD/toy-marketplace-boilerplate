@@ -26,7 +26,7 @@ const AddressBox = ({
   chainId: number;
 }) => {
   return (
-    <Flex className="items-center justify-between rounded-[2.6875rem] px-3 py-0.5 border border-[#403545] bg-[#4035451A]">
+    <Flex className="items-center justify-between rounded-[2.6875rem] px-3 py-0.5 border border-[#403545] bg-[#4035451A] mb:border-[#FFFFFF66]">
       <Text className="text-base text-white capitalize font-DMSans font-semibold">
         {label}
       </Text>
