@@ -51,7 +51,7 @@ export default function Page() {
   return (
     <>
       <BannerImage logo={false}>
-        <div className="pt-[11.0625rem] flex px-[11.1875rem] gap-[1.3125rem] mb:flex-col mb:px-4 mb:pt-[123px] mb:pb-8">
+        <div className="pt-[11.0625rem] flex px-[11.1875rem] gap-[1.3125rem] mb:flex-col mb:px-4 mb:pt-[123px] pb-8">
           <div className="flex flex-col gap-[1.625rem] w-[37.384412153%] shrink-0 mb:w-full">
             <CollectibleImage
               id={collectibleMetadata.data?.tokenId}

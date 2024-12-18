@@ -69,7 +69,7 @@ export const CollectionViewPageLayout = ({
           <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
           <Grid.Child
             name="collection-controls"
-            className="sticky z-20"
+            className="sticky z-[19]"
             style={{
               top: '0',
             }}

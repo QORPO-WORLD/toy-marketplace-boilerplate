@@ -19,7 +19,7 @@ export const NetworkSelectModalContent = () => {
   return (
     <Flex className="flex-col gap-4">
       <Flex>
-        <Text as="h2" className="text-2xl font-bold">
+        <Text as="h2" className="text-2xl font-bold font-main uppercase">
           Switch Network
         </Text>
       </Flex>
@@ -34,7 +34,9 @@ export const NetworkSelectModalContent = () => {
             >
               <Flex className="flex-start w-full flex-row items-center justify-start gap-1">
                 <NetworkImage chainId={chain.id} />
-                <Text className="pl-1 text-lg">{chain.name}</Text>
+                <Text className="pl-1 text-[1rem] font-main text-white">
+                  {chain.name}
+                </Text>
                 <Flex className="ml-2 items-center justify-center gap-1">
                   {connectedChain?.id === chain.id && (
                     <Box className="h-[6px] w-[6px] rounded-full bg-success" />
