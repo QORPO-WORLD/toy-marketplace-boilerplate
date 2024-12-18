@@ -155,7 +155,7 @@ export default function Page() {
           </div>
         </div>
       </BannerImage>
-      <div className="p-4 pb-9 pt-6">
+      <div className="p-4 pb-9 pt-6 mb:block hidden">
         <div className="flex flex-col gap-4">
           <p className="title text-white text-start">Item description</p>
           <div className="rounded-[20px] bg-[#483F51] backdrop-blur-[10px] p-4">

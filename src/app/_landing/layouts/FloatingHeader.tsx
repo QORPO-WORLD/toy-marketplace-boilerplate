@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
@@ -13,6 +15,7 @@ import type {
   Collection,
   MarketplaceConfig,
 } from '@0xsequence/marketplace-sdk';
+import { motion } from 'framer-motion';
 
 export const FloatingBanner = ({
   collections,
@@ -35,28 +38,59 @@ export const FloatingBanner = ({
             <p className="title text-yellow text-center">collections</p>
           </div>
           <div className="flex h-full items-end justify-center translate-x-[-2rem] mb:hidden">
-            <NFTCard
-              data={nftCardData[0]!}
-              className="h-[39rem] w-auto bg-[#E7E6FB] translate-x-[8rem] translate-y-10 rotate-[-15deg]"
-            />
-            <NFTCard
-              data={nftCardData[1]!}
-              className="h-[39rem] w-auto bg-[#FBF2DD] translate-x-[4rem] translate-y-28 z-10 rotate-[25deg]"
-            />
-            <NFTCard
-              data={nftCardData[2]!}
-              className="h-[39rem] w-auto bg-[#E7E6FB] translate-x-[-4rem] translate-y-[-2rem] rotate-[5.5deg]"
-            />
-            <NFTCard
-              data={nftCardData[3]!}
-              className="h-[39rem] w-auto bg-[#FBF2DD] translate-x-[-8rem] translate-y-28 rotate-[-23deg]"
-            />
+            <motion.div
+              initial={{ transform: 'translate(-70%, -150%)' }}
+              animate={{ transform: 'translate(8rem, 2.5rem)' }}
+              transition={{ type: 'spring', duration: 1.5, delay: 0.5 }}
+            >
+              <NFTCard
+                data={nftCardData[0]!}
+                className="h-[39rem] w-auto bg-[#E7E6FB] rotate-[-15deg]"
+              />
+            </motion.div>
+            <motion.div
+              className="z-10"
+              initial={{ transform: 'translate(70%, -150%)' }}
+              animate={{ transform: 'translate(4rem, 7rem)' }}
+              transition={{ type: 'spring', duration: 1.5, delay: 0.75 }}
+            >
+              <NFTCard
+                data={nftCardData[1]!}
+                className="h-[39rem] w-auto bg-[#FBF2DD]  z-10 rotate-[25deg]"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ transform: 'translate(25%, -150%)' }}
+              animate={{ transform: 'translate(-4rem, -2rem)' }}
+              transition={{ type: 'spring', duration: 1.5, delay: 1.25 }}
+            >
+              <NFTCard
+                data={nftCardData[2]!}
+                className="h-[39rem] w-auto bg-[#E7E6FB]  rotate-[5.5deg]"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ transform: 'translate(-70%, -150%)' }}
+              animate={{ transform: 'translate(-8rem, 7rem)' }}
+              transition={{ type: 'spring', duration: 1.5, delay: 1.75 }}
+            >
+              <NFTCard
+                data={nftCardData[3]!}
+                className="h-[39rem] w-auto bg-[#FBF2DD] rotate-[-23deg]"
+              />
+            </motion.div>
           </div>
           <div className="w-full hidden mb:block">
-            <NFTCard
-              data={nftCardData[0]!}
-              className="h-[31rem] w-auto bg-[#E7E6FB] translate-x-[4rem] translate-y-10 rotate-[-15deg]"
-            />
+            <motion.div
+              initial={{ transform: 'translate(-70%, -150%)' }}
+              animate={{ transform: 'translate(4rem, 2.5rem)' }}
+              transition={{ type: 'spring', duration: 1.5 }}
+            >
+              <NFTCard
+                data={nftCardData[0]!}
+                className="h-[31rem] w-auto bg-[#E7E6FB]  rotate-[-15deg]"
+              />
+            </motion.div>
           </div>
         </div>
       </BannerImage>
