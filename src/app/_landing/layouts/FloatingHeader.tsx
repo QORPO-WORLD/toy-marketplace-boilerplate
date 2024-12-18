@@ -4,6 +4,7 @@ import FAQBox from '../../../components/ui/FAQBox/FAQBox';
 import FlipCard from '../../../components/ui/FlipCard/FlipCard';
 import MobileSwiper from '../../../components/ui/MobileSwiper/MobileSwiper';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
+import { CollectionsEnum } from '../../../enum/enum';
 import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
@@ -18,6 +19,12 @@ export const FloatingBanner = ({
   shortDescription,
   logoUrl,
 }: MarketplaceConfig) => {
+  console.log(collections);
+
+  const findCollection = (collectionAddress: string) => {
+    return collections.find((c) => c.collectionAddress === collectionAddress);
+  };
+
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
       <BannerImage logo>
@@ -80,6 +87,11 @@ export const FloatingBanner = ({
             title="Founders’ collection"
             title2="Citizen Zero"
             bgSrc="/market/images/banner/cc-banner-bg.png"
+            collection={
+              findCollection(
+                CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
+              ) as any
+            }
           />
           <LandingCollections collections={collections.slice(0, 2) || []} />
           <Banner

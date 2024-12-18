@@ -128,6 +128,7 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
+      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 
@@ -136,7 +137,7 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
-      // orderbookKind: orderbookKind as OrderbookKind
+      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 

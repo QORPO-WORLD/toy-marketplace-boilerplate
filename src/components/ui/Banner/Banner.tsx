@@ -1,13 +1,14 @@
+import { Collection } from '@0xsequence/marketplace-sdk';
 import Image from 'next/image';
-import { A } from 'node_modules/@0xsequence/marketplace-sdk/dist/types-BlDoGvJV';
 
 interface BannerProps {
   bgSrc: string;
   title: string;
   title2: string;
+  collection?: Collection;
 }
 
-function Banner({ bgSrc, title, title2 }: BannerProps) {
+function Banner({ bgSrc, title, title2, collection }: BannerProps) {
   return (
     <div
       className="h-[45rem] p-12 bg-top bg-cover rounded-[1.6rem] flex items-end justify-start"

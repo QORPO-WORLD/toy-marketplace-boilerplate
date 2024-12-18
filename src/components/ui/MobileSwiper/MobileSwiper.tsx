@@ -20,7 +20,6 @@ const MobileSwiper = ({ arrOfComponents }: MobileSwiperProps) => {
         spaceBetween={16}
         slidesPerView={1}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {arrOfComponents.map((component, index) => (
           <SwiperSlide key={index}>{component}</SwiperSlide>
