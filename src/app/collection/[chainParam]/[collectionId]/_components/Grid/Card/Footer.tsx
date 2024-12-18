@@ -86,7 +86,7 @@ const Order = ({ height, order }: OrderProps) => {
       <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
         {order.priceAmountFormatted} TOY
       </p>
-      {order.marketplace && (
+      {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
         <Image
           className="w-[1.375rem] aspect-square mb:w-[25px]"
           src={setMarketPlaceLogo(order.marketplace)}

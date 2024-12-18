@@ -20,7 +20,7 @@ const CollectableLayout = ({ children }: { children: React.ReactNode }) => {
     //     <Flex className="flex-1 flex-col">{children}</Flex>
     //   </Flex>
     // </Flex>
-    <BannerImage logo={false}>{children}</BannerImage>
+    <>{children}</>
   );
 };
 
