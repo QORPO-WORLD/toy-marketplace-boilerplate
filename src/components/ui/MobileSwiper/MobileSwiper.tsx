@@ -3,7 +3,6 @@
 import { useState } from 'react';
 
 import styles from './MobileSwiper.module.scss';
-import { set } from 'date-fns';
 // Import Swiper React components
 // Import Swiper styles
 import 'swiper/css';
@@ -13,7 +12,7 @@ interface MobileSwiperProps {
   arrOfComponents: React.ReactNode[];
 }
 
-export default ({ arrOfComponents }: MobileSwiperProps) => {
+const MobileSwiper = ({ arrOfComponents }: MobileSwiperProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <>
@@ -38,3 +37,5 @@ export default ({ arrOfComponents }: MobileSwiperProps) => {
     </>
   );
 };
+
+export default MobileSwiper;

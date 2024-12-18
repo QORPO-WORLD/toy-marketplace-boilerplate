@@ -63,10 +63,10 @@ export const FloatingBanner = ({
         <div className="w-full relative hidden mb:block">
           <MobileSwiper
             arrOfComponents={[
-              <FlipCard data={flipCardData[0]!} color="#A3EAFA" />,
-              <FlipCard data={flipCardData[1]!} color="#F3FAA3" />,
-              <FlipCard data={flipCardData[2]!} color="#FAA3A9" />,
-              <FlipCard data={flipCardData[3]!} color="#7795FF" />,
+              <FlipCard key={1} data={flipCardData[0]!} color="#A3EAFA" />,
+              <FlipCard key={2} data={flipCardData[1]!} color="#F3FAA3" />,
+              <FlipCard key={3} data={flipCardData[2]!} color="#FAA3A9" />,
+              <FlipCard key={4} data={flipCardData[3]!} color="#7795FF" />,
             ]}
           />
         </div>

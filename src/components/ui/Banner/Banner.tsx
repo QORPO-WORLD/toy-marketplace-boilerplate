@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { A } from 'node_modules/@0xsequence/marketplace-sdk/dist/types-BlDoGvJV';
 
 interface BannerProps {
   bgSrc: string;

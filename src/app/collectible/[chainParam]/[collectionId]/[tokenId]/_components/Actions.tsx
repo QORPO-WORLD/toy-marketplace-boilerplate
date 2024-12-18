@@ -1,8 +1,10 @@
 'use client';
 
+import { env } from '~/env';
+
 import { Button, Flex, Text, toast } from '$ui';
-import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import { useCollectableData } from '../_hooks/useCollectableData';
+import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import {
   useBalanceOfCollectible,
   useBuyModal,
@@ -15,7 +17,6 @@ import {
 } from '@0xsequence/marketplace-sdk/react';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
-import { env } from '~/env';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -27,7 +28,9 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-  const orderbookKind = env.NEXT_PUBLIC_ORDERBOOK_KIND || OrderbookKind.sequence_marketplace_v1 as OrderbookKind;
+  const orderbookKind =
+    env.NEXT_PUBLIC_ORDERBOOK_KIND ||
+    (OrderbookKind.sequence_marketplace_v1 as OrderbookKind);
   const onError = (error: Error) => {
     toast.error(error.message);
   };
@@ -125,7 +128,6 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
-      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 
@@ -134,11 +136,12 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
-      orderbookKind: orderbookKind as OrderbookKind
+      // orderbookKind: orderbookKind as OrderbookKind
     });
   };
 
-  const buyDisabled = !isConnected || !lowestListing?.order || item721AlreadyOwned;
+  const buyDisabled =
+    !isConnected || !lowestListing?.order || item721AlreadyOwned;
   const offerDisabled = !isConnected || item721AlreadyOwned;
   const listingDisabled = !isConnected || !tokenBalance;
   const sellDisabled = !isConnected || !highestOffer?.order || !tokenBalance;
