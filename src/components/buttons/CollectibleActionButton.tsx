@@ -155,6 +155,7 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
+          orderbookKind: orderbookKind as OrderbookKind,
         });
       },
     },
@@ -165,6 +166,7 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
+          orderbookKind: orderbookKind as OrderbookKind,
         });
       },
     },

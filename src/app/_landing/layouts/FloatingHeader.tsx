@@ -9,7 +9,10 @@ import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
-import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type {
+  Collection,
+  MarketplaceConfig,
+} from '@0xsequence/marketplace-sdk';
 
 export const FloatingBanner = ({
   collections,
@@ -90,7 +93,7 @@ export const FloatingBanner = ({
             collection={
               findCollection(
                 CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
-              ) as any
+              ) as Collection | undefined
             }
           />
           <LandingCollections collections={collections.slice(0, 2) || []} />
