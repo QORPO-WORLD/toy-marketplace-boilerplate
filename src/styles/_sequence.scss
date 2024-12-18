@@ -2156,7 +2156,11 @@
   background: var(--seq-colors-gradient-backdrop);
 }
 .fyvr11tl {
-  background: var(--seq-colors-gradient-primary);
+  background: linear-gradient(
+    -90deg,
+    rgba(217, 79, 121, 1) 0%,
+    rgba(244, 116, 105, 1) 100%
+  ) !important;
 }
 .fyvr11tm:active {
   background: var(--seq-colors-gradient-primary);
