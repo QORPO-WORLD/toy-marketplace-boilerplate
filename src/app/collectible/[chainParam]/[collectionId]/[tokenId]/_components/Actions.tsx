@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Flex, Text, toast } from '$ui';
+import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
   useBalanceOfCollectible,
@@ -14,6 +15,7 @@ import {
 } from '@0xsequence/marketplace-sdk/react';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
+import { env } from '~/env';
 
 interface CollectibleTradeActionsProps {
   chainId: number;
@@ -25,6 +27,7 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
+  const orderbookKind = env.NEXT_PUBLIC_ORDERBOOK_KIND || OrderbookKind.sequence_marketplace_v1 as OrderbookKind;
   const onError = (error: Error) => {
     toast.error(error.message);
   };
@@ -120,6 +123,7 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
+      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 
@@ -128,10 +132,11 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
+      orderbookKind: orderbookKind as OrderbookKind
     });
   };
 
-  const buyDisabled = !isConnected || !lowestListing || item721AlreadyOwned;
+  const buyDisabled = !isConnected || !lowestListing?.order || item721AlreadyOwned;
   const offerDisabled = !isConnected || item721AlreadyOwned;
   const listingDisabled = !isConnected || !tokenBalance;
   const sellDisabled = !isConnected || !highestOffer?.order || !tokenBalance;

@@ -27,8 +27,8 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0(qsw3xhdrx2k6zte7cmle5dyyke)
       '@0xsequence/marketplace-sdk':
-        specifier: ^0.3.5
-        version: 0.3.5(et6paiwg4gusyplrnydksgx53u)
+        specifier: ^0.3.8
+        version: 0.3.8(et6paiwg4gusyplrnydksgx53u)
       '@0xsequence/metadata':
         specifier: ^2.1.7
         version: 2.1.7
@@ -321,8 +321,8 @@ packages:
       viem: '>= 2.0.0'
       wagmi: ^2.13.3
 
-  '@0xsequence/marketplace-sdk@0.3.5':
-    resolution: {integrity: sha512-TOmzJwSmJwuhey6e/unOXGND6zV1DfakIOnL7szB6KQYbaI4SBOZlRN0LDLSvUfkwyXe7HQ2i7md8P13tAp4CA==}
+  '@0xsequence/marketplace-sdk@0.3.8':
+    resolution: {integrity: sha512-oDP4bsgHMPByelLrfmNoq7rfV8BcDzrh8k4KF3Yz6mNj0hj8fN8wcbukCThbcNiaZJMy2GYORKwd8SnaiFO2ig==}
     peerDependencies:
       0xsequence: ^2.1.7
       '@0xsequence/api': ^2.1.7
@@ -4455,8 +4455,8 @@ packages:
       date-fns: ^2.28.0 || ^3.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  react-day-picker@9.4.1:
-    resolution: {integrity: sha512-eyNjKQ2lFHby42K2itlMNMSpp6+A5m+wbXB31xFaufnplpam274AZ1G2NuBjhnyiehpS+4gJZVILJN54e9Xvhw==}
+  react-day-picker@9.4.4:
+    resolution: {integrity: sha512-1s+jA/bFYtoxhhr8M0kkFHLiMTSII6qU8UfDFprRAUStTVHljLTjg4oarvAngPlQ1cQAC+LUb0k/qMc+jjhmxw==}
     engines: {node: '>=18'}
     peerDependencies:
       react: '>=16.8.0'
@@ -5507,7 +5507,7 @@ snapshots:
       - '@types/react-dom'
       - aws-crt
 
-  '@0xsequence/marketplace-sdk@0.3.5(et6paiwg4gusyplrnydksgx53u)':
+  '@0xsequence/marketplace-sdk@0.3.8(et6paiwg4gusyplrnydksgx53u)':
     dependencies:
       0xsequence: 2.1.7(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@0xsequence/api': 2.1.7
@@ -5524,7 +5524,7 @@ snapshots:
       '@tanstack/react-query': 5.62.3(react@18.3.1)
       date-fns: 4.1.0
       react: 18.3.1
-      react-day-picker: 9.4.1(react@18.3.1)
+      react-day-picker: 9.4.4(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
       viem: 2.21.54(bufferutil@4.0.8)(typescript@5.7.2)(utf-8-validate@5.0.10)(zod@3.23.8)
       wagmi: 2.13.4(@tanstack/query-core@5.62.3)(@tanstack/react-query@5.62.3(react@18.3.1))(@types/react@18.3.14)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.7.2)(utf-8-validate@5.0.10)(viem@2.21.54(bufferutil@4.0.8)(typescript@5.7.2)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)
@@ -10611,7 +10611,7 @@ snapshots:
       date-fns: 4.1.0
       react: 18.3.1
 
-  react-day-picker@9.4.1(react@18.3.1):
+  react-day-picker@9.4.4(react@18.3.1):
     dependencies:
       '@date-fns/tz': 1.2.0
       date-fns: 4.1.0
