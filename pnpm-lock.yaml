@@ -27,8 +27,8 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0(qsw3xhdrx2k6zte7cmle5dyyke)
       '@0xsequence/marketplace-sdk':
-        specifier: ^0.3.8
-        version: 0.3.8(et6paiwg4gusyplrnydksgx53u)
+        specifier: ^0.4.0
+        version: 0.4.0(et6paiwg4gusyplrnydksgx53u)
       '@0xsequence/metadata':
         specifier: ^2.1.7
         version: 2.1.7
@@ -321,8 +321,8 @@ packages:
       viem: '>= 2.0.0'
       wagmi: ^2.13.3
 
-  '@0xsequence/marketplace-sdk@0.3.8':
-    resolution: {integrity: sha512-oDP4bsgHMPByelLrfmNoq7rfV8BcDzrh8k4KF3Yz6mNj0hj8fN8wcbukCThbcNiaZJMy2GYORKwd8SnaiFO2ig==}
+  '@0xsequence/marketplace-sdk@0.4.0':
+    resolution: {integrity: sha512-wckc/XY+A6D6nTutYb5PnLFwsh7kYNwKayC6khKvlfculY5UPMZOpI96QgDBvJMek4jwma97tcsP8NOsvj2TWg==}
     peerDependencies:
       0xsequence: ^2.1.7
       '@0xsequence/api': ^2.1.7
@@ -5507,7 +5507,7 @@ snapshots:
       - '@types/react-dom'
       - aws-crt
 
-  '@0xsequence/marketplace-sdk@0.3.8(et6paiwg4gusyplrnydksgx53u)':
+  '@0xsequence/marketplace-sdk@0.4.0(et6paiwg4gusyplrnydksgx53u)':
     dependencies:
       0xsequence: 2.1.7(ethers@6.13.4(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       '@0xsequence/api': 2.1.7
