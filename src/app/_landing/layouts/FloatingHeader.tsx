@@ -115,14 +115,18 @@ export const FloatingBanner = ({
           our <br /> collections
         </p>
         <div className="flex flex-col gap-10">
-          <Banner
-            title="Founders’ collection"
-            title2="Citizen Zero"
-            bgSrc="/market/images/banner/cc-banner-bg.png"
-            collection={findCollection(
-              CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
-            )}
-          />
+          {findCollection(CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO) && (
+            <Banner
+              title="Founders’ collection"
+              title2="Citizen Zero"
+              bgSrc="/market/images/banner/cc-banner-bg.png"
+              collection={
+                findCollection(
+                  CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
+                )!
+              }
+            />
+          )}
           <LandingCollections
             collections={[
               findCollection(CollectionsEnum.HEROES_VARIANT)!,
@@ -130,12 +134,16 @@ export const FloatingBanner = ({
               findCollection(CollectionsEnum.WEAPON_VARIANTS)!,
             ]}
           />
-          <Banner
-            title="Aneemate genesis"
-            title2="zero"
-            bgSrc="/market/images/banner/anmt-banner-bg.png"
-            collection={findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)}
-          />
+          {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
+            <Banner
+              title="Aneemate genesis"
+              title2="zero"
+              bgSrc="/market/images/banner/anmt-banner-bg.png"
+              collection={
+                findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)!
+              }
+            />
+          )}
         </div>
       </Box>
       <Box className="mx-auto w-full px-5 pb-20">

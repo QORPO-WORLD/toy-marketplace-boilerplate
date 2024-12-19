@@ -1,7 +1,9 @@
 'use client';
 
 import { Routes } from '../../../lib/routes';
+import CollectionBadge from '../CollectionBadge/CollectionBadge';
 import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
@@ -9,15 +11,18 @@ interface BannerProps {
   bgSrc: string;
   title: string;
   title2: string;
-  collection?: MarketplaceConfig['collections'][0];
+  collection: MarketplaceConfig['collections'][0];
 }
 
 function Banner({ bgSrc, title, title2, collection }: BannerProps) {
-  if (!collection) {
-    return null;
-  }
-
   const { chainId, collectionAddress } = collection;
+  const { data } = useCollection({
+    chainId,
+    collectionAddress,
+  });
+
+  console.log(data);
+
   return (
     <NextLink
       href={Routes.collection({
@@ -49,6 +54,7 @@ function Banner({ bgSrc, title, title2, collection }: BannerProps) {
             />
           </div>
         </div>
+        {data && <CollectionBadge collectionData={data} />}
       </div>
     </NextLink>
   );
