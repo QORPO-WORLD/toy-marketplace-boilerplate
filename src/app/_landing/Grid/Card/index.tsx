@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
-import { isVideo } from '~/lib/utils/helpers';
+import { getCollectionLogo, getTag, isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionsEnum } from '../../../../enum/enum';
@@ -67,14 +67,21 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
         <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
           <img
             className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
-            src="/market/images/logos/cc-logo.png"
+            src={getCollectionLogo(collectionAddress)}
             alt="logo"
             loading="lazy"
           />
-          <div className="flex items-center gap-[0.6rem] overflow-hidden">
-            <p className="text-[2rem] uppercase truncate">{name}</p>
+          <div className="flex gap-[0.6rem] overflow-hidden">
+            <div>
+              <p className="text-[2rem] uppercase truncate leading-none">
+                {name}
+              </p>
+              <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
+                {getTag(collectionAddress)}
+              </p>
+            </div>
             <img
-              className="w-[1.5rem] h-[1.5rem] block"
+              className="w-[1.5rem] h-[1.5rem] block translate-y-1"
               src="/market/icons/shield-icon.svg"
               alt="ethereum"
               loading="lazy"

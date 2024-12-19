@@ -64,7 +64,11 @@ export const InventoryTabs = ({
   const isEmptyInventory = !balances || balances.balances.length === 0;
 
   if (isEmptyInventory) {
-    return <Text className="w-full text-center text-pink">Empty.</Text>;
+    return (
+      <Text className="w-full text-center text-black pt-32 text-3xl">
+        Empty.
+      </Text>
+    );
   }
 
   // collectible balances and counts

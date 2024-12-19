@@ -84,7 +84,7 @@ const CollectionSection = ({
   }
 
   if (collectibles.length === 0)
-    return <Text className="w-full text-center text-pink">Empty.</Text>;
+    return <Text className="w-full text-center text-black pt-32">Empty.</Text>;
 
   return (
     <Accordion.Item

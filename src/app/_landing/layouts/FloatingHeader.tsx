@@ -11,10 +11,7 @@ import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
-import type {
-  Collection,
-  MarketplaceConfig,
-} from '@0xsequence/marketplace-sdk';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { motion } from 'framer-motion';
 
 export const FloatingBanner = ({

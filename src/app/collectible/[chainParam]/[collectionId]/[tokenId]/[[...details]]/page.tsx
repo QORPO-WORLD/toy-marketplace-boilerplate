@@ -5,6 +5,7 @@ import { Button } from 'react-day-picker';
 import ENSName from '../../../../../../components/ENSName';
 import { Accordion } from '../../../../../../components/ui';
 import { getChain } from '../../../../../../lib/utils/getChain';
+import { getCollectionLogo, getTag } from '../../../../../../lib/utils/helpers';
 import { BannerImage } from '../../../../../_landing/Hero/BannerImage';
 import { CollectibleAccordionItem } from '../_components/AccordionItem';
 import { CollectibleTradeActions } from '../_components/Actions';
@@ -67,16 +68,21 @@ export default function Page() {
             <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
               <img
                 className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
-                src="/market/images/logos/cc-logo.png"
+                src={getCollectionLogo(collectionId)}
                 alt="logo"
                 loading="lazy"
               />
-              <div className="flex items-center gap-[0.6rem] overflow-hidden">
-                <p className="text-[2rem] uppercase truncate">
-                  {collectionMetadata.data?.name}
-                </p>
+              <div className="flex gap-[0.6rem] overflow-hidden">
+                <div>
+                  <p className="text-[2rem] uppercase truncate leading-none">
+                    {collectionMetadata.data?.name}
+                  </p>
+                  <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
+                    {getTag(collectionId)}
+                  </p>
+                </div>
                 <img
-                  className="w-[1.5rem] h-[1.5rem] block"
+                  className="w-[1.5rem] h-[1.5rem] block translate-y-1"
                   src="/market/icons/shield-icon.svg"
                   alt="ethereum"
                   loading="lazy"

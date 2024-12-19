@@ -12,6 +12,7 @@ import {
   getQueryClient,
   marketplaceConfigOptions,
 } from '@0xsequence/marketplace-sdk/react';
+import '@0xsequence/marketplace-sdk/styles';
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';

@@ -49,7 +49,6 @@ export const CollectibleTradeActions = ({
 
   const { data: currencies } = useCurrencies({
     chainId,
-    collectionAddress,
   });
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
