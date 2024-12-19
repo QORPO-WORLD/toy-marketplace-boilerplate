@@ -5,7 +5,11 @@ import { Button } from 'react-day-picker';
 import ENSName from '../../../../../../components/ENSName';
 import { Accordion } from '../../../../../../components/ui';
 import { getChain } from '../../../../../../lib/utils/getChain';
-import { getCollectionLogo, getTag } from '../../../../../../lib/utils/helpers';
+import {
+  getCollectionLogo,
+  getTag,
+  setMarketPlaceLogo,
+} from '../../../../../../lib/utils/helpers';
 import { BannerImage } from '../../../../../_landing/Hero/BannerImage';
 import { CollectibleAccordionItem } from '../_components/AccordionItem';
 import { CollectibleTradeActions } from '../_components/Actions';
@@ -38,16 +42,12 @@ export default function Page() {
 
   const { data } = collectibleMetadata;
 
-  const setMarketPlaceLogo = (marketplace?: string) => {
-    switch (marketplace) {
-      case 'opensea':
-        return '/market/icons/opensea-logo.svg';
-      default:
-        return '';
-    }
-  };
-
   const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
+
+  console.log(
+    'collectionDataOrder',
+    setMarketPlaceLogo(collectionDataOrder?.order?.marketplace),
+  );
 
   return (
     <>

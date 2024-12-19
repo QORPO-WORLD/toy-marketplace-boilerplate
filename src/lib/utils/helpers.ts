@@ -40,3 +40,14 @@ export const getTag = (collection: string) => {
       return '@CITIZEN CONFLICT';
   }
 };
+
+export const setMarketPlaceLogo = (marketplace?: string) => {
+  switch (marketplace) {
+    case 'opensea':
+      return '/market/icons/opensea-logo.svg';
+    case 'sequence_marketplace_v2':
+      return '/market/icons/toy-market-logo.svg';
+    default:
+      return '';
+  }
+};

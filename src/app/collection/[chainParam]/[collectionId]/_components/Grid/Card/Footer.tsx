@@ -1,5 +1,6 @@
 import { Flex, Text, cn } from '~/components/ui';
 
+import { setMarketPlaceLogo } from '../../../../../../../lib/utils/helpers';
 import type { TokenMetadata } from '@0xsequence/indexer';
 import {
   type Order as OrderType,
@@ -56,15 +57,6 @@ const Order = ({ height, order }: OrderProps) => {
   const currency = currencies?.find(
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
-
-  const setMarketPlaceLogo = (marketplace: string) => {
-    switch (marketplace) {
-      case 'opensea':
-        return '/market/icons/opensea-logo.svg';
-      default:
-        return '';
-    }
-  };
 
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>

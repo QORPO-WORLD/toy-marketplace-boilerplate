@@ -17,6 +17,7 @@ import {
   Text,
   cn,
 } from '$ui';
+import CollectionBadge from '../../../../../components/ui/CollectionBadge/CollectionBadge';
 import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
@@ -97,8 +98,13 @@ const CollectionHeader = ({
     <>
       <div className="h-dvh p-2 mx-[-2rem] mb-8 mb:p-0 mb:mx-0 mb:mb-0">
         <div className='rounded-[3.125rem] mb:rounded-none bg-[url("/market/images/banner/collection-page-banner-cc.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12'>
-          <div className="">
-            <p className="title text-center text-white">{name}</p>
+          <div className="relative w-[55%]">
+            <p className="title text-center text-white leading-none">{name}</p>
+            {collection && (
+              <div className="absolute bottom-0 left-0 translate-x-[-115%]">
+                <CollectionBadge collectionData={collection} />
+              </div>
+            )}
           </div>
         </div>
       </div>
