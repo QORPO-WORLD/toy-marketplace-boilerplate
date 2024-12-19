@@ -29,7 +29,7 @@ function FlipCard({ data, color }: FlipCardProps) {
       </div>
       <button className={styles.btn} type="button">
         <span>watch this out</span>
-        <img src="/icons/play-icon.svg" alt="icon" />
+        <img src="/market/icons/play-icon.svg" alt="icon" />
       </button>
     </div>
   );

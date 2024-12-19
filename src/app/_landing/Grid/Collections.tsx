@@ -1,10 +1,9 @@
-import { type MarketConfig } from '~/config/marketplace';
-
 import { Flex, Grid, Text, cn } from '$ui';
-import { CollectionCard } from './Card';
+import { CollectionCard } from './Card/index';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type LandingCollectionsProps = {
-  collections: MarketConfig['collections'];
+  collections: MarketplaceConfig['collections'];
   className?: string;
 };
 
@@ -16,7 +15,7 @@ export const LandingCollections = ({
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
       <Grid.Root
         className={cn(
-          `grid grid-cols-${collections.length < 3 ? '2' : '3'} gap-10`,
+          `grid grid-cols-${collections.length < 3 ? '2' : '3'} gap-10 h-[31.8125rem] mb:grid-cols-1 mb:h-fit`,
           className,
         )}
       >

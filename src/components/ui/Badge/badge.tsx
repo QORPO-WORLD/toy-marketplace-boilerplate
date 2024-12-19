@@ -1,7 +1,7 @@
-import * as React from 'react';
+import type * as React from 'react';
 
 import { cn } from '$ui';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const badgeVariants = cva(
   [
@@ -17,8 +17,8 @@ const badgeVariants = cva(
         success: 'bg-success/50 text-success-foreground',
         destructive: 'bg-destructive text-destructive-foreground',
         muted: 'bg-foreground/10 text-foreground/70',
-        outline: 'border border-border bg-transparent text-foreground/70',
-        outlinePrimary: 'border border-primary bg-transparent text-primary',
+        outline: 'border border-border bg-[#4035451A] text-foreground/70',
+        outlinePrimary: 'border border-primary bg-[#4035451A] text-primary',
       },
       size: {
         default: 'rounded-md px-2.5 py-1.5 text-xs',

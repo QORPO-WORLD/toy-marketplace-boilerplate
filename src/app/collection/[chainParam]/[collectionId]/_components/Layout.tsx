@@ -1,8 +1,8 @@
 import { Box, Flex, Grid, Text, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
-import type { MarketConfig } from '~/config/marketplace';
 
 import { FilterBadges } from './Badges';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 type CollectionViewPageLayoutProps = {
   banner: React.ReactNode;
@@ -11,15 +11,15 @@ type CollectionViewPageLayoutProps = {
   controls: React.ReactNode;
   content: React.ReactNode;
 
-  collectionConfig?: MarketConfig['collections'][0];
+  collectionConfig?: MarketplaceConfig['collections'][0];
   chainError?: string | null;
 };
 
 const defaultGridContainerClassName = [
   classNames.collectionViewLayout,
   '@container/collectionViewContainer',
-  'px-2 md:px-4 xl:px-8',
-  'min-h-screen gap-y-8 md:gap-y-12',
+  'px-2 md:px-4 xl:px-8 mb:px-0',
+  'min-h-screen gap-y-8 md:gap-y-0',
 ] as const;
 
 export const CollectionViewPageLayout = ({
@@ -51,7 +51,7 @@ export const CollectionViewPageLayout = ({
     case 'default': {
       return (
         <Grid.Root
-          className={cn(defaultGridContainerClassName, 'mt-12')}
+          className={cn(defaultGridContainerClassName, 'mt-0 gap-0 mb-56')}
           template={`
             [row1-start] "collection-header collection-header" min-content [row1-end]
             [row2-start] "collection-details collection-details" min-content [row2-end]
@@ -69,9 +69,9 @@ export const CollectionViewPageLayout = ({
           <Grid.Child name="collection-sidebar">{sidebar}</Grid.Child>
           <Grid.Child
             name="collection-controls"
-            className="sticky z-19"
+            className="sticky z-[19]"
             style={{
-              top: 'calc(var(--headerHeight) - 1px)',
+              top: '0',
             }}
           >
             {controls}

@@ -1,9 +1,10 @@
 @import './font.scss';
-@import './text';
+@import './shared';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import 'mixins';
+@import './sequence.scss';
 
 @layer base {
   html {
@@ -21,6 +22,11 @@
       rgba(217, 79, 121, 1) 0%,
       rgba(244, 116, 105, 1) 100%
     );
+
+    font-size: calc(16px + (100vw - 1920px) / 110);
+    @media (max-width: 776px) {
+      font-size: 16px;
+    }
 
     /* Modern browsers with `scrollbar-*` support */
     @supports (scrollbar-width: auto) {

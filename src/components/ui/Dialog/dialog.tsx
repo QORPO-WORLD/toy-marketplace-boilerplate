@@ -53,7 +53,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed z-50 grid w-full gap-4 rounded-md border border-border bg-background p-4 shadow-lg focus:outline-none',
+        'fixed z-50 grid w-full gap-4 rounded-md border border-border bg-[#483F51] p-4 shadow-lg focus:outline-none',
         'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10',
         'sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0',
         className,
@@ -70,7 +70,7 @@ const DialogContent = React.forwardRef<
           'disabled:pointer-events-none data-[state=open]:text-foreground/50',
         )}
       >
-        <CloseIcon className="h-4 w-4" />
+        <CloseIcon className="h-5 w-5" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

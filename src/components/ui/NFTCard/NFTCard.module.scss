@@ -2,14 +2,14 @@
   @apply flex aspect-[0.667188891] flex-col bg-cover p-2 pt-5 drop-shadow-md;
   -webkit-clip-path: url(#nft-card-clip-path);
   clip-path: url(#nft-card-clip-path);
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply p-7;
   //   }
 }
 
 .title_wrapper {
   @apply mb-2 flex h-[4.35781rem] items-center gap-2 px-3 text-black;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[3.1rem];
   //   }
 }
@@ -24,21 +24,21 @@
 
 .title {
   @apply mb-1 text-[1.40325rem] font-normal uppercase leading-[0.8694] text-black;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply text-[1.25rem];
   //   }
 }
 
 .tag {
   @apply font-DMSans text-[0.9355rem] font-normal leading-[1.0345] text-black/50;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply text-[1rem];
   //   }
 }
 
 .img_container {
   @apply relative flex-grow overflow-hidden rounded-[3.11831rem];
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply rounded-[2.1875rem];
   //   }
 }
@@ -57,7 +57,7 @@
 
 .number {
   @apply text-center font-DMSans text-[1.24731rem] font-medium uppercase leading-[0.8694] text-white;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply text-[1rem];
   //   }
 }
@@ -68,7 +68,7 @@
 
 .card_bottom_info_container {
   @apply absolute bottom-0 left-0 flex h-[calc(3.81995rem+0.87rem*2)] w-full gap-1 p-4;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[calc(2.4945rem+0.8rem*2)];
   //   }
 }
@@ -79,7 +79,7 @@
 
 .nft_card_icon_big {
   @apply h-[1.42719rem] w-[1.69725rem];
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[0.96769rem] w-[1.15081rem];
   //   }
 }
@@ -90,14 +90,14 @@
 
 .icon_container {
   @apply flex aspect-square h-[2.87363rem] items-center justify-center rounded-full bg-white/10;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[1.89844rem];
   //   }
 }
 
 .nft_card_icon_small {
   @apply h-[1.42719rem] w-[1.69725rem] scale-75;
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[0.96769rem] w-[1.15081rem];
   //   }
 }
@@ -106,7 +106,7 @@
   @apply ml-auto flex aspect-square items-center justify-center rounded-full bg-[#e5ff03];
   img {
     @apply h-[2.33875rem] w-[2.33875rem];
-    // @include respond-to-small {
+    //@media  (max-width: 776px) {
     //   @apply h-[1.33081rem] w-[1.33081rem];
     // }
   }
@@ -114,7 +114,7 @@
 
 .toy {
   @apply h-[6.3795rem] w-[6.3795rem];
-  //   @include respond-to-small {
+  //  @media  (max-width: 776px) {
   //     @apply h-[4.53816252rem] w-[4.53816252rem];
   //   }
 }

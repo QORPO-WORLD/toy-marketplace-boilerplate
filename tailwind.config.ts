@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
+import { DM_Sans } from 'next/font/google';
 import { type Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -7,6 +8,9 @@ export default {
   content: ['./src/**/*.tsx'],
   theme: {
     extend: {
+      screens: {
+        mb: { max: '756px' }, // Custom media query
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -63,10 +67,12 @@ export default {
         md: `calc(var(--radius) - 2px)`,
         sm: 'calc(var(--radius) - 4px)',
       },
+
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'main-gradient': 'linear-gradient(90deg, #F47469 0%, #DB5179 100%)',
       },
       keyframes: {
         'accordion-down': {
@@ -123,7 +129,7 @@ export default {
   plugins: [
     require('@tailwindcss/container-queries'),
     require('tailwindcss-animate'),
-    plugin(function ({ matchUtilities, theme }) {
+    plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
           // three-d shadow

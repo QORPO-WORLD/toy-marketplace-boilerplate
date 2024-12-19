@@ -3,6 +3,7 @@
 import { classNames } from '~/config/classNames';
 
 import { Button, Flex, GasIcon, Text, cn } from '$ui';
+import SocialsList from '../../../components/ui/SocialsList/SocialsList';
 import styles from './Footer.module.scss';
 import NextLink from 'next/link';
 import { useEstimateFeesPerGas, useAccount } from 'wagmi';
@@ -20,7 +21,7 @@ export const Footer = () => {
       <div className={styles.footer_navigation}>
         <img
           className={styles.logo}
-          src="/icons/toy-logo-full.svg"
+          src="/market/icons/toy-logo-full.svg"
           loading="lazy"
           alt="logo"
         />
@@ -31,7 +32,7 @@ export const Footer = () => {
           <a href="#">BRAND KIT</a>
           <a href="#">ALL SOCIALS</a>
         </div>
-        {/* <qtoy-social-list></qtoy-social-list> */}
+        <SocialsList />
       </div>
       <p className={styles.address}>
         TOY LABS TECHNOLOGIES L.L.C GF-01, Al Sayegh Building, Port Saeed,

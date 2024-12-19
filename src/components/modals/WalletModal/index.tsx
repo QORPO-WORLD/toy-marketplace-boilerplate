@@ -7,13 +7,13 @@ import ENSName from '~/components/ENSName';
 import { sequence } from '0xsequence';
 import {
   Button,
+  CheckmarkIcon,
+  CopyIcon,
   Dialog,
+  DisconnectIcon,
   Flex,
   Text,
   WalletIcon,
-  CopyIcon,
-  DisconnectIcon,
-  CheckmarkIcon,
 } from '$ui';
 import { useAccount, useDisconnect } from 'wagmi';
 
@@ -31,10 +31,10 @@ export const WalletModalContent = () => {
     let wallet: sequence.provider.SequenceProvider | undefined;
     try {
       wallet = sequence.getWallet();
-    } catch (err) {}
-    if (wallet) {
-      void wallet.openWallet();
-    }
+      if (wallet) {
+        void wallet.openWallet();
+      }
+    } catch (e) {}
   };
 
   return (
@@ -42,10 +42,12 @@ export const WalletModalContent = () => {
       <Flex className="mb-5 flex-col items-start justify-between">
         <Flex className="items-center gap-3 font-medium text-foreground/80">
           <WalletIcon />
-          <Text>{connector?.id}</Text>
+          <Text className="text-[1rem] font-main uppercase">
+            {connector?.id}
+          </Text>
         </Flex>
-        <Flex className="w-full text-foreground/80">
-          <Text className="ml-1 mt-2 text-sm text-foreground/50 md:block">
+        <Flex className="w-full text-white">
+          <Text className="ml-1 mt-2 text-[1rem] text-white md:block font-main">
             <ENSName address={address} />
           </Text>
 

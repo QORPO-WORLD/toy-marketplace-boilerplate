@@ -2,20 +2,20 @@
 
 import { Suspense } from 'react';
 
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { placeholderImgUrl } from '~/components/ui/Image/image';
 import { classNames } from '~/config/classNames';
-import { type MarketConfig } from '~/config/marketplace';
-import { collectionQueries } from '~/lib/queries';
 import { Routes } from '~/lib/routes';
 import { isVideo } from '~/lib/utils/helpers';
 
 import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
+import { CollectionsEnum } from '../../../../enum/enum';
 import { CollectionCardSkeleton } from './Skeleton';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { NetworkImage } from '@0xsequence/design-system';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import NextLink from 'next/link';
 
-type CollectionCard = MarketConfig['collections'][0];
+type CollectionCard = MarketplaceConfig['collections'][number];
 
 export const CollectionCard = (params: CollectionCard) => {
   return (
@@ -26,12 +26,10 @@ export const CollectionCard = (params: CollectionCard) => {
 };
 
 const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
-  const { data } = useSuspenseQuery(
-    collectionQueries.detail({
-      collectionId: collectionAddress,
-      chainID: chainId.toString(),
-    }),
-  );
+  const { data } = useCollection({
+    chainId,
+    collectionAddress,
+  });
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   const image = data?.extensions.ogImage || bannerUrl || placeholderImgUrl;
@@ -40,6 +38,19 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const symbol = data?.symbol;
   const logoURI = data?.logoURI;
   const contractType = data?.type;
+
+  const setBackGroundImage = (collectionAddress: `0x${string}`) => {
+    switch (collectionAddress as CollectionsEnum) {
+      case CollectionsEnum.WEAPON_VARIANTS:
+        return 'url(/market/images/banner/weapon-variants-bg.png)';
+      case CollectionsEnum.HEROES_VARIANT:
+        return 'url(/market/images/banner/heroes-variants-bg.png)';
+      case CollectionsEnum.LOOT_BOXES:
+        return 'url(/market/images/banner/loot-boxes-bg.png)';
+      default:
+        return '';
+    }
+  };
 
   return (
     <NextLink
@@ -50,21 +61,21 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       })}
     >
       <div
-        className="w-full aspect-[1.55] bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem]"
-        style={{ backgroundImage: `url(${image})` }}
+        className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem] mb:h-[421px]"
+        style={{ backgroundImage: setBackGroundImage(collectionAddress) }}
       >
         <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
           <img
             className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
-            src="/images/logos/cc-logo.png"
+            src="/market/images/logos/cc-logo.png"
             alt="logo"
             loading="lazy"
           />
-          <div className="flex items-center gap-[0.6rem]">
-            <p className="text-[2rem] uppercase">{name}</p>
+          <div className="flex items-center gap-[0.6rem] overflow-hidden">
+            <p className="text-[2rem] uppercase truncate">{name}</p>
             <img
               className="w-[1.5rem] h-[1.5rem] block"
-              src="/icons/shield-icon.svg"
+              src="/market/icons/shield-icon.svg"
               alt="ethereum"
               loading="lazy"
             />
@@ -72,7 +83,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
           <div className="ml-auto w-[3.562rem] aspect-square rounded-full bg-[#E5FF03] flex items-center justify-center">
             <img
               className="w-[1.5rem] h-[1.5rem] block"
-              src="/icons/cart-icon.svg"
+              src="/market/icons/cart-icon.svg"
               alt="ethereum"
               loading="lazy"
             />

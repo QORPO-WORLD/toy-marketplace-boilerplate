@@ -1,0 +1,22 @@
+.pagination_list {
+  display: none;
+
+  @media (max-width: 776px) {
+    display: flex;
+    margin: 0 auto;
+    width: fit-content;
+    gap: 12px;
+    margin-top: 24px;
+
+    li {
+      width: 20px;
+      aspect-ratio: 1/1;
+      border: 1px solid black;
+      border-radius: 50%;
+    }
+    .active {
+      background-color: rgba(255, 194, 194, 1);
+      border: 1px solid white;
+    }
+  }
+}

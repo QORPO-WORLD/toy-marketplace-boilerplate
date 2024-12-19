@@ -3,7 +3,7 @@
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
-import { Button, Accordion, Flex, Input, Text } from '$ui';
+import { Accordion, Button, Flex, Input, Text } from '$ui';
 import { filters$ } from '../FilterStore';
 import type { FilterProps } from './PropertyFilters';
 import { observer } from '@legendapp/state/react';
@@ -28,7 +28,7 @@ export const IntFilter = observer(({ filter }: FilterProps) => {
         {capitalize(name)}
         <Flex className="ml-auto items-center gap-3">
           {localMin || localMax ? (
-            <Text className="text-primary mr-2 text-xs">ACTIVE</Text>
+            <Text className="text-[#483F50] mr-2 text-xs"></Text>
           ) : null}
         </Flex>
       </Accordion.Trigger>
@@ -47,7 +47,7 @@ export const IntFilter = observer(({ filter }: FilterProps) => {
                 setMin(e.target.value)
               }
             />
-            <Text className="text-foreground/80 text-xs uppercase">to</Text>
+            <Text className="text-[#483F50] text-xs uppercase">to</Text>
             <Input.Base
               id="property-max"
               type="number"
@@ -62,7 +62,7 @@ export const IntFilter = observer(({ filter }: FilterProps) => {
             />
           </Flex>
           <Button
-            className="w-full"
+            className="w-full bg-[#40354579] hover:bg-[#403545]"
             variant="secondary"
             label="Apply"
             onClick={onApplyClick}

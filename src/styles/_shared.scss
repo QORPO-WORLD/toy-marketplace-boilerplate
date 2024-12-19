@@ -1,0 +1,27 @@
+.title {
+  @apply text-[6rem] font-normal uppercase leading-tight drop-shadow-md;
+  @media screen and (max-width: 776px) {
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 103%; /* 32.96px */
+    text-transform: uppercase;
+  }
+}
+
+.btn-main {
+  @apply flex w-full max-w-[16.9375rem] items-center justify-center rounded-[2.6875rem] border border-[rgba(255,255,255,0.40)] bg-main-gradient px-7 py-[0.875rem] text-[1.5rem] font-normal uppercase leading-normal text-white mb:max-w-full mb:py-1;
+  &:hover {
+    @apply shadow-[0_0_10px_rgba(0,0,0,0.25)] shadow-main;
+  }
+
+  &.variant-black {
+    background-image: none;
+    @apply bg-[#483F50];
+    &:hover {
+      @apply shadow-[0_0_10px_rgba(0,0,0,0.25)] shadow-[#483F50];
+    }
+  }
+}

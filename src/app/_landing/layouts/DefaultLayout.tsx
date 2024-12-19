@@ -1,11 +1,10 @@
-import type { MarketConfig } from '~/config/marketplace';
-
 import { Flex, cn } from '$ui';
 import { LandingCollections } from '../Grid/Collections';
 import { BannerImage } from '../Hero/BannerImage';
 import { Description } from '../Hero/Description';
 import { Socials } from '../Hero/Socials';
 import { Title } from '../Hero/Title';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
 export const DefaultLayout = ({
   collections,
@@ -13,7 +12,7 @@ export const DefaultLayout = ({
   socials,
   title,
   shortDescription,
-}: MarketConfig) => {
+}: MarketplaceConfig) => {
   return (
     <Flex
       className={cn(
@@ -21,12 +20,10 @@ export const DefaultLayout = ({
       )}
     >
       <Flex className="min-h-[120px] flex-col gap-4 md:flex-row">
-        {/* <BannerImage
-          className="max-h-[300px] w-full rounded-md md:max-h-[unset] md:w-[300px]"
-          src={landingBannerUrl}
-          title={title}
-          description={shortDescription}
-        /> */}
+      <BannerImage>
+        <p className=''>check our</p>
+        <p>collections</p>
+        </BannerImage>
         {landingBannerUrl ? (
           <Flex className="flex-col gap-2">
             <Flex className="items-center justify-between">
