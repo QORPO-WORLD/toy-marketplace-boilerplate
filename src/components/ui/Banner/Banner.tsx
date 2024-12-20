@@ -21,8 +21,6 @@ function Banner({ bgSrc, title, title2, collection }: BannerProps) {
     collectionAddress,
   });
 
-  console.log(data);
-
   return (
     <NextLink
       href={Routes.collection({

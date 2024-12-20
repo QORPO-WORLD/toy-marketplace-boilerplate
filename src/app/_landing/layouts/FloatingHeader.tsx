@@ -31,8 +31,6 @@ export const FloatingBanner = ({
     );
   };
 
-  console.log('collections', collections);
-
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
       <BannerImage logo>
