@@ -19,4 +19,34 @@ export const FAQData: FAQData[] = [
     answer:
       'The marketplace is currently in the testing period and on the testnet to improve our infrastructure and test the first games on the TOY CHAIN with exclusive features.',
   },
+  {
+    question: 'What games or projects have you onboarded so far?',
+    answer: 'QORPO WORLD is the first Official Launching Partner on TOY CHAIN.',
+  },
+  {
+    question: 'Are there any investors in TOY CHAIN?',
+    answer:
+      'The TOY CHAIN is powered 100% by the community, meaning there are no VC Rounds or any chances for Investors to get in Early.',
+  },
+  {
+    question: 'How can I buy TOY tokens?',
+    answer:
+      'So far, TOY CHAIN is not listed at any exchanges. No additional details have been disclosed.',
+  },
+  {
+    question: 'When will be the TOY CHAIN Mainnet launch?',
+    answer:
+      'The estimated launch of Mainnet and Migration of QORPO is set for Q1 2025.',
+  },
+  {
+    question: 'When will the Airdrop happen?',
+    answer:
+      'We don’t know. It will be announced soon. For more official announcements, follow us on our socials.',
+  },
+  {
+    question:
+      'Where can we find more information about the TOY CHAIN Tokenomics?',
+    answer:
+      'There is no information available at this time. Stay tuned for more official information.',
+  },
 ];
