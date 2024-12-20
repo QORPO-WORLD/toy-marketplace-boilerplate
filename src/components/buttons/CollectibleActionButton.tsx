@@ -37,7 +37,7 @@ export const CollectibleActionButton = ({
 }: CollectibleActionButtonProps) => {
   const orderbookKind =
     env.NEXT_PUBLIC_ORDERBOOK_KIND ||
-    (OrderbookKind.sequence_marketplace_v1 as OrderbookKind);
+    (OrderbookKind.sequence_marketplace_v2 as OrderbookKind);
   const { address } = useAccount();
   const pathname = usePathname();
 

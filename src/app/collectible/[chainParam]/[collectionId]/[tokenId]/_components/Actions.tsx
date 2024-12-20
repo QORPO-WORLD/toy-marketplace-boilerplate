@@ -30,7 +30,7 @@ export const CollectibleTradeActions = ({
 }: CollectibleTradeActionsProps) => {
   const orderbookKind =
     env.NEXT_PUBLIC_ORDERBOOK_KIND ||
-    (OrderbookKind.sequence_marketplace_v1 as OrderbookKind);
+    (OrderbookKind.sequence_marketplace_v2 as OrderbookKind);
   const onError = (error: Error) => {
     toast.error(error.message);
   };

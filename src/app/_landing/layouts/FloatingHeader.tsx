@@ -7,6 +7,7 @@ import FlipCard from '../../../components/ui/FlipCard/FlipCard';
 import MobileSwiper from '../../../components/ui/MobileSwiper/MobileSwiper';
 import NFTCard from '../../../components/ui/NFTCard/NFTCard';
 import { CollectionsEnum } from '../../../enum/enum';
+import { FAQData } from '../../../mockdata/FAQData';
 import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
 import { LandingCollections } from '../Grid/Collections';
@@ -136,7 +137,6 @@ export const FloatingBanner = ({
           <LandingCollections
             collections={[
               findCollection(CollectionsEnum.HEROES_VARIANT),
-              findCollection(CollectionsEnum.LOOT_BOXES),
               findCollection(CollectionsEnum.WEAPON_VARIANTS),
             ].filter((c) => !!c)}
           />
@@ -150,16 +150,25 @@ export const FloatingBanner = ({
               }
             />
           )}
+          <LandingCollections
+            collections={[
+              findCollection(CollectionsEnum.SHARDS),
+              findCollection(CollectionsEnum.LOOT_BOXES),
+              findCollection(CollectionsEnum.COSMETICS),
+            ].filter((c) => !!c)}
+          />
         </div>
       </Box>
       <Box className="mx-auto w-full px-5 pb-20">
         <p className="title text-white text-left mb-8">FAQ</p>
         <div className="flex flex-col gap-4">
-          <FAQBox />
-          <FAQBox />
-          <FAQBox />
-          <FAQBox />
-          <FAQBox />
+          {FAQData.map((faq) => (
+            <FAQBox
+              question={faq.question}
+              answer={faq.answer}
+              key={faq.answer}
+            />
+          ))}
         </div>
       </Box>
     </Flex>

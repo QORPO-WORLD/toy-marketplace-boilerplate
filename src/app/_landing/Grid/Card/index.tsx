@@ -40,12 +40,14 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   const contractType = data?.type;
 
   const setBackGroundImage = (collectionAddress: `0x${string}`) => {
-    switch (collectionAddress as CollectionsEnum) {
+    switch (collectionAddress.toLocaleLowerCase() as CollectionsEnum) {
       case CollectionsEnum.WEAPON_VARIANTS:
+      case CollectionsEnum.LOOT_BOXES:
         return 'url(/market/images/banner/weapon-variants-bg.png)';
       case CollectionsEnum.HEROES_VARIANT:
+      case CollectionsEnum.COSMETICS:
         return 'url(/market/images/banner/heroes-variants-bg.png)';
-      case CollectionsEnum.LOOT_BOXES:
+      case CollectionsEnum.SHARDS:
         return 'url(/market/images/banner/loot-boxes-bg.png)';
       default:
         return '';

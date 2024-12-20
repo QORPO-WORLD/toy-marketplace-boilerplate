@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-function FAQBox() {
+function FAQBox({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null); // To measure the height of the content
 
@@ -13,7 +13,7 @@ function FAQBox() {
     >
       <div className="flex items-center justify-between">
         <p className="text-[2rem] font-DMSans font-bold text-[#00000099]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+          {question}
         </p>
         <img
           className="transition duration-150 ease-out"
@@ -32,9 +32,7 @@ function FAQBox() {
       >
         <div ref={contentRef}>
           <p className="font-DMSans text-[1.75rem] font-normal text-[#00000099]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in leo
-            sit amet dolor dignissim thoncus. Fusce et fermentum dolor. Etiam
-            vulputate nunc vitae tortor mollis, ut blandit ipsum egestas.
+            {answer}
           </p>
         </div>
       </div>
