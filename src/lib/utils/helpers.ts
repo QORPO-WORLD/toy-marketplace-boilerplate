@@ -51,3 +51,35 @@ export const setMarketPlaceLogo = (marketplace?: string) => {
       return '';
   }
 };
+
+export const generateChainNameByChainId = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return 'Ethereum';
+    case 4:
+      return 'Rinkeby';
+    case 137:
+      return 'Polygon';
+    case 80001:
+      return 'Mumbai';
+    case 56:
+      return 'Binance Smart Chain';
+    case 21000000:
+      return 'TOY';
+    default:
+      return 'Unknown';
+  }
+};
+
+export const getCreatedDateByCollectionAddress = (
+  collectionAddress: string,
+) => {
+  switch (collectionAddress) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return 'NOV 2023';
+    case CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO:
+      return 'FEB 2024';
+    default:
+      return 'DEC 2024';
+  }
+};

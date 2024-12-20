@@ -57,7 +57,6 @@ const Order = ({ height, order }: OrderProps) => {
   const currency = currencies?.find(
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
-  console.log(order, currency);
 
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
