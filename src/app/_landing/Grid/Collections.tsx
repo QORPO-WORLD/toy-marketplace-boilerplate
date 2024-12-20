@@ -19,9 +19,10 @@ export const LandingCollections = ({
           className,
         )}
       >
-        {collections.map((d) => {
-          return <CollectionCard key={d.collectionAddress} {...d} />;
-        })}
+        {collections.length &&
+          collections.map((d) => {
+            return <CollectionCard key={d.collectionAddress} {...d} />;
+          })}
       </Grid.Root>
     </Flex>
   );

@@ -16,7 +16,7 @@
     "@0xsequence/indexer": "^2.1.7",
     "@0xsequence/kit": "^4.5.0",
     "@0xsequence/kit-checkout": "^4.5.0",
-    "@0xsequence/marketplace-sdk": "^0.3.8",
+    "@0xsequence/marketplace-sdk": "^0.4.0",
     "@0xsequence/metadata": "^2.1.7",
     "@0xsequence/network": "^2.1.7",
     "@google/model-viewer": "^3.5.0",

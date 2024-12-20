@@ -23,8 +23,14 @@ export const FloatingBanner = ({
   logoUrl,
 }: MarketplaceConfig) => {
   const findCollection = (collectionAddress: string) => {
-    return collections.find((c) => c.collectionAddress === collectionAddress);
+    return collections.find(
+      (c) =>
+        c.collectionAddress.toLocaleLowerCase() ===
+        collectionAddress.toLocaleLowerCase(),
+    );
   };
+
+  console.log('collections', collections);
 
   return (
     <Flex className={cn('mx-auto mb-16 h-full w-full flex-col gap-28')}>
@@ -129,10 +135,10 @@ export const FloatingBanner = ({
           )}
           <LandingCollections
             collections={[
-              findCollection(CollectionsEnum.HEROES_VARIANT)!,
-              findCollection(CollectionsEnum.LOOT_BOXES)!,
-              findCollection(CollectionsEnum.WEAPON_VARIANTS)!,
-            ]}
+              findCollection(CollectionsEnum.HEROES_VARIANT),
+              findCollection(CollectionsEnum.LOOT_BOXES),
+              findCollection(CollectionsEnum.WEAPON_VARIANTS),
+            ].filter((c) => !!c)}
           />
           {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
             <Banner
