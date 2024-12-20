@@ -2,6 +2,7 @@
 
 import { cn } from '$ui';
 import BurgerBtn from '../../../components/ui/BurgerBtn/BurgerBtn';
+import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
@@ -39,7 +40,7 @@ export const Header = () => {
       </div>
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
-          {/* <InventoryButton /> */}
+          <InventoryButton />
           <WalletButton />
           <NetworkButton />
         </div>
