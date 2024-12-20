@@ -7,10 +7,10 @@ export function HeaderLogo() {
   return (
     <Link
       prefetch={false}
-      href="/"
+      href="https://playontoy.com"
       className="my-auto flex items-center text-xl font-bold text-foreground/90"
     >
-        <Logo/>
+      <Logo />
     </Link>
   );
 }

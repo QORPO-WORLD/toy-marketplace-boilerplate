@@ -74,7 +74,7 @@ export const generateChainNameByChainId = (chainId: number) => {
 export const getCreatedDateByCollectionAddress = (
   collectionAddress: string,
 ) => {
-  switch (collectionAddress) {
+  switch (collectionAddress as CollectionsEnum) {
     case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
       return 'NOV 2023';
     case CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO:
