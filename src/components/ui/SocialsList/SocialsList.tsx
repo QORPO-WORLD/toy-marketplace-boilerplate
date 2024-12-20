@@ -3,7 +3,7 @@ import styles from './SocialsList.module.scss';
 function SocialsList() {
   return (
     <ul className={styles.social_list}>
-      <li className={styles.social_item}>
+      {/* <li className={styles.social_item}>
         <a
           href="https://discord.gg/5Ekur8BA"
           target="_blank"
@@ -15,7 +15,7 @@ function SocialsList() {
             alt="discord-icon"
           />
         </a>
-      </li>
+      </li> */}
       <li className={styles.social_item}>
         <a
           href="https://x.com/playonTOY"
@@ -38,7 +38,7 @@ function SocialsList() {
           />
         </a>
       </li>
-      <li className={styles.social_item}>
+      {/* <li className={styles.social_item}>
         <a
           href="https://www.instagram.com/toychaingames?igsh=MXQwdDI4cDRrNmd6MQ%3D%3D&utm_source=qr"
           target="_blank"
@@ -50,8 +50,8 @@ function SocialsList() {
             alt="instagram-icon"
           />
         </a>
-      </li>
-      <li className={styles.social_item}>
+      </li> */}
+      {/* <li className={styles.social_item}>
         <a href="">
           <img
             src="/market/icons/youtube-icon.svg"
@@ -61,8 +61,8 @@ function SocialsList() {
             alt="youtube-icon"
           />
         </a>
-      </li>
-      <li className={styles.social_item}>
+      </li> */}
+      {/* <li className={styles.social_item}>
         <a href="">
           <img
             src="/market/icons/twitch-icon.svg"
@@ -72,7 +72,7 @@ function SocialsList() {
             alt="twitch-icon"
           />
         </a>
-      </li>
+      </li> */}
     </ul>
   );
 }
