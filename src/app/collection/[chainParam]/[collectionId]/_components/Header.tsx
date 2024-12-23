@@ -18,6 +18,7 @@ import {
   cn,
 } from '$ui';
 import CollectionBadge from '../../../../../components/ui/CollectionBadge/CollectionBadge';
+import { getCollectionBg } from '../../../../../lib/utils/helpers';
 import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
@@ -69,7 +70,7 @@ const CollectionHeader = ({
       );
       setShowBtnType('show-more');
     }
-  }, [, descripionRef, descripionContainerRef, description]);
+  }, [descripionRef, descripionContainerRef, description]);
 
   const onShowMoreClick = () => {
     if (showBtnType === 'show-more') {
@@ -97,7 +98,12 @@ const CollectionHeader = ({
   return (
     <>
       <div className="h-dvh p-2 mx-[-2rem] mb-8 mb:p-0 mb:mx-0 mb:mb-0">
-        <div className='rounded-[3.125rem] mb:rounded-none bg-[url("/market/images/banner/collection-page-banner-cc.png")] bg-cover bg-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12'>
+        <div
+          className="rounded-[3.125rem] mb:rounded-none bg-[url()] bg-cover bg-top-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12"
+          style={{
+            backgroundImage: `url(${getCollectionBg(collectionAddress)})`,
+          }}
+        >
           <div className="relative w-[55%]">
             <p className="title text-center text-white leading-none">{name}</p>
             {collection && (

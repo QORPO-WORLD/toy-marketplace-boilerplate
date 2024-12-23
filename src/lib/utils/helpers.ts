@@ -32,6 +32,15 @@ export const getCollectionLogo = (collection: string) => {
   }
 };
 
+export const getCollectionBg = (collection: string) => {
+  switch (collection as CollectionsEnum) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return '/market/images/banner/collection-page-banner-anmt.png';
+    default:
+      return '/market/images/banner/collection-page-banner-cc.png';
+  }
+};
+
 export const getTag = (collection: string) => {
   switch (collection as CollectionsEnum) {
     case CollectionsEnum.ANEEMATE_GENESIS_ZERO:

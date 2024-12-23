@@ -74,6 +74,9 @@ export default {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'main-gradient': 'linear-gradient(90deg, #F47469 0%, #DB5179 100%)',
       },
+      backgroundPosition: {
+        'top-center': 'center top',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
