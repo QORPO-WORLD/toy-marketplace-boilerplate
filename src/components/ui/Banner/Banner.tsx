@@ -30,7 +30,7 @@ function Banner({ bgSrc, title, title2, collection }: BannerProps) {
       })}
     >
       <div
-        className="h-[45rem] p-12 bg-top bg-cover rounded-[1.6rem] flex items-end justify-start"
+        className="h-[45rem] p-12 bg-top bg-cover rounded-[1.6rem] flex items-end justify-start mb:flex-col-reverse mb:p-4 mb:pb-8 mb:items-center mb:gap-4"
         style={{
           backgroundImage: `url(${bgSrc})`,
         }}
