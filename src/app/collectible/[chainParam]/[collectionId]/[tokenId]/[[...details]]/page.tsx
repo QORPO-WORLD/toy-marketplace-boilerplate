@@ -44,10 +44,7 @@ export default function Page() {
 
   const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
-  console.log(
-    'collectionDataOrder',
-    setMarketPlaceLogo(collectionDataOrder?.order?.marketplace),
-  );
+  console.log('collectionDataOrder', data);
 
   return (
     <>
@@ -170,6 +167,26 @@ export default function Page() {
             </p>
           </div>
         </div>
+      </div>
+      <div className="p-[11.1875rem] pb-52 pt-6">
+        <p className="text-white font-main text-[24px] font-normal uppercase mb-5">
+          Asset properties
+        </p>
+        <ul className="flex gap-[0.8125rem]">
+          {data?.attributes.map((attribute, index) => (
+            <li
+              className="flex-1 w-full py-2 px-5 rounded-[1.25rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]"
+              key={index}
+            >
+              <p className="text-white font-DMSans text-[1rem] font-semibold leading-normal">
+                {attribute.trait_type}
+              </p>
+              <p className="text-white font-main text-[1.5rem] font-normal leading-normal uppercase">
+                {attribute.value}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );

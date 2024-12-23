@@ -6,6 +6,7 @@ import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
+import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -27,16 +28,14 @@ export const Header = () => {
         >
           home
         </a>
-        <a
+        <Link
           className={cn(
             'block text-black py-[0.88rem] px-[1.75rem] bg-white rounded-[3.9375rem]',
           )}
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/"
         >
           marketplace
-        </a>
+        </Link>
       </div>
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
