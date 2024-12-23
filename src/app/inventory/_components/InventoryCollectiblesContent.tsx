@@ -91,17 +91,19 @@ const CollectionSection = ({
     return <Text className="w-full text-center text-black pt-32">Empty.</Text>;
 
   return (
-    <div className="max-w-[100vw] px-0  py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
-      <Flex className="sticky z-20 py-2">
-        <ScrollArea.Base orientation="horizontal" className="max-w-full">
-          <div className={cn('w-full min-w-max self-start flex items-center')}>
-            <Flex className="items-center gap-3">
-              <Avatar.Base>
+    <div className="max-w-[100vw] px-4 py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
+      <Flex className="sticky z-20 py-2 w-full">
+        <div className="w-full">
+          <div
+            className={cn('w-full self-start flex items-center mb:items-start')}
+          >
+            <Flex className="items-center gap-3 w-full flex-wrap">
+              {/* <Avatar.Base>
                 <Avatar.Image
                   alt={collectionMetadata?.name}
                   src={collectionMetadata?.logoURI}
                 />
-              </Avatar.Base>
+              </Avatar.Base> */}
 
               <Text className="text-[1.25rem] text-[#00000099]">
                 {collectionMetadata?.name || collectionAddress}
@@ -113,11 +115,10 @@ const CollectionSection = ({
                 chainId={chainId}
                 collectionAddress={collectionAddress}
               />
+              <Text className="ml-auto text-[1rem] text-[#00000099] mr-8 mb:ml-0">
+                ITEMS {collectibles.length}
+              </Text>
             </Flex>
-
-            <Text className="ml-auto text-[1rem] text-[#00000099] mr-8">
-              ITEMS {collectibles.length}
-            </Text>
             <button className="mr-4" onClick={() => setIsOpen((prev) => !prev)}>
               <img
                 className="transition duration-150 ease-out w-4 aspect-square"
@@ -129,7 +130,7 @@ const CollectionSection = ({
               />
             </button>
           </div>
-        </ScrollArea.Base>
+        </div>
       </Flex>
 
       <div
@@ -189,8 +190,8 @@ const ContentWrapper = ({
   return isGridView ? (
     <Grid.Root
       className={cn(
-        'grid-flow-row gap-0.5 sm:gap-3',
-        'auto-rows-[minmax(250px,min-content)] grid-cols-[repeat(auto-fill,minmax(140px,1fr))] grid-rows-[repeat(auto-fill,minmax(250px,min-content))]',
+        'grid-flow-row gap-3 sm:gap-3',
+        'auto-rows-[minmax(250px,min-content)] grid-cols-[repeat(auto-fill,minmax(240px,1fr))] grid-rows-[repeat(auto-fill,minmax(250px,min-content))]',
         'sm:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]',
       )}
     >

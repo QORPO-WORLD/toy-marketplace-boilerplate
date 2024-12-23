@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import styles from './NavigationMenu.module.scss';
+import Link from 'next/link';
 
 function NavigationMenu() {
   useEffect(() => {
@@ -16,19 +17,15 @@ function NavigationMenu() {
       <div className={styles.navigation_wrapper}>
         <ul className={styles.navigation_list}>
           <li className={styles.navigation_item}>
-            <a>
-              <span>MISSIONS</span>
+            <a href="https://playontoy.com" rel="noopener noreferrer">
+              <span>home</span>
             </a>
           </li>
+
           <li className={styles.navigation_item}>
-            <a>
-              <span>Staking</span>
-            </a>
-          </li>
-          <li className={styles.navigation_item}>
-            <a>
+            <Link href="/">
               <span>marketplace</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

@@ -10,8 +10,6 @@ import { ContractInfo } from '@0xsequence/metadata';
 function CollectionBadge({ collectionData }: { collectionData: ContractInfo }) {
   const { chainId, address, name, type } = collectionData;
 
-  console.log('collectionData', collectionData);
-
   return (
     <div className={styles.banner_card}>
       <div className={styles.card_container}>

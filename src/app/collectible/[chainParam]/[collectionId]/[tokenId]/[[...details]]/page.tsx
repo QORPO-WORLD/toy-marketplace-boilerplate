@@ -44,8 +44,6 @@ export default function Page() {
 
   const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
-  console.log('collectionDataOrder', data);
-
   return (
     <>
       <BannerImage logo={false}>
@@ -158,7 +156,7 @@ export default function Page() {
           </div>
         </div>
       </BannerImage>
-      <div className="p-4 pb-9 pt-6 mb:block hidden">
+      <div className="p-4 pb-6 pt-6 mb:block hidden">
         <div className="flex flex-col gap-4">
           <p className="title text-white text-start">Item description</p>
           <div className="rounded-[20px] bg-[#483F51] backdrop-blur-[10px] p-4">
@@ -168,11 +166,11 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="p-[11.1875rem] pb-52 pt-6">
-        <p className="text-white font-main text-[24px] font-normal uppercase mb-5">
+      <div className="p-[11.1875rem] pb-52 pt-6 mb:p-4 mb:pb-16">
+        <p className="text-white font-main text-[1.5rem] font-normal uppercase mb-5  title mb:text-[32px] mb:font-normal mb:uppercase text-start">
           Asset properties
         </p>
-        <ul className="flex gap-[0.8125rem]">
+        <ul className="flex gap-[0.8125rem] mb:flex-col">
           {data?.attributes.map((attribute, index) => (
             <li
               className="flex-1 w-full py-2 px-5 rounded-[1.25rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]"

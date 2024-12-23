@@ -12,7 +12,10 @@
 
   &:hover {
     .card {
-      transform: rotateY(180deg);
+      transform: rotateY(180deg) rotateZ(5.47deg);
+      @media (max-width: 776px) {
+        transform: rotateY(180deg);
+      }
     }
 
     .number_container {
@@ -29,9 +32,13 @@
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s;
+  border: 0.5rem solid #e7e6fb;
+  background: #e7e6fb;
+  border-radius: 3.56rem;
 
   @media (max-width: 776px) {
     transform: rotateY(180deg);
+    border-radius: 25px;
   }
 }
 
@@ -44,7 +51,8 @@
   backface-visibility: hidden;
   border-radius: 3.56rem;
   overflow: hidden;
-  background-color: rgba(87, 77, 95, 1);
+  background-position: center;
+  background-size: cover;
 
   @media (max-width: 776px) {
     border-radius: 25px;
@@ -56,159 +64,74 @@
   justify-content: center;
   align-items: center;
   background-position: center;
-  background-size: 100% 100%;
-
-  .number_container {
-    width: 12.6875rem;
-    height: 8.1875rem;
-    background-color: #f3faa3;
-    border-top-left-radius: 1.56rem;
-    border-bottom-right-radius: 3.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    span {
-      color: rgba(87, 77, 95, 1);
-      font-size: 6rem;
-    }
-  }
 }
 
 .back_card {
   color: white;
   transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.31rem 1.27rem 3.81rem;
+  padding: 1.8125rem 3.4375rem 2.375rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  background-position: center;
 
   @media (max-width: 776px) {
     border-radius: 25px;
-    padding: 18px 15px 37px 14px;
+    padding: 32.4px 27px 66.6px 25.2px;
   }
 }
 
-.number_container {
-  position: absolute;
-  bottom: 50%;
-  right: 50%;
-  transform: translate(50%, 50%);
-  width: 12.6875rem;
-  height: 8.1875rem;
-  background-color: rgba(163, 234, 250, 1);
-  border-top-left-radius: 1.56rem;
-  border-bottom-right-radius: 3.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.6s ease-in-out;
+.card_description {
+  color: #fff;
+  font-family: DMSans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 207%;
 
   @media (max-width: 776px) {
-    bottom: 0;
-    right: 0;
-    transform: translate(0%, 0%);
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    width: 126.674px;
-    height: 81.745px;
-  }
-
-  span {
-    color: rgba(87, 77, 95, 1);
-    font-size: 6rem;
-
-    @media (max-width: 776px) {
-      font-size: 62px;
-    }
-  }
-}
-
-.text_container {
-  padding: 2.25rem 1.94rem 2.19rem 2.06rem;
-  border-radius: 3.5rem;
-  border: 0.125rem dashed #a3eafa;
-
-  @media (max-width: 776px) {
-    padding: 14px 21px 19px 24px;
-    border: 2px dashed #a3eafa;
-    border-radius: 25px;
-  }
-
-  p {
-    font-family: DMSans;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 207%;
-
-    @media (max-width: 776px) {
-      font-size: 16px;
-    }
+    font-size: 16px;
   }
 }
 
 .card_title {
-  font-size: 4rem;
+  color: #fff;
+  font-size: 3rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1;
   text-transform: uppercase;
-  padding-left: 1rem;
+  margin-bottom: 1.2rem;
 
   @media (max-width: 776px) {
     font-size: 36px;
-    padding-left: 20px;
   }
 }
 
 .btn {
-  position: absolute;
-  bottom: 0;
-  left: 1.2rem;
-  transform: translateY(0.875rem);
-  padding: 0.59rem 0.85rem;
+  width: 4.125rem;
+  aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.59375rem;
   background: var(--gradient-main);
-  border-radius: 1.2rem;
+  border-radius: 50%;
   transition: all 0.3s;
   color: white;
+  margin-bottom: 3.125rem;
   &:hover {
     box-shadow: 0px 0px 16px rgba(217, 79, 121, 1);
   }
 
   @media (max-width: 776px) {
-    padding: 5.5px 16px;
-    border-radius: 12px;
-    transform: translateY(14px);
-    left: 16px;
-  }
-
-  span {
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    text-transform: uppercase;
-
-    @media (max-width: 776px) {
-      font-size: 16px;
-    }
   }
 
   img {
-    width: 0.625rem;
-    height: 0.6875rem;
+    width: 1.875rem;
+    height: 2.0625rem;
 
     @media (max-width: 776px) {
-      width: 10px;
-      height: 11px;
+      width: 1.875rem;
+      height: 2.0625rem;
     }
   }
 }

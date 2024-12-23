@@ -30,7 +30,6 @@ export const CollectibleCard = ({
     collectibleId: tokenId,
   });
 
-  console.log(tokenId, 'tokenId');
   // TODO: Handle this better later
   if (collectibleLoading) return null;
 
