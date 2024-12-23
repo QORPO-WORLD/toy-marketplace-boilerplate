@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef, useState } from 'react';
+
 import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { Spinner } from '~/components/Spinner';
@@ -61,6 +63,8 @@ const CollectionSection = ({
     accountAddress,
     contractAddress: collectionAddress,
   });
+  const [isOpen, setIsOpen] = useState(true);
+  const contentRef = useRef<HTMLDivElement>(null);
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
 
@@ -87,17 +91,10 @@ const CollectionSection = ({
     return <Text className="w-full text-center text-black pt-32">Empty.</Text>;
 
   return (
-    <Accordion.Item
-      disabled={collectionBalancesLoading}
-      value={collectionAddress}
-      className="mb-8 max-w-[100vw] bg-transparent px-0 focus-within:ring-0 md:px-3"
-    >
-      <Flex
-        className="sticky z-20 bg-background py-2"
-        style={{ top: 'calc(var(--headerHeight))' }}
-      >
+    <div className="max-w-[100vw] px-0  py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
+      <Flex className="sticky z-20 py-2">
         <ScrollArea.Base orientation="horizontal" className="max-w-full">
-          <Accordion.Trigger className={cn('w-full min-w-max self-start')}>
+          <div className={cn('w-full min-w-max self-start flex items-center')}>
             <Flex className="items-center gap-3">
               <Avatar.Base>
                 <Avatar.Image
@@ -106,37 +103,56 @@ const CollectionSection = ({
                 />
               </Avatar.Base>
 
-              <Text className="text-sm">
+              <Text className="text-[1.25rem] text-[#00000099]">
                 {collectionMetadata?.name || collectionAddress}
               </Text>
-              <NetworkImage chainId={Number(collectionMetadata?.chainId)} />
+              <div className="bg-[#4035451A] p-1 rounded-full">
+                <NetworkImage chainId={Number(collectionMetadata?.chainId)} />
+              </div>
               <ContractTypeBadge
                 chainId={chainId}
                 collectionAddress={collectionAddress}
               />
             </Flex>
 
-            <Text className="ml-auto text-sm text-foreground/50">
+            <Text className="ml-auto text-[1rem] text-[#00000099] mr-8">
               ITEMS {collectibles.length}
             </Text>
-          </Accordion.Trigger>
+            <button className="mr-4" onClick={() => setIsOpen((prev) => !prev)}>
+              <img
+                className="transition duration-150 ease-out w-4 aspect-square"
+                src="/market/icons/arrow-icon.svg"
+                style={{
+                  transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                }}
+                alt="arrow"
+              />
+            </button>
+          </div>
         </ScrollArea.Base>
       </Flex>
 
-      <Accordion.Content className="mt-0 p-1">
-        <ContentWrapper isGridView={isGridView}>
-          {collectibles.map((c) => {
-            return isGridView ? (
-              <CollectibleCard
-                collectionAddress={collectionAddress as Hex}
-                tokenId={c.tokenID!}
-                collectionChainId={String(c.chainId)}
-              />
-            ) : (
-              <InventoryRow />
-            );
-          })}
-        </ContentWrapper>
+      <div
+        className="mt-0 p-1 overflow-hidden transition-all duration-[900ms] ease-out"
+        style={{
+          height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+        }}
+      >
+        <div className="pt-1" ref={contentRef}>
+          <ContentWrapper isGridView={isGridView}>
+            {collectibles.map((c) => {
+              return isGridView ? (
+                <CollectibleCard
+                  collectionAddress={collectionAddress as Hex}
+                  tokenId={c.tokenID!}
+                  collectionChainId={String(c.chainId)}
+                />
+              ) : (
+                <InventoryRow />
+              );
+            })}
+          </ContentWrapper>
+        </div>
 
         {hasNextPage ? (
           <Button
@@ -147,8 +163,8 @@ const CollectionSection = ({
             loading={isFetchingNextPage}
           />
         ) : null}
-      </Accordion.Content>
-    </Accordion.Item>
+      </div>
+    </div>
   );
 };
 

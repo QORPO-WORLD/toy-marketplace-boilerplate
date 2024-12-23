@@ -16,7 +16,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       <Grid.Child
         name="content"
-        className="flex w-full flex-col justify-self-center  mt-auto mb-auto"
+        className="flex w-full flex-col justify-self-center mt-auto mb-auto"
         // style={{
         //   width: 'calc(100% - var(--orderCartRightOffset))',
         //   height: 'calc(100% + var(--footerHeight))',

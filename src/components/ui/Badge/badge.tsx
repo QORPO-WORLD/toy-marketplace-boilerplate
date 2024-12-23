@@ -12,11 +12,11 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground',
+        default: 'bg-[#4035451A] text-primary-foreground',
         secondary: 'bg-secondary/10 text-secondary-foreground',
         success: 'bg-success/50 text-success-foreground',
         destructive: 'bg-destructive text-destructive-foreground',
-        muted: 'bg-foreground/10 text-foreground/70',
+        muted: 'bg-[#4035451A] text-[#00000099]',
         outline: 'border border-border bg-[#4035451A] text-foreground/70',
         outlinePrimary: 'border border-primary bg-[#4035451A] text-primary',
       },

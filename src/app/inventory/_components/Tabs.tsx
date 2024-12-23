@@ -97,19 +97,23 @@ export const InventoryTabs = ({
 
   return (
     <>
-      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8">
+      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
         <InfoBox label="Address" transparent>
-          <Text className="overflow-hidden text-lg font-semibold uppercase">
+          <Text className="overflow-hidden text-lg font-semibold uppercase text-[#00000099] font-DMSans text-[1.25rem]  tracking-[-0.07rem]">
             <ENSName address={accountAddress} truncateAt={6} />
           </Text>
         </InfoBox>
 
         <InfoBox label="Collections" transparent>
-          <Text className="text-lg font-medium">{totalCollections}</Text>
+          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+            {totalCollections}
+          </Text>
         </InfoBox>
 
         <InfoBox label="Collectibles" transparent>
-          <Text className="text-lg font-medium">{totalCollectibles}</Text>
+          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+            {totalCollectibles}
+          </Text>
         </InfoBox>
       </Grid.Root>
 
@@ -126,7 +130,7 @@ export const InventoryTabs = ({
         }}
       >
         <Tabs.Content value={inventoryTabsList.collectibles}>
-          <Flex className="flex-col gap-14">
+          <Flex className="flex-col gap-4">
             <InventoryCollectiblesContent
               collectionBalances={filteredCollecionBalances}
             />
