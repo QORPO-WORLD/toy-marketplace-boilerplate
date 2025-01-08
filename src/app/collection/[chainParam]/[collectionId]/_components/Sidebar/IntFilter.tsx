@@ -42,7 +42,7 @@ export const IntFilter = observer(({ filter }: FilterProps) => {
               min={min}
               max={max}
               value={localMin}
-              className="w-full"
+              className="w-full text-[#483F50]"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setMin(e.target.value)
               }

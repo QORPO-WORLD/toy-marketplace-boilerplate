@@ -26,11 +26,11 @@ export const Footer = () => {
           alt="logo"
         />
         <div className={styles.link_container}>
-          <a href="/market/docs/01-TOY_GTC_EN-2024.docx" target="_blank">
+          <a href="/market/docs/01-TOY_GTC_EN-2024.pdf" target="_blank">
             TERMS OF SERVICE
           </a>
           <a
-            href="/market/docs/02-TOY_Privacy policy_EN-2024.docx"
+            href="/market/docs/02-TOY_Privacy policy_EN-2024.pdf"
             target="_blank"
           >
             DOCS
