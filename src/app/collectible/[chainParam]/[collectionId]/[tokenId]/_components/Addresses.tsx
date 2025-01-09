@@ -2,7 +2,7 @@
 
 import ENSName from '~/components/ENSName';
 import { InfoGrid } from '~/components/InfoGrid';
-import { getChain } from '~/config/networks';
+import { getChain } from '~/lib/utils/getChain';
 
 import { Box, Button, LinkIcon, cn } from '$ui';
 
@@ -28,7 +28,7 @@ export const CollectibleAddresses = ({
     <Box className="@container/addressesBox">
       <InfoGrid
         className={cn(
-          'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3',
+          'grid-cols-1 @sm/addressesBox:grid-cols-2 @xl/addressesBox:grid-cols-3 w-full',
         )}
         values={addresses.map((a) => {
           const explorerUrl = getChain(a.chainId)?.blockExplorer?.rootUrl;
@@ -36,7 +36,11 @@ export const CollectibleAddresses = ({
             label: a.label,
             children: (
               <Button asChild variant="ghost" size="sm" className="uppercase">
-                <a href={`${explorerUrl}address/${a.address}`} target="_blank">
+                <a
+                  href={`${explorerUrl}address/${a.address}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <LinkIcon />
                   <ENSName address={a.address} truncateAt={4} />
                 </a>

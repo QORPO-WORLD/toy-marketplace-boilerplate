@@ -3,54 +3,31 @@ import { classNames } from '~/config/classNames';
 import { Grid, cn } from '$ui';
 import { Footer } from './Footer';
 import { Header } from './Header';
-import { OrderCartGrid } from './OrderCartGrid';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Grid.Root
-      className={cn(
-        classNames.mainLayout,
-        'font-main',
-        'bg-background',
-        'min-h-[100vh] w-full',
-        '[--headerHeight:56px]',
-        '[--collectionControlsHeight:41px]',
-        '[--footerHeight:33px]',
-        '[--orderCartRightOffset:16px]',
-      )}
-      template={`
-        [row1-start] "header header" min-content [row1-end]
-        [row2-start] "content order-cart" 1fr [row2-end]
-        [row3-start] "footer order-cart" min-content [row3-end] 
-        / 1fr auto
-      `}
-    >
-      <Grid.Child className="sticky top-0 z-50 bg-transparent" name="header">
+    <div className="font-main min-h-dvh flex flex-col justify-between h-fit">
+      <Grid.Child
+        className="absolute top-0 z-50 bg-transparent w-full"
+        name="header"
+      >
         <Header />
       </Grid.Child>
 
       <Grid.Child
         name="content"
-        className="flex w-full flex-col justify-self-center"
-        style={{
-          width: 'calc(100% - var(--orderCartRightOffset))',
-          height: 'calc(100% + var(--footerHeight))',
-        }}
+        className="flex w-full flex-col justify-self-center mt-auto mb-auto"
+        // style={{
+        //   width: 'calc(100% - var(--orderCartRightOffset))',
+        //   height: 'calc(100% + var(--footerHeight))',
+        // }}
       >
         {children}
       </Grid.Child>
 
-      <Grid.Child
-        name="footer"
-        className="bottom-0 z-10 bg-inherit md:sticky"
-        style={{
-          width: 'calc(100% - var(--orderCartRightOffset))',
-        }}
-      >
+      <Grid.Child name="footer">
         <Footer />
       </Grid.Child>
-
-      <OrderCartGrid />
-    </Grid.Root>
+    </div>
   );
 }

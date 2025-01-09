@@ -3,20 +3,20 @@
 import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
-import type { MarketConfig } from '~/config/marketplace';
-import { balanceQueries } from '~/lib/queries';
-import { compareAddress } from '~/lib/utils/helpers';
 
-import { Tabs, Flex, Text, Grid } from '$ui';
-import { InventoryCollectiblesContent } from './Content/CollectiblesContent';
+import { Button, Flex, Grid, Tabs, Text } from '$ui';
+import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { compareAddress } from '@0xsequence/marketplace-sdk';
+import {
+  useListBalances,
+  useMarketplaceConfig,
+} from '@0xsequence/marketplace-sdk/react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 type InventoryTabsProps = {
   chainId: number;
-  inventoryAddress: string;
-  marketConfig: MarketConfig;
+  accountAddress: string;
 };
 
 const inventoryTabsList = {
@@ -25,9 +25,9 @@ const inventoryTabsList = {
 
 export const InventoryTabs = ({
   chainId,
-  inventoryAddress,
-  marketConfig,
+  accountAddress,
 }: InventoryTabsProps) => {
+  const config = useMarketplaceConfig();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -40,22 +40,19 @@ export const InventoryTabs = ({
   searchParams.set('activeTab', activeTab);
 
   const {
-    data: userTokenBalancesRespPage,
-    isLoading: isUserTokenBalancesLoading,
-    isError: isUserTokenBalancesError,
-  } = useInfiniteQuery(
-    balanceQueries.list({
-      chainId,
-      includeMetadata: false,
-      accountAddress: inventoryAddress,
-    }),
-  );
+    data: balancesData,
+    isLoading: balancesLoading,
+    isError: errorGettingBalances,
+  } = useListBalances({
+    chainId,
+    accountAddress,
+  });
 
-  if (isUserTokenBalancesLoading) {
+  if (balancesLoading) {
     return <Spinner label="Loading Inventory Collectibles" />;
   }
 
-  if (isUserTokenBalancesError) {
+  if (errorGettingBalances) {
     return (
       <Text className="w-full text-center text-destructive">
         Error occured. Failed to fetch the wallet collectible balances.
@@ -63,24 +60,32 @@ export const InventoryTabs = ({
     );
   }
 
-  if (!userTokenBalancesRespPage) {
-    return <Text className="w-full text-center text-pink">Empty.</Text>;
+  const balances = balancesData?.pages[0];
+  const isEmptyInventory = !balances || balances.balances.length === 0;
+
+  if (isEmptyInventory) {
+    return (
+      <Text className="w-full text-center text-black pt-32 text-3xl">
+        Empty.
+      </Text>
+    );
   }
 
-  const userTokenBalancesResp = userTokenBalancesRespPage.pages[0];
-
   // collectible balances and counts
-  const collectionBalances = userTokenBalancesResp?.balances.filter(
+  const collectionBalances = balances?.balances.filter(
     (b) => b.contractType != ContractType.ERC20,
   );
 
-  const filteredCollecionBalances: TokenBalance[] = collectionBalances!.filter(
-    (c) =>
-      !!marketConfig?.collections?.find(
-        (wcc) =>
-          compareAddress(wcc.collectionAddress, c.contractAddress) &&
+  const filteredCollecionBalances: TokenBalance[] = collectionBalances.filter(
+    (balanceCollection) =>
+      !!config.data?.collections?.find(
+        (marketplaceCollection) =>
+          compareAddress(
+            marketplaceCollection.collectionAddress,
+            balanceCollection.contractAddress,
+          ) &&
           // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          wcc.chainId === c.chainId,
+          marketplaceCollection.chainId === balanceCollection.chainId,
       ),
   );
 
@@ -92,19 +97,23 @@ export const InventoryTabs = ({
 
   return (
     <>
-      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8">
+      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
         <InfoBox label="Address" transparent>
-          <Text className="overflow-hidden text-lg font-semibold uppercase">
-            <ENSName address={inventoryAddress} truncateAt={6} />
+          <Text className="overflow-hidden text-lg font-semibold uppercase text-[#00000099] font-DMSans text-[1.25rem]  tracking-[-0.07rem]">
+            <ENSName address={accountAddress} truncateAt={6} />
           </Text>
         </InfoBox>
 
         <InfoBox label="Collections" transparent>
-          <Text className="text-lg font-medium">{totalCollections}</Text>
+          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+            {totalCollections}
+          </Text>
         </InfoBox>
 
         <InfoBox label="Collectibles" transparent>
-          <Text className="text-lg font-medium">{totalCollectibles}</Text>
+          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+            {totalCollectibles}
+          </Text>
         </InfoBox>
       </Grid.Root>
 
@@ -121,7 +130,7 @@ export const InventoryTabs = ({
         }}
       >
         <Tabs.Content value={inventoryTabsList.collectibles}>
-          <Flex className="flex-col gap-14">
+          <Flex className="flex-col gap-4">
             <InventoryCollectiblesContent
               collectionBalances={filteredCollecionBalances}
             />

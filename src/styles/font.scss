@@ -1,42 +1,77 @@
 /* FAVORIT FONT, should be replaced with next/font */
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/Regular.woff2');
+  src: url('/market/fonts/favorit/Regular.woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/Medium.woff2');
+  src: url('/market/fonts/favorit/Medium.woff2');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/Bold.woff2');
+  src: url('/market/fonts/favorit/Bold.woff2');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/RegularItalic.woff2');
+  src: url('/market/fonts/favorit/RegularItalic.woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/MediumItalic.woff2');
+  src: url('/market/fonts/favorit/MediumItalic.woff2');
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Favorit Mono';
-  src: url('/fonts/favorit/BoldItalic.woff2');
+  src: url('/market/fonts/favorit/BoldItalic.woff2');
   font-weight: 600;
   font-style: italic;
+}
+
+@font-face {
+  font-family: X-Heighting;
+  src: url('/market/fonts/X-Heighting.otf');
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/market/fonts/DMSans-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/market/fonts/DMSans-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/market/fonts/DMSans-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url('/market/fonts/DMSans-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: RedHatDisplay;
+  src: url('/market/fonts/RedHatDisplay-Light.ttf');
+  font-weight: 400;
 }

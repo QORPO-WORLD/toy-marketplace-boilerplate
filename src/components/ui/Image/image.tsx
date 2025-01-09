@@ -18,7 +18,7 @@ export interface ImageProps extends React.HTMLAttributes<HTMLImageElement> {
   loading?: boolean;
 }
 
-export const placeholderImgUrl = '/images/placeholder.png';
+export const placeholderImgUrl = '/market/images/placeholder.png';
 
 export const BaseImage = memo(
   forwardRef<HTMLImageElement, ImageProps>(

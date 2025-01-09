@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
+import { DM_Sans } from 'next/font/google';
 import { type Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -7,11 +8,15 @@ export default {
   content: ['./src/**/*.tsx'],
   theme: {
     extend: {
+      screens: {
+        mb: { max: '756px' }, // Custom media query
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-
+        main: '#F47469',
+        yellow: '#F3DAAA',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
@@ -53,17 +58,24 @@ export default {
         },
       },
       fontFamily: {
-        main: 'var(--font-main)',
+        main: 'var(--font-X-Heighting)',
+        RedHatDisplay: 'var(--font-RedHatDisplay)',
+        DMSans: 'var(--font-DMSans)',
       },
       borderRadius: {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
         sm: 'calc(var(--radius) - 4px)',
       },
+
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'main-gradient': 'linear-gradient(90deg, #F47469 0%, #DB5179 100%)',
+      },
+      backgroundPosition: {
+        'top-center': 'center top',
       },
       keyframes: {
         'accordion-down': {
@@ -120,7 +132,7 @@ export default {
   plugins: [
     require('@tailwindcss/container-queries'),
     require('tailwindcss-animate'),
-    plugin(function ({ matchUtilities, theme }) {
+    plugin(({ matchUtilities, theme }) => {
       matchUtilities(
         {
           // three-d shadow

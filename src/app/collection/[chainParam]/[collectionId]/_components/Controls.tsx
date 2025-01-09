@@ -54,7 +54,7 @@ export const BaseCollectionControls = ({
 }: BaseCollectionControlsProps) => {
   return (
     <Grid.Root
-      className={cn(classNames.collectionControls, 'w-full bg-background')}
+      className={cn(classNames.collectionControls, 'w-full bg-[#CBBFD0]')}
       template={`
       [row1-start] "collection-control-mode collection-control-search-input collection-control-tabs"  [row1-end]
       / 1fr 

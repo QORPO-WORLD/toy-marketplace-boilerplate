@@ -1,35 +1,38 @@
-import { Avatar, Badge, Flex, Text, cn } from '~/components/ui';
-import { useCollectionCurrencies } from '~/hooks/useCollectionCurrencies';
-import {
-  type Order,
-  type CollectibleOrder,
-} from '~/lib/queries/marketplace/marketplace.gen';
-import {
-  formatDisplay,
-  textClassName,
-  truncateAtMiddle,
-} from '~/lib/utils/helpers';
+import { Flex, Text, cn } from '~/components/ui';
 
-export const Footer = ({ metadata, order }: CollectibleOrder) => {
-  const { tokenId, name } = metadata;
+import { setMarketPlaceLogo } from '../../../../../../../lib/utils/helpers';
+import type { TokenMetadata } from '@0xsequence/indexer';
+import {
+  type Order as OrderType,
+  truncateMiddle,
+} from '@0xsequence/marketplace-sdk';
+import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
+import Image from 'next/image';
 
-  const height = 'h-[24px]';
+type FooterProps = {
+  tokenMetadata: TokenMetadata;
+  order?: OrderType;
+};
+
+export const Footer = ({ tokenMetadata, order }: FooterProps) => {
+  const { tokenId, name } = tokenMetadata;
+
+  const height = 'h-[1.5rem]';
   return (
     <>
-      <Text
+      {/* <Text
         className={cn(
           height,
-          'md:text-md text-left text-xs font-medium text-foreground/50 max-lines-[1]',
+          'md:text-md text-left text-xl font-main uppercase text-[#483F50] max-lines-[1]',
         )}
       >
-        #{truncateAtMiddle(tokenId, 10) || '--'}
-      </Text>
+        #{truncateMiddle(tokenId, 10) || '--'}
+      </Text> */}
 
       <Text
         className={cn(
           height,
-          'md:text-md ellipsis block text-left font-semibold text-foreground',
-          textClassName(!!name),
+          'md:text-md text-left text-xl font-main uppercase text-[#483F50] max-lines-[1] truncate mb:text-[24px] mb:mb-3',
         )}
         title={name}
       >
@@ -43,13 +46,12 @@ export const Footer = ({ metadata, order }: CollectibleOrder) => {
 
 type OrderProps = {
   height: string;
-  order: Order;
+  order: OrderType;
 };
 
 const Order = ({ height, order }: OrderProps) => {
-  const { currencies } = useCollectionCurrencies({
+  const { data: currencies } = useCurrencies({
     chainId: order.chainId,
-    collectionId: order.collectionContractAddress,
   });
 
   const currency = currencies?.find(
@@ -58,7 +60,7 @@ const Order = ({ height, order }: OrderProps) => {
 
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
-      <Flex className="items-center gap-2">
+      {/* <Flex className="items-center gap-2">
         <Avatar.Base size="xs">
           <Avatar.Image src={currency?.imageUrl} />
           <Avatar.Fallback>{currency?.name}</Avatar.Fallback>
@@ -67,12 +69,24 @@ const Order = ({ height, order }: OrderProps) => {
           className="ellipsis text-sm md:text-base"
           title={String(currency?.name)}
         >
-          {formatDisplay(order.priceAmountFormatted) || 'N/A'}
+          {order.priceAmountFormatted || 'N/A'} {currency?.symbol}
         </Text>
       </Flex>
       <Badge variant="success">
         Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
-      </Badge>
+      </Badge> */}
+      <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
+        {order.priceAmountFormatted} ${currency?.symbol}
+      </p>
+      {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
+        <Image
+          className="w-[1.375rem] aspect-square mb:w-[25px]"
+          src={setMarketPlaceLogo(order.marketplace)}
+          width={22}
+          height={22}
+          alt={order.marketplace}
+        />
+      )}
     </Flex>
   );
 };

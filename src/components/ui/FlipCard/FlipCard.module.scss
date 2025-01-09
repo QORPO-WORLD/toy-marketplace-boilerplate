@@ -1,0 +1,137 @@
+.card_container {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s;
+  perspective: 1700px;
+
+  @media (max-width: 776px) {
+    width: 100%;
+    height: 494px;
+    margin-bottom: 16px;
+  }
+
+  &:hover {
+    .card {
+      transform: rotateY(180deg) rotateZ(5.47deg);
+      @media (max-width: 776px) {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .number_container {
+      bottom: 0;
+      right: 0;
+      transform: translate(0%, 0%);
+    }
+  }
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  border: 0.5rem solid #e7e6fb;
+  background: #e7e6fb;
+  border-radius: 3.56rem;
+
+  @media (max-width: 776px) {
+    transform: rotateY(180deg);
+    border-radius: 25px;
+  }
+}
+
+.front_card,
+.back_card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 3.56rem;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+
+  @media (max-width: 776px) {
+    border-radius: 25px;
+  }
+}
+
+.front_card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+}
+
+.back_card {
+  color: white;
+  transform: rotateY(180deg);
+  padding: 1.8125rem 3.4375rem 2.375rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-position: center;
+
+  @media (max-width: 776px) {
+    border-radius: 25px;
+    padding: 32.4px 27px 66.6px 25.2px;
+  }
+}
+
+.card_description {
+  color: #fff;
+  font-family: DMSans;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 207%;
+
+  @media (max-width: 776px) {
+    font-size: 16px;
+  }
+}
+
+.card_title {
+  color: #fff;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+
+  @media (max-width: 776px) {
+    font-size: 36px;
+  }
+}
+
+.btn {
+  width: 4.125rem;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gradient-main);
+  border-radius: 50%;
+  transition: all 0.3s;
+  color: white;
+  margin-bottom: 3.125rem;
+  &:hover {
+    box-shadow: 0px 0px 16px rgba(217, 79, 121, 1);
+  }
+
+  @media (max-width: 776px) {
+  }
+
+  img {
+    width: 1.875rem;
+    height: 2.0625rem;
+
+    @media (max-width: 776px) {
+      width: 1.875rem;
+      height: 2.0625rem;
+    }
+  }
+}

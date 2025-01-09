@@ -3,45 +3,44 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
-import { NetworkIcon } from '~/components/NetworkLabel';
 import { classNames } from '~/config/classNames';
-import type { MarketConfig } from '~/config/marketplace';
-import { collectionQueries } from '~/lib/queries';
 
 import {
-  Grid,
-  Text,
-  Button,
-  Box,
   Avatar,
-  cn,
-  GlobeIcon,
+  Box,
+  BugIcon,
+  Button,
   ChevronDownIcon,
   ChevronUpIcon,
-  BugIcon,
+  GlobeIcon,
+  Grid,
+  Text,
+  cn,
 } from '$ui';
-import { useQuery } from '@tanstack/react-query';
+import CollectionBadge from '../../../../../components/ui/CollectionBadge/CollectionBadge';
+import { getCollectionBg } from '../../../../../lib/utils/helpers';
+import { NetworkImage } from '@0xsequence/design-system';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
 import Markdown from 'markdown-to-jsx';
 import Head from 'next/head';
 
 interface CollectionHeaderProps {
   chainId: number;
   collectionAddress: string;
-  marketConfig: MarketConfig;
+  marketplaceConfig: MarketplaceConfig;
 }
 
 const MIN_HEIGHT = 140;
 const CollectionHeader = ({
   chainId,
   collectionAddress,
-  marketConfig,
+  marketplaceConfig,
 }: CollectionHeaderProps) => {
-  const collectionMetadata = useQuery(
-    collectionQueries.detail({
-      chainID: chainId.toString(),
-      collectionId: collectionAddress,
-    }),
-  );
+  const collectionMetadata = useCollection({
+    chainId: chainId.toString(),
+    collectionAddress,
+  });
 
   const { data: collection, isLoading, isError } = collectionMetadata;
   const name = collection?.name;
@@ -49,7 +48,7 @@ const CollectionHeader = ({
   const symbol = collection?.symbol;
   const image = collection?.extensions?.ogImage;
   const description = collection?.extensions?.description;
-  const socials = marketConfig.socials;
+  const socials = marketplaceConfig.socials;
 
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(
@@ -71,7 +70,7 @@ const CollectionHeader = ({
       );
       setShowBtnType('show-more');
     }
-  }, [, descripionRef, descripionContainerRef, description]);
+  }, [descripionRef, descripionContainerRef, description]);
 
   const onShowMoreClick = () => {
     if (showBtnType === 'show-more') {
@@ -98,7 +97,24 @@ const CollectionHeader = ({
 
   return (
     <>
-      <Head>
+      <div className="h-dvh p-2 mx-[-2rem] mb-8 mb:p-0 mb:mx-0 mb:mb-0">
+        <div
+          className="rounded-[3.125rem] mb:rounded-none bg-[url()] bg-cover bg-top-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12"
+          style={{
+            backgroundImage: `url(${getCollectionBg(collectionAddress)})`,
+          }}
+        >
+          <div className="relative w-[55%]">
+            <p className="title text-center text-white leading-none">{name}</p>
+            {collection && (
+              <div className="absolute bottom-0 left-0 translate-x-[-115%]">
+                <CollectionBadge collectionData={collection} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* <Head>
         {image ? <link rel="preload" as="image" href={image} /> : null}
       </Head>
 
@@ -144,7 +160,7 @@ const CollectionHeader = ({
             name="collection-type-and-network"
             className="flex items-center gap-2"
           >
-            {chainId && <NetworkIcon chainId={chainId} size="sm" />}
+            {chainId && <NetworkImage chainId={chainId} size="sm" />}
 
             <ContractTypeBadge
               chainId={chainId}
@@ -157,7 +173,7 @@ const CollectionHeader = ({
           <Grid.Child name="collection-social" className="flex gap-2">
             {socials?.website ? (
               <Button asChild variant="ghost">
-                <a href={socials.website} target="_blank">
+                <a href={socials.website} target="_blank" rel="noreferrer">
                   <GlobeIcon />
                 </a>
               </Button>
@@ -222,7 +238,7 @@ const CollectionHeader = ({
             </Button>
           ) : null}
         </Grid.Child>
-      </Grid.Root>
+      </Grid.Root> */}
     </>
   );
 };

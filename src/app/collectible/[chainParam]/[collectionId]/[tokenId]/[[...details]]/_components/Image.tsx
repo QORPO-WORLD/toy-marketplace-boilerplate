@@ -28,9 +28,9 @@ export const CollectibleImage = ({
 
   if (isHtml(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center bg-foreground/5">
+      <Box className="align-center flex justify-center w-fit overflow-hidden rounded-[1.5625rem]">
         <iframe
-          className="aspect-square max-h-[500px] w-full"
+          className="aspect-square max-h-[36.6875rem] w-full"
           src={fileSrc}
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           sandbox="allow-scripts"
@@ -44,12 +44,11 @@ export const CollectibleImage = ({
 
   if (isVideo(fileSrc)) {
     return (
-      <Box className="align-center flex justify-center bg-foreground/5">
+      <Box className="align-center flex justify-center w-fit overflow-hidden rounded-[1.5625rem]">
         <video
-          className="aspect-square max-h-[500px]"
+          className="aspect-square max-h-[36.6875rem]"
           autoPlay
           loop
-          controls
           playsInline
           muted
         >
@@ -70,7 +69,7 @@ export const CollectibleImage = ({
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Image.Base
+        <Image
           src={src}
           alt={id}
           className="aspect-square max-h-[500px]"
@@ -82,7 +81,7 @@ export const CollectibleImage = ({
         />
       </Dialog.Trigger>
       <Dialog.BaseContent className="border-none bg-transparent py-4">
-        <Image.Base
+        <Image
           src={src}
           alt={id}
           className="h-[90vh] w-[80vw] bg-transparent"

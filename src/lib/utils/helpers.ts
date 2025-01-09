@@ -1,160 +1,4 @@
-import type { BigNumberish } from 'ethers';
-import { formatUnits } from 'ethers';
-
-export const truncateAtMiddle = (text: string, truncateAt: number) => {
-  let finalText = text;
-
-  if (text.length >= truncateAt) {
-    finalText =
-      text.slice(0, truncateAt / 2) +
-      '...' +
-      text.slice(text.length - truncateAt / 2, text.length);
-  }
-
-  return finalText;
-};
-
-export const compareAddress = (a = '', b = '') => {
-  return a.toLowerCase() === b.toLowerCase();
-};
-
-export const truncateEnd = (text: string | undefined, truncateAt: number) => {
-  if (!text) return '';
-
-  let finalText = text;
-
-  if (text.length >= truncateAt) {
-    finalText = text.slice(0, truncateAt) + '...';
-  }
-
-  return finalText;
-};
-
-enum ValueType {
-  VERY_LARGE,
-  FRACTION,
-  VERY_TINY,
-  MIXED,
-}
-
-export const formatDisplay = (_val: number | string): string => {
-  if (isNaN(Number(_val))) {
-    console.error(`display format error ${_val} is not a number`);
-    return 'NaN';
-  }
-
-  const val = Number(_val);
-
-  if (val === 0) {
-    return '0';
-  }
-
-  let valMode: ValueType;
-
-  if (val > 100000000) {
-    valMode = ValueType.VERY_LARGE;
-  } else if (val < 0.0000000001) {
-    valMode = ValueType.VERY_TINY;
-  } else if (val < 1) {
-    valMode = ValueType.FRACTION;
-  } else {
-    valMode = ValueType.MIXED;
-  }
-
-  let notation: Intl.NumberFormatOptions['notation'] = undefined;
-  let config: Pick<
-    Intl.NumberFormatOptions,
-    'maximumFractionDigits' | 'maximumSignificantDigits'
-  >;
-
-  switch (valMode) {
-    case ValueType.VERY_LARGE:
-      notation = 'compact';
-      config = {
-        maximumFractionDigits: 4,
-      };
-      break;
-    case ValueType.VERY_TINY:
-      notation = 'scientific';
-      config = {
-        maximumFractionDigits: 4,
-      };
-      break;
-    case ValueType.FRACTION:
-      notation = 'standard';
-      config = {
-        maximumSignificantDigits: 4,
-      };
-      break;
-    default:
-      notation = 'standard';
-      config = {
-        maximumFractionDigits: 2,
-      };
-  }
-
-  return Intl.NumberFormat('en-US', {
-    notation,
-    ...config,
-  }).format(val);
-};
-
-export const formatDecimals = (
-  bn: BigNumberish,
-  decimals: string | number | BigNumberish = 0,
-): string => {
-  // sanitize extremety formats such as "1e+99",
-  // convert to hex before feeding into any BigNumber instance
-  if (typeof bn === 'number' || typeof bn === 'string') {
-    const n = Number(bn);
-    if (isNaN(n)) return 'NaN';
-    bn = '0x' + n.toString(16); // hex
-  }
-
-  const formatted = formatUnits(bn, decimals);
-
-  // formatUnits always returns with 1 decimal precision
-  if (formatted.endsWith('.0')) {
-    // Dont display decimal precision if its a whole number
-    return formatted.slice(0, -2);
-  } else {
-    return formatted;
-  }
-};
-
-export const marketDataPeriodDiffPercentage = (
-  startingValue: number,
-  endingValue: number,
-): number => {
-  // if the value increased from a startiong point of 0 means we increased by 100%
-  if (startingValue === 0 && endingValue > 0) {
-    return 100;
-  }
-
-  // if value decreased to 0 from non-zero value, means we decreased by 100%
-  if (endingValue === 0 && startingValue > 0) {
-    return -100;
-  }
-
-  // normal diff
-  return Number(
-    (((endingValue - startingValue) / startingValue) * 100).toFixed(2),
-  );
-};
-
-export const BigIntMin = (a: bigint, b: bigint) => {
-  return a < b ? a : b;
-};
-
-export const BigIntCast = (n: string | undefined) => {
-  try {
-    if (typeof n === 'undefined') return n;
-    const val = BigInt(n);
-    return val;
-  } catch {
-    return undefined;
-  }
-};
+import { CollectionsEnum } from '../../enum/enum';
 
 export const textClassName = (isEmpty: boolean) =>
   `${isEmpty ? 'italic' : ''} text-${
@@ -178,3 +22,73 @@ export const is3dModel = (fileName: string) => {
 
 export const isDefined = <T>(value: T): value is NonNullable<T> =>
   value != null;
+
+export const getCollectionLogo = (collection: string) => {
+  switch (collection as CollectionsEnum) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return '/market/images/logos/anmt-logo.png';
+    default:
+      return '/market/images/logos/cc-logo.png';
+  }
+};
+
+export const getCollectionBg = (collection: string) => {
+  switch (collection as CollectionsEnum) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return '/market/images/banner/collection-page-banner-anmt.png';
+    default:
+      return '/market/images/banner/collection-page-banner-cc.png';
+  }
+};
+
+export const getTag = (collection: string) => {
+  switch (collection as CollectionsEnum) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return '@ANEEMATE';
+    default:
+      return '@CITIZEN CONFLICT';
+  }
+};
+
+export const setMarketPlaceLogo = (marketplace?: string) => {
+  switch (marketplace) {
+    case 'opensea':
+      return '/market/icons/opensea-logo.svg';
+    case 'sequence_marketplace_v2':
+      return '/market/icons/toy-market-logo.svg';
+    default:
+      return '';
+  }
+};
+
+export const generateChainNameByChainId = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return 'Ethereum';
+    case 4:
+      return 'Rinkeby';
+    case 137:
+      return 'Polygon';
+    case 80001:
+      return 'Mumbai';
+    case 56:
+      return 'Binance Smart Chain';
+    case 21000000:
+      return 'TOY';
+    default:
+      return 'Unknown';
+  }
+};
+
+export const getCreatedDateByCollectionAddress = (
+  collectionAddress: string,
+) => {
+  switch (collectionAddress as CollectionsEnum) {
+    case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
+      return 'NOV 2023';
+    case CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO:
+      return 'FEB 2024';
+    default:
+      return 'DEC 2024';
+  }
+};
