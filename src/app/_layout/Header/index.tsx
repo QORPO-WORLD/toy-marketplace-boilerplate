@@ -21,7 +21,7 @@ export const Header = () => {
         >
           missions
         </a> */}
-        <a
+        {/* <a
           className="block py-[0.88rem] px-[1.75rem]"
           href="https://playontoy.com"
           rel="noopener noreferrer"
@@ -35,7 +35,7 @@ export const Header = () => {
           href="/"
         >
           marketplace
-        </Link>
+        </Link> */}
       </div>
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
@@ -44,8 +44,11 @@ export const Header = () => {
           <NetworkButton />
         </div>
         {/* <ProfileBox /> */}
+        <BurgerBtn />
       </div>
-      <BurgerBtn />
+      <div className="hidden mb:block">
+        <BurgerBtn />
+      </div>
     </header>
 
     // <Grid.Root

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import styles from './NavigationMenu.module.scss';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 function NavigationMenu() {
@@ -13,7 +14,12 @@ function NavigationMenu() {
   }, []);
 
   return (
-    <div className={styles.navigation_menu_container}>
+    <motion.div
+      className={styles.navigation_menu_container}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className={styles.navigation_wrapper}>
         <ul className={styles.navigation_list}>
           <li className={styles.navigation_item}>
@@ -22,14 +28,14 @@ function NavigationMenu() {
             </a>
           </li>
 
-          <li className={styles.navigation_item}>
+          <li className={styles.navigation_item + ' pointer-events-none'}>
             <Link href="/">
               <span>marketplace</span>
             </Link>
           </li>
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
