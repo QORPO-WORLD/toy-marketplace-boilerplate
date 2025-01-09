@@ -1,11 +1,7 @@
 'use client';
 
-import { classNames } from '~/config/classNames';
-
-import { Button, Flex, GasIcon, Text, cn } from '$ui';
 import SocialsList from '../../../components/ui/SocialsList/SocialsList';
 import styles from './Footer.module.scss';
-import NextLink from 'next/link';
 import { useEstimateFeesPerGas, useAccount } from 'wagmi';
 
 export const Footer = () => {
