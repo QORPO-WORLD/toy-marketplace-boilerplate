@@ -5,7 +5,7 @@ import { getChainId } from '~/lib/utils/getChain';
 
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
-import { OrderSide } from '@0xsequence/marketplace-sdk';
+import { OrderSide, SortOrder } from '@0xsequence/marketplace-sdk';
 import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
 
@@ -30,6 +30,16 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
       properties,
     },
     side: OrderSide.listing,
+    // page: {
+    //   page: 1,
+    //   pageSize: 10,
+    //   sort: [
+    //     {
+    //       order: SortOrder.ASC,
+    //       column: 'created',
+    //     },
+    //   ],
+    // },
   });
 
   const collectibles =

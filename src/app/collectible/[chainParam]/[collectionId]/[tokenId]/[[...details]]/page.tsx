@@ -1,9 +1,6 @@
 'use client';
 
-import { Button } from 'react-day-picker';
-
 import ENSName from '../../../../../../components/ENSName';
-import { Accordion } from '../../../../../../components/ui';
 import { getChain } from '../../../../../../lib/utils/getChain';
 import {
   getCollectionLogo,
@@ -11,18 +8,10 @@ import {
   setMarketPlaceLogo,
 } from '../../../../../../lib/utils/helpers';
 import { BannerImage } from '../../../../../_landing/Hero/BannerImage';
-import { CollectibleAccordionItem } from '../_components/AccordionItem';
 import { CollectibleTradeActions } from '../_components/Actions';
-import CollectibleAddresses from '../_components/Addresses';
-import { CollectibleDescription } from '../_components/Description';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { CollectibleImage } from './_components/Image';
-import { CollectibleProperties } from './_components/Properties';
 import { LinkIcon } from '@0xsequence/design-system';
-import {
-  useCurrencies,
-  useLowestListing,
-} from '@0xsequence/marketplace-sdk/react';
 import { useFloorOrder } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 
