@@ -120,7 +120,7 @@
   --seq-colors-text80: rgba(255, 255, 255, 0.8);
   --seq-colors-text50: rgba(255, 255, 255, 0.5);
   --seq-colors-text-inverse100: rgba(0, 0, 0, 1);
-  --seq-colors-background-primary: rgba(0, 0, 0, 1);
+  --seq-colors-background-primary: rgba(75, 66, 83, 1) !important;
   --seq-colors-background-secondary: rgba(255, 255, 255, 0.1);
   --seq-colors-background-contrast: rgba(0, 0, 0, 0.5);
   --seq-colors-background-muted: rgba(255, 255, 255, 0.05);
@@ -13001,142 +13001,15 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-@font-face {
-  font-family: X-Heighting;
-  src: url('/market/fonts/X-Heighting.otf');
+._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0 {
+  background: #4b4253 !important;
 }
-
-.fyvr1v8.fyvr1xc.fyvr11m4.fyvr12g.fyvr164._1vqx0w94._1vqx0w97._1vqx0w95 {
-  height: auto !important;
+.fyvr11ul._1vqx0w91._1vqx0w90.fyvr12g.fyvr164._1vqx0w92 {
+  background: #4b4253 !important;
 }
-
-._5b32m96 {
-  width: 561px !important;
-  min-width: 561px;
-  box-shadow: none !important;
-  font-size: 24px;
-  font-family: X-Heighting;
-  @media (max-width: 768px) {
-    width: 94% !important;
-    border-radius: 0;
-    margin-top: 0;
-    min-width: 94% !important;
-    border-radius: 25px;
-  }
-
-  button {
-    background: linear-gradient(90deg, #f47469 0%, #db5179 100%);
-    color: white;
-    font-family: X-Heighting;
-    font-size: 20px;
-    filter: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      svg {
-        display: none;
-      }
-    }
-    span {
-      color: white;
-    }
-  }
-
-  input {
-    font-size: 1.3125rem;
-    position: relative;
-    border-radius: 1.5625rem;
-  }
-
-  svg {
-    path {
-      color: white;
-    }
-  }
-
-  ._1dizidw1 {
-    path {
-      color: white;
-    }
-  }
-
-  .fyvr11l8 {
-    > input {
-      height: 3.625rem;
-      width: 2.5rem;
-    }
-  }
-
-  .fyvr11tl {
-    background: var();
-  }
-
-  button {
-    &._140wn8n15 {
-      background: none;
-      border: none;
-    }
-  }
-
-  ._1acm19y1 {
-    border-radius: 1.5625rem;
-    position: relative;
-    &::after {
-      content: ' ';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: block;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
-      border-radius: 1.9375rem;
-      border: 1px dashed #fff;
-    }
-  }
-
-  .fyvr1140 {
-    .fyvr113k.fyvr11cg.fyvr11mk.fyvr11no.fyvr11ow.fyvr11l8 {
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 1.5625rem;
-        background: url('/market/images/mogal-bg.png'),
-          linear-gradient(90deg, #f47469 0%, #db5179 100%);
-        background-size: cover;
-        background-position: center;
-        z-index: -2;
-      }
-    }
-  }
-
-  .fyvr11no.fyvr12w9.fyvr11ow.fyvr11jc.fyvr11l8 {
-    .fyvr11r2.fyvr11ic.fyvr11ko.fyvr11jo.fyvr11j4._1qxj1ib9 {
-      position: relative;
-      transform: translateX(-0.9375rem);
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 0;
-        width: 2.1875rem;
-        height: 2.1875rem;
-        transform: translate(125%, -50%);
-        background-image: url('/market/images/teddy-logo.png');
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-    }
-  }
-  .fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o {
-    padding-top: 2.25rem;
-    padding-bottom: 2.25rem;
-  }
+.fyvr11ul.fyvr11rs.fyvr12g.fyvr11mk.fyvr11ow.fyvr11o4.fyvr11l8 {
+  background: #4b4253 !important;
+}
+.sequence-kit-payment-selection-content {
+  z-index: 1000;
 }

@@ -26,7 +26,7 @@ export const CollectiblesGrid = ({
 
   return (
     <VirtuosoGrid
-      className="@container/collectiblesGridContainer w-[99.9%] mb:w-[95%] mb:mx-auto"
+      className="@container/collectiblesGridContainer w-[99.9%] mb:w-[95%] mb:mx-auto z-[1]"
       useWindowScroll
       components={{
         List: GridContainer,
