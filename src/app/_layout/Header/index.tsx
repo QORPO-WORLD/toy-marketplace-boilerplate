@@ -39,7 +39,7 @@ export const Header = () => {
       </div>
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
-          {/* <InventoryButton /> */}
+          <InventoryButton />
           <WalletButton />
           <NetworkButton />
         </div>
