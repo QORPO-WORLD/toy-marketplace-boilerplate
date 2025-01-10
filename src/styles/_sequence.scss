@@ -109,12 +109,12 @@
   --seq-colors-avalance-dark: #810c0c;
   --seq-colors-avalance-light: #ff8080;
   --seq-colors-bsc-dark: #584508;
-  --seq-colors-bsc-light: #fccf43;
+  --seq-colors-bsc-light: #584508 !important;
   --seq-colors-ethereum-dark: #132362;
   --seq-colors-ethereum-light: #aabbff;
   --seq-colors-gnosis-dark: #084246;
   --seq-colors-gnosis-light: #8cf6fd;
-  --seq-colors-polygon-dark: #350881;
+  --seq-colors-polygon-dark: rgba(34, 34, 34, 0.9) !important;
   --seq-colors-polygon-light: #c7a6ff;
   --seq-colors-text100: rgba(255, 255, 255, 1);
   --seq-colors-text80: rgba(255, 255, 255, 0.8);
