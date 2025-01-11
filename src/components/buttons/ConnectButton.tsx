@@ -3,6 +3,7 @@
 import type { ComponentProps } from 'react';
 
 import { Button, WalletIcon } from '$ui';
+import styles from './ConnectButton.module.scss';
 import { useOpenConnectModal } from '@0xsequence/kit';
 import { useAccount } from 'wagmi';
 
@@ -28,13 +29,8 @@ export const ConnectButton = ({
   };
 
   return (
-    <Button
-      size={size}
-      className={className}
-      variant={variant}
-      onClick={handleOnClick}
-    >
-      <WalletIcon /> Connect wallet
-    </Button>
+    <button type="button" className={styles.wallet} onClick={handleOnClick}>
+      Connect the TOY wallet
+    </button>
   );
 };
