@@ -59,8 +59,10 @@ const Order = ({ height, order }: OrderProps) => {
   );
 
   return (
-    <Flex className={cn(height, 'flex-1 items-center justify-between')}>
-      {/* <Flex className="items-center gap-2">
+    <>
+      {Number(order.priceAmountFormatted) >= 0.001 && (
+        <Flex className={cn(height, 'flex-1 items-center justify-between')}>
+          {/* <Flex className="items-center gap-2">
         <Avatar.Base size="xs">
           <Avatar.Image src={currency?.imageUrl} />
           <Avatar.Fallback>{currency?.name}</Avatar.Fallback>
@@ -75,18 +77,20 @@ const Order = ({ height, order }: OrderProps) => {
       <Badge variant="success">
         Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
       </Badge> */}
-      <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
-        {order.priceAmountFormatted} ${currency?.symbol}
-      </p>
-      {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
-        <Image
-          className="w-[1.375rem] aspect-square mb:w-[25px]"
-          src={setMarketPlaceLogo(order.marketplace)}
-          width={22}
-          height={22}
-          alt={order.marketplace}
-        />
+          <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
+            {Number(order.priceAmountFormatted).toFixed(3)} ${currency?.symbol}
+          </p>
+          {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
+            <Image
+              className="w-[1.375rem] aspect-square mb:w-[25px]"
+              src={setMarketPlaceLogo(order.marketplace)}
+              width={22}
+              height={22}
+              alt={order.marketplace}
+            />
+          )}
+        </Flex>
       )}
-    </Flex>
+    </>
   );
 };
