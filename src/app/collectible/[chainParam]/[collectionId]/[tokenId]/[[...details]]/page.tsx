@@ -105,7 +105,10 @@ export default function Page() {
                     />
                   )}
                   <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white">
-                    {collectionDataOrder?.order?.marketplace}
+                    {collectionDataOrder?.order?.marketplace ===
+                    'sequence_marketplace_v2'
+                      ? 'Sequence marketplace'
+                      : collectionDataOrder?.order?.marketplace}
                   </p>
                 </div>
               )}
