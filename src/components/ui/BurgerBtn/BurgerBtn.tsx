@@ -23,7 +23,7 @@ function BurgerBtn() {
 
       {isOpen && (
         <Portal>
-          <NavigationMenu />
+          <NavigationMenu onClose={() => setIsOpen(false)} />
         </Portal>
       )}
     </>

@@ -4,7 +4,7 @@ import styles from './NavigationMenu.module.scss';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-function NavigationMenu() {
+function NavigationMenu({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -28,8 +28,8 @@ function NavigationMenu() {
             </a>
           </li>
 
-          <li className={styles.navigation_item + ' pointer-events-none'}>
-            <Link href="/">
+          <li className={styles.navigation_item}>
+            <Link href="/" onClick={onClose}>
               <span>marketplace</span>
             </Link>
           </li>
