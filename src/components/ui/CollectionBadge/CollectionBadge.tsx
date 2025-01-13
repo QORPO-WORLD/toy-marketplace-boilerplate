@@ -18,8 +18,10 @@ function CollectionBadge({ collectionData }: { collectionData: ContractInfo }) {
           src={getCollectionLogo(address)}
           alt="logo"
         />
-        <p className={styles.user_id}>{getTag(address)}</p>
-        <p className={styles.balance_text}>{name}</p>
+        <div>
+          <p className={styles.user_id}>{getTag(address)}</p>
+          <p className={styles.balance_text}>{name}</p>
+        </div>
         <div className={styles.balance_container}>
           <p>Created: {getCreatedDateByCollectionAddress(address)}</p>
           <p>Chain: {generateChainNameByChainId(chainId)}</p>
