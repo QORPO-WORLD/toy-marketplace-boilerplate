@@ -12,6 +12,7 @@ import { CollectibleTradeActions } from '../_components/Actions';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { CollectibleImage } from './_components/Image';
 import { LinkIcon } from '@0xsequence/design-system';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { useFloorOrder } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 
@@ -106,7 +107,7 @@ export default function Page() {
                   )}
                   <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white">
                     {collectionDataOrder?.order?.marketplace ===
-                    'sequence_marketplace_v2'
+                    MarketplaceKind.sequence_marketplace_v2
                       ? 'Sequence marketplace'
                       : collectionDataOrder?.order?.marketplace}
                   </p>
