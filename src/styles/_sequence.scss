@@ -13019,7 +13019,7 @@
 }
 
 .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12kf._1qxj1ib9 {
-  color: black;
+  color: white;
 }
 
 .modal_dialogContent_narrow__1ypl6nt2.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs {
@@ -13029,4 +13029,140 @@
 .fyvr11r3.fyvr11ig.fyvr11ko.fyvr11jo.fyvr11jg.fyvr12j9.fyvr11lw._1qxj1ib9 {
   transform: translateY(4px);
   font-size: 0.75rem;
+}
+
+@font-face {
+  font-family: X-Heighting;
+  src: url('/market/fonts/X-Heighting.otf');
+}
+
+._5b32m96 {
+  width: 561px !important;
+  min-width: 561px;
+  box-shadow: none !important;
+  font-family: X-Heighting;
+  font-size: 24px;
+  @media (max-width: 768px) {
+    width: 94% !important;
+    border-radius: 0;
+    margin-top: 0;
+    min-width: 94% !important;
+    border-radius: 25px;
+  }
+
+  button {
+    background: linear-gradient(90deg, #f47469 0%, #db5179 100%);
+    color: white;
+    font-family: X-Heighting;
+    font-size: 20px;
+    filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        display: none;
+      }
+    }
+    span {
+      color: white;
+    }
+  }
+
+  input {
+    font-size: 21px;
+    position: relative;
+    border-radius: 25px;
+  }
+
+  svg {
+    path {
+      color: white;
+    }
+  }
+
+  ._1dizidw1 {
+    path {
+      color: white;
+    }
+  }
+
+  .fyvr11l8 {
+    > input {
+      height: 58px;
+      width: 40px;
+    }
+  }
+
+  .fyvr11tl {
+    background: var();
+  }
+
+  button {
+    &._140wn8n15 {
+      background: none;
+      border: none;
+    }
+  }
+
+  ._1acm19y1 {
+    border-radius: 25px;
+    position: relative;
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      border-radius: 31px;
+      border: 1px dashed #fff;
+    }
+  }
+
+  .fyvr1140 {
+    .fyvr113k.fyvr11cg.fyvr11mk.fyvr11no.fyvr11ow.fyvr11l8 {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        background: url('/market/images/mogal-bg.png'),
+          linear-gradient(90deg, #f47469 0%, #db5179 100%);
+        background-size: cover;
+        background-position: center;
+        z-index: -2;
+      }
+    }
+  }
+  .fyvr11no.fyvr12k9.fyvr11ow.fyvr11jc.fyvr11l8 {
+    .fyvr11r2.fyvr11ic.fyvr11ko.fyvr11jo.fyvr11j4._1qxj1ib9 {
+      position: relative;
+      transform: translateX(-15px);
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 35px;
+        height: 35px;
+        transform: translate(125%, -50%);
+        background-image: url('/market/images/teddy-logo.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
 }
