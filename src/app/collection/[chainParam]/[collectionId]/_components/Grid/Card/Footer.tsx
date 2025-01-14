@@ -57,7 +57,7 @@ const Order = ({ height, order }: OrderProps) => {
   const currency = currencies?.find(
     (c) => c.contractAddress === order.priceCurrencyAddress,
   );
-
+  console.log('currency', order);
   return (
     <Flex className={cn(height, 'flex-1 items-center justify-between')}>
       {/* <Flex className="items-center gap-2">
@@ -84,7 +84,10 @@ const Order = ({ height, order }: OrderProps) => {
       {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
         <Image
           className="w-[1.375rem] aspect-square mb:w-[25px]"
-          src={setMarketPlaceLogo(order.marketplace)}
+          src={setMarketPlaceLogo(
+            order.marketplace,
+            order.collectionContractAddress,
+          )}
           width={22}
           height={22}
           alt={order.marketplace}

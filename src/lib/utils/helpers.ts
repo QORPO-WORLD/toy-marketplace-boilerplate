@@ -50,7 +50,13 @@ export const getTag = (collection: string) => {
   }
 };
 
-export const setMarketPlaceLogo = (marketplace?: string) => {
+export const setMarketPlaceLogo = (
+  marketplace?: string,
+  collectionAddress?: string,
+) => {
+  if ('0xbd19b4c3c1e745e982f4d7f8bdf983d407e68a46' === collectionAddress) {
+    return '/market/icons/element-circle.svg';
+  }
   switch (marketplace) {
     case 'opensea':
       return '/market/icons/opensea-logo.svg';
