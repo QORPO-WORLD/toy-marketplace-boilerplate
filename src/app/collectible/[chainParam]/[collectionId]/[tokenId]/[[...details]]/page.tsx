@@ -15,6 +15,7 @@ import { LinkIcon } from '@0xsequence/design-system';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import { useFloorOrder } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const {
@@ -24,6 +25,7 @@ export default function Page() {
     collectionMetadata,
     tokenId,
   } = useCollectableData();
+  const router = useRouter();
 
   const { data: collectionDataOrder } = useFloorOrder({
     chainId: String(chainId),
@@ -38,7 +40,19 @@ export default function Page() {
     <>
       <BannerImage logo={false}>
         <div className="pt-[11.0625rem] flex px-[11.1875rem] gap-[1.3125rem] mb:flex-col mb:px-4 mb:pt-[123px] pb-8">
-          <div className="flex flex-col gap-[1.625rem] w-[37.384412153%] shrink-0 mb:w-full">
+          <div className="flex flex-col gap-[1.625rem] w-[37.384412153%] shrink-0 mb:w-full relative">
+            <button
+              className="absolute top-0 left-0 translate-y-[-125%] flex items-center gap-2"
+              onClick={() => router.back()}
+            >
+              <img
+                className="w-[1.3rem] h-[1.875rem] block"
+                src="/market/icons/gao-back-icon.svg"
+                alt="back"
+                loading="lazy"
+              />
+              <p className="text-white">GO BACK</p>
+            </button>
             <CollectibleImage
               id={collectibleMetadata.data?.tokenId}
               src={collectibleMetadata.data?.image}
