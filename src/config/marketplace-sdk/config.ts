@@ -14,7 +14,6 @@ const embeddedWallet = env.NEXT_PUBLIC_WAAS_CONFIG_KEY
 export const config = {
   projectId: env.NEXT_PUBLIC_SEQUENCE_PROJECT_ID,
   projectAccessKey: env.NEXT_PUBLIC_SEQUENCE_ACCESS_KEY,
-  defaultTheme: 'dark',
   wallet: {
     walletConnectProjectId: env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
     embedded: embeddedWallet,
