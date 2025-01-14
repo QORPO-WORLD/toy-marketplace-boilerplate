@@ -104,10 +104,10 @@ const CollectionHeader = ({
             backgroundImage: `url(${getCollectionBg(collectionAddress)})`,
           }}
         >
-          <div className="relative w-[55%]">
+          <div className="relative w-[55%] mb:w-[100%] mb:flex mb:flex-col-reverse mb:gap-6">
             <p className="title text-center text-white leading-none">{name}</p>
             {collection && (
-              <div className="absolute bottom-0 left-0 translate-x-[-115%]">
+              <div className="absolute bottom-0 left-0 translate-x-[-115%] mb:translate-x-0 mb:static">
                 <CollectionBadge collectionData={collection} />
               </div>
             )}
