@@ -41,7 +41,7 @@ export const FAQData: FAQData[] = [
   {
     question: 'When will the Airdrop happen?',
     answer:
-      'We don’t know. It will be announced soon. For more official announcements, follow us on our socials.',
+      'Airdrop will be announced soon. For more official announcements, follow us on our socials.',
   },
   {
     question:

@@ -111,6 +111,14 @@ const CollectionSidebarContent = ({
   ];
 
   const filterSwitches = Array.from(filterOptions);
+
+  const isProperties =
+    collectableFilters.data?.length &&
+    collectableFilters.data.length <= 1 &&
+    !!collectableFilters.data.find(
+      (filter) => filter.name === 'Daily Diamond Points',
+    );
+
   return (
     <ScrollArea.Base className="h-full">
       <Flex
@@ -129,7 +137,8 @@ const CollectionSidebarContent = ({
           </Flex>
         ) : null}
 
-        {collectableFilters.data?.length || collectableFilters.isLoading ? (
+        {!isProperties &&
+        (collectableFilters.data?.length || collectableFilters.isLoading) ? (
           <Flex className="flex-col gap-3 p-3 pl-1">
             <PropertyFilters
               filters={collectableFilters.data}

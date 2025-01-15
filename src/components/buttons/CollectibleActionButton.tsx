@@ -149,7 +149,7 @@ export const CollectibleActionButton = ({
       },
     },
     order: {
-      label: 'Place offer',
+      label: 'Make offer',
       onClick: () => {
         showMakeOfferModal({
           collectionAddress,
@@ -160,7 +160,7 @@ export const CollectibleActionButton = ({
       },
     },
     listing: {
-      label: 'Create Listing',
+      label: 'Place offer',
       onClick: () => {
         showCreateListingModal({
           collectionAddress,
