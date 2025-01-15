@@ -7,7 +7,6 @@ type AddressesLinksProps = {
 };
 
 export const AddressesLinks = ({ addresses }: AddressesLinksProps) => {
-  console.log('AddressesLinks', addresses);
   return (
     <Flex className="flex-col gap-2 p-3 pl-1">
       {addresses
