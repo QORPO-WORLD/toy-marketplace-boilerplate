@@ -23,7 +23,7 @@ export const NotConnectedWarning = ({ isConnected }: Props) => {
         Please connect your wallet to continue
       </Text>
 
-      <ConnectButton />
+      {/* <ConnectButton /> */}
     </Flex>
   );
 };

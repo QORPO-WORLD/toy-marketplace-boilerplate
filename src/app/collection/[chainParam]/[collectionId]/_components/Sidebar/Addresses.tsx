@@ -9,9 +9,11 @@ type AddressesLinksProps = {
 export const AddressesLinks = ({ addresses }: AddressesLinksProps) => {
   return (
     <Flex className="flex-col gap-2 p-3 pl-1">
-      {addresses.map((a, i) => (
-        <AddressBox key={i} {...a} />
-      ))}
+      {addresses
+        .filter((a) => a.label !== 'Orderbook')
+        .map((a, i) => (
+          <AddressBox key={i} {...a} />
+        ))}
     </Flex>
   );
 };

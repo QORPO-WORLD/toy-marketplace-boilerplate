@@ -84,7 +84,10 @@ const Order = ({ height, order }: OrderProps) => {
       {order.marketplace && setMarketPlaceLogo(order.marketplace) && (
         <Image
           className="w-[1.375rem] aspect-square mb:w-[25px]"
-          src={setMarketPlaceLogo(order.marketplace)}
+          src={setMarketPlaceLogo(
+            order.marketplace,
+            order.collectionContractAddress,
+          )}
           width={22}
           height={22}
           alt={order.marketplace}

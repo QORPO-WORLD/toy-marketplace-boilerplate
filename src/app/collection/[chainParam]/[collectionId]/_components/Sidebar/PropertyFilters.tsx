@@ -47,6 +47,8 @@ export const PropertyFilters = ({ filters, loading }: PropertyFiltersProps) => {
       collapsible
     >
       {filters.map((filter, index) => {
+        if (filter.values && filter.values.length <= 1) return null;
+        if (filter.name === 'Daily Diamond Points') return null;
         switch (filter.type) {
           case PropertyType.STRING:
           case PropertyType.ARRAY:

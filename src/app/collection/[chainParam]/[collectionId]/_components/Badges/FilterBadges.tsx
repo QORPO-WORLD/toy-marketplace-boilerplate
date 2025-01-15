@@ -47,7 +47,7 @@ export const FilterBadges = observer(
     };
 
     return (
-      <div className="sticky z-10 bg-[#CBBFD0] py-4 px-2 top-[6rem] flex flex-row-reverse items-center mb:2rem">
+      <div className="sticky z-10 bg-[#CBBFD0] py-4 px-2 top-[6rem] flex flex-row-reverse items-center mb:top-[3rem]">
         <Input.Search
           className="max-w-[20rem]"
           id="property-search"

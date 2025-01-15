@@ -158,7 +158,7 @@ export const CollectibleTradeActions = ({
             <Text className="text-inherit">Buy</Text>
           </Button>
         )}
-        {!offerDisabled && (
+        {!offerDisabled && listingDisabled && (
           <Button
             className="btn-main variant-black flex-1 "
             onClick={onClickOffer}
@@ -169,30 +169,29 @@ export const CollectibleTradeActions = ({
             <Text className="text-inherit">make Offer</Text>
           </Button>
         )}
-      </Flex>
-      {/* <Flex className="flex-row gap-4">
-        <Button
-          className="w-full justify-between"
-          size="lg"
-          loading={isLoading}
-          disabled={sellDisabled}
-          onClick={onClickSell}
-        >
-          <Text className="text-inherit">Sell</Text>
-        </Button>
-
-        <Flex className="w-full flex-col gap-3">
+        {!sellDisabled && (
           <Button
-            className="w-full justify-between"
+            className="btn-main w-full "
+            size="lg"
+            loading={isLoading}
+            disabled={sellDisabled}
+            onClick={onClickSell}
+          >
+            <Text className="text-inherit text-center">Sell</Text>
+          </Button>
+        )}
+        {!listingDisabled && (
+          <Button
+            className="btn-main w-full variant-black "
             onClick={onClickList}
             size="lg"
             loading={false}
             disabled={listingDisabled}
           >
-            <Text className="text-inherit">List</Text>
+            <Text className="text-inherit text-center">Place offer</Text>
           </Button>
-        </Flex>
-      </Flex> */}
+        )}
+      </Flex>
     </Flex>
   );
 };
