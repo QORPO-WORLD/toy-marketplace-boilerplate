@@ -1,6 +1,9 @@
 import { Flex, Text, cn } from '~/components/ui';
 
-import { setMarketPlaceLogo } from '../../../../../../../lib/utils/helpers';
+import {
+  getCurrencyLogoByChainId,
+  setMarketPlaceLogo,
+} from '../../../../../../../lib/utils/helpers';
 import type { TokenMetadata } from '@0xsequence/indexer';
 import {
   type Order as OrderType,
@@ -59,7 +62,9 @@ const Order = ({ height, order }: OrderProps) => {
   );
 
   return (
-    <Flex className={cn(height, 'flex-1 items-center justify-between')}>
+    <Flex
+      className={cn(height, 'flex-1 items-end justify-between gap-[0.4rem]')}
+    >
       {/* <Flex className="items-center gap-2">
         <Avatar.Base size="xs">
           <Avatar.Image src={currency?.imageUrl} />
@@ -75,7 +80,12 @@ const Order = ({ height, order }: OrderProps) => {
       <Badge variant="success">
         Stock: <span className="ml-1">{order.quantityRemainingFormatted}</span>
       </Badge> */}
-      <p className="text-[#483F50] text-center font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
+      <img
+        className="w-[1.375rem] aspect-square mb:w-[25px]"
+        src={getCurrencyLogoByChainId(order.chainId)}
+        alt="logo"
+      />
+      <p className="text-[#483F50] mr-auto font-DMSans text-[1.25rem] font-normal leading-[1.08675rem] uppercase mb:text-[24px]">
         {Number(order.priceAmountFormatted) <= 0.00001
           ? '0.00001'
           : Number(order.priceAmountFormatted).toFixed(3)}{' '}

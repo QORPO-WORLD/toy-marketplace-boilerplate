@@ -40,7 +40,7 @@ const Inventory = () => {
         <Text className="text-center font-medium text-foreground/50">
           Connect your wallet to see your inventory
         </Text>
-        <ConnectButton variant="secondary" />
+        {/* <ConnectButton variant="secondary" /> */}
       </Flex>
     );
   }
