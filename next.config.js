@@ -12,6 +12,7 @@ const config = {
     bodyParser: {
       sizeLimit: '10mb', // Increase from default
     },
+    responseLimit: false,
   },
 };
 
