@@ -20,6 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
+        <title>TOY ⎸ OWN YOUR STORY</title>
 
         <link rel="icon" href={faviconUrl} />
         <link rel="shortcut icon" href={faviconUrl} />
@@ -46,7 +47,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   return {
     title: {
       template: marketplaceConfig.titleTemplate ?? '%s',
-      default: marketplaceConfig.title ?? '',
+      default: 'TOY ⎸ OWN YOUR STORY',
     },
     description: marketplaceConfig.shortDescription ?? '',
     manifest: marketplaceConfig.manifestUrl,

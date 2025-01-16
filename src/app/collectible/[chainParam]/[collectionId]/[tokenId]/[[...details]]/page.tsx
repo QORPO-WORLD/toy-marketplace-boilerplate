@@ -36,6 +36,24 @@ export default function Page() {
 
   const explorerUrl = getChain(chainId)?.blockExplorer?.rootUrl;
 
+  const getMarketPlaceName = (
+    marketplace: string,
+    collectionAddress: string,
+  ) => {
+    console.log('marketplace', collectionAddress);
+    if ('0xbd19b4c3c1e745e982f4d7f8bdf983d407e68a46' === collectionAddress) {
+      return 'Element';
+    }
+    switch (marketplace) {
+      case 'opensea':
+        return 'Opensea';
+      case 'sequence_marketplace_v2':
+        return 'Sequence marketplace';
+      default:
+        return '';
+    }
+  };
+
   return (
     <>
       <BannerImage logo={false}>
@@ -108,11 +126,13 @@ export default function Page() {
                 <div className="flex items-center gap-[0.5625rem]">
                   {setMarketPlaceLogo(
                     collectionDataOrder?.order?.marketplace,
+                    collectionDataOrder.order.collectionContractAddress,
                   ) && (
                     <Image
                       className="rounded-full w-[31px] aspect-square"
                       src={setMarketPlaceLogo(
                         collectionDataOrder?.order?.marketplace,
+                        collectionDataOrder.order.collectionContractAddress,
                       )}
                       width={22}
                       height={22}
@@ -120,10 +140,10 @@ export default function Page() {
                     />
                   )}
                   <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white">
-                    {collectionDataOrder?.order?.marketplace ===
-                    MarketplaceKind.sequence_marketplace_v2
-                      ? 'Sequence marketplace'
-                      : collectionDataOrder?.order?.marketplace}
+                    {getMarketPlaceName(
+                      collectionDataOrder?.order?.marketplace,
+                      collectionDataOrder.order.collectionContractAddress,
+                    )}
                   </p>
                 </div>
               )}
