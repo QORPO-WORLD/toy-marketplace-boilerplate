@@ -70,7 +70,7 @@ export default function Page() {
         return '';
     }
   };
-  console.log(lowestListing);
+
   return (
     <>
       <BannerImage logo={false}>
