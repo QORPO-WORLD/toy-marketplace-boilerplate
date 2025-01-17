@@ -80,6 +80,24 @@ export const generateChainNameByChainId = (chainId: number) => {
     case 56:
       return 'Binance Smart Chain';
     case 21000000:
+      return 'TOY TESTNET';
+    default:
+      return 'Unknown';
+  }
+};
+export const getCurrencyByChainId = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return 'ETH';
+    case 4:
+      return 'ETH';
+    case 137:
+      return 'MATIC';
+    case 80001:
+      return 'MATIC';
+    case 56:
+      return 'BNB';
+    case 21000000:
       return 'TOY';
     default:
       return 'Unknown';
@@ -96,5 +114,24 @@ export const getCreatedDateByCollectionAddress = (
       return 'FEB 2024';
     default:
       return 'DEC 2024';
+  }
+};
+
+export const getCurrencyLogoByChainId = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return '/market/icons/ETH-logo.png';
+    case 4:
+      return '/market/icons/ETH-logo.png';
+    case 137:
+      return 'MATIC';
+    case 80001:
+      return 'MATIC';
+    case 56:
+      return '/market/icons/bnb-logo.png';
+    case 21000000:
+      return '/market/icons/toy-market-logo.svg';
+    default:
+      return '/market/icons/toy-market-logo.svg';
   }
 };

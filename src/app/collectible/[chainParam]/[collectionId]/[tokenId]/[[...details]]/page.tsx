@@ -4,6 +4,8 @@ import ENSName from '../../../../../../components/ENSName';
 import { getChain } from '../../../../../../lib/utils/getChain';
 import {
   getCollectionLogo,
+  getCurrencyByChainId,
+  getCurrencyLogoByChainId,
   getTag,
   setMarketPlaceLogo,
 } from '../../../../../../lib/utils/helpers';
@@ -12,10 +14,15 @@ import { CollectibleTradeActions } from '../_components/Actions';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import { CollectibleImage } from './_components/Image';
 import { LinkIcon } from '@0xsequence/design-system';
+import { useOpenConnectModal } from '@0xsequence/kit';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
-import { useFloorOrder } from '@0xsequence/marketplace-sdk/react';
+import {
+  useFloorOrder,
+  useLowestListing,
+} from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAccount } from 'wagmi';
 
 export default function Page() {
   const {
@@ -26,6 +33,17 @@ export default function Page() {
     tokenId,
   } = useCollectableData();
   const router = useRouter();
+  const { isConnected } = useAccount();
+  const { setOpenConnectModal } = useOpenConnectModal();
+
+  const { data: lowestListing } = useLowestListing({
+    chainId: String(chainId),
+    collectionAddress: collectionId,
+    tokenId,
+    query: {
+      enabled: true,
+    },
+  });
 
   const { data: collectionDataOrder } = useFloorOrder({
     chainId: String(chainId),
@@ -40,7 +58,6 @@ export default function Page() {
     marketplace: string,
     collectionAddress: string,
   ) => {
-    console.log('marketplace', collectionAddress);
     if ('0xbd19b4c3c1e745e982f4d7f8bdf983d407e68a46' === collectionAddress) {
       return 'Element';
     }
@@ -110,49 +127,82 @@ export default function Page() {
               <p className="text-[2rem] font-normal leading-[86.94%] uppercase text-white mb:text-[20px]">
                 {data?.name}
               </p>
-              {/* <div>
-              <div>
-                <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white font-bold">
-                  Price
-                </p>
-                <div>
-                  <p className="">
-                    {lowestListing?.order?.priceAmountFormatted} TOY
-                  </p>
-                </div>
-              </div>
-            </div> */}
-              {collectionDataOrder?.order?.marketplace && (
-                <div className="flex items-center gap-[0.5625rem]">
-                  {setMarketPlaceLogo(
-                    collectionDataOrder?.order?.marketplace,
-                    collectionDataOrder.order.collectionContractAddress,
-                  ) && (
-                    <Image
-                      className="rounded-full w-[31px] aspect-square"
-                      src={setMarketPlaceLogo(
+              {lowestListing?.order &&
+                collectionDataOrder?.order?.marketplace && (
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white font-bold mb-2">
+                        Price
+                      </p>
+                      <div className="flex items-end gap-[0.5625rem]">
+                        <div className="rounded-full overflow-hidden">
+                          <img
+                            className="w-[1.9375rem] aspect-square"
+                            src={getCurrencyLogoByChainId(
+                              lowestListing?.order.chainId,
+                            )}
+                            alt="logo"
+                          />
+                        </div>
+                        <p className="text-white font-DMSans text-[1.6rem] font-bold leading-none">
+                          {Number(lowestListing?.order.priceAmountFormatted) <=
+                          0.00001
+                            ? '0.00001'
+                            : Number(
+                                lowestListing?.order.priceAmountFormatted,
+                              ).toFixed(3)}{' '}
+                          {getCurrencyByChainId(lowestListing?.order.chainId)}
+                        </p>
+                        <p className="text-white font-DMSans self-end leading-[1.2]">
+                          {Number(lowestListing?.order.priceUSD) <= 0.00001
+                            ? '0.00001'
+                            : Number(lowestListing?.order.priceUSD).toFixed(
+                                2,
+                              )}{' '}
+                          $USD
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-[0.5625rem]">
+                      {setMarketPlaceLogo(
                         collectionDataOrder?.order?.marketplace,
                         collectionDataOrder.order.collectionContractAddress,
+                      ) && (
+                        <Image
+                          className="rounded-full w-[1.9375rem] aspect-square"
+                          src={setMarketPlaceLogo(
+                            collectionDataOrder?.order?.marketplace,
+                            collectionDataOrder.order.collectionContractAddress,
+                          )}
+                          width={22}
+                          height={22}
+                          alt={collectionDataOrder?.order?.marketplace || ''}
+                        />
                       )}
-                      width={22}
-                      height={22}
-                      alt={collectionDataOrder?.order?.marketplace || ''}
-                    />
-                  )}
-                  <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white">
-                    {getMarketPlaceName(
-                      collectionDataOrder?.order?.marketplace,
-                      collectionDataOrder.order.collectionContractAddress,
-                    )}
-                  </p>
-                </div>
-              )}
+                      <p className="font-DMSans text-[16px] capitalize leading-[103.45%] text-white">
+                        {getMarketPlaceName(
+                          collectionDataOrder?.order?.marketplace,
+                          collectionDataOrder.order.collectionContractAddress,
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                )}
               <div className="mb:hidden">
-                <CollectibleTradeActions
-                  chainId={chainId}
-                  collectionAddress={collectionId}
-                  tokenId={tokenId}
-                />
+                {isConnected ? (
+                  <CollectibleTradeActions
+                    chainId={chainId}
+                    collectionAddress={collectionId}
+                    tokenId={tokenId}
+                  />
+                ) : (
+                  <button
+                    className="btn-main"
+                    onClick={() => setOpenConnectModal(true)}
+                  >
+                    Connect wallet
+                  </button>
+                )}
               </div>
             </div>
             <div className=" hidden mb:block">

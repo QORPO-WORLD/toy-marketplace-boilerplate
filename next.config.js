@@ -1,16 +1,4 @@
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
-import dotenv from 'dotenv';
-import path from 'path';
-
-// Load environment variables based on NODE_ENV
-dotenv.config({
-  path: path.resolve(
-    process.cwd(),
-    process.env.NODE_ENV === 'production'
-      ? '.env.production'
-      : '.env.development',
-  ),
-});
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
@@ -20,6 +8,12 @@ const config = {
   basePath: '/market',
   assetPrefix: '/market/',
   reactStrictMode: true,
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // Increase from default
+    },
+    responseLimit: false,
+  },
 };
 
 export default withVanillaExtract(config);
