@@ -32,6 +32,14 @@ function NavigationMenu({ onClose }: { onClose: () => void }) {
             <Link href="/" onClick={onClose}>
               <span>marketplace</span>
             </Link>
+            <div className="flex items-center">
+              <img
+                className="w-24"
+                src="/market/icons/toy-logo.svg"
+                alt="logo"
+              />
+              <p className="text-[#E7E6FB] text-4xl font-main">TESTNET</p>
+            </div>
           </li>
         </ul>
       </div>

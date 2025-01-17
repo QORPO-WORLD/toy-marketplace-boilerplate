@@ -39,7 +39,11 @@ export const FloatingBanner = ({
             <p className="title text-white text-center">check our</p>
             <p className="title text-yellow text-center">collections</p>
           </div>
-          <div className="flex h-full items-end justify-center translate-x-[-2rem] mb:hidden">
+          <div className="flex justify-center items-center bg-[#DE5578] rounded-md w-fit m-auto px-4 py-2">
+            <img className="w-24" src="/market/icons/toy-logo.svg" alt="logo" />
+            <p className="text-[#E7E6FB] text-4xl">TESTNET</p>
+          </div>
+          <div className="flex h-full items-end justify-center translate-x-[-2rem] translate-y-[5rem] mb:hidden">
             <motion.div
               initial={{ transform: 'translate(-70%, -150%)' }}
               animate={{ transform: 'translate(8rem, 2.5rem)' }}
