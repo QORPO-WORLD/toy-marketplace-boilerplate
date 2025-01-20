@@ -5,6 +5,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAccount, useBalance } from 'wagmi';
 
+type BalanceProps = {
+  data: {
+    loyalty_points: string;
+  };
+};
+
 function Balance() {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -12,8 +18,8 @@ function Balance() {
   const { data: walletData } = useBalance({
     address,
   });
-  const { isPending, error, data } = useQuery({
-    queryKey: ['qorpobalance'],
+  const { isPending, error, data } = useQuery<BalanceProps>({
+    queryKey: ['qorpobalance', address],
     queryFn: () =>
       fetch(
         `https://devapi.playontoy.com/api/v1/me/diamond-points/?wallet_address=${address}`,
@@ -87,11 +93,11 @@ function Balance() {
                   alt="logo"
                 />
                 <p className=" text-xl font-bold">
-                  {data.data.loyalty_points} DP
+                  {data?.data.loyalty_points} DP
                 </p>
               </div>
             </li>
-            {/* <li className="py-3 px-8 border-dashed border-text">
+            <li className="py-3 px-8 border-dashed border-text">
               <p className="opacity-50 font-bold uppercase">CCash</p>
               <div className="flex items-center gap-2">
                 <img
@@ -99,9 +105,9 @@ function Balance() {
                   src="/market/images/logos/ccash.png"
                   alt="logo"
                 />
-                <p className=" text-xl font-bold">10.569 TOY</p>
+                <p className=" text-xl font-bold">CC</p>
               </div>
-            </li> */}
+            </li>
           </ul>
         </div>
       )}
