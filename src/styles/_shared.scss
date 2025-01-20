@@ -26,6 +26,22 @@
   }
 }
 
+.logo-shadow {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.tooltip {
+  clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+  transition: clip-path 0.3s ease;
+  animation: appear 0.6s ease forwards;
+
+  @keyframes appear {
+    to {
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+    }
+  }
+}
+
 // .btn {
 //   font-size: 1.5rem;
 //   font-style: normal;

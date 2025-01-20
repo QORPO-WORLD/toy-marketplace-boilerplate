@@ -12,6 +12,7 @@ import {
 import { BannerImage } from '../../../../../_landing/Hero/BannerImage';
 import { CollectibleTradeActions } from '../_components/Actions';
 import { useCollectableData } from '../_hooks/useCollectableData';
+import DPCard from './_components/DPCard';
 import { CollectibleImage } from './_components/Image';
 import { LinkIcon } from '@0xsequence/design-system';
 import { useOpenConnectModal } from '@0xsequence/kit';
@@ -212,7 +213,7 @@ export default function Page() {
                 tokenId={tokenId}
               />
             </div>
-            <div className="flex flex-col w-full  py-[1.75rem] px-[2.5625rem] rounded-[25px] border border-white bg-main-gradient backdrop-blur-[10px] text-white text-[16px] leading-[2.07]">
+            <div className="flex flex-col w-full font-DMSans  py-[1.75rem] px-[2.5625rem] rounded-[25px] border border-white bg-main-gradient backdrop-blur-[10px] text-white text-[16px] leading-[2.07]">
               <div className="flex items-center justify-between">
                 <p>Collection ID:</p>
                 <a
@@ -226,9 +227,38 @@ export default function Page() {
                 </a>
               </div>
               <div className="flex items-center justify-between">
+                <p>Owner Address:</p>
+                <a
+                  className="flex items-center gap-2"
+                  href={`${explorerUrl}address/${collectionDataOrder?.order?.createdBy}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkIcon />
+                  <ENSName
+                    address={collectionDataOrder?.order?.createdBy}
+                    truncateAt={5}
+                  />
+                </a>
+              </div>
+              <div className="flex items-center justify-between">
                 <p>Token ID:</p>
                 <p>{data?.tokenId}</p>
               </div>
+            </div>
+            <div className="grid grid-cols-3 gap-7">
+              <DPCard
+                title="Sell"
+                tooltip="When a sale is finalized, you’ll earn DIAMOND points as a reward."
+              />
+              <DPCard
+                title="Buy"
+                tooltip="Buy Assets and earn DIAMOND points as a reward."
+              />
+              <DPCard
+                title="List"
+                tooltip="list your asset on the market, and once it’s sold, you’ll earn DIAMOND points."
+              />
             </div>
           </div>
         </div>

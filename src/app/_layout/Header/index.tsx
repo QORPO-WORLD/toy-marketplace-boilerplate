@@ -2,6 +2,7 @@
 
 import { cn } from '$ui';
 import BurgerBtn from '../../../components/ui/BurgerBtn/BurgerBtn';
+import Balance from './Balance';
 import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { WalletButton } from './Buttons/WalletButton';
@@ -12,6 +13,9 @@ export const Header = () => {
   return (
     <header className="flex items-center justify-between pt-[1.44rem] px-[2.5rem] absolute w-full mb:px-4">
       <HeaderLogo />
+      <div className="ml-[3.2rem] h-full relative self-start w-[20rem] mr-auto">
+        <Balance />
+      </div>
       <div className="flex items-center text-white uppercase mb:hidden">
         {/* <a
           className="block py-[0.88rem] px-[1.75rem]"
