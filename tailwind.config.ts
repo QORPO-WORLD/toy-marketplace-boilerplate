@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { DM_Sans } from 'next/font/google';
+import { text } from 'stream/consumers';
 import { type Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
@@ -17,6 +18,7 @@ export default {
         ring: 'hsl(var(--ring))',
         main: '#F47469',
         yellow: '#F3DAAA',
+        text: '#483F50',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
@@ -116,7 +118,6 @@ export default {
       threedDropShadow: {
         unset: 'unset',
         none: 'none',
-
         1: 'hsl(var(--primary))',
       },
       maxLines: {
