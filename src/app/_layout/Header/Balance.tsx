@@ -22,7 +22,7 @@ function Balance() {
     queryKey: ['qorpobalance', address],
     queryFn: () =>
       fetch(
-        `https://devapi.playontoy.com/api/v1/me/diamond-points/?wallet_address=${address}`,
+        `https://devapi.playontoy.com/api/v1/me/balances/?wallet_address=${address}`,
       ).then((res) => res.json()),
   });
 
