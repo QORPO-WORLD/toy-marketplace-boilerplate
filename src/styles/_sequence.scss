@@ -9,23 +9,23 @@
   box-sizing: border-box;
 }
 :root {
-  --seq-blur-blur: blur(12.5px);
+  --seq-blur-blur: blur(0.7813rem);
   --seq-blur-none: none;
   --seq-border-widths-none: 0;
-  --seq-border-widths-thin: 0.075rem;
-  --seq-border-widths-thick: 0.125rem;
+  --seq-border-widths-thin: 1.2px;
+  --seq-border-widths-thick: 2px;
   --seq-fonts-inherit: inherit;
   --seq-fonts-body: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
     Cantarell, Noto Sans, sans-serif, 'Helvetica Neue', Arial;
   --seq-fonts-mono: 'iAWriter Mono', Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
   --seq-font-sizes-inherit: inherit;
-  --seq-font-sizes-xsmall: 0.9375rem !important;
-  --seq-font-sizes-small: 1.125rem !important;
-  --seq-font-sizes-normal: 1.3125rem !important;
-  --seq-font-sizes-medium: 1.5rem !important;
-  --seq-font-sizes-large: 1.875rem !important;
-  --seq-font-sizes-xlarge: 2.8125rem !important;
+  --seq-font-sizes-xsmall: 15px !important;
+  --seq-font-sizes-small: 18px !important;
+  --seq-font-sizes-normal: 21px !important;
+  --seq-font-sizes-medium: 24px !important;
+  --seq-font-sizes-large: 30px !important;
+  --seq-font-sizes-xlarge: 45px !important;
   --seq-font-weights-inherit: inherit;
   --seq-font-weights-normal: 400;
   --seq-font-weights-medium: 500;
@@ -35,41 +35,41 @@
   --seq-letter-spacings-none: 0;
   --seq-letter-spacings-normal: 0.01em;
   --seq-letter-spacings-wide: 0.03em;
-  --seq-line-heights-4: 1rem;
-  --seq-line-heights-5: 1.25rem;
-  --seq-line-heights-6: 1.5rem;
-  --seq-line-heights-7: 1.75rem;
-  --seq-line-heights-9: 2.25rem;
+  --seq-line-heights-4: 16px;
+  --seq-line-heights-5: 20px;
+  --seq-line-heights-6: 24px;
+  --seq-line-heights-7: 28px;
+  --seq-line-heights-9: 36px;
   --seq-line-heights-inherit: inherit;
   --seq-opacity-0: 0;
   --seq-opacity-50: 0.5;
   --seq-opacity-80: 0.8;
   --seq-opacity-100: 1;
   --seq-radii-none: 0;
-  --seq-radii-xs: 0.25rem;
-  --seq-radii-sm: 0.5rem;
-  --seq-radii-md: 0.75rem;
-  --seq-radii-lg: 1rem;
+  --seq-radii-xs: 4px;
+  --seq-radii-sm: 8px;
+  --seq-radii-md: 12px;
+  --seq-radii-lg: 16px;
   --seq-radii-circle: 9999px;
   --seq-space-0: 0;
-  --seq-space-1: 0.25rem;
-  --seq-space-2: 0.5rem;
-  --seq-space-3: 0.75rem;
-  --seq-space-4: 1rem;
-  --seq-space-5: 1.25rem;
-  --seq-space-6: 1.5rem;
-  --seq-space-7: 1.75rem;
-  --seq-space-8: 2rem;
-  --seq-space-9: 2.25rem;
-  --seq-space-10: 2.5rem;
-  --seq-space-12: 3rem;
-  --seq-space-14: 3.5rem;
-  --seq-space-16: 4rem;
-  --seq-space-18: 4.5rem;
-  --seq-space-20: 5rem;
-  --seq-space-0_25: 0.0625rem;
-  --seq-space-0_5: 0.125rem;
-  --seq-space-1_5: 0.375rem;
+  --seq-space-1: 4px;
+  --seq-space-2: 8px;
+  --seq-space-3: 12px;
+  --seq-space-4: 16px;
+  --seq-space-5: 20px;
+  --seq-space-6: 24px;
+  --seq-space-7: 28px;
+  --seq-space-8: 32px;
+  --seq-space-9: 36px;
+  --seq-space-10: 40px;
+  --seq-space-12: 48px;
+  --seq-space-14: 56px;
+  --seq-space-16: 64px;
+  --seq-space-18: 72px;
+  --seq-space-20: 80px;
+  --seq-space-0_25: 1px;
+  --seq-space-0_5: 2px;
+  --seq-space-1_5: 6px;
   --seq-z-index-0: 0;
   --seq-z-index-1: 1;
   --seq-z-index-10: 10;
@@ -13028,7 +13028,7 @@
 
 .fyvr11r3.fyvr11ig.fyvr11ko.fyvr11jo.fyvr11jg.fyvr12j9.fyvr11lw._1qxj1ib9 {
   transform: translateY(4px);
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 
 @font-face {
@@ -13168,7 +13168,7 @@
 }
 
 .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11jk.fyvr12kl._1qxj1ib9 {
-  font-size: 0.8rem;
+  font-size: 12.8px;
 }
 
 .fyvr11ul._1vqx0w91._1vqx0w90.fyvr12g.fyvr164._1vqx0w92 {
@@ -13176,15 +13176,15 @@
 }
 
 .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr12j9._1qxj1ib9 {
-  font-size: 0.8rem;
+  font-size: 12.8px;
 }
 
 .fyvr11r3.fyvr11iw.fyvr11kg.fyvr11jw.fyvr11jk.fyvr12il._1qxj1ib9 {
-  font-size: 1.3rem;
+  font-size: 20.8px;
 }
 
 .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr12kl._1qxj1ib9 {
-  font-size: 1.2rem;
+  font-size: 19.2px;
 }
 
 .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12kf._1qxj1ib9 {
@@ -13201,7 +13201,7 @@
 }
 
 .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11j4.fyvr12k9._1qxj1ib9 {
-  font-size: 0.8rem;
+  font-size: 12.8px;
 }
 
 input {
@@ -13220,13 +13220,25 @@ input {
 }
 
 .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12k9._1qxj1ib9 {
-  font-size: 0.8rem;
+  font-size: 12.8px;
 }
 
 .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11jc.fyvr11kw.fyvr12g.fyvr12k9._1qxj1ib9 {
-  font-size: 0.8rem;
+  font-size: 12.8px;
 }
 
 .styles_transferModalContent__i1qz9g0.modal_dialogContent_wide__1ypl6nt3.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs.fyvr1vo.fyvr1xs.fyvr1zw.fyvr1120 {
   background: #4b4253 !important;
+}
+
+.rdp-chevron {
+  fill: white !important;
+}
+
+.rdp-day.rdp-today {
+  color: white !important;
+}
+
+.fyvr12j9 {
+  color: red !important;
 }

@@ -5,16 +5,36 @@ import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAccount, useBalance } from 'wagmi';
 
-type BalanceProps = {
-  data: {
-    loyalty_points: string;
+interface BalanceData {
+  dp: {
+    id: string;
+    last_refresh_points: number;
+    loyalty_points: number;
+    loyalty_points_for_next_tier: number;
+    loyalty_points_instant: number;
+    loyalty_points_nfts: number;
+    loyalty_points_qorpo: number;
+    current_tier_id: string;
+    current_tier_name: string;
+    next_tier_id: string | null;
+    next_tier_name: string | null;
+    last_refresh_timestamp: string;
+    next_refresh_timestamp: string;
   };
+  ccash: {
+    currency: string;
+    amount: number;
+  };
+}
+
+type BalanceProps = {
+  data: BalanceData;
 };
 
 function Balance() {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const { data: walletData } = useBalance({
     address,
   });
@@ -22,8 +42,9 @@ function Balance() {
     queryKey: ['qorpobalance', address],
     queryFn: () =>
       fetch(
-        `https://devapi.playontoy.com/api/v1/me/balances/?wallet_address=${address}`,
+        `${process.env.NEXT_PUBLIC_BALANCE_URL}?wallet_address=${address}`,
       ).then((res) => res.json()),
+    enabled: isConnected,
   });
 
   useEffect(() => {
@@ -46,15 +67,59 @@ function Balance() {
     };
   }, [isOpen, ref]);
 
-  //   useEffect(() => {
-  //     console.log('wallet data', walletData);
-  //     console.log(data);
-  //   }, [data, walletData]);
+  // useEffect(() => {
+  //   console.log('wallet data', walletData);
+  //   console.log(data);
+  // }, [data, walletData]);
+
+  const getChainNamebySymbol = (symbol: string | undefined) => {
+    switch (symbol) {
+      case 'ETH':
+        return 'Ethereum';
+      case 'BSC':
+        return 'Binance Smart Chain';
+      case 'MATIC':
+        return 'Polygon';
+      case 'FANTOM':
+        return 'Fantom';
+      case 'SOL':
+        return 'Solana';
+      case 'BNB':
+        return 'Binance Smart Chain';
+      case 'TOY':
+        return 'TOY TESTNET';
+      default:
+        '';
+    }
+  };
+
+  const getCurrencyLogoBySymbol = (symbol: string | undefined) => {
+    switch (symbol) {
+      case 'ETH':
+        return '/market/icons/ETH-logo.png';
+      case 'BSC':
+        return '/market/icons/bnb-logo.png';
+      case 'MATIC':
+        return '/market/icons/matic-logo.png';
+      case 'FANTOM':
+        return '/market/icons/fantom-logo.png';
+      case 'SOL':
+        return '/market/icons/sol-logo.png';
+      case 'BNB':
+        return '/market/icons/bnb-logo.png';
+      case 'TOY':
+        return '/market/icons/toy-market-logo.svg';
+      default:
+        return '/market/icons/default-logo.svg';
+    }
+  };
+
+  if (!isConnected) return null;
 
   return (
     <div
       ref={ref}
-      className="w-full rounded-3xl overflow-hidden absolute top-0 right-0 translate-y-[-0.5rem]"
+      className="w-full rounded-3xl overflow-hidden absolute top-0 right-0 translate-y-[-0.2rem]"
     >
       <div
         className="py-3 px-8 bg-[#483F50] flex items-center justify-between cursor-pointer"
@@ -71,15 +136,18 @@ function Balance() {
         <div className="bg-white tooltip font-DMSans text-text selection:none">
           <ul>
             <li className="py-3 px-8 border-dashed border-b border-text">
-              <p className="opacity-50 font-bold uppercase">TOY</p>
+              <p className="opacity-50 font-bold uppercase">
+                {getChainNamebySymbol(walletData?.symbol)}
+              </p>
               <div className="flex items-center gap-2">
                 <img
                   className="w-[1.9375rem] aspect-square"
-                  src="/market/images/logos/toy-logo.png"
+                  src={getCurrencyLogoBySymbol(walletData?.symbol)}
                   alt="logo"
                 />
                 <p className=" text-xl font-bold">
-                  {walletData?.formatted} {walletData?.symbol}
+                  {parseFloat(walletData?.formatted || '0').toFixed(4)}{' '}
+                  {walletData?.symbol}
                 </p>
                 {/* <p className="ml-auto">$ 0.03</p> */}
               </div>
@@ -93,7 +161,7 @@ function Balance() {
                   alt="logo"
                 />
                 <p className=" text-xl font-bold">
-                  {data?.data.loyalty_points} DP
+                  {data?.data.dp.loyalty_points} DP
                 </p>
               </div>
             </li>
@@ -105,7 +173,9 @@ function Balance() {
                   src="/market/images/logos/ccash.png"
                   alt="logo"
                 />
-                <p className=" text-xl font-bold">CC</p>
+                <p className=" text-xl font-bold uppercase">
+                  {data?.data.ccash.amount} {data?.data.ccash.currency}
+                </p>
               </div>
             </li>
           </ul>

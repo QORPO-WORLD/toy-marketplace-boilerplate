@@ -16,7 +16,7 @@ export const Header = () => {
       <div className="ml-[3.2rem] h-full relative self-start w-[20rem] mr-auto">
         <Balance />
       </div>
-      <div className="flex items-center text-white uppercase mb:hidden">
+      <div className="flex items-center text-white uppercase mb:hidden mr-auto">
         {/* <a
           className="block py-[0.88rem] px-[1.75rem]"
           href="#"
@@ -25,7 +25,7 @@ export const Header = () => {
         >
           missions
         </a> */}
-        {/* <a
+        <a
           className="block py-[0.88rem] px-[1.75rem]"
           href="https://playontoy.com"
           rel="noopener noreferrer"
@@ -39,7 +39,7 @@ export const Header = () => {
           href="/"
         >
           marketplace
-        </Link> */}
+        </Link>
       </div>
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
@@ -48,7 +48,7 @@ export const Header = () => {
           <NetworkButton />
         </div>
         {/* <ProfileBox /> */}
-        <BurgerBtn />
+        {/* <BurgerBtn /> */}
       </div>
       <div className="hidden mb:block">
         <BurgerBtn />
