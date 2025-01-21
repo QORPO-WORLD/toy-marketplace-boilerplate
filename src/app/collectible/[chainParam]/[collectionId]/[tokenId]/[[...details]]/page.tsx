@@ -16,6 +16,7 @@ import DPCard from './_components/DPCard';
 import { CollectibleImage } from './_components/Image';
 import { LinkIcon } from '@0xsequence/design-system';
 import { useOpenConnectModal } from '@0xsequence/kit';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
   useFloorOrder,
   useLowestListing,
@@ -61,10 +62,10 @@ export default function Page() {
     if ('0xbd19b4c3c1e745e982f4d7f8bdf983d407e68a46' === collectionAddress) {
       return 'Element';
     }
-    switch (marketplace) {
-      case 'opensea':
+    switch (marketplace as MarketplaceKind) {
+      case MarketplaceKind.opensea:
         return 'Opensea';
-      case 'sequence_marketplace_v2':
+      case MarketplaceKind.sequence_marketplace_v2:
         return 'TOY TESTNET marketplace';
       default:
         return '';
@@ -123,7 +124,7 @@ export default function Page() {
                 />
               </div>
               {collectionDataOrder?.order?.marketplace ===
-                'sequence_marketplace_v2' && (
+                MarketplaceKind.sequence_marketplace_v2 && (
                 <div className="flex gap-2">
                   <img
                     className="w-[3.8rem]"

@@ -38,7 +38,7 @@ function Balance() {
   const { data: walletData } = useBalance({
     address,
   });
-  const { isPending, error, data } = useQuery<BalanceProps>({
+  const { data } = useQuery<BalanceProps>({
     queryKey: ['qorpobalance', address],
     queryFn: () =>
       fetch(
@@ -89,7 +89,7 @@ function Balance() {
       case 'TOY':
         return 'TOY TESTNET';
       default:
-        '';
+        return '';
     }
   };
 
