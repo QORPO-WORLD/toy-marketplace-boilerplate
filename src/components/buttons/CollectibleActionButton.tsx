@@ -75,14 +75,9 @@ export const CollectibleActionButton = ({
     orderSide = 'sell';
   }
 
-  // buyable collectible
-  if (!userOwnsCollectible && lowestListing?.order) {
-    orderSide = 'buy';
-  }
-
   // transferable collectible
   if (userOwnsCollectible && !highestOffer?.order) {
-    orderSide = 'transfer';
+    orderSide = pathname.includes('sell') ? 'transfer' : 'buy';
   }
 
   // offerable collectible
@@ -92,12 +87,17 @@ export const CollectibleActionButton = ({
 
   // listable collectible
   if (userOwnsCollectible && !lowestListing?.order) {
-    orderSide = 'listing';
+    orderSide = pathname.includes('sell') ? 'listing' : 'order';
   }
 
   // inventory page
   if (pathname === '/inventory') {
     orderSide = 'transfer';
+  }
+
+  // buyable collectible
+  if (!userOwnsCollectible && lowestListing?.order) {
+    orderSide = 'buy';
   }
 
   if (!orderSide) return null;

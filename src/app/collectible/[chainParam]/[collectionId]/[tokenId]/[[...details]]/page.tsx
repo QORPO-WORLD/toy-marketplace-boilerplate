@@ -16,7 +16,6 @@ import DPCard from './_components/DPCard';
 import { CollectibleImage } from './_components/Image';
 import { LinkIcon } from '@0xsequence/design-system';
 import { useOpenConnectModal } from '@0xsequence/kit';
-import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
   useFloorOrder,
   useLowestListing,
@@ -66,7 +65,7 @@ export default function Page() {
       case 'opensea':
         return 'Opensea';
       case 'sequence_marketplace_v2':
-        return 'Sequence marketplace';
+        return 'TOY TESTNET marketplace';
       default:
         return '';
     }
@@ -100,14 +99,14 @@ export default function Page() {
             </p>
           </div>
           <div className="w-full flex flex-col gap-5">
-            <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
+            <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] justify-between  w-full">
               <img
                 className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
                 src={getCollectionLogo(collectionId)}
                 alt="logo"
                 loading="lazy"
               />
-              <div className="flex gap-[0.6rem] overflow-hidden">
+              <div className="flex gap-[0.6rem] overflow-hidden mr-auto">
                 <div>
                   <p className="text-[2rem] uppercase truncate leading-none">
                     {collectionMetadata.data?.name}
@@ -123,6 +122,17 @@ export default function Page() {
                   loading="lazy"
                 />
               </div>
+              {collectionDataOrder?.order?.marketplace ===
+                'sequence_marketplace_v2' && (
+                <div className="flex gap-2">
+                  <img
+                    className="w-[3.8rem]"
+                    src="/market/icons/toy-logo-darck.svg"
+                    alt="logo"
+                  />{' '}
+                  <p className="text-text text-[1.6rem]">TESTNET</p>
+                </div>
+              )}
             </div>
             <div className="flex flex-col w-full  py-[1.75rem] px-[2.5625rem] gap-10 rounded-[25px] border border-white bg-[rgba(87,77,95,0.80)] backdrop-blur-[10px]">
               <p className="text-[2rem] font-normal leading-[86.94%] uppercase text-white mb:text-[20px]">
