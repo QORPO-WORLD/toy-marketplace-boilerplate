@@ -1,5 +1,4 @@
 import { Flex, Image, Text } from '$ui';
-import { ConnectButton } from './buttons/ConnectButton';
 
 interface Props {
   isConnected: boolean;

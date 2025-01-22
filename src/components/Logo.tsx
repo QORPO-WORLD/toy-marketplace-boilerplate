@@ -2,9 +2,6 @@
 
 import Image from 'next/image';
 
-const defaultDesktopLogoUrl = '/sequence-logo.png';
-const defaultMobileLogoUrl = '/logo/152x152.png';
-
 export const Logo = () => {
   return (
     <Image

@@ -8,12 +8,6 @@ const config = {
   basePath: '/market',
   assetPrefix: '/market/',
   reactStrictMode: true,
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb', // Increase from default
-    },
-    responseLimit: false,
-  },
 };
 
 export default withVanillaExtract(config);

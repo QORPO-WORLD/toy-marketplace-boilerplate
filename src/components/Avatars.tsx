@@ -8,18 +8,18 @@ import { truncateMiddle } from '@0xsequence/marketplace-sdk';
 import NextLink from 'next/link';
 
 /* ************* CURRENCY AVATAR ***************** */
-type CurrencyAvatarProps = {
-  amount: number | string;
-  currency: { src: string | undefined; symbol: string | undefined };
-  title?: string | number;
+// type CurrencyAvatarProps = {
+//   amount: number | string;
+//   currency: { src: string | undefined; symbol: string | undefined };
+//   title?: string | number;
 
-  className?: string;
-  justify?: 'justify-center' | 'justify-start' | 'justify-end';
+//   className?: string;
+//   justify?: 'justify-center' | 'justify-start' | 'justify-end';
 
-  size?: 'default' | 'sm' | 'lg';
+//   size?: 'default' | 'sm' | 'lg';
 
-  loading?: boolean;
-};
+//   loading?: boolean;
+// };
 
 /* ************* COLLECTION AVATAR ***************** */
 type CollectionAvatarProps = {
@@ -86,6 +86,7 @@ export const PoolAvatar = memo(
           src={src}
           className={cn('h-[40px] w-[30px] min-w-[30px]', imageClassName)}
           loading={loading}
+          alt="image"
         />
 
         <Flex className="h-full flex-col justify-center">

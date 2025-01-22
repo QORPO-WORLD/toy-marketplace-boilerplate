@@ -2,7 +2,7 @@
 
 import { Routes } from '../../../lib/routes';
 import CollectionBadge from '../CollectionBadge/CollectionBadge';
-import { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
+import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
 import NextLink from 'next/link';
