@@ -1,4 +1,6 @@
-import { Flex, Grid, Text, cn } from '$ui';
+'use client';
+
+import { Flex, Grid, cn } from '$ui';
 import { CollectionCard } from './Card/index';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 

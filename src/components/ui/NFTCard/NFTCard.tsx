@@ -1,4 +1,8 @@
+'use client';
+
+import { useFlip } from '../../../hooks/ui/useFlip';
 import styles from './NFTCard.module.scss';
+import Image from 'next/image';
 
 interface NFTCardProps {
   imageSrc: string;
@@ -16,18 +20,28 @@ function NFTCard({
   data: NFTCardProps;
   className: string;
 }) {
+  const flip = useFlip(undefined, 25);
   const { logoSrc, imageSrc, name, tag, nftNumber, nftPrice } = data;
   return (
-    <div className={styles.card + ' ' + className}>
+    <div ref={flip} className={styles.card + ' ' + className}>
       <div className={styles.title_wrapper}>
-        <img className={styles.logo} src={logoSrc} loading="lazy" alt="logo" />
+        <Image
+          width={150}
+          height={150}
+          className={styles.logo}
+          src={logoSrc}
+          loading="lazy"
+          alt="logo"
+        />
         <div className={styles.card_title_container}>
           <p className={styles.title}>{name}</p>
           <p className={styles.tag}>&#64;{tag}</p>
         </div>
       </div>
       <div className={styles.img_container}>
-        <img
+        <Image
+          width={315}
+          height={393}
           className={styles.card_img}
           src={imageSrc}
           loading="lazy"
@@ -35,7 +49,9 @@ function NFTCard({
         />
         <div className={styles.card_bottom_info_container}>
           <div className={styles.info_cotnainer_1}>
-            <img
+            <Image
+              width={150}
+              height={150}
               className={styles.nft_card_icon_big}
               src="/market/icons/amount-icon.svg"
               alt="icon"
@@ -45,7 +61,9 @@ function NFTCard({
           <div className={styles.info_cotnainer_2}>
             <p className={styles.number}>{nftPrice} TOY</p>
             <div className={styles.icon_container}>
-              <img
+              <Image
+                width={150}
+                height={150}
                 className={styles.nft_card_icon_small}
                 src="/market/icons/amount-icon.svg"
                 alt="icon"
@@ -53,7 +71,9 @@ function NFTCard({
             </div>
           </div>
           <div className={styles.cart_container}>
-            <img
+            <Image
+              width={150}
+              height={150}
               className={styles.nft_card_icon_small}
               src="/market/icons/cart-icon.svg"
               alt="icon"
