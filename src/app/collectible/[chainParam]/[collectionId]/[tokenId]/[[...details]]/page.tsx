@@ -109,7 +109,7 @@ export default function Page() {
               />
               <div className="flex gap-[0.6rem] overflow-hidden mr-auto">
                 <div>
-                  <p className="text-[2rem] uppercase truncate leading-none">
+                  <p className="text-[2rem] uppercase truncate leading-none mb:text-xl">
                     {collectionMetadata.data?.name}
                   </p>
                   <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
@@ -125,7 +125,7 @@ export default function Page() {
               </div>
               {collectionDataOrder?.order?.marketplace ===
                 MarketplaceKind.sequence_marketplace_v2 && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 mb:flex-col mb:gap-0 mb:hidden">
                   <img
                     className="w-[3.8rem]"
                     src="/market/icons/toy-logo-darck.svg"
@@ -257,7 +257,7 @@ export default function Page() {
                 <p>{data?.tokenId}</p>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-7">
+            <div className="grid grid-cols-3 gap-7 mb:flex-col mb:flex mb:gap-4 mb:hidden">
               <DPCard
                 title="Sell"
                 tooltip="When a sale is finalized, you’ll earn DIAMOND points as a reward."
