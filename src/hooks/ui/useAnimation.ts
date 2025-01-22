@@ -12,24 +12,17 @@ const scrollTriggerConfig = (ref: RefObject<HTMLDivElement>) => ({
 });
 
 export const useAnimation = (
-  gsapFn: (ref: RefObject<HTMLDivElement>) => void,
+  gsapFn: (ref: RefObject<HTMLDivElement>, delay?: number) => void,
   container?: RefObject<HTMLElement>,
+  delay?: number,
 ) => {
-  const [isPlaging, setIsPlaying] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null); // Ensure the ref matches the expected type
-  const tl = useRef<gsap.core.Timeline | null>(null);
-
-  useEffect(() => {
-    setIsPlaying(true);
-  }, []); // Ensure the effect runs only once
 
   useGSAP(() => {
-    if (!isPlaging) return;
-    tl.current = gsap.timeline();
     if (ref.current) {
-      gsapFn(ref);
+      gsapFn(ref, delay);
     }
-  }, [isPlaging]);
+  });
 
   return ref; // Return the ref
 };

@@ -1,5 +1,6 @@
 'use client';
 
+import { useFlip } from '../../../hooks/ui/useFlip';
 import styles from './NFTCard.module.scss';
 import Image from 'next/image';
 
@@ -21,7 +22,7 @@ function NFTCard({
 }) {
   const { logoSrc, imageSrc, name, tag, nftNumber, nftPrice } = data;
   return (
-    <div className={styles.card + ' ' + className}>
+    <div ref={useFlip(undefined, 25)} className={styles.card + ' ' + className}>
       <div className={styles.title_wrapper}>
         <Image
           width={150}

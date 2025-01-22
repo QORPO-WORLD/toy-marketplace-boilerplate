@@ -1,4 +1,7 @@
-import { Flex, Grid, Text, cn } from '$ui';
+'use client';
+
+import { Flex, Grid, cn } from '$ui';
+import { useFlip } from '../../../hooks/ui/useFlip';
 import { CollectionCard } from './Card/index';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
@@ -21,7 +24,11 @@ export const LandingCollections = ({
       >
         {collections.length &&
           collections.map((d) => {
-            return <CollectionCard key={d.collectionAddress} {...d} />;
+            return (
+              <div ref={useFlip(undefined, 22)}>
+                <CollectionCard key={d.collectionAddress} {...d} />
+              </div>
+            );
           })}
       </Grid.Root>
     </Flex>

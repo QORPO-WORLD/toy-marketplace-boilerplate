@@ -20,6 +20,7 @@ import {
   rotate,
   useAnimation,
 } from '../../../hooks/ui/useAnimation';
+import { useFlip } from '../../../hooks/ui/useFlip';
 import { FAQData } from '../../../mockdata/FAQData';
 import { flipCardData } from '../../../mockdata/flipCardData';
 import { nftCardData } from '../../../mockdata/nftCardData';
@@ -140,16 +141,18 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
               CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
             ) && (
               <div ref={useAnimation(fromTop)}>
-                <Banner
-                  title="Founders’ collection"
-                  title2="Citizen Zero"
-                  bgSrc="/market/images/banner/cc-banner-bg.png"
-                  collection={
-                    findCollection(
-                      CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
-                    )!
-                  }
-                />
+                <div ref={useFlip()}>
+                  <Banner
+                    title="Founders’ collection"
+                    title2="Citizen Zero"
+                    bgSrc="/market/images/banner/cc-banner-bg.png"
+                    collection={
+                      findCollection(
+                        CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
+                      )!
+                    }
+                  />
+                </div>
               </div>
             )}
             <LandingCollections
@@ -160,14 +163,16 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             />
             {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
               <div ref={useAnimation(opacity)}>
-                <Banner
-                  title="Aneemate genesis"
-                  title2="zero"
-                  bgSrc="/market/images/banner/anmt-banner-bg.png"
-                  collection={
-                    findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)!
-                  }
-                />
+                <div ref={useFlip()}>
+                  <Banner
+                    title="Aneemate genesis"
+                    title2="zero"
+                    bgSrc="/market/images/banner/anmt-banner-bg.png"
+                    collection={
+                      findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)!
+                    }
+                  />
+                </div>
               </div>
             )}
             <LandingCollections
