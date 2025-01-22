@@ -16,7 +16,7 @@ interface FlipCardProps {
   color: string;
 }
 
-function FlipCard({ data, color }: FlipCardProps) {
+function FlipCard({ data }: FlipCardProps) {
   const { text, number, bgUrl } = data;
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,29 +1,14 @@
 'use client';
 
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { classNames } from '~/config/classNames';
 
-import {
-  Avatar,
-  Box,
-  BugIcon,
-  Button,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  GlobeIcon,
-  Grid,
-  Text,
-  cn,
-} from '$ui';
+import { BugIcon, Grid, Text, cn } from '$ui';
 import CollectionBadge from '../../../../../components/ui/CollectionBadge/CollectionBadge';
 import { getCollectionBg } from '../../../../../lib/utils/helpers';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
-import Markdown from 'markdown-to-jsx';
-import Head from 'next/head';
 
 interface CollectionHeaderProps {
   chainId: number;

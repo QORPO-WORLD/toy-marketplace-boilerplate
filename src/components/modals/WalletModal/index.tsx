@@ -34,7 +34,9 @@ export const WalletModalContent = () => {
       if (wallet) {
         void wallet.openWallet();
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error('Error opening wallet', e);
+    }
   };
 
   return (

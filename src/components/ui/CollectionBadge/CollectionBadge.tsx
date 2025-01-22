@@ -5,10 +5,10 @@ import {
   getTag,
 } from '../../../lib/utils/helpers';
 import styles from './CollectionBadge.module.scss';
-import { ContractInfo } from '@0xsequence/metadata';
+import type { ContractInfo } from '@0xsequence/metadata';
 
 function CollectionBadge({ collectionData }: { collectionData: ContractInfo }) {
-  const { chainId, address, name, type } = collectionData;
+  const { chainId, address, name } = collectionData;
 
   return (
     <div className={styles.banner_card}>

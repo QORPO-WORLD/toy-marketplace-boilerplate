@@ -1,7 +1,6 @@
 'use client';
 
 import { Spinner } from '~/components/Spinner';
-import { ConnectButton } from '~/components/buttons/ConnectButton';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
 import { BaseImage } from '~/components/ui/Image/image';
 import { getThemeManagerElement } from '~/lib/utils/theme';

@@ -23,15 +23,7 @@ export const placeholderImgUrl = '/market/images/placeholder.png';
 export const BaseImage = memo(
   forwardRef<HTMLImageElement, ImageProps>(
     (
-      {
-        fallbackSrc = placeholderImgUrl,
-        className,
-        onLoad,
-        children,
-        elementClassName,
-        containerClassName,
-        ...props
-      },
+      { className, children, elementClassName, containerClassName, ...props },
       ref,
     ) => {
       //Disabling fade in for now, the onLoad event is firing to early for the useState hook

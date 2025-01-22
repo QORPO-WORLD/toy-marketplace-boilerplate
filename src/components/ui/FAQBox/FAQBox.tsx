@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 function FAQBox({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +21,7 @@ function FAQBox({ question, answer }: { question: string; answer: string }) {
           style={{
             transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
           }}
+          alt="arrow"
         />
       </div>
       <div

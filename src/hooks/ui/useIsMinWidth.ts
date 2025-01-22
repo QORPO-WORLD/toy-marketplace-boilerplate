@@ -38,7 +38,7 @@ export function useIsMinWidth(size: Breakpoints) {
         matchMedia.removeEventListener('change', handleChange);
       }
     };
-  }, [size]);
+  }, [size, handleChange]);
 
   return isMatch;
 }
