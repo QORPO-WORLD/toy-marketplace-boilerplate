@@ -30,11 +30,21 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { f } from 'node_modules/@0xsequence/marketplace-sdk/dist/marketplace.gen-jdKqutnd';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
-  const flipCards = useAnimation(fromLeft);
+  const animationFromLeft = useAnimation(fromLeft);
+  const animationFromTop = useAnimation(fromTop);
+  const card1Animation = useAnimation(nftCard1);
+  const card2Animation = useAnimation(nftCard2);
+  const card3Animation = useAnimation(nftCard3);
+  const card4Animation = useAnimation(nftCard4);
+  const rotateAnimation = useAnimation(rotate);
+  const opacityAnimation = useAnimation(opacity);
+  const fromRightStagedAnimation = useAnimation(fromRightStaged);
+  const flip = useFlip();
   const findCollection = (collectionAddress: string) => {
     return collections.find(
       (c) =>
@@ -51,37 +61,37 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
     >
       <BannerImage logo>
         <div className="flex flex-col h-full z-10 relative mb:h-auto">
-          <div ref={useAnimation(fromLeft)} className="pt-[8rem]">
+          <div ref={animationFromLeft} className="pt-[8rem]">
             <p className="title text-white text-center">check our</p>
             <p className="title text-yellow text-center">collections</p>
           </div>
           <div
-            ref={useAnimation(rotate)}
+            ref={rotateAnimation}
             className="flex justify-center items-center bg-[#DE5578] rounded-md w-fit m-auto px-4 py-2"
           >
             <img className="w-24" src="/market/icons/toy-logo.svg" alt="logo" />
             <p className="text-[#E7E6FB] text-4xl">TESTNET</p>
           </div>
           <div className="flex h-full items-end justify-center translate-x-[-2rem] translate-y-[5rem] mb:hidden">
-            <div ref={useAnimation(nftCard1)}>
+            <div ref={card1Animation}>
               <NFTCard
                 data={nftCardData[0]!}
                 className="h-[39rem] w-auto bg-[#E7E6FB] rotate-[-15deg]"
               />
             </div>
-            <div ref={useAnimation(nftCard2)} className="z-10">
+            <div ref={card2Animation} className="z-10">
               <NFTCard
                 data={nftCardData[1]!}
                 className="h-[39rem] w-auto bg-[#FBF2DD]  z-10 rotate-[25deg]"
               />
             </div>
-            <div ref={useAnimation(nftCard3)}>
+            <div ref={card3Animation}>
               <NFTCard
                 data={nftCardData[2]!}
                 className="h-[39rem] w-auto bg-[#E7E6FB]  rotate-[5.5deg]"
               />
             </div>
-            <div ref={useAnimation(nftCard4)}>
+            <div ref={card4Animation}>
               <NFTCard
                 data={nftCardData[3]!}
                 className="h-[39rem] w-auto bg-[#FBF2DD] rotate-[-23deg]"
@@ -101,13 +111,13 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
       <div className="px-20 mb:px-0 flex flex-col gap-20">
         <div className="px-5 w-full overflow-hidden mb:overflow-visible">
           <p
-            ref={useAnimation(fromLeft)}
+            ref={animationFromLeft}
             className="title text-start text-white mb-9"
           >
             Our benefits
           </p>
           <div
-            ref={useAnimation(fromRightStaged)}
+            ref={fromRightStagedAnimation}
             className="h-[31.5rem] flex justify-between gap-5 pb-4 mb:hidden"
           >
             <FlipCard data={flipCardData[0]!} color="#A3EAFA" />
@@ -116,7 +126,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             <FlipCard data={flipCardData[3]!} color="#7795FF" />
           </div>
           <div
-            ref={useAnimation(fromRight)}
+            ref={fromRightStagedAnimation}
             className="w-full relative hidden mb:block"
           >
             <MobileSwiper
@@ -131,7 +141,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
         </div>
         <Box className="mx-auto w-full px-5">
           <p
-            ref={useAnimation(fromLeft)}
+            ref={animationFromLeft}
             className="title text-white text-start leading-none mb-8"
           >
             our <br /> collections
@@ -140,8 +150,8 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             {findCollection(
               CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
             ) && (
-              <div ref={useAnimation(fromTop)}>
-                <div ref={useFlip()}>
+              <div ref={animationFromTop}>
+                <div ref={flip}>
                   <Banner
                     title="Founders’ collection"
                     title2="Citizen Zero"
@@ -162,8 +172,8 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
               ].filter((c) => !!c)}
             />
             {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
-              <div ref={useAnimation(opacity)}>
-                <div ref={useFlip()}>
+              <div ref={opacityAnimation}>
+                <div ref={flip}>
                   <Banner
                     title="Aneemate genesis"
                     title2="zero"
@@ -186,15 +196,12 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
         </Box>
         <Box className="mx-auto w-full px-5 pb-20">
           <p
-            ref={useAnimation(fromLeft)}
+            ref={animationFromLeft}
             className="title text-white text-left mb-8"
           >
             FAQ
           </p>
-          <div
-            ref={useAnimation(fromRightStaged)}
-            className="flex flex-col gap-4"
-          >
+          <div ref={fromRightStagedAnimation} className="flex flex-col gap-4">
             {FAQData.map((faq) => (
               <FAQBox
                 question={faq.question}

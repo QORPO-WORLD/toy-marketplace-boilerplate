@@ -14,6 +14,7 @@ export const LandingCollections = ({
   collections,
   className,
 }: LandingCollectionsProps) => {
+  const flip = useFlip(undefined, 22);
   return (
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
       <Grid.Root
@@ -25,7 +26,7 @@ export const LandingCollections = ({
         {collections.length &&
           collections.map((d) => {
             return (
-              <div ref={useFlip(undefined, 22)}>
+              <div key={d.collectionAddress} ref={flip}>
                 <CollectionCard key={d.collectionAddress} {...d} />
               </div>
             );

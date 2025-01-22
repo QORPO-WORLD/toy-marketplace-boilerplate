@@ -20,9 +20,10 @@ function NFTCard({
   data: NFTCardProps;
   className: string;
 }) {
+  const flip = useFlip(undefined, 25);
   const { logoSrc, imageSrc, name, tag, nftNumber, nftPrice } = data;
   return (
-    <div ref={useFlip(undefined, 25)} className={styles.card + ' ' + className}>
+    <div ref={flip} className={styles.card + ' ' + className}>
       <div className={styles.title_wrapper}>
         <Image
           width={150}
