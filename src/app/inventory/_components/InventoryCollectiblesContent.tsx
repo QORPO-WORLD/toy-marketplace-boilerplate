@@ -134,7 +134,7 @@ const CollectionSection = ({
       </Flex>
 
       <div
-        className="mt-0 p-1 overflow-hidden transition-all duration-[900ms] ease-out"
+        className="mt-0 p-1 overflow-hidden transition-all duration-700 ease-out"
         style={{
           height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
         }}

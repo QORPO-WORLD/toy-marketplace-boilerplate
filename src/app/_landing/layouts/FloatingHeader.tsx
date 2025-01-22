@@ -97,7 +97,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
           </div>
         </div>
       </BannerImage>
-      <div className="px-16 mb:px-0 flex flex-col gap-20">
+      <div className="px-20 mb:px-0 flex flex-col gap-20">
         <div className="px-5 w-full overflow-hidden mb:overflow-visible">
           <p className="title text-start text-white mb-9">Our benefits</p>
           <div className="h-[31.5rem] flex justify-between gap-5 pb-4 mb:hidden">

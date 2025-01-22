@@ -41,7 +41,7 @@ function Balance() {
     address,
   });
   const { data } = useQuery<BalanceProps>({
-    queryKey: ['qorpobalance', address],
+    queryKey: ['qorpobalance', idToken],
     queryFn: () =>
       fetch(`${process.env.NEXT_PUBLIC_BALANCE_URL}?token=${idToken}`).then(
         (res) => res.json(),
@@ -61,7 +61,7 @@ function Balance() {
       }
     };
 
-    getIdToken();
+    void getIdToken();
   }, [isConnected, address]);
 
   useEffect(() => {
