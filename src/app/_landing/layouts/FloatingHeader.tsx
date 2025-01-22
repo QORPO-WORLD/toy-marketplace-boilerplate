@@ -9,7 +9,6 @@ import NFTCard from '../../../components/ui/NFTCard/NFTCard';
 import { CollectionsEnum } from '../../../enum/enum';
 import {
   fromLeft,
-  fromRight,
   fromRightStaged,
   fromTop,
   nftCard1,
@@ -30,21 +29,27 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { f } from 'node_modules/@0xsequence/marketplace-sdk/dist/marketplace.gen-jdKqutnd';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
-  const animationFromLeft = useAnimation(fromLeft);
+  const animationFromLeft1 = useAnimation(fromLeft);
+  const animationFromLeft2 = useAnimation(fromLeft);
+  const animationFromLeft4 = useAnimation(fromLeft);
+  const animationFromLeft5 = useAnimation(fromLeft);
   const animationFromTop = useAnimation(fromTop);
+  const animationFromRight = useAnimation(fromRightStaged);
   const card1Animation = useAnimation(nftCard1);
   const card2Animation = useAnimation(nftCard2);
   const card3Animation = useAnimation(nftCard3);
   const card4Animation = useAnimation(nftCard4);
+  const card5Animation = useAnimation(nftCard1);
   const rotateAnimation = useAnimation(rotate);
   const opacityAnimation = useAnimation(opacity);
-  const fromRightStagedAnimation = useAnimation(fromRightStaged);
-  const flip = useFlip();
+  const fromRightStagedAnimation1 = useAnimation(fromRightStaged);
+  const fromRightStagedAnimation2 = useAnimation(fromRightStaged);
+  const flip1 = useFlip();
+  const flip2 = useFlip();
   const findCollection = (collectionAddress: string) => {
     return collections.find(
       (c) =>
@@ -61,7 +66,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
     >
       <BannerImage logo>
         <div className="flex flex-col h-full z-10 relative mb:h-auto">
-          <div ref={animationFromLeft} className="pt-[8rem]">
+          <div ref={animationFromLeft1} className="pt-[8rem]">
             <p className="title text-white text-center">check our</p>
             <p className="title text-yellow text-center">collections</p>
           </div>
@@ -98,8 +103,8 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
               />
             </div>
           </div>
-          <div className="w-full hidden mb:block">
-            <div>
+          <div className="w-full hidden mb:block translate-x-6">
+            <div ref={card5Animation}>
               <NFTCard
                 data={nftCardData[0]!}
                 className="h-[31rem] w-auto bg-[#E7E6FB]  rotate-[-15deg]"
@@ -111,13 +116,13 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
       <div className="px-20 mb:px-0 flex flex-col gap-20">
         <div className="px-5 w-full overflow-hidden mb:overflow-visible">
           <p
-            ref={animationFromLeft}
+            ref={animationFromLeft2}
             className="title text-start text-white mb-9"
           >
             Our benefits
           </p>
           <div
-            ref={fromRightStagedAnimation}
+            ref={fromRightStagedAnimation1}
             className="h-[31.5rem] flex justify-between gap-5 pb-4 mb:hidden"
           >
             <FlipCard data={flipCardData[0]!} color="#A3EAFA" />
@@ -126,7 +131,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             <FlipCard data={flipCardData[3]!} color="#7795FF" />
           </div>
           <div
-            ref={fromRightStagedAnimation}
+            ref={animationFromRight}
             className="w-full relative hidden mb:block"
           >
             <MobileSwiper
@@ -141,7 +146,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
         </div>
         <Box className="mx-auto w-full px-5">
           <p
-            ref={animationFromLeft}
+            ref={animationFromLeft4}
             className="title text-white text-start leading-none mb-8"
           >
             our <br /> collections
@@ -151,7 +156,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
               CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
             ) && (
               <div ref={animationFromTop}>
-                <div ref={flip}>
+                <div ref={flip1}>
                   <Banner
                     title="Founders’ collection"
                     title2="Citizen Zero"
@@ -173,7 +178,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             />
             {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
               <div ref={opacityAnimation}>
-                <div ref={flip}>
+                <div ref={flip2}>
                   <Banner
                     title="Aneemate genesis"
                     title2="zero"
@@ -196,12 +201,12 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
         </Box>
         <Box className="mx-auto w-full px-5 pb-20">
           <p
-            ref={animationFromLeft}
+            ref={animationFromLeft5}
             className="title text-white text-left mb-8"
           >
             FAQ
           </p>
-          <div ref={fromRightStagedAnimation} className="flex flex-col gap-4">
+          <div ref={fromRightStagedAnimation2} className="flex flex-col gap-4">
             {FAQData.map((faq) => (
               <FAQBox
                 question={faq.question}

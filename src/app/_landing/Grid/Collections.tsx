@@ -1,7 +1,6 @@
 'use client';
 
 import { Flex, Grid, cn } from '$ui';
-import { useFlip } from '../../../hooks/ui/useFlip';
 import { CollectionCard } from './Card/index';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 
@@ -14,7 +13,6 @@ export const LandingCollections = ({
   collections,
   className,
 }: LandingCollectionsProps) => {
-  const flip = useFlip(undefined, 22);
   return (
     <Flex className="flex-col gap-4 @container/publisherCollectionsGrid">
       <Grid.Root
@@ -25,11 +23,7 @@ export const LandingCollections = ({
       >
         {collections.length &&
           collections.map((d) => {
-            return (
-              <div key={d.collectionAddress} ref={flip}>
-                <CollectionCard key={d.collectionAddress} {...d} />
-              </div>
-            );
+            return <CollectionCard key={d.collectionAddress} {...d} />;
           })}
       </Grid.Root>
     </Flex>

@@ -14,6 +14,7 @@ import {
   opacity,
   useAnimation,
 } from '../../../../hooks/ui/useAnimation';
+import { useFlip } from '../../../../hooks/ui/useFlip';
 import { CollectionCardSkeleton } from './Skeleton';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react';
@@ -22,9 +23,12 @@ import NextLink from 'next/link';
 type CollectionCard = MarketplaceConfig['collections'][number];
 
 export const CollectionCard = (params: CollectionCard) => {
+  const flip = useFlip(undefined, 22);
   return (
     <Suspense fallback={<CollectionCardSkeleton />}>
-      <Card {...params} />
+      <div ref={flip}>
+        <Card {...params} />
+      </div>
     </Suspense>
   );
 };
