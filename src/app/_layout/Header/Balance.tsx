@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import sequence from '../../../sequence/Sequence';
 import { useQuery } from '@tanstack/react-query';
 import { useAccount, useBalance } from 'wagmi';
 
@@ -33,6 +34,7 @@ type BalanceProps = {
 
 function Balance() {
   const [isOpen, setIsOpen] = useState(false);
+  const [idToken, setIdToken] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const { address, isConnected } = useAccount();
   const { data: walletData } = useBalance({
@@ -41,17 +43,32 @@ function Balance() {
   const { data } = useQuery<BalanceProps>({
     queryKey: ['qorpobalance', address],
     queryFn: () =>
-      fetch(
-        `${process.env.NEXT_PUBLIC_BALANCE_URL}?wallet_address=${address}`,
-      ).then((res) => res.json()),
-    enabled: isConnected,
+      fetch(`${process.env.NEXT_PUBLIC_BALANCE_URL}?token=${idToken}`).then(
+        (res) => res.json(),
+      ),
+    enabled: idToken !== null,
   });
+
+  useEffect(() => {
+    const getIdToken = async () => {
+      try {
+        const signedIn = await sequence.isSignedIn();
+        if (!signedIn) return;
+        const { idToken } = await sequence.getIdToken();
+        setIdToken(idToken);
+        console.log('ID Token:', idToken);
+      } catch (error) {
+        console.error('Error getting ID token:', error);
+      }
+    };
+
+    getIdToken();
+  }, [isConnected, address]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as HTMLElement;
       if (ref.current && !ref.current.contains(target)) {
-        console.log('click outside');
         setIsOpen(false);
       }
     }
@@ -152,32 +169,34 @@ function Balance() {
                 {/* <p className="ml-auto">$ 0.03</p> */}
               </div>
             </li>
-            <li className="py-3 px-8 border-dashed border-b border-text">
-              <p className="opacity-50 font-bold uppercase">DIAMOND Points</p>
-              <div className="flex items-center gap-2">
-                <img
-                  className="w-[1.9375rem] aspect-square"
-                  src="/market/images/logos/dp.png"
-                  alt="logo"
-                />
-                <p className=" text-xl font-bold">
-                  {data?.data.dp.loyalty_points} DP
-                </p>
-              </div>
-            </li>
-            <li className="py-3 px-8 border-dashed border-text">
-              <p className="opacity-50 font-bold uppercase">CCash</p>
-              <div className="flex items-center gap-2">
-                <img
-                  className="w-[1.9375rem] aspect-square"
-                  src="/market/images/logos/ccash.png"
-                  alt="logo"
-                />
-                <p className=" text-xl font-bold uppercase">
-                  {data?.data.ccash.amount} {data?.data.ccash.currency}
-                </p>
-              </div>
-            </li>
+            {data?.data.dp && (
+              <li className="py-3 px-8 border-dashed border-b border-text">
+                <p className="opacity-50 font-bold uppercase">DIAMOND Points</p>
+                <div className="flex items-center gap-2">
+                  <img
+                    className="w-[1.9375rem] aspect-square"
+                    src="/market/images/logos/dp.png"
+                    alt="logo"
+                  />
+                  <p className=" text-xl font-bold">
+                    {data?.data.dp.loyalty_points} DP
+                  </p>
+                </div>
+              </li>
+            )}
+            {/* // <li className="py-3 px-8 border-dashed border-text">
+            //   <p className="opacity-50 font-bold uppercase">CCash</p>
+            //   <div className="flex items-center gap-2">
+            //     <img
+            //       className="w-[1.9375rem] aspect-square"
+            //       src="/market/images/logos/ccash.png"
+            //       alt="logo"
+            //     />
+            //     <p className=" text-xl font-bold uppercase">
+            //       {data?.data.ccash.amount} {data?.data.ccash.currency}
+            //     </p>
+            //   </div>
+            // </li> */}
           </ul>
         </div>
       )}
