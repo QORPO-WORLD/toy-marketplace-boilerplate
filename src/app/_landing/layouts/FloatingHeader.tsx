@@ -11,11 +11,13 @@ import {
   fromLeft,
   fromRight,
   fromRightStaged,
+  fromTop,
   nftCard1,
   nftCard2,
   nftCard3,
   nftCard4,
-  opacityLeft,
+  opacity,
+  rotate,
   useAnimation,
 } from '../../../hooks/ui/useAnimation';
 import { FAQData } from '../../../mockdata/FAQData';
@@ -52,7 +54,10 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             <p className="title text-white text-center">check our</p>
             <p className="title text-yellow text-center">collections</p>
           </div>
-          <div className="flex justify-center items-center bg-[#DE5578] rounded-md w-fit m-auto px-4 py-2">
+          <div
+            ref={useAnimation(rotate)}
+            className="flex justify-center items-center bg-[#DE5578] rounded-md w-fit m-auto px-4 py-2"
+          >
             <img className="w-24" src="/market/icons/toy-logo.svg" alt="logo" />
             <p className="text-[#E7E6FB] text-4xl">TESTNET</p>
           </div>
@@ -134,16 +139,18 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             {findCollection(
               CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
             ) && (
-              <Banner
-                title="Founders’ collection"
-                title2="Citizen Zero"
-                bgSrc="/market/images/banner/cc-banner-bg.png"
-                collection={
-                  findCollection(
-                    CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
-                  )!
-                }
-              />
+              <div ref={useAnimation(fromTop)}>
+                <Banner
+                  title="Founders’ collection"
+                  title2="Citizen Zero"
+                  bgSrc="/market/images/banner/cc-banner-bg.png"
+                  collection={
+                    findCollection(
+                      CollectionsEnum.FOUNDERS_COLLECTION_CITIZEN_ZERO,
+                    )!
+                  }
+                />
+              </div>
             )}
             <LandingCollections
               collections={[
@@ -152,14 +159,16 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
               ].filter((c) => !!c)}
             />
             {findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO) && (
-              <Banner
-                title="Aneemate genesis"
-                title2="zero"
-                bgSrc="/market/images/banner/anmt-banner-bg.png"
-                collection={
-                  findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)!
-                }
-              />
+              <div ref={useAnimation(opacity)}>
+                <Banner
+                  title="Aneemate genesis"
+                  title2="zero"
+                  bgSrc="/market/images/banner/anmt-banner-bg.png"
+                  collection={
+                    findCollection(CollectionsEnum.ANEEMATE_GENESIS_ZERO)!
+                  }
+                />
+              </div>
             )}
             <LandingCollections
               collections={[
@@ -171,8 +180,16 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
           </div>
         </Box>
         <Box className="mx-auto w-full px-5 pb-20">
-          <p className="title text-white text-left mb-8">FAQ</p>
-          <div className="flex flex-col gap-4">
+          <p
+            ref={useAnimation(fromLeft)}
+            className="title text-white text-left mb-8"
+          >
+            FAQ
+          </p>
+          <div
+            ref={useAnimation(fromRightStaged)}
+            className="flex flex-col gap-4"
+          >
             {FAQData.map((faq) => (
               <FAQBox
                 question={faq.question}

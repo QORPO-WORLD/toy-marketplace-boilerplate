@@ -6,6 +6,14 @@ import { Routes } from '~/lib/routes';
 import { getCollectionLogo, getTag } from '~/lib/utils/helpers';
 
 import { CollectionsEnum } from '../../../../enum/enum';
+import {
+  fromBottom,
+  fromLeft,
+  fromRight,
+  fromTop,
+  opacity,
+  useAnimation,
+} from '../../../../hooks/ui/useAnimation';
 import { CollectionCardSkeleton } from './Skeleton';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react';
@@ -48,6 +56,23 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
     }
   };
 
+  const getAnimation = (address: string) => {
+    switch (address as CollectionsEnum) {
+      case CollectionsEnum.WEAPON_VARIANTS:
+        return fromRight;
+      case CollectionsEnum.LOOT_BOXES:
+        return opacity;
+      case CollectionsEnum.HEROES_VARIANT:
+        return fromLeft;
+      case CollectionsEnum.COSMETICS:
+        return fromRight;
+      case CollectionsEnum.SHARDS:
+        return fromLeft;
+      default:
+        return opacity;
+    }
+  };
+
   return (
     <NextLink
       href={Routes.collection({
@@ -57,6 +82,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       })}
     >
       <div
+        ref={useAnimation(getAnimation(collectionAddress))}
         className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem] mb:h-[421px] mb:p-4"
         style={{ backgroundImage: setBackGroundImage(collectionAddress) }}
       >

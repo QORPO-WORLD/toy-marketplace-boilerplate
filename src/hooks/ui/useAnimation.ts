@@ -34,6 +34,18 @@ export const useAnimation = (
   return ref; // Return the ref
 };
 
+export const opacity = (ref: RefObject<HTMLDivElement>) => {
+  if (ref.current) {
+    gsap.from(ref.current, {
+      ...scrollTriggerConfig(ref),
+
+      opacity: 0,
+      duration: 2,
+      ease: 'elastic.out(1,1)"',
+    });
+  }
+};
+
 export const fromLeft = (ref: RefObject<HTMLDivElement>) => {
   if (ref.current) {
     gsap.from(ref.current, {
@@ -61,7 +73,7 @@ export const fromTop = (ref: RefObject<HTMLDivElement>) => {
   if (ref.current) {
     gsap.from(ref.current, {
       ...scrollTriggerConfig(ref),
-      y: '-100%',
+      y: '-50%',
       opacity: 0,
       duration: 2,
       ease: 'elastic.out(1,1)"',
@@ -135,28 +147,31 @@ export const nftCard4 = (ref: RefObject<HTMLDivElement>) => {
   }
 };
 
-export const opacityLeft = (ref: RefObject<HTMLDivElement>) => {
-  if (ref.current) {
-    gsap.from(ref.current, {
-      ...scrollTriggerConfig(ref),
-      x: '-40%',
-      opacity: 0,
-      duration: 1,
-    });
-  }
-};
-
 export const fromRightStaged = (ref: RefObject<HTMLDivElement>) => {
   if (ref.current) {
     Array.from(ref.current.children).forEach((child, index) => {
       gsap.from(child, {
         ...scrollTriggerConfig(ref),
-        x: '200%',
+        x: '100%',
         opacity: 0,
-        duration: 0.2,
-        delay: index * 0.1,
+        duration: 1.4,
+        delay: index * 0.2,
         ease: 'elastic.out(1,0.5)"',
       });
+    });
+  }
+};
+
+export const rotate = (ref: RefObject<HTMLDivElement>) => {
+  if (ref.current) {
+    gsap.from(ref.current, {
+      ...scrollTriggerConfig(ref),
+      rotate: 270,
+      opacity: 0,
+      duration: 2,
+      ease: 'elastic.out(1,0.5)"',
+      scale: 0,
+      delay: 0.3,
     });
   }
 };
