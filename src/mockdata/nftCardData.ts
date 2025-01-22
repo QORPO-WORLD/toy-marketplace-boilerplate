@@ -1,7 +1,7 @@
 export const nftCardData = [
   {
     name: 'shards',
-    tag: 'citizen conflict',
+    tag: 'CitizenConflict',
     logoSrc: '/market/images/logos/cc-logo.png',
     imageSrc: '/market/images/nft-card-bg/cristal-bg.png',
     nftNumber: 125,
@@ -9,7 +9,7 @@ export const nftCardData = [
   },
   {
     name: 'Aneemate genesis zero',
-    tag: 'aneemate',
+    tag: 'playAneeMate',
     logoSrc: '/market/images/logos/anmt-logo.png',
     imageSrc: '/market/images/nft-card-bg/monky-bg.png',
     nftNumber: 125,
@@ -17,7 +17,7 @@ export const nftCardData = [
   },
   {
     name: 'Lootboxes',
-    tag: 'citizen conflict',
+    tag: 'CitizenConflict',
     logoSrc: '/market/images/logos/cc-logo.png',
     imageSrc: '/market/images/nft-card-bg/robot-bg.png',
     nftNumber: 125,
@@ -25,7 +25,7 @@ export const nftCardData = [
   },
   {
     name: 'heroes variants',
-    tag: 'citizen conflict',
+    tag: 'CitizenConflict',
     logoSrc: '/market/images/logos/cc-logo.png',
     imageSrc: '/market/images/nft-card-bg/man-bg.png',
     nftNumber: 125,

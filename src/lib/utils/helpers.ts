@@ -44,9 +44,9 @@ export const getCollectionBg = (collection: string) => {
 export const getTag = (collection: string) => {
   switch (collection as CollectionsEnum) {
     case CollectionsEnum.ANEEMATE_GENESIS_ZERO:
-      return '@ANEEMATE';
+      return '@playAneeMate';
     default:
-      return '@CITIZEN CONFLICT';
+      return '@CitizenConflict';
   }
 };
 

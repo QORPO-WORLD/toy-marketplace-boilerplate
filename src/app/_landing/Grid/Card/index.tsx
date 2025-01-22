@@ -2,15 +2,11 @@
 
 import { Suspense } from 'react';
 
-import { placeholderImgUrl } from '~/components/ui/Image/image';
-import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
-import { getCollectionLogo, getTag, isVideo } from '~/lib/utils/helpers';
+import { getCollectionLogo, getTag } from '~/lib/utils/helpers';
 
-import { Avatar, Badge, Flex, ScrollArea, Text, cn } from '$ui';
 import { CollectionsEnum } from '../../../../enum/enum';
 import { CollectionCardSkeleton } from './Skeleton';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react';
 import NextLink from 'next/link';
@@ -32,12 +28,8 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
   });
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const image = data?.extensions.ogImage || bannerUrl || placeholderImgUrl;
-  const description = data?.extensions.description;
+
   const name = data?.name;
-  const symbol = data?.symbol;
-  const logoURI = data?.logoURI;
-  const contractType = data?.type;
 
   const setBackGroundImage = (collectionAddress: `0x${string}`) => {
     switch (collectionAddress.toLocaleLowerCase() as CollectionsEnum) {
@@ -65,10 +57,10 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
       })}
     >
       <div
-        className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem] mb:h-[421px]"
+        className="w-full h-full bg-center bg-cover flex items-end p-[1.56rem] rounded-[1.5625rem] mb:h-[421px] mb:p-4"
         style={{ backgroundImage: setBackGroundImage(collectionAddress) }}
       >
-        <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full">
+        <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] w-full mb:p-2">
           <img
             className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
             src={getCollectionLogo(collectionAddress)}
@@ -77,7 +69,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
           />
           <div className="flex gap-[0.6rem] overflow-hidden">
             <div>
-              <p className="text-[2rem] uppercase truncate leading-none">
+              <p className="text-[2rem] uppercase truncate leading-none mb:text-xl">
                 {name}
               </p>
               <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
@@ -91,7 +83,7 @@ const Card = ({ chainId, collectionAddress, bannerUrl }: CollectionCard) => {
               loading="lazy"
             />
           </div>
-          <div className="ml-auto w-[3.562rem] aspect-square rounded-full bg-[#E5FF03] flex items-center justify-center">
+          <div className="ml-auto w-[3.562rem] aspect-square rounded-full bg-[#E5FF03] flex items-center justify-center mb:hidden">
             <img
               className="w-[1.5rem] h-[1.5rem] block"
               src="/market/icons/cart-icon.svg"

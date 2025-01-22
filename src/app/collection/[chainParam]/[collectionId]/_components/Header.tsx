@@ -84,7 +84,7 @@ const CollectionHeader = ({
     <>
       <div className="h-dvh p-2 mx-[-2rem] mb-8 mb:p-0 mb:mx-0 mb:mb-0">
         <div
-          className="rounded-[3.125rem] mb:rounded-none bg-[url()] bg-cover bg-top-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12"
+          className="rounded-[3.125rem] mb:rounded-none bg-[url()] bg-cover bg-top-center h-full shadow-[0_0.5rem_3rem_rgba(58,49,66,1)] flex items-end justify-center p-12 mb:p-8"
           style={{
             backgroundImage: `url(${getCollectionBg(collectionAddress)})`,
           }}

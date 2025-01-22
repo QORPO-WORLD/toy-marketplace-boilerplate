@@ -56,7 +56,6 @@ function Balance() {
         if (!signedIn) return;
         const { idToken } = await sequence.getIdToken();
         setIdToken(idToken);
-        console.log('ID Token:', idToken);
       } catch (error) {
         console.error('Error getting ID token:', error);
       }
