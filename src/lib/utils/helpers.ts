@@ -130,8 +130,27 @@ export const getCurrencyLogoByChainId = (chainId: number) => {
     case 56:
       return '/market/icons/bnb-logo.png';
     case 21000000:
-      return '/market/icons/toy-market-logo.svg';
+      return '/market/icons/toy-chain-logo.png';
     default:
-      return '/market/icons/toy-market-logo.svg';
+      return '/market/icons/toy-chain-logo.png';
+  }
+};
+
+export const getChainLogo = (chainId: number) => {
+  switch (chainId) {
+    case 1:
+      return '/market/icons/ETH-logo.png';
+    case 4:
+      return '/market/icons/ETH-logo.png';
+    case 137:
+      return 'MATIC';
+    case 80001:
+      return 'MATIC';
+    case 56:
+      return '/market/icons/bnb-logo.png';
+    case 21000000:
+      return '/market/icons/toy-chain-logo.png';
+    default:
+      return '/market/icons/toy-chain-logo.png';
   }
 };

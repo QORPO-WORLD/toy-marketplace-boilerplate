@@ -124,9 +124,9 @@ function Balance() {
       case 'BNB':
         return '/market/icons/bnb-logo.png';
       case 'TOY':
-        return '/market/icons/toy-market-logo.svg';
+        return '/market/icons/toy-chain-logo.png';
       default:
-        return '/market/icons/default-logo.svg';
+        return '/market/icons/toy-chain-logo.png';
     }
   };
 
