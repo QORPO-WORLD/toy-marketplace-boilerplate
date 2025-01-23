@@ -12,6 +12,7 @@ import { useAccount } from 'wagmi';
 export const NetworkButton = () => {
   const { chain } = useAccount();
   const isClient = useIsClient();
+
   if (!isClient)
     return (
       <Button variant="muted">

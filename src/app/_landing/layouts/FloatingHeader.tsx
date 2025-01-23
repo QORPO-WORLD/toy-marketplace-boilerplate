@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
 import FAQBox from '../../../components/ui/FAQBox/FAQBox';
@@ -29,6 +31,7 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useSwitchChain } from 'wagmi';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -46,10 +49,11 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
   const card5Animation = useAnimation(nftCard1);
   const rotateAnimation = useAnimation(rotate);
   const opacityAnimation = useAnimation(opacity);
-  const fromRightStagedAnimation1 = useAnimation(fromRightStaged);
+  const fromRightStagedAnimation1 = useAnimation(fromRightStaged, 3);
   const fromRightStagedAnimation2 = useAnimation(fromRightStaged);
   const flip1 = useFlip();
   const flip2 = useFlip();
+  const { switchChainAsync } = useSwitchChain();
   const findCollection = (collectionAddress: string) => {
     return collections.find(
       (c) =>
@@ -57,6 +61,16 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
         collectionAddress.toLocaleLowerCase(),
     );
   };
+  useEffect(() => {
+    const onClickNetwork = async (chainId: number) => {
+      try {
+        await switchChainAsync({ chainId });
+      } catch (err) {
+        console.error('failed to switch network', err);
+      }
+    };
+    void onClickNetwork(21000000);
+  }, [switchChainAsync]);
 
   return (
     <Flex
