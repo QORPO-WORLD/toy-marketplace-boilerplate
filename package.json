@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "build-staging": "dotenv -e .env.staging -- npx next build",
     "dev": "next dev -p 4444",
     "lint": "next lint",
     "lint:fix": "next lint --fix && prettier --write --ignore-path .prettierignore .",
@@ -79,6 +80,7 @@
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "@vanilla-extract/next-plugin": "^2.4.7",
+    "dotenv-cli": "^8.0.0",
     "esbuild-plugin-alias": "^0.2.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.20",
