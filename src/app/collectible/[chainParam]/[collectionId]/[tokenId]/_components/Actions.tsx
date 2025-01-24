@@ -1,7 +1,5 @@
 'use client';
 
-import { env } from '~/env';
-
 import { Button, Flex, Text, toast } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
 import {
