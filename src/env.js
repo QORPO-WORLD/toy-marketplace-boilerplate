@@ -10,7 +10,6 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: z.string().optional(),
     NEXT_PUBLIC_APPLE_CLIENT_ID: z.string().optional(),
     NEXT_PUBLIC_APPLE_REDIRECT_URI: z.string().optional(),
-    NEXT_PUBLIC_ORDERBOOK_KIND: z.string().optional(),
   },
 
   runtimeEnv: {
@@ -24,7 +23,6 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
     NEXT_PUBLIC_APPLE_CLIENT_ID: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
     NEXT_PUBLIC_APPLE_REDIRECT_URI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI,
-    NEXT_PUBLIC_ORDERBOOK_KIND: process.env.NEXT_PUBLIC_ORDERBOOK_KIND,
   },
   emptyStringAsUndefined: true,
 });

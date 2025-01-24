@@ -1,7 +1,6 @@
 'use client';
 
 import { Button, toast } from '$ui';
-import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import {
   useBalanceOfCollectible,
   useBuyModal,
@@ -15,7 +14,6 @@ import {
 import { usePathname } from 'next/navigation';
 import type { Hex } from 'viem';
 import { useAccount } from 'wagmi';
-import { env } from '~/env';
 
 type OrderSide = 'buy' | 'sell' | 'transfer' | 'order' | 'listing' | undefined;
 
@@ -34,7 +32,6 @@ export const CollectibleActionButton = ({
   collectibleName,
   collectionChainId,
 }: CollectibleActionButtonProps) => {
-  const orderbookKind = env.NEXT_PUBLIC_ORDERBOOK_KIND || OrderbookKind.sequence_marketplace_v1 as OrderbookKind;
   const { address } = useAccount();
   const pathname = usePathname();
 
@@ -152,7 +149,6 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
-          orderbookKind: orderbookKind as OrderbookKind,
         });
       },
     },
@@ -162,8 +158,7 @@ export const CollectibleActionButton = ({
         showCreateListingModal({
           collectionAddress,
           chainId: collectionChainId,
-          collectibleId: tokenId ,
-          orderbookKind: orderbookKind as OrderbookKind,
+          collectibleId: tokenId,
         });
       },
     },
