@@ -183,12 +183,12 @@ export const CollectibleTradeActions = ({
         {!listingDisabled && (
           <Button
             className="btn-main w-full variant-black "
-            onClick={onClickOffer}
+            onClick={onClickList}
             size="lg"
             loading={false}
             disabled={listingDisabled}
           >
-            <Text className="text-inherit text-center">make offer</Text>
+            <Text className="text-inherit text-center">place offer</Text>
           </Button>
         )}
       </Flex>

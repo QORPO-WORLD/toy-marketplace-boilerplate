@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box, Flex, cn } from '$ui';
 import Banner from '../../../components/ui/Banner/Banner';
@@ -36,20 +36,35 @@ import { useSwitchChain } from 'wagmi';
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
+  const [isFirstCardLoaded, setIsFirstCardLoaded] = useState(false);
+  const [isSecondCardLoaded, setIsSecondCardLoaded] = useState(false);
+  const [isThirdCardLoaded, setIsThirdCardLoaded] = useState(false);
+  const [isFourthCardLoaded, setIsFourthCardLoaded] = useState(false);
+  const [isFifthCardLoaded, setIsFifthCardLoaded] = useState(false);
   const animationFromLeft1 = useAnimation(fromLeft);
   const animationFromLeft2 = useAnimation(fromLeft);
   const animationFromLeft4 = useAnimation(fromLeft);
   const animationFromLeft5 = useAnimation(fromLeft);
   const animationFromTop = useAnimation(fromTop);
   const animationFromRight = useAnimation(fromRightStaged);
-  const card1Animation = useAnimation(nftCard1);
-  const card2Animation = useAnimation(nftCard2);
-  const card3Animation = useAnimation(nftCard3);
-  const card4Animation = useAnimation(nftCard4);
+  const card1Animation = useAnimation(nftCard1, {
+    isDisabled: !isFirstCardLoaded,
+  });
+  const card2Animation = useAnimation(nftCard2, {
+    isDisabled: !isSecondCardLoaded,
+  });
+  const card3Animation = useAnimation(nftCard3, {
+    isDisabled: !isThirdCardLoaded,
+  });
+  const card4Animation = useAnimation(nftCard4, {
+    isDisabled: !isFourthCardLoaded,
+  });
   const card5Animation = useAnimation(nftCard1);
   const rotateAnimation = useAnimation(rotate);
   const opacityAnimation = useAnimation(opacity);
-  const fromRightStagedAnimation1 = useAnimation(fromRightStaged, 3);
+  const fromRightStagedAnimation1 = useAnimation(fromRightStaged, {
+    duration: 3,
+  });
   const fromRightStagedAnimation2 = useAnimation(fromRightStaged);
   const flip1 = useFlip();
   const flip2 = useFlip();
@@ -94,24 +109,28 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
           <div className="flex h-full items-end justify-center translate-x-[-2rem] translate-y-[5rem] mb:hidden">
             <div ref={card1Animation}>
               <NFTCard
+                setIsLoaded={setIsFirstCardLoaded}
                 data={nftCardData[0]!}
                 className="h-[39rem] w-auto bg-[#E7E6FB] rotate-[-15deg]"
               />
             </div>
             <div ref={card2Animation} className="z-10">
               <NFTCard
+                setIsLoaded={setIsSecondCardLoaded}
                 data={nftCardData[1]!}
                 className="h-[39rem] w-auto bg-[#FBF2DD]  z-10 rotate-[25deg]"
               />
             </div>
             <div ref={card3Animation}>
               <NFTCard
+                setIsLoaded={setIsThirdCardLoaded}
                 data={nftCardData[2]!}
                 className="h-[39rem] w-auto bg-[#E7E6FB]  rotate-[5.5deg]"
               />
             </div>
             <div ref={card4Animation}>
               <NFTCard
+                setIsLoaded={setIsFourthCardLoaded}
                 data={nftCardData[3]!}
                 className="h-[39rem] w-auto bg-[#FBF2DD] rotate-[-23deg]"
               />
@@ -120,6 +139,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
           <div className="w-full hidden mb:block translate-x-6">
             <div ref={card5Animation}>
               <NFTCard
+                setIsLoaded={setIsFifthCardLoaded}
                 data={nftCardData[0]!}
                 className="h-[31rem] w-auto bg-[#E7E6FB]  rotate-[-15deg]"
               />

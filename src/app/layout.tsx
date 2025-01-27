@@ -21,9 +21,40 @@ export default async function RootLayout({
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <title>TOY ⎸ OWN YOUR STORY</title>
+        <meta
+          name="description"
+          content="Own your story with $TOY and become part of our community."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="icon" href={faviconUrl} />
-        <link rel="shortcut icon" href={faviconUrl} />
+        {/* Open Graph / Facebook Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="TOY ⎸ OWN YOUR STORY" />
+        <meta property="og:title" content="TOY ⎸ OWN YOUR STORY" />
+        <meta
+          property="og:description"
+          content="Own your story with $TOY and become part of our community."
+        />
+        <meta
+          property="og:image"
+          content="https://playontoy.com/assets/img/thumbnailimageTOY-min.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="TOY ⎸ OWN YOUR STORY" />
+        <meta
+          name="twitter:description"
+          content="Own your story with $TOY and become part of our community."
+        />
+        <meta
+          name="twitter:image"
+          content="https://playontoy.com/assets/img/thumbnailimageTOY-min.jpg"
+        />
+        <link rel="icon" href="/market/favicon.ico" />
+        <link rel="shortcut icon" href="/market/favicon.ico" />
         {fontUrl ? <link href={fontUrl} rel="stylesheet" /> : null}
         <style>{cssString}</style>
       </head>
@@ -41,35 +72,36 @@ export default async function RootLayout({
   );
 }
 
-export const generateMetadata = async (): Promise<Metadata> => {
-  const { getMarketplaceConfig } = ssrClient();
-  const marketplaceConfig = await getMarketplaceConfig();
-  return {
-    title: {
-      template: marketplaceConfig.titleTemplate ?? '%s',
-      default: 'TOY ⎸ OWN YOUR STORY',
-    },
-    description: marketplaceConfig.shortDescription ?? '',
-    manifest: marketplaceConfig.manifestUrl,
-    twitter: {
-      card: 'summary_large_image',
-    },
-    openGraph: {
-      type: 'website',
-      title: marketplaceConfig.title ?? '',
-      description: marketplaceConfig.shortDescription ?? '',
-      images: [
-        {
-          url: marketplaceConfig.ogImage ?? '',
-          alt: marketplaceConfig.title,
-        },
-      ],
-    },
-    appleWebApp: {
-      title: marketplaceConfig.title,
-      statusBarStyle: 'default',
-    },
-  };
-};
+// export const generateMetadata = async (): Promise<Metadata> => {
+//   const { getMarketplaceConfig } = ssrClient();
+//   const marketplaceConfig = await getMarketplaceConfig();
+
+//   return {
+//     title: {
+//       template: marketplaceConfig.titleTemplate ?? '%s',
+//       default: 'TOY ⎸ OWN YOUR STORY',
+//     },
+//     description: marketplaceConfig.shortDescription ?? '',
+//     manifest: marketplaceConfig.manifestUrl,
+//     twitter: {
+//       card: 'summary_large_image',
+//     },
+//     openGraph: {
+//       type: 'website',
+//       title: marketplaceConfig.title ?? '',
+//       description: marketplaceConfig.shortDescription ?? '',
+//       images: [
+//         {
+//           url: marketplaceConfig.ogImage ?? '',
+//           alt: marketplaceConfig.title,
+//         },
+//       ],
+//     },
+//     appleWebApp: {
+//       title: marketplaceConfig.title,
+//       statusBarStyle: 'default',
+//     },
+//   };
+// };
 
 export const runtime = 'edge';

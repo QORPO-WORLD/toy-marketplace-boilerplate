@@ -75,6 +75,8 @@ export default {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'main-gradient': 'linear-gradient(90deg, #F47469 0%, #DB5179 100%)',
+        modal:
+          'url("/images/mogal-bg.png") linear-gradient(90deg, #F47469 0%, #DB5179 100%)',
       },
       backgroundPosition: {
         'top-center': 'center top',
