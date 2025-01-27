@@ -1,7 +1,10 @@
 'use client';
 
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
 import { useFlip } from '../../../hooks/ui/useFlip';
 import styles from './NFTCard.module.scss';
+import clsx from 'clsx';
 import Image from 'next/image';
 
 interface NFTCardProps {
@@ -16,14 +19,30 @@ interface NFTCardProps {
 function NFTCard({
   data,
   className,
+  setIsLoaded,
 }: {
   data: NFTCardProps;
   className: string;
+  setIsLoaded: Dispatch<SetStateAction<boolean>>;
 }) {
+  const [isVisible, setIsVisible] = useState(false);
   const flip = useFlip(undefined, 25);
   const { logoSrc, imageSrc, name, tag, nftNumber, nftPrice } = data;
+
+  useEffect(() => {
+    if (isVisible) {
+      setIsLoaded(true);
+    }
+  }, [isVisible, setIsLoaded]);
+
   return (
-    <div ref={flip} className={styles.card + ' ' + className}>
+    <div
+      ref={flip}
+      className={clsx(styles.card + ' ' + className, {
+        'opacity-0': !isVisible,
+        'opacity-100': isVisible,
+      })}
+    >
       <div className={styles.title_wrapper}>
         <Image
           width={150}
@@ -32,6 +51,9 @@ function NFTCard({
           src={logoSrc}
           loading="lazy"
           alt="logo"
+          onLoadingComplete={() => {
+            setIsVisible(true);
+          }}
         />
         <div className={styles.card_title_container}>
           <p className={styles.title}>{name}</p>

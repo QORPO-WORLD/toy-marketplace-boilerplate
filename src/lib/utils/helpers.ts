@@ -149,7 +149,7 @@ export const getChainLogo = (chainId: number) => {
     case 56:
       return '/market/icons/bnb-logo.png';
     case 21000000:
-      return '/market/icons/toy-chain-logo.png';
+      return '/market/images/teddy-logo.png';
     default:
       return '/market/icons/toy-chain-logo.png';
   }

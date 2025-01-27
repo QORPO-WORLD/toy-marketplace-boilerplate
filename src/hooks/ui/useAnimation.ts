@@ -13,15 +13,20 @@ const scrollTriggerConfig = (ref: RefObject<HTMLDivElement>) => ({
 
 export const useAnimation = (
   gsapFn: (ref: RefObject<HTMLDivElement>, delay?: number) => void,
-  duration?: number,
+  config?: {
+    duration?: number;
+    isDisabled?: boolean;
+  },
 ) => {
   const ref = useRef<HTMLDivElement | null>(null); // Ensure the ref matches the expected type
 
   useGSAP(() => {
+    console.log('useGSAP', config?.isDisabled);
+    if (config?.isDisabled) return;
     if (ref.current) {
-      gsapFn(ref, duration);
+      gsapFn(ref, config?.duration);
     }
-  });
+  }, [config?.isDisabled]);
 
   return ref; // Return the ref
 };
