@@ -1,5 +1,5 @@
 .card {
-  @apply flex aspect-[0.667188891] flex-col bg-cover p-2 pt-5 drop-shadow-md;
+  @apply flex aspect-[0.667188891] flex-col bg-cover p-2 pt-5;
   -webkit-clip-path: url(#nft-card-clip-path);
   clip-path: url(#nft-card-clip-path);
   //  @media  (max-width: 776px) {

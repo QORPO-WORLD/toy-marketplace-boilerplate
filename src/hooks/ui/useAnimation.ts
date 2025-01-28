@@ -21,7 +21,6 @@ export const useAnimation = (
   const ref = useRef<HTMLDivElement | null>(null); // Ensure the ref matches the expected type
 
   useGSAP(() => {
-    console.log('useGSAP', config?.isDisabled);
     if (config?.isDisabled) return;
     if (ref.current) {
       gsapFn(ref, config?.duration);

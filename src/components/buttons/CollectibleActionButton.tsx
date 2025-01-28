@@ -92,7 +92,7 @@ export const CollectibleActionButton = ({
 
   // inventory page
   if (pathname === '/inventory') {
-    orderSide = 'transfer';
+    orderSide = 'listing';
   }
 
   // buyable collectible

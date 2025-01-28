@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
@@ -23,6 +23,8 @@ import {
   useListBalances,
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
+import { useIsMounted } from '@legendapp/state/react';
+import { set } from 'date-fns';
 import type { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
@@ -63,12 +65,43 @@ const CollectionSection = ({
     accountAddress,
     contractAddress: collectionAddress,
   });
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
+  const [balancesData, setBalancesData] = useState<TokenBalance[] | []>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   // const { isGridView } = useViewType();
+
+  useEffect(() => {
+    if (isMounted) return;
+    if (contentRef.current) {
+      setIsOpen(true);
+      setIsMounted(true);
+    }
+  }, [useIsMounted, contentRef.current]);
+
+  useEffect(() => {
+    if (collectionBalances) {
+      const balances = collectionBalances?.pages
+        .flatMap((item) => item.balances)
+        .map((item) => item);
+      balances.forEach((item) => {
+        setBalancesData((prev) => {
+          return prev ? [...prev, item] : [item];
+        });
+      });
+    }
+  }, [collectionBalances]);
+
+  const findAssetBalance = (contractAddress: string) => {
+    return balancesData.find(
+      (c) =>
+        c.contractAddress.toLocaleLowerCase() ===
+        contractAddress.toLocaleLowerCase(),
+    );
+  };
 
   const isGridView = true;
 
@@ -79,7 +112,6 @@ const CollectionSection = ({
     if (isFetchingNextPage) {
       return;
     }
-
     void fetchNextPage();
   };
 
@@ -119,7 +151,7 @@ const CollectionSection = ({
                 ITEMS {collectibles.length}
               </Text>
             </Flex>
-            <button className="mr-4" onClick={() => setIsOpen((prev) => !prev)}>
+            {/* <button className="mr-4" onClick={() => setIsOpen((prev) => !prev)}>
               <img
                 className="transition duration-150 ease-out w-4 aspect-square"
                 src="/market/icons/arrow-icon.svg"
@@ -128,22 +160,24 @@ const CollectionSection = ({
                 }}
                 alt="arrow"
               />
-            </button>
+            </button> */}
           </div>
         </div>
       </Flex>
 
       <div
         className="mt-0 p-1 overflow-hidden transition-all duration-700 ease-out"
-        style={{
-          height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
-        }}
+        // style={{
+        //   height: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+        // }}
       >
         <div className="pt-1" ref={contentRef}>
           <ContentWrapper isGridView={isGridView}>
             {collectibles.map((c) => {
               return isGridView ? (
                 <CollectibleCard
+                  balance={findAssetBalance(c.contractAddress)}
+                  isInventory
                   collectionAddress={collectionAddress as Hex}
                   tokenId={c.tokenID!}
                   collectionChainId={String(c.chainId)}

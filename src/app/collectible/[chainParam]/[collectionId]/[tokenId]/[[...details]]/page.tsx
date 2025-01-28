@@ -1,5 +1,7 @@
 'use client';
 
+import { use, useEffect, useState } from 'react';
+
 import ENSName from '../../../../../../components/ENSName';
 import { getChain } from '../../../../../../lib/utils/getChain';
 import {
@@ -19,6 +21,7 @@ import { useOpenConnectModal } from '@0xsequence/kit';
 import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
   useFloorOrder,
+  useListBalances,
   useLowestListing,
 } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
@@ -36,6 +39,7 @@ export default function Page() {
   const router = useRouter();
   const { isConnected } = useAccount();
   const { setOpenConnectModal } = useOpenConnectModal();
+  const [yourAssets, setYourAssets] = useState<string[]>([]);
 
   const { data: lowestListing } = useLowestListing({
     chainId: String(chainId),
@@ -45,6 +49,27 @@ export default function Page() {
       enabled: true,
     },
   });
+
+  const { address: accountAddress } = useAccount();
+
+  const { data: balancesData } = useListBalances({
+    chainId,
+    accountAddress,
+    contractAddress: collectionId,
+  });
+
+  useEffect(() => {
+    if (balancesData) {
+      const balances = balancesData?.pages
+        .flatMap((item) => item.balances)
+        .map((item) => item);
+      balances.forEach((item) => {
+        if (item.tokenID) {
+          setYourAssets((prev) => [...prev, item.tokenID!]);
+        }
+      });
+    }
+  }, [balancesData?.pages]);
 
   const { data: collectionDataOrder } = useFloorOrder({
     chainId: String(chainId),
@@ -203,6 +228,7 @@ export default function Page() {
               <div className="mb:hidden">
                 {isConnected ? (
                   <CollectibleTradeActions
+                    isYour={yourAssets.includes(tokenId)}
                     chainId={chainId}
                     collectionAddress={collectionId}
                     tokenId={tokenId}
@@ -219,6 +245,7 @@ export default function Page() {
             </div>
             <div className=" hidden mb:block">
               <CollectibleTradeActions
+                isYour={yourAssets.includes(tokenId)}
                 chainId={chainId}
                 collectionAddress={collectionId}
                 tokenId={tokenId}
