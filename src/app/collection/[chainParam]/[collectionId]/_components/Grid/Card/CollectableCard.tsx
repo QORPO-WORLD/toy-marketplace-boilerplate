@@ -4,6 +4,7 @@ import { classNames } from '~/config/classNames';
 import { Routes } from '~/lib/routes';
 
 import { Footer } from './Footer';
+import { TokenBalance } from '@0xsequence/indexer';
 import type { Order } from '@0xsequence/marketplace-sdk';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';
@@ -16,6 +17,7 @@ type CollectibleCardProps = {
   collectionAddress: Hex;
   collectionChainId: string;
   isInventory?: boolean;
+  balance?: TokenBalance;
 };
 
 export const CollectibleCard = ({
@@ -23,6 +25,7 @@ export const CollectibleCard = ({
   tokenId,
   collectionAddress,
   collectionChainId,
+  balance,
 }: CollectibleCardProps) => {
   const { isConnected, chainId: accountChainId } = useAccount();
   const { data: collectible, isLoading: collectibleLoading } = useCollectible({
@@ -49,13 +52,18 @@ export const CollectibleCard = ({
           collectionId: collectionAddress,
           tokenId,
         })}
-        className="peer h-full p-2"
+        className="peer h-full p-2 relative"
       >
         <Image
           src={collectible?.image}
           containerClassName="bg-foreground/10 aspect-square rounded-[1.5625rem] overflow-hidden mb-2"
           className="aspect-square rounded-[inherit] hover:scale-110 ease-in duration-150"
         />
+        {balance && (
+          <p className="absolute top-[12rem] left-[1.5rem] bg-[#ffffff26] block rounded-xl p-4 py-1">
+            {balance.balance}
+          </p>
+        )}
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
       {isConnected && accountChainId && (

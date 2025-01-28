@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
@@ -67,8 +67,30 @@ const CollectionSection = ({
   const contentRef = useRef<HTMLDivElement>(null);
   const { data: collectionMetadata, isLoading: isCollectionMetadataLoading } =
     useCollection({ chainId, collectionAddress });
+  const [balancesData, setBalancesData] = useState<TokenBalance[] | []>([]);
 
   // const { isGridView } = useViewType();
+
+  useEffect(() => {
+    if (collectionBalances) {
+      const balances = collectionBalances?.pages
+        .flatMap((item) => item.balances)
+        .map((item) => item);
+      balances.forEach((item) => {
+        setBalancesData((prev) => {
+          return prev ? [...prev, item] : [item];
+        });
+      });
+    }
+  }, [collectionBalances]);
+
+  const findAssetBalance = (contractAddress: string) => {
+    return balancesData.find(
+      (c) =>
+        c.contractAddress.toLocaleLowerCase() ===
+        contractAddress.toLocaleLowerCase(),
+    );
+  };
 
   const isGridView = true;
 
@@ -144,6 +166,7 @@ const CollectionSection = ({
             {collectibles.map((c) => {
               return isGridView ? (
                 <CollectibleCard
+                  balance={findAssetBalance(c.contractAddress)}
                   isInventory
                   collectionAddress={collectionAddress as Hex}
                   tokenId={c.tokenID!}
