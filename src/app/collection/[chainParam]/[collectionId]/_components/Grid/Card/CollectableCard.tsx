@@ -15,6 +15,7 @@ type CollectibleCardProps = {
   tokenId: string;
   collectionAddress: Hex;
   collectionChainId: string;
+  isInventory?: boolean;
 };
 
 export const CollectibleCard = ({

@@ -63,7 +63,6 @@ export default function Page() {
       const balances = balancesData?.pages
         .flatMap((item) => item.balances)
         .map((item) => item);
-      console.log(balances);
       balances.forEach((item) => {
         if (item.tokenID) {
           setYourAssets((prev) => [...prev, item.tokenID!]);

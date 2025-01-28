@@ -144,6 +144,7 @@ const CollectionSection = ({
             {collectibles.map((c) => {
               return isGridView ? (
                 <CollectibleCard
+                  isInventory
                   collectionAddress={collectionAddress as Hex}
                   tokenId={c.tokenID!}
                   collectionChainId={String(c.chainId)}
