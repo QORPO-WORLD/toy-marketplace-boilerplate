@@ -31,6 +31,7 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { EffectCards } from 'swiper/modules';
 import { useSwitchChain } from 'wagmi';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -137,12 +138,23 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
             </div>
           </div>
           <div className="w-full hidden mb:block translate-x-6">
-            <div ref={card5Animation}>
-              <NFTCard
+            <div ref={card5Animation} className="rotate-[-15deg]">
+              <MobileSwiper
+                disabledPagination
+                effects="cards"
+                arrOfComponents={nftCardData.map((data) => (
+                  <NFTCard
+                    key={data.name}
+                    data={data}
+                    className="h-[31rem]  w-auto bg-[#E7E6FB]"
+                  />
+                ))}
+              ></MobileSwiper>
+              {/* <NFTCard
                 setIsLoaded={setIsFifthCardLoaded}
                 data={nftCardData[0]!}
                 className="h-[31rem] w-auto bg-[#E7E6FB]  rotate-[-15deg]"
-              />
+              /> */}
             </div>
           </div>
         </div>

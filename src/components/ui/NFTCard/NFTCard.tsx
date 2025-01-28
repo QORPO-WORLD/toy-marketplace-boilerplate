@@ -23,14 +23,14 @@ function NFTCard({
 }: {
   data: NFTCardProps;
   className: string;
-  setIsLoaded: Dispatch<SetStateAction<boolean>>;
+  setIsLoaded?: Dispatch<SetStateAction<boolean>>;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const flip = useFlip(undefined, 25);
   const { logoSrc, imageSrc, name, tag, nftNumber, nftPrice } = data;
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && setIsLoaded) {
       setIsLoaded(true);
     }
   }, [isVisible, setIsLoaded]);
