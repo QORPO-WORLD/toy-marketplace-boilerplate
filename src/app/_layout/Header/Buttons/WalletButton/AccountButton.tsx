@@ -15,7 +15,11 @@ export const AccountButton = (props: ComponentProps<typeof Button>) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button variant="muted" className="backdrop-blur" {...props}>
+        <Button
+          variant="muted"
+          className="bg-[#483F50] hover:bg-[#483f5077]"
+          {...props}
+        >
           {props.children ?? (
             <>
               <WalletIcon />

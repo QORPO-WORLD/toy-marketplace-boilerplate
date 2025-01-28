@@ -14,7 +14,11 @@ export function InventoryButton() {
   }
 
   return (
-    <Button asChild variant="muted" className="backdrop-blur">
+    <Button
+      asChild
+      variant="muted"
+      className="bg-[#483F50] hover:bg-[#483f5077]"
+    >
       <Link href={Routes.inventory()}>
         <CubeIcon />
         <span className="hidden md:inline">Inventory</span>

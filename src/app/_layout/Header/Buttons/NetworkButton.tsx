@@ -28,7 +28,7 @@ export const NetworkButton = () => {
       return (
         <Button
           variant="muted"
-          className="backdrop-blur"
+          className="bg-[#483F50] hover:bg-[#483f5077]"
           aria-label="Select network"
         >
           <NetworkImage chainId={chain?.id} />
