@@ -40,6 +40,8 @@ function Balance() {
   const { data: walletData } = useBalance({
     address,
   });
+  const [isToyInfoShown, setIsToyInfoShown] = useState(false);
+  const [isDPInfoShown, setIsDPInfoShown] = useState(false);
   const { data } = useQuery<BalanceProps>({
     queryKey: ['qorpobalance', idToken],
     queryFn: () =>
@@ -133,57 +135,88 @@ function Balance() {
   if (!isConnected) return null;
 
   return (
-    <div
-      ref={ref}
-      className="w-full rounded-3xl overflow-hidden absolute top-0 right-0 translate-y-[-0.2rem]"
-    >
-      <div
-        className="py-3 px-8 bg-[#483F50] flex items-center justify-between cursor-pointer"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        <p className="text-2xl text-white">Balance</p>
-        <img
-          className="w-[1.1rem] aspect-square"
-          src="/market/icons/info.svg"
-          alt=""
-        />
-      </div>
-      {isOpen && (
-        <div className="bg-white tooltip font-DMSans text-text selection:none">
-          <ul>
-            <li className="py-3 px-8 border-dashed border-b border-text">
-              <p className="opacity-50 font-bold uppercase">
-                {getChainNamebySymbol(walletData?.symbol)}
-              </p>
-              <div className="flex items-center gap-2">
-                <img
-                  className="w-[1.9375rem] aspect-square"
-                  src={getCurrencyLogoBySymbol(walletData?.symbol)}
-                  alt="logo"
-                />
-                <p className=" text-xl font-bold">
-                  {parseFloat(walletData?.formatted || '0').toFixed(4)}{' '}
-                  {walletData?.symbol}
-                </p>
-                {/* <p className="ml-auto">$ 0.03</p> */}
-              </div>
-            </li>
-            {data?.data.dp && (
+    <div className="absolute top-0 right-0 translate-y-[-0.2rem] w-full h-auto select-none">
+      {isToyInfoShown && (
+        <div className="absolute left-[102%] top-[4.7rem] w-96 p-4 bg-[#483F50] rounded-3xl shadow-lg tooltip font-DMSans text-white selection:none">
+          <p>
+            How to get Testnet $TOY Tokens for testing the transactions on TOY
+            Marketplace? Players who create a TOY Wallet and earn CCash in
+            Citizen Conflict will receive 1 testing $TOY for every CCash
+            earned.This testing currency lets you perform on-chain actions and
+            explore the TOY Chain Testnet fully. A TOY Wallet is essential to
+            maximize your Testnet experience.
+          </p>
+        </div>
+      )}
+      {isDPInfoShown && (
+        <div className="absolute left-[102%] top-[9.5rem] w-96 p-4 bg-[#483F50] rounded-3xl shadow-lg tooltip font-DMSans text-white selection:none">
+          <p>
+            Do I earn Diamond Points, while being active in TOY Testnet? Diamond
+            Points are a loyalty currency within the QORPO ecosystem. By
+            participating in the Testnet and creating a TOY Wallet, you can earn
+            these points for Buy / Sell / Listing assets.
+          </p>
+        </div>
+      )}
+      <div ref={ref} className="w-full rounded-3xl overflow-hidden">
+        <div
+          className="py-3 px-8 bg-[#483F50] flex items-center justify-between cursor-pointer rounded-t-3xl"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <p className="text-2xl text-white">Balance</p>
+        </div>
+        {isOpen && (
+          <div className="bg-white tooltip font-DMSans text-text selection:none  rounded-b-3xl">
+            <ul>
               <li className="py-3 px-8 border-dashed border-b border-text">
-                <p className="opacity-50 font-bold uppercase">DIAMOND Points</p>
+                <p className="opacity-50 font-bold uppercase">
+                  {getChainNamebySymbol(walletData?.symbol)}
+                </p>
                 <div className="flex items-center gap-2">
                   <img
                     className="w-[1.9375rem] aspect-square"
-                    src="/market/images/logos/dp.png"
+                    src={getCurrencyLogoBySymbol(walletData?.symbol)}
                     alt="logo"
                   />
                   <p className=" text-xl font-bold">
-                    {data?.data.dp.loyalty_points} DP
+                    {parseFloat(walletData?.formatted || '0').toFixed(4)}{' '}
+                    {walletData?.symbol}
                   </p>
+                  {/* <p className="ml-auto">$ 0.03</p> */}
+                  <img
+                    className="w-[1.3rem] aspect-square invert ml-auto"
+                    src="/market/icons/info.svg"
+                    alt=""
+                    onMouseEnter={() => setIsToyInfoShown(true)}
+                    onMouseLeave={() => setIsToyInfoShown(false)}
+                  />
                 </div>
               </li>
-            )}
-            {/* // <li className="py-3 px-8 border-dashed border-text">
+              {
+                <li className="py-3 px-8 border-text">
+                  <p className="opacity-50 font-bold uppercase">
+                    DIAMOND Points
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <img
+                      className="w-[1.9375rem] aspect-square"
+                      src="/market/images/logos/dp.png"
+                      alt="logo"
+                    />
+                    <p className=" text-xl font-bold">
+                      {data?.data.dp.loyalty_points || '0'} DP
+                    </p>
+                    <img
+                      onMouseEnter={() => setIsDPInfoShown(true)}
+                      onMouseLeave={() => setIsDPInfoShown(false)}
+                      className="w-[1.3rem] aspect-square invert ml-auto"
+                      src="/market/icons/info.svg"
+                      alt=""
+                    />
+                  </div>
+                </li>
+              }
+              {/* // <li className="py-3 px-8 border-dashed border-text">
             //   <p className="opacity-50 font-bold uppercase">CCash</p>
             //   <div className="flex items-center gap-2">
             //     <img
@@ -196,9 +229,10 @@ function Balance() {
             //     </p>
             //   </div>
             // </li> */}
-          </ul>
-        </div>
-      )}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

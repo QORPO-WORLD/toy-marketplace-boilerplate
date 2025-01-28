@@ -10,6 +10,7 @@ import {
   useBuyModal,
   useCreateListingModal,
   useCurrencies,
+  useFloorOrder,
   useHighestOffer,
   useLowestListing,
   useMakeOfferModal,
@@ -34,6 +35,10 @@ export const CollectibleTradeActions = ({
   const onError = (error: Error) => {
     toast.error(error.message);
   };
+  const { data: collectionDataOrder } = useFloorOrder({
+    chainId: String(chainId),
+    collectionAddress,
+  });
 
   const { show: showListModal } = useCreateListingModal({ onError });
   const { show: showOfferModal } = useMakeOfferModal({
@@ -147,7 +152,7 @@ export const CollectibleTradeActions = ({
   return (
     <Flex className="flex-col gap-4">
       <Flex className="flex-row gap-3 flex-1 w-full mb:flex-col">
-        {lowestListing?.order && (
+        {lowestListing?.order && !collectionDataOrder?.order?.createdBy && (
           <Button
             size="lg"
             className="btn-main flex-1"
