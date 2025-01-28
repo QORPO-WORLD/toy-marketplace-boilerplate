@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { Spinner } from '~/components/Spinner';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
 import { BaseImage } from '~/components/ui/Image/image';
@@ -7,7 +9,7 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, Text } from '$ui';
 import { InventoryTabs } from './_components/Tabs';
-import { useAccount } from 'wagmi';
+import { useAccount, useSwitchChain } from 'wagmi';
 
 const Inventory = () => {
   const {
@@ -17,8 +19,14 @@ const Inventory = () => {
     isConnecting,
     address,
   } = useAccount();
-
+  const { switchChain, chains } = useSwitchChain();
   const supportedChain = walletChainId == chain?.id;
+
+  useEffect(() => {
+    setTimeout(() => {
+      switchChain({ chainId: 21000000 });
+    });
+  }, []);
 
   if (isConnecting) {
     return <Spinner label="Loading Inventory Collectibles" />;

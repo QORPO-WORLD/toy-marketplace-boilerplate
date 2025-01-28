@@ -31,8 +31,7 @@ import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EffectCards } from 'swiper/modules';
-import { useSwitchChain } from 'wagmi';
+import { useChainId, useSwitchChain } from 'wagmi';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -69,7 +68,8 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
   const fromRightStagedAnimation2 = useAnimation(fromRightStaged);
   const flip1 = useFlip();
   const flip2 = useFlip();
-  const { switchChainAsync } = useSwitchChain();
+  const { switchChain, chains } = useSwitchChain();
+  const chainId = useChainId();
   const findCollection = (collectionAddress: string) => {
     return collections.find(
       (c) =>
@@ -78,15 +78,8 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
     );
   };
   useEffect(() => {
-    const onClickNetwork = async (chainId: number) => {
-      try {
-        await switchChainAsync({ chainId });
-      } catch (err) {
-        console.error('failed to switch network', err);
-      }
-    };
-    void onClickNetwork(21000000);
-  }, [switchChainAsync]);
+    switchChain({ chainId: 21000000 });
+  }, []);
 
   return (
     <Flex
