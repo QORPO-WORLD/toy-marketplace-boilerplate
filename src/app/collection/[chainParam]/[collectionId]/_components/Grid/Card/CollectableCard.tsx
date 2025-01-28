@@ -59,11 +59,7 @@ export const CollectibleCard = ({
           containerClassName="bg-foreground/10 aspect-square rounded-[1.5625rem] overflow-hidden mb-2"
           className="aspect-square rounded-[inherit] hover:scale-110 ease-in duration-150"
         />
-        {balance && (
-          <p className="absolute top-[12rem] left-[1.5rem] bg-[#ffffff26] block rounded-xl p-4 py-1">
-            {balance.balance}
-          </p>
-        )}
+        {balance && <p className="text-xl">Amount: {balance.balance}</p>}
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
       {isConnected && accountChainId && (
