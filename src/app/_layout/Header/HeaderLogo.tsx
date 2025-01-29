@@ -8,7 +8,7 @@ export function HeaderLogo() {
     <Link
       prefetch={false}
       href="https://playontoy.com"
-      className="my-auto flex items-center text-xl font-bold text-foreground/90"
+      className="my-auto flex items-center text-xl font-bold text-foreground/90 shrink-0"
     >
       <Logo />
     </Link>

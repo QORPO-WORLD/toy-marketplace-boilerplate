@@ -1,13 +1,10 @@
 'use client';
 
-import { cn } from '$ui';
-import BurgerBtn from '../../../components/ui/BurgerBtn/BurgerBtn';
 import Balance from './Balance';
 import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
-import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -16,15 +13,15 @@ export const Header = () => {
       <div className="ml-[3.2rem] h-full relative self-start w-[20rem] mr-auto">
         <Balance />
       </div>
-      <div className="flex items-center text-white uppercase mb:hidden mr-auto">
-        {/* <a
+      {/* <div className="flex items-center text-white uppercase mb:hidden mr-auto">
+        <a
           className="block py-[0.88rem] px-[1.75rem]"
           href="#"
           target="_blank"
           rel="noopener noreferrer"
         >
           missions
-        </a> */}
+        </a>
         <a
           className="block py-[0.88rem] px-[1.75rem]"
           href="https://playontoy.com"
@@ -40,7 +37,7 @@ export const Header = () => {
         >
           marketplace
         </Link>
-      </div>
+      </div> */}
       <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
           <InventoryButton />
@@ -51,8 +48,11 @@ export const Header = () => {
         {/* <BurgerBtn /> */}
       </div>
       <div className="hidden mb:block">
-        <BurgerBtn />
+        <WalletButton />
       </div>
+      {/* <div className="hidden mb:block">
+        <BurgerBtn />
+      </div> */}
     </header>
 
     // <Grid.Root
