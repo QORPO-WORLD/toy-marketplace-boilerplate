@@ -9,6 +9,7 @@ import CollectionBadge from '../../../../../components/ui/CollectionBadge/Collec
 import { getCollectionBg } from '../../../../../lib/utils/helpers';
 import type { MarketplaceConfig } from '@0xsequence/marketplace-sdk';
 import { useCollection } from '@0xsequence/marketplace-sdk/react/hooks';
+import { useRouter } from 'next/navigation';
 
 interface CollectionHeaderProps {
   chainId: number;
@@ -34,6 +35,7 @@ const CollectionHeader = ({
   const image = collection?.extensions?.ogImage;
   const description = collection?.extensions?.description;
   const socials = marketplaceConfig.socials;
+  const router = useRouter();
 
   const [showMoreBtn, setShowMoreBtn] = useState(false);
   const [showBtnType, setShowBtnType] = useState<'show-more' | 'show-less'>(
@@ -98,6 +100,18 @@ const CollectionHeader = ({
             )}
           </div>
         </div>
+        <button
+          className="absolute top-[9rem] left-[8rem] flex items-center gap-2 p-4 py-2 backdrop-blur rounded-[3.25rem] border border-white"
+          onClick={() => router.back()}
+        >
+          <img
+            className="w-[1.3rem] h-[1.875rem] block"
+            src="/market/icons/gao-back-icon.svg"
+            alt="back"
+            loading="lazy"
+          />
+          <p className="text-white">GO BACK</p>
+        </button>
       </div>
       {/* <Head>
         {image ? <link rel="preload" as="image" href={image} /> : null}

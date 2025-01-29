@@ -41,15 +41,15 @@ export const WalletModalContent = () => {
 
   return (
     <>
-      <Flex className="mb-5 flex-col items-start justify-between">
+      <Flex className="mb-5 flex-col items-start justify-between mb:overflow-hidden">
         <Flex className="items-center gap-3 font-medium text-foreground/80">
           <WalletIcon />
           <Text className="text-[1rem] font-main uppercase">
             {connector?.id}
           </Text>
         </Flex>
-        <Flex className="w-full text-white">
-          <Text className="ml-1 mt-2 text-[1rem] text-white md:block font-main">
+        <Flex className="w-full text-white mb:overflow-hidden">
+          <Text className="ml-1 mt-2 text-[1rem] text-white md:block font-main mb:truncate">
             <ENSName address={address} />
           </Text>
 

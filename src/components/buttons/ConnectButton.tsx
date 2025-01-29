@@ -24,10 +24,11 @@ export const ConnectButton = ({
     setOpenConnectModal(true);
     onClick?.(e);
   };
+  console.log(window.innerHeight);
 
   return (
     <button type="button" className={styles.wallet} onClick={handleOnClick}>
-      Connect the TOY wallet
+      {window.innerWidth > 768 ? 'Connect the TOY wallet' : 'Connect wallet'}
     </button>
   );
 };

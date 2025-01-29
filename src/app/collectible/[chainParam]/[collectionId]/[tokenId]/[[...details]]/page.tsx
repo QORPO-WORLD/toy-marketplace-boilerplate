@@ -244,12 +244,21 @@ export default function Page() {
               </div>
             </div>
             <div className=" hidden mb:block">
-              <CollectibleTradeActions
-                isYour={yourAssets.includes(tokenId)}
-                chainId={chainId}
-                collectionAddress={collectionId}
-                tokenId={tokenId}
-              />
+              {isConnected ? (
+                <CollectibleTradeActions
+                  isYour={yourAssets.includes(tokenId)}
+                  chainId={chainId}
+                  collectionAddress={collectionId}
+                  tokenId={tokenId}
+                />
+              ) : (
+                <button
+                  className="btn-main"
+                  onClick={() => setOpenConnectModal(true)}
+                >
+                  Connect wallet
+                </button>
+              )}
             </div>
             <div className="flex flex-col w-full font-DMSans  py-[1.75rem] px-[2.5625rem] rounded-[25px] border border-white bg-main-gradient backdrop-blur-[10px] text-white text-[16px] leading-[2.07]">
               <div className="flex items-center justify-between">

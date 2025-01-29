@@ -135,7 +135,7 @@ function Balance() {
   if (!isConnected) return null;
 
   return (
-    <div className="absolute top-0 right-0 translate-y-[-0.2rem] w-full h-auto select-none">
+    <div className="absolute top-0 right-0 translate-y-[-0.2rem] w-full h-auto select-none mb:hidden">
       {isToyInfoShown && (
         <div className="absolute left-[102%] top-[4.7rem] w-96 p-4 bg-[#483F50]  rounded-3xl shadow-lg tooltip font-DMSans text-white selection:none">
           <p>
@@ -160,7 +160,7 @@ function Balance() {
       )}
       <div ref={ref} className="w-full rounded-3xl overflow-hidden">
         <div
-          className="py-3 px-8 bg-[#483F50] flex items-center justify-between cursor-pointer rounded-t-3xl hover:bg-[#483f5077] transition-all transition-duration-250 ease-in-out"
+          className="py-3 px-8 bg-[#483F50] flex items-center justify-between cursor-pointer rounded-t-3xl hover:bg-[#483f5077] mb:hover:bg-[#483F50] transition-all transition-duration-250 ease-in-out"
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <p className="text-2xl text-white">Balance</p>

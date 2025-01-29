@@ -27,7 +27,9 @@ function FlipCard({ data }: FlipCardProps) {
           <div
             className={styles.front_card}
             style={{ backgroundImage: `url(${bgUrl})` }}
-          ></div>
+          >
+            <p className={styles.card_title}>{number}</p>
+          </div>
           <div
             className={styles.back_card}
             style={{
