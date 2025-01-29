@@ -13023,7 +13023,7 @@
 }
 
 .modal_dialogContent_narrow__1ypl6nt2.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs {
-  background: #4b4253 !important;
+  background: linear-gradient(90deg, #f47469 0%, #db5179 100%) !important;
 }
 
 .fyvr11r3.fyvr11ig.fyvr11ko.fyvr11jo.fyvr11jg.fyvr12j9.fyvr11lw._1qxj1ib9 {
@@ -13224,7 +13224,7 @@ input {
 }
 
 .styles_transferModalContent__i1qz9g0.modal_dialogContent_wide__1ypl6nt3.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs.fyvr1vo.fyvr1xs.fyvr1zw.fyvr1120 {
-  background: #4b4253 !important;
+  background: linear-gradient(90deg, #f47469 0%, #db5179 100%) !important;
 }
 
 .rdp-chevron {
@@ -13314,11 +13314,21 @@ input {
     background: linear-gradient(90deg, #f47469 0%, #db5179 100%) !important;
   }
 }
+@font-face {
+  font-family: X-Heighting;
+  src: url('/market/fonts/X-Heighting.otf');
+}
 
 .fyvr12g {
   .fyvr11lk.fyvr11jk.fyvr12g.fyvr1140._140wn8ni._140wn8n0.fyvr11q0.fyvr11qg.fyvr11rh.fyvr11ow.fyvr12i9.fyvr11ra.fyvr11l8._4efw240._140wn8nu._140wn8nc.fyvr12n9.fyvr12nx._140wn8ny._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8._140wn8ng.fyvr1zo.fyvr111s._140wn8nt._140wn8nb.fyvr11h8.fyvr11hw.fyvr11fw.fyvr11gk._140wn8nm._140wn8n4.fyvr11tl.fyvr12il {
     background: white !important;
+    border-radius: 2.6875rem;
+
+    .fyvr12g.fyvr164.fyvr11o4.fyvr11ow.fyvr11cg.fyvr11l8 {
+      justify-content: center !important;
+    }
     span {
+      font-family: X-Heighting;
       color: black !important;
     }
   }
@@ -13330,17 +13340,13 @@ input {
   }
 }
 
-@font-face {
-  font-family: X-Heighting;
-  src: url('/market/fonts/X-Heighting.otf');
-}
-
 .fyvr12g.fyvr11ow.fyvr11no.fyvr11l8 {
   .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12k9._1qxj1ib9 {
     font-size: 2.25rem !important;
     font-family: X-Heighting;
     margin-right: auto;
     width: fit-content;
+    margin-left: -20px;
   }
 }
 
@@ -13362,11 +13368,11 @@ input {
 }
 
 .fyvr11ec.fyvr11eo.fyvr11f0.fyvr11fc.fyvr113o.fyvr115w.fyvr11wl.fyvr15w.fyvr12g {
-  background: rgba(255, 255, 255, 0.614) !important;
+  background: rgba(255, 255, 255, 0) !important;
 }
 
 .fyvr11ec.fyvr11eo.fyvr11f0.fyvr11fc.fyvr113c.fyvr115k.fyvr11wl.fyvr15w {
-  background: rgba(255, 255, 255, 0.614) !important;
+  background: rgba(255, 255, 255, 0) !important;
 }
 
 .fyvr11h4.fyvr11hs.fyvr11fs.fyvr11gg.fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o.fyvr11s9 {
@@ -13388,6 +13394,140 @@ input {
 .fyvr11hc.fyvr11i0.fyvr11g0.fyvr11go.fyvr11q0.fyvr11qg.fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o.fyvr11ur.fyvr12g.fyvr12o7.fyvr12nf.fyvr11o4.fyvr11l8.rhmai63 {
   border: 1px solid white !important;
 }
+.fyvr12g {
+  // .fyvr11tl {
+  //   background: white !important;
+  // }
+  .fyvr11lk.fyvr11jk.fyvr12g.fyvr1140._140wn8ni._140wn8n0.fyvr11q0.fyvr11qg.fyvr11rh.fyvr11ow.fyvr12i9.fyvr11ra.fyvr11l8._4efw240._140wn8nv._140wn8nd.fyvr12nf.fyvr12o9.fyvr12o7._140wn8ny._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8._140wn8ng.fyvr1zo.fyvr111s._140wn8nt._140wn8nb.fyvr11h8.fyvr11hw.fyvr11fw.fyvr11gk._140wn8nm._140wn8n4.fyvr11tl.fyvr12il {
+    background: white !important;
+    border-radius: 2.6875rem;
+    span {
+      color: #dc5378 !important;
+      font-family: X-Heighting;
+    }
+    .fyvr12g.fyvr164.fyvr11o4.fyvr11ow.fyvr11cg.fyvr11l8 {
+      justify-content: center !important;
+    }
+  }
+}
 
-.fyvr11lk.fyvr11jk.fyvr12g.fyvr1140._140wn8ni._140wn8n0.fyvr11q0.fyvr11qg.fyvr11rh.fyvr11ow.fyvr12i9.fyvr11ra.fyvr11l8._4efw240._140wn8nv._140wn8nd.fyvr12nf.fyvr12o9.fyvr12o7._140wn8ny._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8._140wn8ng.fyvr1zo.fyvr111s._140wn8nt._140wn8nb.fyvr11h8.fyvr11hw.fyvr11fw.fyvr11gk._140wn8nm._140wn8n4.fyvr11tl.fyvr12il {
+.fyvr11ra.fyvr12o7.fyvr12nf {
+  .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11jk.fyvr12kl._1qxj1ib9 {
+    font-size: 1rem;
+  }
+}
+
+.seq-root._5b32m91._5b32m90.fyvr11no.fyvr11ow.fyvr11l8.fyvr11m0.fyvr11rs.fyvr1m0.fyvr1qg.fyvr1so.fyvr1o8 {
+  ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m97 {
+    max-width: 42.25rem !important;
+    @media screen and (max-width: 769px) {
+      max-width: 92% !important;
+    }
+  }
+}
+._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m97 {
+  height: fit-content !important;
+  > .fyvr11m4.fyvr12g.fyvr164._1vqx0w94._1vqx0w97._1vqx0w95 {
+    overflow-y: auto !important;
+  }
+}
+
+.fyvr11mk.fyvr11cc.fyvr11ow.fyvr11o4.fyvr11l8 {
+  span {
+    color: white !important;
+  }
+}
+
+.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr11ra.fyvr12nf._1qxj1ib9 {
+  color: white !important;
+}
+
+.fyvr12g.fyvr11l8.fyvr11mc.fyvr11cg {
+  .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr11ra.fyvr12nf._1qxj1ib9 {
+    // background: white !important;
+    border-radius: 2.6875rem !important;
+    span {
+      color: #dc5378;
+    }
+  }
+}
+
+.fyvr11r2.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11j4.fyvr12kl._1qxj1ib9 {
+  color: white !important;
+}
+
+.fyvr11l8.fyvr11n4.fyvr11ow.fyvr11mc.fyvr11co.fyvr11m4 {
+  .fyvr11l8.fyvr11mc.fyvr11co {
+    width: 100% !important;
+  }
+}
+
+.modal_dialogContent_narrow__1ypl6nt2.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs {
+  width: 32.5rem !important;
+}
+
+.fyvr1188.fyvr11ag.fyvr11l8.fyvr11ow.fyvr12g {
+  img {
+    width: 5.375rem !important;
+    height: 5.375rem !important;
+  }
+  .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11jc.fyvr12kf._1qxj1ib9 {
+    color: white !important;
+    font-size: 1.25rem !important;
+    font-family: X-Heighting;
+  }
+}
+
+.modal_dialogContent_narrow__1ypl6nt2.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs {
+  .fyvr12g.fyvr11l8.fyvr11mc.fyvr11cg {
+    .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr11ra.fyvr12nf._1qxj1ib9 {
+      background: white !important;
+      border-radius: 2.6875rem !important;
+      span {
+        color: #dc5378;
+      }
+    }
+  }
+}
+
+.fyvr12g {
+  ._1acm19y1._1acm19y0.fyvr11hc.fyvr11i0.fyvr11g0.fyvr11go.fyvr1zk.fyvr111o.fyvr11lk.fyvr11ow.fyvr11sl.fyvr12k9.fyvr1h4.fyvr11cg._1acm19y5._1acm19y8._1acm19y4.fyvr11hc.fyvr11i0.fyvr11g0.fyvr11go {
+    border: 1px solid white !important;
+  }
+}
+
+.fyvr12g.fyvr11m4 {
+  .fyvr12g.fyvr11l8.fyvr11ow.fyvr11cg.fyvr1158 {
+    button {
+      border: 1px solid white !important;
+    }
+  }
+}
+
+.fyvr12g.fyvr11l8.fyvr11mc.fyvr11cg {
+  button {
+    border-radius: 2.6875rem !important;
+  }
+}
+
+.fyvr11hc.fyvr11i0.fyvr11g0.fyvr11go.fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o.fyvr11l8.fyvr11ow.fyvr11o4.fyvr11ck.styles_alertMessageBoxVariants_warning__yzftal1 {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+._1acm19ya._1acm19y9.fyvr1z4.fyvr1118.fyvr1vc.fyvr1xg.fyvr12ox.fyvr12or.fyvr11l4.fyvr11sl.fyvr12k9.fyvr12i9.fyvr12g.fyvr164._1acm19yb._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8::placeholder {
+  color: rgba(245, 245, 245, 0.674) !important;
+}
+
+.fyvr1108.fyvr112c.fyvr11lk.fyvr11jk.fyvr134.fyvr11ok._140wn8ni._140wn8n0.fyvr11q0.fyvr11qg.fyvr11rh.fyvr11ow.fyvr12i9.fyvr11ra.fyvr11l8._4efw240._140wn8nu._140wn8nc.fyvr12n9.fyvr12nx._140wn8nx._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8._140wn8nf.fyvr1zk.fyvr111o._140wn8nt._140wn8nb.fyvr11h8.fyvr11hw.fyvr11fw.fyvr11gk._140wn8nm._140wn8n4.fyvr11tl.fyvr12il {
+  background: white !important;
+  border-radius: 2.6875rem;
+  span {
+    color: #dc5378;
+  }
+}
+.fyvr1108.fyvr112c.fyvr11lk.fyvr11jk.fyvr134.fyvr11ok._140wn8ni._140wn8n0.fyvr11q0.fyvr11qg.fyvr11rh.fyvr11ow.fyvr12i9.fyvr11ra.fyvr11l8._4efw240._140wn8nv._140wn8nd.fyvr12nf.fyvr12o9.fyvr12o7._140wn8nx._1qxj1ib9._1qxj1ibe._1qxj1ib4.fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8._140wn8nf.fyvr1zk.fyvr111o._140wn8nt._140wn8nb.fyvr11h8.fyvr11hw.fyvr11fw.fyvr11gk._140wn8nm._140wn8n4.fyvr11tl.fyvr12il {
+  background: white !important;
+  span {
+    color: #dc5378;
+  }
 }
