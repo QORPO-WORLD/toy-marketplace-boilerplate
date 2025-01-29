@@ -274,7 +274,7 @@ export default function Page() {
                 </a>
               </div>
               <div className="flex items-center justify-between">
-                <p>Owner Address:</p>
+                <p>Created By:</p>
                 <a
                   className="flex items-center gap-2"
                   href={`${explorerUrl}address/${collectionDataOrder?.order?.createdBy}`}
