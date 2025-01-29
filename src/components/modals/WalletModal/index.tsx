@@ -44,8 +44,8 @@ export const WalletModalContent = () => {
       <Flex className="mb-5 flex-col items-start justify-between mb:overflow-hidden">
         <Flex className="items-center gap-3 font-medium text-foreground/80">
           <WalletIcon />
-          <Text className="text-[1rem] font-main uppercase">
-            {connector?.id}
+          <Text className="text-[1rem] font-main uppercase text-3xl">
+            TOY WALLET
           </Text>
         </Flex>
         <Flex className="w-full text-white mb:overflow-hidden">
@@ -89,14 +89,13 @@ export const WalletModalContent = () => {
           </Button>
         )}
         <Dialog.Close asChild>
-          <Button
-            className="w-full justify-start"
-            variant="secondary"
+          <button
+            className="w-full justify-center bg-white text-[#DC5378] text-2xl font-main rounded-[2.6875rem] h-14 hover:opacity-70 transition-all transition-duration-200"
             onClick={onDisconnectClick}
           >
-            <DisconnectIcon />
+            {/* <DisconnectIcon /> */}
             Disconnect
-          </Button>
+          </button>
         </Dialog.Close>
       </Flex>
     </>
