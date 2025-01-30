@@ -16,6 +16,7 @@ import {
   Text,
   cn,
 } from '$ui';
+import { getChainLogo } from '../../../lib/utils/helpers';
 import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
 import {
@@ -25,6 +26,7 @@ import {
 import { ContractType } from '@0xsequence/metadata';
 import { useIsMounted } from '@legendapp/state/react';
 import { set } from 'date-fns';
+import Image from 'next/image';
 import type { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
@@ -120,10 +122,14 @@ const CollectionSection = ({
   }
 
   if (collectibles.length === 0)
-    return <Text className="w-full text-center text-black pt-32">Empty.</Text>;
+    return (
+      <Text className="w-full text-center text-black pt-32">
+        There is not assets.
+      </Text>
+    );
 
   return (
-    <div className="max-w-[100vw] px-4 py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
+    <div className="max-w-[100vw] px-4 py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-white bg-[#574d5fcc] backdrop-blur-[0.625rem]">
       <Flex className="sticky z-20 py-2 w-full">
         <div className="w-full">
           <div
@@ -137,17 +143,23 @@ const CollectionSection = ({
                 />
               </Avatar.Base> */}
 
-              <Text className="text-[1.25rem] text-[#00000099]">
+              <Text className="text-[1.25rem] text-white">
                 {collectionMetadata?.name || collectionAddress}
               </Text>
               <div className="bg-[#4035451A] p-1 rounded-full">
-                <NetworkImage chainId={Number(collectionMetadata?.chainId)} />
+                <Image
+                  className="w-[1.5625rem] aspect-square"
+                  src={getChainLogo(chainId)}
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <ContractTypeBadge
                 chainId={chainId}
                 collectionAddress={collectionAddress}
               />
-              <Text className="ml-auto text-[1rem] text-[#00000099] mr-8 mb:ml-0">
+              <Text className="ml-auto text-[1rem]  mr-8 mb:ml-0">
                 ITEMS {collectibles.length}
               </Text>
             </Flex>

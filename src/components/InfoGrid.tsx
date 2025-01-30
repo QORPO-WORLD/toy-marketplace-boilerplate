@@ -48,7 +48,7 @@ export const InfoBox = ({
         loading ? 'loading' : 'duration-300 animate-in fade-in',
       )}
     >
-      <Text className="text-[#00000099] font-DMSans text-[1rem] font-medium capitalize">
+      <Text className="text-white font-DMSans text-[1rem] font-medium capitalize">
         {label}
       </Text>
 

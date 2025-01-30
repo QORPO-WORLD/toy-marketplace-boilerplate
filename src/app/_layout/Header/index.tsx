@@ -1,18 +1,53 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Balance from './Balance';
 import { InventoryButton } from './Buttons/InventoryButton';
 import { NetworkButton } from './Buttons/NetworkButton';
 import { WalletButton } from './Buttons/WalletButton';
 import { HeaderLogo } from './HeaderLogo';
+import ToyWalletBtn from './ToyWalletButton';
+import { useAccount } from 'wagmi';
 
 export const Header = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const { isConnected } = useAccount();
+
+  const controlHeader = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) {
+        // Scroll down
+        setIsVisible(false);
+      } else {
+        // Scroll up
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlHeader);
+
+      // Cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlHeader);
+      };
+    }
+  }, [lastScrollY]);
   return (
-    <header className="flex items-center justify-between pt-[1.44rem] px-[2.5rem] absolute w-full mb:px-4">
+    <header
+      className={`flex items-center justify-between pt-[1.44rem] px-[2.5rem] fixed w-full mb:px-4 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <HeaderLogo />
-      <div className="ml-[3.2rem] h-full relative self-start w-[20rem] mr-auto">
+      {/* <div className="ml-[3.2rem] h-full relative self-start w-[20rem] mr-auto">
         <Balance />
-      </div>
+      </div> */}
       {/* <div className="flex items-center text-white uppercase mb:hidden mr-auto">
         <a
           className="block py-[0.88rem] px-[1.75rem]"
@@ -38,18 +73,19 @@ export const Header = () => {
           marketplace
         </Link>
       </div> */}
-      <div className="flex items-center gap-4  mb:hidden">
+      {isConnected ? <ToyWalletBtn /> : <WalletButton />}
+      {/* <div className="flex items-center gap-4  mb:hidden">
         <div className="flex items-center gap-2">
           <InventoryButton />
           <WalletButton />
           <NetworkButton />
         </div>
-        {/* <ProfileBox /> */}
-        {/* <BurgerBtn /> */}
-      </div>
-      <div className="hidden mb:block">
+        <ProfileBox />
+        <BurgerBtn />
+      </div> */}
+      {/* <div className="hidden mb:block">
         <WalletButton />
-      </div>
+      </div> */}
       {/* <div className="hidden mb:block">
         <BurgerBtn />
       </div> */}

@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import {
+  getChainNamebySymbol,
+  getCurrencyLogoBySymbol,
+} from '../../../lib/utils/helpers';
 import sequence from '../../../sequence/Sequence';
 import { useQuery } from '@tanstack/react-query';
 import { useAccount, useBalance } from 'wagmi';
@@ -90,48 +94,6 @@ function Balance() {
   //   console.log(data);
   // }, [data, walletData]);
 
-  const getChainNamebySymbol = (symbol: string | undefined) => {
-    switch (symbol) {
-      case 'ETH':
-        return 'Ethereum';
-      case 'BSC':
-        return 'Binance Smart Chain';
-      case 'MATIC':
-        return 'Polygon';
-      case 'FANTOM':
-        return 'Fantom';
-      case 'SOL':
-        return 'Solana';
-      case 'BNB':
-        return 'Binance Smart Chain';
-      case 'TOY':
-        return 'TOY TESTNET';
-      default:
-        return '';
-    }
-  };
-
-  const getCurrencyLogoBySymbol = (symbol: string | undefined) => {
-    switch (symbol) {
-      case 'ETH':
-        return '/market/icons/ETH-logo.png';
-      case 'BSC':
-        return '/market/icons/bnb-logo.png';
-      case 'MATIC':
-        return '/market/icons/matic-logo.png';
-      case 'FANTOM':
-        return '/market/icons/fantom-logo.png';
-      case 'SOL':
-        return '/market/icons/sol-logo.png';
-      case 'BNB':
-        return '/market/icons/bnb-logo.png';
-      case 'TOY':
-        return '/market/icons/toy-chain-logo.png';
-      default:
-        return '/market/icons/toy-chain-logo.png';
-    }
-  };
-
   if (!isConnected) return null;
 
   return (
@@ -179,7 +141,7 @@ function Balance() {
                     alt="logo"
                   />
                   <p className=" text-xl font-bold">
-                    {parseFloat(walletData?.formatted || '0').toFixed(4)}{' '}
+                    {parseFloat(walletData?.formatted || '0').toFixed(3)}{' '}
                     {walletData?.symbol}
                   </p>
                   {/* <p className="ml-auto">$ 0.03</p> */}

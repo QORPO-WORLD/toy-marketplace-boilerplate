@@ -34,7 +34,7 @@ const Inventory = () => {
 
   if (!isConnected) {
     return (
-      <Flex className="my-auto flex-col items-center justify-center gap-4">
+      <Flex className="my-auto flex-col items-center justify-center gap-4 text-white">
         <BaseImage
           alt="Cube"
           src="/market/images/cubes.svg"

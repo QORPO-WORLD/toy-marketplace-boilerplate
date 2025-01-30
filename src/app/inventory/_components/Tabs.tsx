@@ -97,21 +97,21 @@ export const InventoryTabs = ({
 
   return (
     <>
-      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-[#403545] bg-[#4035451A] backdrop-blur-[0.625rem]">
+      <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-white bg-main-gradient backdrop-blur-[0.625rem]">
         <InfoBox label="Address" transparent>
-          <Text className="overflow-hidden text-lg font-semibold uppercase text-[#00000099] font-DMSans text-[1.25rem]  tracking-[-0.07rem]">
+          <Text className="overflow-hidden text-lg font-semibold uppercase font-DMSans text-[1.25rem]  tracking-[-0.07rem]">
             <ENSName address={accountAddress} truncateAt={6} />
           </Text>
         </InfoBox>
 
         <InfoBox label="Collections" transparent>
-          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+          <Text className="text-lg font-medium  font-DMSans text-[1.25rem] tracking-[-0.07rem]">
             {totalCollections}
           </Text>
         </InfoBox>
 
         <InfoBox label="Collectibles" transparent>
-          <Text className="text-lg font-medium text-[#00000099] font-DMSans text-[1.25rem] tracking-[-0.07rem]">
+          <Text className="text-lg font-medium font-DMSans text-[1.25rem] tracking-[-0.07rem]">
             {totalCollectibles}
           </Text>
         </InfoBox>

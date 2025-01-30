@@ -40,7 +40,7 @@ export const FloatingBanner = ({ collections }: MarketplaceConfig) => {
   const [isSecondCardLoaded, setIsSecondCardLoaded] = useState(false);
   const [isThirdCardLoaded, setIsThirdCardLoaded] = useState(false);
   const [isFourthCardLoaded, setIsFourthCardLoaded] = useState(false);
-  const [isFifthCardLoaded, setIsFifthCardLoaded] = useState(false);
+
   const animationFromLeft1 = useAnimation(fromLeft);
   const animationFromLeft2 = useAnimation(fromLeft);
   const animationFromLeft4 = useAnimation(fromLeft);

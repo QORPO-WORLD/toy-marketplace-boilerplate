@@ -14,16 +14,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Header />
       </Grid.Child>
 
-      <Grid.Child
-        name="content"
-        className="flex w-full flex-col justify-self-center mt-auto mb-auto"
+      <div
+        className="flex w-full flex-col justify-self-center min-h-dvh justify-center"
         // style={{
         //   width: 'calc(100% - var(--orderCartRightOffset))',
         //   height: 'calc(100% + var(--footerHeight))',
         // }}
       >
         {children}
-      </Grid.Child>
+      </div>
 
       <Grid.Child name="footer">
         <Footer />
