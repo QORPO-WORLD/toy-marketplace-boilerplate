@@ -5,6 +5,7 @@ import { useIsClient } from '~/hooks/ui/useIsClient';
 import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog } from '$ui';
+import { WalletModalContent } from '../../../../components/modals/WalletModal';
 import { NetworkImage } from '@0xsequence/design-system';
 import { type ChainId, networks } from '@0xsequence/network';
 import { useAccount } from 'wagmi';
@@ -45,7 +46,7 @@ export const NetworkButton = () => {
           container={getThemeManagerElement()}
           title="Switch Network"
         >
-          <NetworkSelectModalContent />
+          <WalletModalContent />
         </Dialog.BaseContent>
       </Dialog.Root>
     );

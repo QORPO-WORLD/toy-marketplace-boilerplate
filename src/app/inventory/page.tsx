@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { LuCross } from 'react-icons/lu';
 
 import { Spinner } from '~/components/Spinner';
 import { NetworkSelectModalContent } from '~/components/modals/NetworkSelectModal';
@@ -9,6 +10,7 @@ import { getThemeManagerElement } from '~/lib/utils/theme';
 
 import { Button, Dialog, Flex, Text } from '$ui';
 import { InventoryTabs } from './_components/Tabs';
+import { useRouter } from 'next/navigation';
 import { useAccount, useSwitchChain } from 'wagmi';
 
 const Inventory = () => {
@@ -20,6 +22,7 @@ const Inventory = () => {
     address,
   } = useAccount();
   const { switchChain, chains } = useSwitchChain();
+  const router = useRouter();
   const supportedChain = walletChainId == chain?.id;
 
   useEffect(() => {
@@ -34,7 +37,7 @@ const Inventory = () => {
 
   if (!isConnected) {
     return (
-      <Flex className="my-auto flex-col items-center justify-center gap-4">
+      <Flex className="my-auto flex-col items-center justify-center gap-4 text-white">
         <BaseImage
           alt="Cube"
           src="/market/images/cubes.svg"
@@ -63,7 +66,20 @@ const Inventory = () => {
     );
   }
 
-  return <InventoryTabs chainId={walletChainId!} accountAddress={address!} />;
+  return (
+    <div className="pt-6">
+      <div className="flex justify-end items-center ">
+        <button
+          className="flex items-center gap-2 py-[1rem]"
+          onClick={() => router.back()}
+        >
+          <p className="text-[1.25rem] text-white">close</p>
+          <LuCross className="rotate-45 w-[1rem] h-[1rem]" color="white" />
+        </button>
+      </div>
+      <InventoryTabs chainId={walletChainId!} accountAddress={address!} />
+    </div>
+  );
 };
 
 export default Inventory;

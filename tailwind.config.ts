@@ -21,6 +21,7 @@ export default {
         text: '#483F50',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'opacity-black': 'rgba(87, 77, 95, 0.20)',
 
         primary: {
           DEFAULT: 'hsl(var(--primary))',

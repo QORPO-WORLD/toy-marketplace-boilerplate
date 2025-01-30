@@ -7,22 +7,22 @@ const badgeVariants = cva(
   [
     'badge',
     'rounded-radius inline-flex h-fit w-fit items-center border-transparent font-light font-medium transition-colors',
-    'pre-wrap whitespace-nowrap',
+    'pre-wrap whitespace-nowrap text-[3rem]',
   ],
   {
     variants: {
       variant: {
-        default: 'bg-[#4035451A] text-primary-foreground',
+        default: 'bg-opacity-black text-primary-foreground',
         secondary: 'bg-secondary/10 text-secondary-foreground',
         success: 'bg-success/50 text-success-foreground',
         destructive: 'bg-destructive text-destructive-foreground',
-        muted: 'bg-[#4035451A] text-[#00000099]',
-        outline: 'border border-border bg-[#4035451A] text-foreground/70',
-        outlinePrimary: 'border border-primary bg-[#4035451A] text-primary',
+        muted: 'bg-opacity-black text-white',
+        outline: 'border border-border bg-opacity-black text-foreground/70',
+        outlinePrimary: 'border border-primary bg-opacity-black text-primary',
       },
       size: {
-        default: 'rounded-md px-2.5 py-1.5 text-xs',
-        sm: 'py-0.75 px-1 text-xs',
+        default: 'rounded-md px-2.5 py-1.5 text-base',
+        sm: 'py-0.75 px-1 text-base',
         md: 'rounded-lg px-3 py-2 text-sm',
         lg: 'rounded-lg px-4 py-3 text-sm',
       },

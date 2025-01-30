@@ -13128,12 +13128,16 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 1.5625rem;
+        border-radius: 1.2625rem;
         background: url('/market/images/mogal-bg.png'),
           linear-gradient(90deg, #f47469 0%, #db5179 100%);
         background-size: cover;
         background-position: center;
         z-index: -2;
+        @media screen and (max-width: 756px) {
+          border-bottom-right-radius: 0rem;
+          border-bottom-left-radius: 0rem;
+        }
       }
     }
   }
@@ -13255,9 +13259,7 @@ input {
     background-size: contain;
     background-repeat: no-repeat;
     @media (max-width: 760px) {
-      &::after {
-        display: none;
-      }
+      display: none;
     }
   }
 }
@@ -13265,7 +13267,7 @@ input {
 ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m96 {
   transform: translateY(2.9375rem) !important;
   @media (max-width: 760px) {
-    transform: translateY(-70%) !important;
+    transform: translateY(0%) !important;
   }
 
   .fyvr1vc.fyvr1xg.fyvr1zk.fyvr111o {
@@ -13274,8 +13276,7 @@ input {
 
 .fyvr1zs.fyvr111w.fyvr12g.fyvr1xo {
   .fyvr11m0 {
-    transform: translateY(-13rem) !important;
-    top: 50% !important;
+    position: relative;
   }
 }
 
@@ -13426,7 +13427,7 @@ input {
   }
 }
 ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m97 {
-  height: fit-content !important;
+  height: calc(fit-content + 0.5rem) !important;
   > .fyvr11m4.fyvr12g.fyvr164._1vqx0w94._1vqx0w97._1vqx0w95 {
     overflow-y: auto !important;
   }
@@ -13464,6 +13465,9 @@ input {
 
 .modal_dialogContent_narrow__1ypl6nt2.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs {
   width: 32.5rem !important;
+  @media screen and (max-width: 769px) {
+    width: 94% !important;
+  }
 }
 
 .fyvr1188.fyvr11ag.fyvr11l8.fyvr11ow.fyvr12g {
@@ -13530,4 +13534,12 @@ input {
   span {
     color: #dc5378;
   }
+}
+
+.seq-root._5b32m91._5b32m90.fyvr11no.fyvr11ow.fyvr11l8.fyvr11m0.fyvr11rs.fyvr1m0.fyvr1qg.fyvr1so.fyvr1o8 {
+  z-index: 99 !important;
+}
+
+.fyvr11cc.fyvr113s.fyvr11mk {
+  display: none !important;
 }

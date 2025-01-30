@@ -1,27 +1,43 @@
 'use client';
 
+import { useRef } from 'react';
+
 import SocialsList from '../../../components/ui/SocialsList/SocialsList';
+import { useFlip } from '../../../hooks/ui/useFlip';
 import styles from './Footer.module.scss';
-import { useEstimateFeesPerGas, useAccount } from 'wagmi';
+import Link from 'next/link';
 
 export const Footer = () => {
-  const { chain } = useAccount();
-
-  const { data } = useEstimateFeesPerGas({
-    formatUnits: 'gwei',
-    chainId: chain?.id ?? 1,
-  });
-
+  const logoRef = useRef(null);
+  const flip1 = useFlip(logoRef);
   return (
     <footer className={styles.footer}>
-      <div className={styles.footer_navigation}>
+      <div ref={flip1} className={styles.logo_container}>
         <img
+          ref={logoRef}
           className={styles.logo}
-          src="/market/icons/toy-logo-full.svg"
+          src="/market/icons/logo-full.svg"
           loading="lazy"
           alt="logo"
         />
+      </div>
+      {/* <div className={styles.footer_menu}>
+        <div>
+          <a href="https://playontoy.com" target="_blank">
+            home
+          </a>
+        </div>
+        <div>
+          <Link href="/">marketplace</Link>
+        </div>
+      </div> */}
+      <div className={styles.footer_navigation}>
         <div className={styles.link_container}>
+          <p>
+            © 2025, TOY LABS TECHNOLOGIES L.L.C <br />
+            SM 1-02-330, Arab Building Bank, <br />
+            Port Saeed, Dubai, UAE
+          </p>
           <a href="/market/docs/01-TOY_GTC_EN-2024.pdf" target="_blank">
             TERMS OF SERVICE
           </a>
@@ -31,16 +47,9 @@ export const Footer = () => {
           >
             DOCS
           </a>
-          {/* <a href="#">GITBOOK</a>
-          <a href="#">BRAND KIT</a>
-          <a href="#">ALL SOCIALS</a> */}
         </div>
         <SocialsList />
       </div>
-      <p className={styles.address}>
-        TOY LABS TECHNOLOGIES L.L.C GF-01, Al Sayegh Building, Port Saeed,
-        Dubai, UAE
-      </p>
     </footer>
   );
 };

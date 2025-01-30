@@ -154,3 +154,55 @@ export const getChainLogo = (chainId: number) => {
       return '/market/icons/toy-chain-logo.png';
   }
 };
+
+export const reduceAddress = (address: string | undefined) => {
+  if (!address) return '';
+  return `${address.slice(0, 3)}...${address.slice(-3)}`;
+};
+
+export const getChainNamebySymbol = (symbol: string | undefined) => {
+  switch (symbol) {
+    case 'ETH':
+      return 'Ethereum';
+    case 'BSC':
+      return 'Binance Smart Chain';
+    case 'MATIC':
+      return 'Polygon';
+    case 'FANTOM':
+      return 'Fantom';
+    case 'SOL':
+      return 'Solana';
+    case 'BNB':
+      return 'Binance Smart Chain';
+    case 'TOY':
+      return 'TOY TESTNET';
+    default:
+      return '';
+  }
+};
+
+export const getCurrencyLogoBySymbol = (symbol: string | undefined) => {
+  switch (symbol) {
+    case 'ETH':
+      return '/market/icons/ETH-logo.png';
+    case 'BSC':
+      return '/market/icons/bnb-logo.png';
+    case 'MATIC':
+      return '/market/icons/matic-logo.png';
+    case 'FANTOM':
+      return '/market/icons/fantom-logo.png';
+    case 'SOL':
+      return '/market/icons/sol-logo.png';
+    case 'BNB':
+      return '/market/icons/bnb-logo.png';
+    case 'TOY':
+      return '/market/icons/toy-chain-logo.png';
+    default:
+      return '/market/icons/toy-chain-logo.png';
+  }
+};
+
+export function getFirstWord(text: string): string | undefined {
+  if (!text) return '';
+  return text.split(' ')[0];
+}
