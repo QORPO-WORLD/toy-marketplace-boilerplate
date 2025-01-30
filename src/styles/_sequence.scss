@@ -13276,8 +13276,7 @@ input {
 
 .fyvr1zs.fyvr111w.fyvr12g.fyvr1xo {
   .fyvr11m0 {
-    transform: translateY(-13rem) !important;
-    top: 50% !important;
+    position: relative;
   }
 }
 
@@ -13428,7 +13427,7 @@ input {
   }
 }
 ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m97 {
-  height: fit-content !important;
+  height: calc(fit-content + 0.5rem) !important;
   > .fyvr11m4.fyvr12g.fyvr164._1vqx0w94._1vqx0w97._1vqx0w95 {
     overflow-y: auto !important;
   }

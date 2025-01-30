@@ -28,6 +28,7 @@ type InfoBoxProps = {
   loading?: boolean;
   transparent?: boolean;
   status?: { type: 'neutral' | 'asc' | 'desc'; value: string };
+  i?: React.ReactNode;
 };
 
 export const InfoBox = ({
@@ -38,6 +39,7 @@ export const InfoBox = ({
   status,
   transparent,
   loading,
+  i,
 }: InfoBoxProps) => {
   return (
     <Flex
@@ -48,9 +50,13 @@ export const InfoBox = ({
         loading ? 'loading' : 'duration-300 animate-in fade-in',
       )}
     >
-      <Text className="text-white font-DMSans text-[1rem] font-medium capitalize">
-        {label}
-      </Text>
+      <div className="flex items-center gap-2">
+        {' '}
+        <Text className="text-white text-[1.25rem] font-medium capitalize">
+          {label}
+        </Text>
+        {i && <div className="">{i}</div>}
+      </div>
 
       {children}
 

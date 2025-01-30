@@ -66,7 +66,7 @@ export const NetworkSelectModalContent = () => {
               width={50}
               height={50}
             />
-            <p className="text-[2.25rem]">{chain.name}</p>
+            <p className="text-[2rem] truncate">{chain.name}</p>
             {connectedChain?.id === chain.id && (
               <Box className="h-[0.75rem] aspect-square rounded-full bg-success ml-auto" />
             )}
