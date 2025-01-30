@@ -65,14 +65,14 @@
   display: flex;
   gap: 1.75em;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   color: #fff;
   opacity: 0.7;
 
   @media (max-width: 776px) {
     margin: 0 auto;
-
+    align-items: center;
     order: 2;
     flex-direction: column;
     gap: 12px;

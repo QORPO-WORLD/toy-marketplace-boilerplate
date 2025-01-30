@@ -21,7 +21,7 @@ export const Footer = () => {
           alt="logo"
         />
       </div>
-      <div className={styles.footer_menu}>
+      {/* <div className={styles.footer_menu}>
         <div>
           <a href="https://playontoy.com" target="_blank">
             home
@@ -30,10 +30,14 @@ export const Footer = () => {
         <div>
           <Link href="/">marketplace</Link>
         </div>
-      </div>
+      </div> */}
       <div className={styles.footer_navigation}>
         <div className={styles.link_container}>
-          <p>© 2025, toy</p>
+          <p>
+            © 2025, TOY LABS TECHNOLOGIES L.L.C <br />
+            SM 1-02-330, Arab Building Bank, <br />
+            Port Saeed, Dubai, UAE
+          </p>
           <a href="/market/docs/01-TOY_GTC_EN-2024.pdf" target="_blank">
             TERMS OF SERVICE
           </a>
