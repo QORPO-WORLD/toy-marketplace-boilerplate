@@ -69,7 +69,6 @@ export default function Page() {
   });
 
   const connectors = useConnections();
-  console.log(connectors);
 
   // useEffect(() => {
   //   const getYourActivity = async () => {

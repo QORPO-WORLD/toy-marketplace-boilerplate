@@ -13006,6 +13006,24 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.5);
+  .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12kl._1qxj1ib9 {
+    color: rgba(84, 74, 92, 0) !important;
+    position: relative;
+    &::after {
+      content: 'OR SELECT ANY OF WEB3 WALLET';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: fit-content;
+      white-space: nowrap;
+      font-size: 0.9rem;
+      height: 100%;
+      font-family: DMSans;
+      font-weight: 300;
+      color: white;
+    }
+  }
 }
 .fyvr11ul._1vqx0w91._1vqx0w90.fyvr12g.fyvr164._1vqx0w92 {
   background: #4b4253 !important;
@@ -13032,6 +13050,7 @@
 .fyvr11r3.fyvr11ig.fyvr11ko.fyvr11jo.fyvr11jg.fyvr12j9.fyvr11lw._1qxj1ib9 {
   transform: translateY(0.25rem);
   font-size: 0.75rem;
+  color: black !important;
 }
 
 @font-face {
@@ -13149,7 +13168,7 @@
   .fyvr11no.fyvr12k9.fyvr11ow.fyvr11jc.fyvr11l8 {
     .fyvr11r2.fyvr11ic.fyvr11ko.fyvr11jo.fyvr11j4._1qxj1ib9 {
       position: relative;
-      transform: translateX(-0.9375rem);
+      transform: translateX(-0.9375rem) translateY(-0.7rem);
       &::after {
         content: '';
         position: absolute;
@@ -13163,6 +13182,20 @@
         background-position: center;
         background-repeat: no-repeat;
       }
+      // &::before {
+      //   content: 'USE TOY WALLET';
+      //   position: absolute;
+      //   top: 50%;
+      //   left: 50%;
+      //   width: fit-content;
+      //   transform: translate(-36%, 50%);
+      //   white-space: nowrap;
+      //   font-size: 0.9rem;
+      //   height: 100%;
+      //   font-family: DMSans;
+      //   font-weight: 300;
+      //   color: white;
+      // }
     }
   }
 
@@ -13607,5 +13640,21 @@ input {
     color: black !important;
     display: block;
     padding: 1rem;
+  }
+}
+
+._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11qg.fyvr12p0.fyvr12ou.fyvr11l8.fyvr11mc.fyvr11m0.fyvr11ul.fyvr1o8.fyvr1qe._5b32m97.fyvr11ul.fyvr11rs.fyvr12g.fyvr11mk.fyvr11ow.fyvr11o4.fyvr11l8 {
+  ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0.fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12kl._1qxj1ib9 {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.fyvr12g.fyvr11ow.fyvr11no.fyvr11l8 {
+  .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12kl._1qxj1ib9 {
+    &::after {
+      display: none;
+    }
   }
 }
