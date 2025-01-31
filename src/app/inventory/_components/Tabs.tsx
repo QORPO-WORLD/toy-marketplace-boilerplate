@@ -18,10 +18,12 @@ import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
 import {
+  useCurrency,
   useListBalances,
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
 import { useQuery } from '@tanstack/react-query';
+import { id } from 'ethers';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useAccount, useBalance } from 'wagmi';
 
@@ -72,6 +74,7 @@ export const InventoryTabs = ({
   const { data: walletData } = useBalance({
     address,
   });
+
   const { data } = useQuery<BalanceProps>({
     queryKey: ['qorpobalance', idToken],
     queryFn: () =>
@@ -80,6 +83,7 @@ export const InventoryTabs = ({
       ),
     enabled: idToken !== null,
   });
+
   useEffect(() => {
     const getIdToken = async () => {
       try {
@@ -149,6 +153,9 @@ export const InventoryTabs = ({
   };
 
   const filteredCollecionBalances = filterCollecionBalances();
+  const tokenIDs = filteredCollecionBalances
+    .map((b) => b.tokenID)
+    .filter((id) => id !== undefined);
 
   const totalCollections = filteredCollecionBalances.length;
   const totalCollectibles = filteredCollecionBalances.reduce(
@@ -286,6 +293,12 @@ export const InventoryTabs = ({
           </Flex>
         </Tabs.Content>
       </Tabs.Root>
+      {/* <Activity
+        chainId={chainId}
+        accountAddress={accountAddress}
+        tokenIDs={tokenIDs}
+
+      /> */}
     </>
   );
 };

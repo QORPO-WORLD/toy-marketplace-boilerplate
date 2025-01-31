@@ -1,3 +1,5 @@
+import { MdContentCopy } from 'react-icons/md';
+
 import { CollectibleActionButton } from '~/components/buttons/CollectibleActionButton';
 import { Image, cn } from '~/components/ui';
 import { classNames } from '~/config/classNames';
@@ -54,12 +56,20 @@ export const CollectibleCard = ({
         })}
         className="peer h-full p-2 relative"
       >
-        <Image
-          src={collectible?.image}
-          containerClassName="bg-foreground/10 aspect-square rounded-[1.5625rem] overflow-hidden mb-2"
-          className="aspect-square rounded-[inherit] hover:scale-110 ease-in duration-150"
-        />
-        {balance && <p className="text-xl">Amount: {balance.balance}</p>}
+        <div className="bg-foreground/10 aspect-square rounded-[1.5625rem] overflow-hidden mb-2 relative">
+          <Image
+            src={collectible?.image}
+            className="aspect-square rounded-[inherit] hover:scale-110 ease-in duration-150"
+          />
+          {balance && (
+            <div className="absolute bottom-2 left-4 flex items-center gap-2 bg-opacity-black py-2 px-3 rounded-sm border border-white">
+              <MdContentCopy color="white" />
+              <p className="text-sm uppercase font-DMSans text-white">
+                {balance.balance} owned
+              </p>
+            </div>
+          )}
+        </div>
         <Footer tokenMetadata={collectible!} order={order} />
       </Link>
       {isConnected && accountChainId && (
