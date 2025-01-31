@@ -13002,7 +13002,10 @@
 }
 
 ._5b32m95._5b32m94.fyvr11hg.fyvr11i4.fyvr11fo.fyvr11g6.fyvr11gc.fyvr11gu.fyvr11q0 {
-  background: #4b4253 !important;
+  background: rgba(84, 74, 92, 0.8) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .fyvr11ul._1vqx0w91._1vqx0w90.fyvr12g.fyvr164._1vqx0w92 {
   background: #4b4253 !important;
@@ -13127,8 +13130,10 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        border-radius: 1.2625rem;
+        height: 57%;
+        border-radius: 1.1625rem;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
         background: url('/market/images/mogal-bg.png'),
           linear-gradient(90deg, #f47469 0%, #db5179 100%);
         background-size: cover;
