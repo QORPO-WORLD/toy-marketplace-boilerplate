@@ -5,23 +5,82 @@ type FAQData = {
 
 export const FAQData: FAQData[] = [
   {
-    question: 'What’s $TOY?',
+    question: 'What is TOY CHAIN?',
     answer:
-      '$TOY is the native currency of the TOY CHAIN and the sole currency used within its marketplace and ecosystem.',
+      'TOY CHAIN is a blockchain ecosystem built for gamers, creators, and builders who want real ownership, AI Agent Tools, and high-quality and long-lasting IPs that go beyond gaming into TV Shows and more. No VCs—just AI, gaming, and 100% community-driven.',
   },
   {
-    question: 'What’s the TOY Marketplace?',
+    question: 'Is TOY CHAIN gaming blockchain?',
     answer:
-      'The TOY Marketplace is a fully on-chain platform co-developed by us. You can use our white-label solution to build your own marketplace and start sharing liquidity within the TOY Ecosystem, or you can trade directly on the platform.',
+      'We are building an ecosystem with our own AI infrastructure to support dApps and builders on TOY CHAIN.',
   },
   {
-    question: 'What’s the current status?',
+    question:
+      'How does TOY CHAIN leverage AI for players, watchers, and developers?',
     answer:
-      'The marketplace is currently in the testing period and on the testnet to improve our infrastructure and test the first games on the TOY CHAIN with exclusive features.',
+      'TOY CHAIN is building AI infrastructure to support Gamers, Watchers, and Blockchain integration providing Real-time player assistance, interactive viewer engagement, and seamless blockchain transactions.<br><br>' +
+      '<strong>For Players:</strong><br>' +
+      'AI Moderator helps players improve with real-time stats, match probabilities, and personalized tips in shooter games and action RPGs. The AI Moderator learns from pro players and guides casual players through challenging situations with expert strategies. It provides tailored insights and skills to boost performance, win more matches, and increase rewards.<br><br>' +
+      '<strong>For Watchers:</strong><br>' +
+      'AI Moderator is designed to enhance player engagement and monetization. AI Moderator acts as a smart commentator who interacts with users through social media–posting on X, streaming on Twitch and YouTube, engaging in on-chain activities, and driving community engagement.<br><br>' +
+      '<strong>For Developers:</strong><br>' +
+      'TOY CHAIN integrates AI with blockchain, allowing the AI agent to work smoothly with dApps and wallets. It handles tasks like token transfers and DAO governance, providing real-time assistance with minimal delay using advanced IVS technology.',
   },
   {
-    question: 'What games or projects have you onboarded so far?',
-    answer: 'QORPO WORLD is the first Official Launching Partner on TOY CHAIN.',
+    question: 'What are the core features of AI in TOY Ecosystem?',
+    answer:
+      'Game Intelligence – Advanced analytics to help players improve and adapt in real-time.<br>' +
+      'Fan Engagement – Allows real-time gifting and rewards during gameplay.<br>' +
+      'Watchers’ Features – Interactive AI tools to spectate and influence matches.',
+  },
+  {
+    question: 'How will AI integrate with TOY Chain?',
+    answer:
+      '- Virtual rewards for players and watchers.<br>' +
+      '- dApp integration for seamless transactions.<br>' +
+      '- NFT and asset transfers within the TOY CHAIN ecosystem.',
+  },
+  {
+    question:
+      'How do the games on TOY CHAIN benefit from AI and blockchain integration?',
+    answer:
+      'Games on TOY CHAIN leverage AI to optimize gameplay, and personalize player experiences. Blockchain integration ensures secure asset ownership, transparent transactions, and decentralized economies.',
+  },
+  {
+    question: 'What games are currently available on TOY CHAIN?',
+    answer:
+      'Currently, Citizen Conflict and AneeMate are available on TOY CHAIN. Both games leverage blockchain and AI technology to offer unique, personalized experiences, with secure asset ownership and dynamic gameplay.',
+  },
+  {
+    question: 'What are the main utilities of $TOY Token?',
+    answer:
+      '1. Ecosystem Platform<br>' +
+      '- Mint, Trade, Borrow Assets<br>' +
+      '- Monetization Tools<br>' +
+      '- TOY Pass & Exclusive Content<br><br>' +
+      '2. Staking Hub<br>' +
+      '- Contribute & Participate in Governance<br>' +
+      '- Earn Partner Airdrops & Collaborate on IPs<br>' +
+      '- Launchpad Benefits<br><br>' +
+      '3. TOY Factory<br>' +
+      '- Support Network Operations & Earn Rewards<br>' +
+      '- Shape Ecosystem Development<br><br>' +
+      '4. Gas & Payments<br>' +
+      '- Zero-Gas Transactions<br>' +
+      '- Cross-Platform Payments<br><br>' +
+      '5. Games<br>' +
+      '- Citizen Conflict & AneeMate Integration<br>' +
+      '- AI-Powered Game Economies',
+  },
+  {
+    question: 'Who is behind TOY CHAIN?',
+    answer:
+      'TOY Chain is powered by Arbitrum technology and co-developed with QORPO World, Sequence, and Caldera.',
+  },
+  {
+    question: 'What’s $TOY Token?',
+    answer:
+      '$TOY Token is the native token of TOY CHAIN—100% community-owned with zero VCs involved. It powers gas fees, payments, staking, and DAO where the community makes the decisions.',
   },
   {
     question: 'Are there any investors in TOY CHAIN?',
@@ -29,24 +88,8 @@ export const FAQData: FAQData[] = [
       'The TOY CHAIN is powered 100% by the community, meaning there are no VC Rounds or any chances for Investors to get in Early.',
   },
   {
-    question: 'How can I buy TOY tokens?',
+    question: 'What is TOY’s vision for the future?',
     answer:
-      'So far, TOY CHAIN is not listed at any exchanges. No additional details have been disclosed.',
-  },
-  {
-    question: 'When will be the TOY CHAIN Mainnet launch?',
-    answer:
-      'The estimated launch of Mainnet and Migration of QORPO is set for Q1 2025.',
-  },
-  {
-    question: 'When will the Airdrop happen?',
-    answer:
-      'Airdrop will be announced soon. For more official announcements, follow us on our socials.',
-  },
-  {
-    question:
-      'Where can we find more information about the TOY CHAIN Tokenomics?',
-    answer:
-      'There is no information available at this time. Stay tuned for more official information.',
+      'TOY CHAIN aims to become a leading blockchain ecosystem by publishing indie games, empowering developers and gamers, and leveraging AI tools and infrastructure to create a seamless Web3 experience.',
   },
 ];

@@ -32,9 +32,10 @@ function FAQBox({ question, answer }: { question: string; answer: string }) {
         }}
       >
         <div ref={contentRef}>
-          <p className="font-DMSans text-[1.75rem] font-normal text-[#00000099] mb:text-base">
-            {answer}
-          </p>
+          <p
+            className="font-DMSans text-[1.75rem] font-normal text-[#00000099] mb:text-base"
+            dangerouslySetInnerHTML={{ __html: answer }}
+          ></p>
         </div>
       </div>
     </div>

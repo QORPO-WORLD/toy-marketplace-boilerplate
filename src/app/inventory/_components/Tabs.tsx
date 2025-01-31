@@ -179,12 +179,12 @@ export const InventoryTabs = ({
                 />
                 <div className="absolute left-[100%] top-[50%] translate-y-[-50%] translate-x-[2%] w-96 p-4 bg-[#483F50] rounded-3xl shadow-lg tooltip font-DMSans text-white selection:none hidden peer-hover:block">
                   <p>
-                    How to get Testnet $TOY Tokens for testing the transactions
-                    on TOY Marketplace? Players who create a TOY Wallet and earn
-                    CCASH in Citizen Conflict will receive 1 testing $TOY for
-                    every CCASH earned. This testing currency lets you perform
-                    on-chain actions and explore the TOY CHAIN Testnet fully. A
-                    TOY Wallet is essential to maximize your Testnet experience.
+                    <strong>How to Get Testnet $TOY Tokens?</strong>
+                    <br />
+                    Earn 1 Testnet $TOY for every CCASH earned in Citizen
+                    Conflict by creating a TOY Wallet. Use it to test
+                    transactions and explore the TOY CHAIN Testnet. A TOY Wallet
+                    is required for full access.
                   </p>
                 </div>
               </div>
@@ -230,12 +230,15 @@ export const InventoryTabs = ({
                 alt="i-logo"
               />
               <div className="absolute left-[100%] top-[50%] translate-y-[-50%] translate-x-[2%] w-96 p-4 bg-[#483F50] rounded-3xl shadow-lg tooltip font-DMSans text-white selection:none hidden peer-hover:block">
-                <p>
-                  Do I earn Diamond Points, while being active in TOY Testnet?
-                  Diamond Points are a loyalty currency within the QORPO
-                  ecosystem. By participating in the Testnet and creating a TOY
-                  Wallet, you can earn these points for Buy / Sell / Listing
-                  assets.
+                <p className="font-thin">
+                  <span className="font-extrabold">
+                    Can I Earn Diamond Points on TOY Testnet?
+                  </span>
+                  <br />
+                  Yes. Diamond Points, QORPO’s loyalty currency, can be earned
+                  by participating in the TOY CHAIN Testnet and creating a TOY
+                  Wallet. These points will later convert into $TOY during the
+                  biggest airdrop yet.
                 </p>
               </div>
             </div>
