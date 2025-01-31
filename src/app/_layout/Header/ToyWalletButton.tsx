@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { FaWallet } from 'react-icons/fa';
+import { LuSquarePlus } from 'react-icons/lu';
 import { PiCopySimpleThin } from 'react-icons/pi';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 
-import { Button, Dialog, Portal } from '$ui';
+import { Dialog } from '$ui';
 import { NetworkSelectModalContent } from '../../../components/modals/NetworkSelectModal';
 import { WalletModalContent } from '../../../components/modals/WalletModal';
 import useCopyToClipboard from '../../../hooks/utils/useCoppyText';
@@ -19,9 +20,10 @@ import {
 } from '../../../lib/utils/helpers';
 import { getThemeManagerElement } from '../../../lib/utils/theme';
 import { useChain } from '@0xsequence/kit';
+import { useOpenConnectModal } from '@0xsequence/kit';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useAccount, useBalance, useSwitchChain } from 'wagmi';
+import { useAccount, useBalance, useConnections, useDisconnect } from 'wagmi';
 
 function ToyWalletBtn() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +34,11 @@ function ToyWalletBtn() {
   const { data: walletData } = useBalance({
     address,
   });
+  const { setOpenConnectModal } = useOpenConnectModal();
+  const { disconnectAsync } = useDisconnect();
+  const connection = useConnections();
+  const walletIcon = connection?.length ? connection[0]!.connector?.icon : null;
+  const walletId = connection?.length ? connection[0]!.connector?.id : null;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -52,21 +59,48 @@ function ToyWalletBtn() {
     };
   }, [isOpen, ref]);
 
+  const createToyWallet = () => {
+    const disconnect = async () => {
+      await disconnectAsync();
+      setOpenConnectModal(true);
+    };
+    void disconnect();
+  };
+
   return (
     <div
       className={clsx(
-        'h-full w-fit pr-[0.63rem]  selection:none bg-main-gradient py-[0.63rem] pl-12 rounded-[1.6875rem] relative text-white flex gap-5 leading-none toy_logo cursor-pointer',
+        'h-full w-fit pr-[0.63rem]  selection:none bg-main-gradient py-[0.63rem] pl-12 rounded-[1.6875rem] relative text-white flex gap-5 leading-none cursor-pointer',
         { 'rounded-b-none': isOpen },
       )}
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
       {chain?.id && (
-        <img
-          className="w-[3.5rem] aspect-square absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2  block"
-          src={getChainLogo(chain?.id || 21000000)}
-          alt="logo"
-        />
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            {
+              <img
+                className="w-[4.5rem] aspect-square absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2  block hover:scale-110 transition-all duration-300"
+                src={getChainLogo(chain?.id || 21000000)}
+                alt="logo"
+              />
+            }
+          </Dialog.Trigger>
+
+          <Dialog.BaseContent
+            className="sm:max-w-[450px]"
+            container={getThemeManagerElement()}
+            title="Switch Network"
+          >
+            <NetworkSelectModalContent />
+          </Dialog.BaseContent>
+        </Dialog.Root>
+      )}
+      {walletIcon && (
+        <div className="w-6 aspect-square overflow-hidden p-[0.2rem] border border-black rounded-full bg-white absolute left-0 bottom-0  translate-x-[1rem]">
+          <img className="w-full" src={walletIcon} alt="wallet-icon" />
+        </div>
       )}
       <div className="flex items-center gap-1">
         <div className="">
@@ -104,6 +138,15 @@ function ToyWalletBtn() {
                 <p className="text-[1.125rem]">Wallet</p>
               </li>
             </Link>
+            {walletId !== 'sequence-waas' && (
+              <li
+                className="flex items-center gap-2 px-6 py-4 border-dashed-[2px] border-b hover:bg-opacity-black"
+                onClick={() => createToyWallet()}
+              >
+                <LuSquarePlus />
+                <p className="text-[1.125rem]">Create toy wallet</p>
+              </li>
+            )}
             {isConnected && (
               <Dialog.Root>
                 <Dialog.Trigger asChild>
@@ -125,25 +168,6 @@ function ToyWalletBtn() {
           </ul>
         </div>
       )}
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          {
-            <img
-              className="w-[3.5rem] aspect-square absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2  block"
-              src={getChainLogo(chain?.id || 21000000)}
-              alt="logo"
-            />
-          }
-        </Dialog.Trigger>
-
-        <Dialog.BaseContent
-          className="sm:max-w-[450px]"
-          container={getThemeManagerElement()}
-          title="Switch Network"
-        >
-          <NetworkSelectModalContent />
-        </Dialog.BaseContent>
-      </Dialog.Root>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ENSName from '../../../../../../components/ENSName';
+import { Routes } from '../../../../../../lib/routes';
 import { getChain } from '../../../../../../lib/utils/getChain';
 import {
   getCollectionLogo,
@@ -25,8 +26,17 @@ import {
   useLowestListing,
 } from '@0xsequence/marketplace-sdk/react';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAccount } from 'wagmi';
+import { useAccount, useConnections, useConnectorClient } from 'wagmi';
+
+interface UserActivity {
+  // Define the structure of the user activity data
+  // Example:
+  activityType: string;
+  timestamp: string;
+  // Add other fields as needed
+}
 
 export default function Page() {
   const {
@@ -57,6 +67,38 @@ export default function Page() {
     accountAddress,
     contractAddress: collectionId,
   });
+
+  const connectors = useConnections();
+
+  // useEffect(() => {
+  //   const getYourActivity = async () => {
+  //     try {
+  //       const body = {
+  //         collectionAddress: '0x9365ffc890787a224aa9c8b18dd7e2d68ec88846',
+  //         currencyAddresses: ['0x6D7bFFEFbAd377940f286c4AA790fb5d6cadF685'],
+  //         orderbookContractAddress:
+  //           '0xB537a160472183f2150d42EB1c3DD6684A55f74c',
+  //         page: { sort: [{ column: 'createdAt', order: 'DESC' }] },
+  //         tokenIDs: ['4', '5', '6'],
+  //         userAddress: '0xd5C9D8b7ab0f624eAA6A5149d09cEB8B432452dc',
+  //       };
+
+  //       const response = await fetch(
+  //         'https://marketplace-api.sequence.app/toy-testnet/rpc/Marketplace/GetUserActivities',
+  //         {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify(body),
+  //         },
+  //       );
+  //       const data: UserActivity[] = await response.json();
+  //       console.log(data);
+  //     } catch (error) {}
+  //   };
+  //   void getYourActivity();
+  // }, []);
 
   useEffect(() => {
     if (balancesData) {
@@ -125,41 +167,50 @@ export default function Page() {
             </p>
           </div>
           <div className="w-full flex flex-col gap-5">
-            <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] justify-between  w-full">
-              <img
-                className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
-                src={getCollectionLogo(collectionId)}
-                alt="logo"
-                loading="lazy"
-              />
-              <div className="flex gap-[0.6rem] overflow-hidden mr-auto">
-                <div>
-                  <p className="text-[2rem] uppercase truncate leading-none mb:text-xl">
-                    {collectionMetadata.data?.name}
-                  </p>
-                  <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
-                    {getTag(collectionId)}
-                  </p>
-                </div>
+            <NextLink
+              href={Routes.collection({
+                chainParam: chainId,
+                collectionId,
+                mode: 'buy',
+              })}
+            >
+              <div className="py-4 px-5 bg-white rounded-[1.5rem] flex items-center gap-[0.65rem] justify-between  w-full hover:scale-[1.005] transition-transform duration-200">
                 <img
-                  className="w-[1.5rem] h-[1.5rem] block translate-y-1"
-                  src="/market/icons/shield-icon.svg"
-                  alt="ethereum"
+                  className="drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[2.6rem] h-[2.6rem] rounded-full block"
+                  src={getCollectionLogo(collectionId)}
+                  alt="logo"
                   loading="lazy"
                 />
-              </div>
-              {collectionDataOrder?.order?.marketplace ===
-                MarketplaceKind.sequence_marketplace_v2 && (
-                <div className="flex gap-2 mb:flex-col mb:gap-0 mb:hidden">
+                <div className="flex gap-[0.6rem] overflow-hidden mr-auto">
+                  <div>
+                    <p className="text-[2rem] uppercase truncate leading-none mb:text-xl">
+                      {collectionMetadata.data?.name}
+                    </p>
+                    <p className="text-[#483F50] font-DMSans text-[16px] font-normal leading-[103.45%]">
+                      {getTag(collectionId)}
+                    </p>
+                  </div>
                   <img
-                    className="w-[3.8rem]"
-                    src="/market/icons/toy-logo-darck.svg"
-                    alt="logo"
-                  />{' '}
-                  <p className="text-text text-[1.6rem]">TESTNET</p>
+                    className="w-[1.5rem] h-[1.5rem] block translate-y-1"
+                    src="/market/icons/shield-icon.svg"
+                    alt="ethereum"
+                    loading="lazy"
+                  />
                 </div>
-              )}
-            </div>
+                {collectionDataOrder?.order?.marketplace ===
+                  MarketplaceKind.sequence_marketplace_v2 && (
+                  <div className="flex gap-2 mb:flex-col mb:gap-0 mb:hidden">
+                    <img
+                      className="w-[3.8rem]"
+                      src="/market/icons/toy-logo-darck.svg"
+                      alt="logo"
+                    />{' '}
+                    <p className="text-text text-[1.6rem]">TESTNET</p>
+                  </div>
+                )}
+              </div>
+            </NextLink>
+
             <div className="flex flex-col w-full  py-[1.75rem] px-[2.5625rem] gap-10 rounded-[25px] border border-white bg-[rgba(87,77,95,0.80)] backdrop-blur-[10px]">
               <p className="text-[2rem] font-normal leading-[86.94%] uppercase text-white mb:text-[20px]">
                 {data?.name}

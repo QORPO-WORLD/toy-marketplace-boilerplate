@@ -24,7 +24,6 @@ export const ConnectButton = ({
     setOpenConnectModal(true);
     onClick?.(e);
   };
-  console.log(window.innerHeight);
 
   return (
     <button type="button" className={styles.wallet} onClick={handleOnClick}>

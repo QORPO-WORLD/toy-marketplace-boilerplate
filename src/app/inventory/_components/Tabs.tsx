@@ -127,31 +127,28 @@ export const InventoryTabs = ({
   const balances = balancesData?.pages[0];
   const isEmptyInventory = !balances || balances.balances.length === 0;
 
-  if (isEmptyInventory) {
-    return (
-      <Text className="w-full text-center text-black pt-32 text-3xl">
-        Empty.
-      </Text>
-    );
-  }
-
   // collectible balances and counts
   const collectionBalances = balances?.balances.filter(
     (b) => b.contractType != ContractType.ERC20,
   );
 
-  const filteredCollecionBalances: TokenBalance[] = collectionBalances.filter(
-    (balanceCollection) =>
-      !!config.data?.collections?.find(
-        (marketplaceCollection) =>
-          compareAddress(
-            marketplaceCollection.collectionAddress,
-            balanceCollection.contractAddress,
-          ) &&
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          marketplaceCollection.chainId === balanceCollection.chainId,
-      ),
-  );
+  const filterCollecionBalances = (): TokenBalance[] | [] => {
+    if (collectionBalances === undefined) return [];
+    return collectionBalances.filter(
+      (balanceCollection) =>
+        !!config.data?.collections?.find(
+          (marketplaceCollection) =>
+            compareAddress(
+              marketplaceCollection.collectionAddress,
+              balanceCollection.contractAddress,
+            ) &&
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+            marketplaceCollection.chainId === balanceCollection.chainId,
+        ),
+    );
+  };
+
+  const filteredCollecionBalances = filterCollecionBalances();
 
   const totalCollections = filteredCollecionBalances.length;
   const totalCollectibles = filteredCollecionBalances.reduce(
@@ -178,8 +175,8 @@ export const InventoryTabs = ({
                     How to get Testnet $TOY Tokens for testing the transactions
                     on TOY Marketplace? Players who create a TOY Wallet and earn
                     CCASH in Citizen Conflict will receive 1 testing $TOY for
-                    every CCASH earned.This testing currency lets you perform
-                    on-chain actions and explore the TOY Chain Testnet fully. A
+                    every CCASH earned. This testing currency lets you perform
+                    on-chain actions and explore the TOY CHAIN Testnet fully. A
                     TOY Wallet is essential to maximize your Testnet experience.
                   </p>
                 </div>
@@ -275,9 +272,17 @@ export const InventoryTabs = ({
       >
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-4">
-            <InventoryCollectiblesContent
-              collectionBalances={filteredCollecionBalances}
-            />
+            {filteredCollecionBalances.length ? (
+              <InventoryCollectiblesContent
+                collectionBalances={filteredCollecionBalances}
+              />
+            ) : (
+              <div className="max-w-[100vw] px-4 py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] min-h-[56dvh] border border-white bg-[#574d5fcc] backdrop-blur-[0.625rem] flex flex-col items-center justify-center">
+                <Text className="text-white text-center text-3xl">
+                  you have no assets
+                </Text>
+              </div>
+            )}
           </Flex>
         </Tabs.Content>
       </Tabs.Root>
