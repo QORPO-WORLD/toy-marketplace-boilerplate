@@ -1,23 +1,14 @@
 'use client';
 
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { CollectibleCard } from '~/app/collection/[chainParam]/[collectionId]/_components/Grid/Card/CollectableCard';
 import { ContractTypeBadge } from '~/components/ContractTypeBadge';
 import { Spinner } from '~/components/Spinner';
 
-import {
-  Accordion,
-  Avatar,
-  Button,
-  Flex,
-  Grid,
-  ScrollArea,
-  Text,
-  cn,
-} from '$ui';
+import { Accordion, Button, Flex, Grid, Text, cn } from '$ui';
+import { Routes } from '../../../lib/routes';
 import { getChainLogo } from '../../../lib/utils/helpers';
-import { NetworkImage } from '@0xsequence/design-system';
 import type { TokenBalance } from '@0xsequence/indexer';
 import {
   useCollection,
@@ -25,8 +16,8 @@ import {
 } from '@0xsequence/marketplace-sdk/react';
 import { ContractType } from '@0xsequence/metadata';
 import { useIsMounted } from '@legendapp/state/react';
-import { set } from 'date-fns';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import type { Hex } from 'viem';
 
 type InventoryCollectiblesContent = {
@@ -142,10 +133,18 @@ const CollectionSection = ({
                   src={collectionMetadata?.logoURI}
                 />
               </Avatar.Base> */}
+              <NextLink
+                href={Routes.collection({
+                  chainParam: chainId,
+                  collectionId: collectionAddress,
+                  mode: 'buy',
+                })}
+              >
+                <Text className="text-[1.25rem] text-white hover:scale-105 transition-transform duration-200">
+                  {collectionMetadata?.name || collectionAddress}
+                </Text>
+              </NextLink>
 
-              <Text className="text-[1.25rem] text-white">
-                {collectionMetadata?.name || collectionAddress}
-              </Text>
               <div className="bg-[#4035451A] p-1 rounded-full">
                 <Image
                   className="w-[1.5625rem] aspect-square"

@@ -26,6 +26,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1500px;
+  transition: 0.3 ease;
+  img {
+    transition: 0.3 ease;
+  }
 }
 
 .address {
@@ -159,7 +164,7 @@
       transform: translate(-50%, -50%);
       width: calc(100% + 3rem);
       height: 2.75rem;
-      background: url('/img/hover.png');
+      background: url('/market/images/hover.png');
       background-size: 100% 100%;
       transition: 0.3s;
       background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import SocialsList from '../../../components/ui/SocialsList/SocialsList';
 import { useFlip } from '../../../hooks/ui/useFlip';
@@ -8,29 +8,42 @@ import styles from './Footer.module.scss';
 import Link from 'next/link';
 
 export const Footer = () => {
-  const logoRef = useRef(null);
-  const flip1 = useFlip(logoRef);
+  const flip1 = useFlip();
+
   return (
     <footer className={styles.footer}>
-      <div ref={flip1} className={styles.logo_container}>
+      <div className={styles.logo_container}>
         <img
-          ref={logoRef}
+          ref={flip1 as React.RefObject<HTMLImageElement>}
           className={styles.logo}
           src="/market/icons/logo-full.svg"
           loading="lazy"
           alt="logo"
         />
       </div>
-      {/* <div className={styles.footer_menu}>
+      <div className={styles.footer_menu}>
         <div>
-          <a href="https://playontoy.com" target="_blank">
+          <a
+            href="https://playontoy.com"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             home
           </a>
         </div>
         <div>
           <Link href="/">marketplace</Link>
         </div>
-      </div> */}
+        <div>
+          <a
+            href="https://hub.playontoy.com/"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            toy hub
+          </a>
+        </div>
+      </div>
       <div className={styles.footer_navigation}>
         <div className={styles.link_container}>
           <p>

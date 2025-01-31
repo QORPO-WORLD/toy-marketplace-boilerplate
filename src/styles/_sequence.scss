@@ -13196,10 +13196,6 @@
   }
 }
 
-.modal_dialogContent_wide__1ypl6nt3.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs.fyvr1vo.fyvr1xs.fyvr1zw.fyvr1120.fyvr11lc.fyvr11mc.fyvr11cw {
-  background: #4b4253 !important;
-}
-
 .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11j4.fyvr12k9._1qxj1ib9 {
   font-size: 0.8rem;
 }
@@ -13542,4 +13538,69 @@ input {
 
 .fyvr11cc.fyvr113s.fyvr11mk {
   display: none !important;
+}
+
+// .fyvr11l8.fyvr11n4.fyvr11ow.fyvr11mc.fyvr11co.fyvr11m4 {
+//   .fyvr11r3.fyvr11is.fyvr11ko.fyvr11jo.fyvr11jk.fyvr11ks.fyvr12g.fyvr12k9._1qxj1ib9 {
+//     position: relative;
+//     &::after {
+//       content: 'LOADING TOY PAY';
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//     }
+//   }
+// }
+
+.modal_dialogContent_wide__1ypl6nt3.modal_dialogContentBase__1ypl6nt1.fyvr11hg.fyvr11i4.fyvr11g4.fyvr11gs.fyvr11l8.fyvr11ul.fyvr11m0.fyvr11rs.fyvr1vo.fyvr1xs.fyvr1zw.fyvr1120.fyvr11lc.fyvr11mc.fyvr11cw {
+  background: linear-gradient(90deg, #f47469 0%, #db5179 100%) !important;
+  button {
+    background: white !important;
+    color: black !important;
+    .fyvr11r2.fyvr11ic.fyvr11ko.fyvr11jo.fyvr11j4._1qxj1ib9 {
+      color: #dc5378 !important;
+    }
+  }
+
+  .fyvr11r3.fyvr11io.fyvr11ko.fyvr11jo.fyvr11jc.fyvr11l0._1qxj1ib9 {
+    color: white !important;
+  }
+
+  .fyvr11h4.fyvr11hs.fyvr11fs.fyvr11gg.fyvr110.fyvr14o.fyvr11ac {
+    width: 5.375rem !important;
+    height: 5.375rem !important;
+  }
+
+  .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11jc.fyvr12kf._1qxj1ib9 {
+    color: white !important;
+    font-family: X-Heighting;
+    font-size: 1.5rem !important;
+  }
+
+  .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11j4.fyvr12k9._1qxj1ib9 {
+    font-size: 1.2rem !important;
+  }
+
+  .fyvr11r3.fyvr11ik.fyvr11ko.fyvr11jo.fyvr11j4.fyvr12kf._1qxj1ib9 {
+    color: white !important;
+  }
+  span {
+    color: white !important;
+  }
+}
+
+.fyvr11mc.fyvr11o4.fyvr11p0.fyvr11l8 {
+  .fyvr11r3.fyvr11io.fyvr11k8.fyvr11k0.fyvr11j8.fyvr12j9._1qxj1ib9 {
+    color: black !important;
+    font-size: 1.35rem !important;
+  }
+}
+
+.fyvr12g {
+  .fyvr11r3.fyvr11ik.fyvr11k4.fyvr11k0.fyvr11jc.fyvr12j9._1qxj1ib9 {
+    color: black !important;
+    display: block;
+    padding: 1rem;
+  }
 }

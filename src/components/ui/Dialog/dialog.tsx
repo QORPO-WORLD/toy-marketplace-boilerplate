@@ -66,7 +66,7 @@ const DialogContent = React.forwardRef<
         className={cn(
           hideCloseButton ? 'hidden' : '',
           'absolute right-3 top-3 rounded-sm text-foreground/90 opacity-70 ring-offset-background transition-opacity hover:opacity-100',
-          'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+          'focus:outline-none',
           'disabled:pointer-events-none data-[state=open]:text-foreground/50',
         )}
       >
