@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { FaWallet } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa6';
 import { LuSquarePlus } from 'react-icons/lu';
 import { PiCopySimpleThin } from 'react-icons/pi';
 import { RiLogoutBoxLine } from 'react-icons/ri';
@@ -140,11 +141,13 @@ function ToyWalletBtn() {
             </Link>
             {walletId !== 'sequence-waas' && (
               <li
-                className="flex items-center gap-2 px-6 py-4 border-dashed-[2px] border-b hover:bg-opacity-black"
+                className="flex items-center gap-2 px-6 py-4 border-dashed-[2px] border-b bg-main-gradient hover:scale-[1.03] transition-transform duration-200"
                 onClick={() => createToyWallet()}
               >
-                <LuSquarePlus />
-                <p className="text-[1.125rem]">Create toy wallet</p>
+                <div className="p-1 bg-white rounded-[0.5rem] ">
+                  <FaPlus />
+                </div>
+                <p className="text-[1.125rem] text-white">Create toy wallet</p>
               </li>
             )}
             {isConnected && (

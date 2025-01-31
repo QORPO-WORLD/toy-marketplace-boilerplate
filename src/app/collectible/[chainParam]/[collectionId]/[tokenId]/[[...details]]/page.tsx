@@ -68,38 +68,6 @@ export default function Page() {
     contractAddress: collectionId,
   });
 
-  const connectors = useConnections();
-
-  // useEffect(() => {
-  //   const getYourActivity = async () => {
-  //     try {
-  //       const body = {
-  //         collectionAddress: '0x9365ffc890787a224aa9c8b18dd7e2d68ec88846',
-  //         currencyAddresses: ['0x6D7bFFEFbAd377940f286c4AA790fb5d6cadF685'],
-  //         orderbookContractAddress:
-  //           '0xB537a160472183f2150d42EB1c3DD6684A55f74c',
-  //         page: { sort: [{ column: 'createdAt', order: 'DESC' }] },
-  //         tokenIDs: ['4', '5', '6'],
-  //         userAddress: '0xd5C9D8b7ab0f624eAA6A5149d09cEB8B432452dc',
-  //       };
-
-  //       const response = await fetch(
-  //         'https://marketplace-api.sequence.app/toy-testnet/rpc/Marketplace/GetUserActivities',
-  //         {
-  //           method: 'POST',
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify(body),
-  //         },
-  //       );
-  //       const data: UserActivity[] = await response.json();
-  //       console.log(data);
-  //     } catch (error) {}
-  //   };
-  //   void getYourActivity();
-  // }, []);
-
   useEffect(() => {
     if (balancesData) {
       const balances = balancesData?.pages
