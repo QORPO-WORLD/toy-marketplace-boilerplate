@@ -36,6 +36,7 @@ export const Footer = () => {
         </div>
         <div>
           <a
+            className="opacity-50 pointer-events-none"
             href="https://hub.playontoy.com/"
             target="_blank"
             rel="noreferrer noopener"

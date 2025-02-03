@@ -16,11 +16,13 @@ import sequence from '../../../sequence/Sequence';
 import ActivityWrapper from './Activyty';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
+import { useAddFundsModal } from '@0xsequence/kit-checkout';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
 import {
   useListBalances,
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
+import '@0xsequence/waas';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -65,6 +67,7 @@ export const InventoryTabs = ({
   chainId,
   accountAddress,
 }: InventoryTabsProps) => {
+  const { triggerAddFunds: toggleAddFunds } = useAddFundsModal();
   const config = useMarketplaceConfig();
   const router = useRouter();
   const pathname = usePathname();
@@ -207,6 +210,28 @@ export const InventoryTabs = ({
               <ENSName address={accountAddress} truncateAt={6} />
             </Text>
           </InfoBox>
+          <div className="w-full flex justify-end items-center text-2xl gap-4 pr-4 opacity-50">
+            <button
+              className="bg-white p-2 px-4 text-[#E15975] rounded-[2.69rem]"
+              // onClick={() =>
+              //   toggleAddFunds({
+              //     walletAddress: recipientAddress,
+              //   })
+              // }
+            >
+              Deposit
+            </button>
+            <button
+              className="bg-white p-2 px-4 text-[#E15975] rounded-[2.69rem]"
+              // onClick={() =>
+              //   toggleAddFunds({
+              //     walletAddress: recipientAddress,
+              //   })
+              // }
+            >
+              withdraw
+            </button>
+          </div>
         </Grid.Root>
       )}
       <Grid.Root className="w-full grid-cols-2 grid-rows-2 gap-0 md:grid-cols-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-white bg-main-gradient backdrop-blur-[0.625rem] mt-[1rem] hover:z-10">
