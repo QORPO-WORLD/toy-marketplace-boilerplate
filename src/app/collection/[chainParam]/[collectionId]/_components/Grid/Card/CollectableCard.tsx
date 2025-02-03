@@ -7,6 +7,7 @@ import { Routes } from '~/lib/routes';
 
 import { Footer } from './Footer';
 import { TokenBalance } from '@0xsequence/indexer';
+import { useTokenMetadata } from '@0xsequence/kit';
 import type { Order } from '@0xsequence/marketplace-sdk';
 import { useCollectible } from '@0xsequence/marketplace-sdk/react';
 import Link from 'next/link';

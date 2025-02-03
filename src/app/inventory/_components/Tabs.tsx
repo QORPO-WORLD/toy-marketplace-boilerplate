@@ -7,23 +7,22 @@ import ENSName from '~/components/ENSName';
 import { InfoBox } from '~/components/InfoGrid';
 import { Spinner } from '~/components/Spinner';
 
-import { Button, Flex, Grid, Tabs, Text } from '$ui';
+import { Flex, Grid, Tabs, Text } from '$ui';
 import {
   getChainNamebySymbol,
-  getCurrencyByChainId,
   getCurrencyLogoByChainId,
 } from '../../../lib/utils/helpers';
 import sequence from '../../../sequence/Sequence';
+import ActivityWrapper from './Activyty';
 import { InventoryCollectiblesContent } from './InventoryCollectiblesContent';
 import { ContractType, type TokenBalance } from '@0xsequence/indexer';
 import { compareAddress } from '@0xsequence/marketplace-sdk';
 import {
-  useCurrency,
   useListBalances,
   useMarketplaceConfig,
 } from '@0xsequence/marketplace-sdk/react';
 import { useQuery } from '@tanstack/react-query';
-import { id } from 'ethers';
+import clsx from 'clsx';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useAccount, useBalance } from 'wagmi';
 
@@ -74,6 +73,7 @@ export const InventoryTabs = ({
   const { data: walletData } = useBalance({
     address,
   });
+  const [isActivity, setIsActivity] = useState(false);
 
   const { data } = useQuery<BalanceProps>({
     queryKey: ['qorpobalance', idToken],
@@ -82,6 +82,7 @@ export const InventoryTabs = ({
         (res) => res.json(),
       ),
     enabled: idToken !== null,
+    refetchInterval: 100000,
   });
 
   useEffect(() => {
@@ -100,7 +101,6 @@ export const InventoryTabs = ({
   }, [isConnected, address]);
 
   const currSearchParams = useSearchParams();
-  // Next is missing .set on the searchParams hook, so we need to recreate it
   const searchParams = new URLSearchParams(currSearchParams?.toString());
 
   const activeTab =
@@ -153,15 +153,6 @@ export const InventoryTabs = ({
   };
 
   const filteredCollecionBalances = filterCollecionBalances();
-  const tokenIDs = filteredCollecionBalances
-    .map((b) => b.tokenID)
-    .filter((id) => id !== undefined);
-
-  const totalCollections = filteredCollecionBalances.length;
-  const totalCollectibles = filteredCollecionBalances.reduce(
-    (p, c) => p + Number(c.balance),
-    0,
-  );
 
   return (
     <>
@@ -257,16 +248,36 @@ export const InventoryTabs = ({
         </InfoBox>
       </Grid.Root>
 
-      <div className="mt-4 px-4">
-        <ul className="flex gap-4 items-center">
-          <li className="bg-white text-main px-2 py-1 rounded-[1.25rem] uppercase font-DMSans font-bold">
-            <p>collected</p>
-          </li>
-          <li className="text-white uppercase font-DMSans opacity-40 font-bold">
-            <p>activity</p>
-          </li>
-        </ul>
-      </div>
+      {filteredCollecionBalances.length && (
+        <div className="mt-4 px-4">
+          <ul className="flex gap-4 items-center">
+            <li
+              className={clsx(
+                ' px-2 py-1 rounded-[1.25rem] uppercase font-DMSans font-bold cursor-pointer',
+                {
+                  'bg-white text-main': !isActivity,
+                  'text-white opacity-40': isActivity,
+                },
+              )}
+              onClick={() => setIsActivity(false)}
+            >
+              <p>collected</p>
+            </li>
+            <li
+              className={clsx(
+                ' px-2 py-1 rounded-[1.25rem] uppercase font-DMSans font-bold cursor-pointer',
+                {
+                  'bg-white text-main': isActivity,
+                  'text-white opacity-40': !isActivity,
+                },
+              )}
+              onClick={() => setIsActivity(true)}
+            >
+              <p>activity</p>
+            </li>
+          </ul>
+        </div>
+      )}
 
       <Tabs.Root
         orientation="horizontal"
@@ -283,9 +294,17 @@ export const InventoryTabs = ({
         <Tabs.Content value={inventoryTabsList.collectibles}>
           <Flex className="flex-col gap-4">
             {filteredCollecionBalances.length ? (
-              <InventoryCollectiblesContent
-                collectionBalances={filteredCollecionBalances}
-              />
+              isActivity ? (
+                <div className="max-w-[100vw] px-8 py-4 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] border border-white bg-[#574d5fcc] backdrop-blur-[0.625rem]">
+                  <ActivityWrapper
+                    filteredCollecionBalances={filteredCollecionBalances}
+                  />
+                </div>
+              ) : (
+                <InventoryCollectiblesContent
+                  collectionBalances={filteredCollecionBalances}
+                />
+              )
             ) : (
               <div className="max-w-[100vw] px-4 py-4 md:px-3 md:grid-rows-1 md:gap-8 rounded-[1.5625rem] min-h-[56dvh] border border-white bg-[#574d5fcc] backdrop-blur-[0.625rem] flex flex-col items-center justify-center">
                 <Text className="text-white text-center text-3xl">
@@ -296,12 +315,6 @@ export const InventoryTabs = ({
           </Flex>
         </Tabs.Content>
       </Tabs.Root>
-      {/* <Activity
-        chainId={chainId}
-        accountAddress={accountAddress}
-        tokenIDs={tokenIDs}
-
-      /> */}
     </>
   );
 };
