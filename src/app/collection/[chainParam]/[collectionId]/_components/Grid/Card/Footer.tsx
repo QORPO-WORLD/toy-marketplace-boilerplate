@@ -1,12 +1,9 @@
 import { Flex, Text, cn } from '~/components/ui';
 
 import { setMarketPlaceLogo } from '../../../../../../../lib/utils/helpers';
-import type { TokenMetadata } from '@0xsequence/indexer';
-import {
-  type Order as OrderType,
-  truncateMiddle,
-} from '@0xsequence/marketplace-sdk';
+import { type Order as OrderType } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
+import { TokenMetadata } from '@0xsequence/metadata';
 import Image from 'next/image';
 
 type FooterProps = {
@@ -15,7 +12,7 @@ type FooterProps = {
 };
 
 export const Footer = ({ tokenMetadata, order }: FooterProps) => {
-  const { tokenId, name } = tokenMetadata;
+  const { name } = tokenMetadata;
 
   const height = 'h-[1.5rem]';
   return (
