@@ -8,7 +8,10 @@ import { getChainId } from '~/lib/utils/getChain';
 import { filters$ } from '../_components/FilterStore';
 import { CollectiblesGrid } from '../_components/Grid';
 import { OrderSide } from '@0xsequence/marketplace-sdk';
-import { useListCollectibles } from '@0xsequence/marketplace-sdk/react';
+import {
+  useListCollectibles,
+  useListListingsForCollectible,
+} from '@0xsequence/marketplace-sdk/react';
 import { observer } from '@legendapp/state/react';
 import { useAccount } from 'wagmi';
 

@@ -102,8 +102,6 @@ export const CollectibleActionButton = ({
     | Record<NonNullable<OrderSide>, { label: string; onClick: () => void }>
     | undefined = undefined;
 
-  console.log('chainId', collectionChainId);
-
   orderTypes = {
     buy: {
       label: 'Buy',

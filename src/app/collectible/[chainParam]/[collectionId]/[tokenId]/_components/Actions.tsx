@@ -1,10 +1,7 @@
 'use client';
 
-import { env } from '~/env';
-
 import { Button, Flex, Text, toast } from '$ui';
 import { useCollectableData } from '../_hooks/useCollectableData';
-import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import {
   useBalanceOfCollectible,
   useBuyModal,
@@ -34,10 +31,6 @@ export const CollectibleTradeActions = ({
   const onError = (error: Error) => {
     toast.error(error.message);
   };
-  const { data: collectionDataOrder } = useFloorOrder({
-    chainId: String(chainId),
-    collectionAddress,
-  });
 
   const { show: showListModal } = useCreateListingModal({ onError });
   const { show: showOfferModal } = useMakeOfferModal({

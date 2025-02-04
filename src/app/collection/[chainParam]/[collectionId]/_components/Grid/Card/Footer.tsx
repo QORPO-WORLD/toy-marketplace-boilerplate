@@ -1,6 +1,9 @@
 import { Flex, Text, cn } from '~/components/ui';
 
-import { setMarketPlaceLogo } from '../../../../../../../lib/utils/helpers';
+import {
+  getCurrencyLogoByChainId,
+  setMarketPlaceLogo,
+} from '../../../../../../../lib/utils/helpers';
 import { type Order as OrderType } from '@0xsequence/marketplace-sdk';
 import { useCurrencies } from '@0xsequence/marketplace-sdk/react';
 import { TokenMetadata } from '@0xsequence/metadata';

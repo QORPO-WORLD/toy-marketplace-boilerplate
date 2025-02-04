@@ -26,7 +26,7 @@ const CollectionBuyPage = observer(({ params }: CollectionBuyPageParams) => {
     collectionAddress: collectionId,
     filter: {
       searchText: text,
-      includeEmpty,
+      includeEmpty: false,
       properties,
     },
     side: OrderSide.listing,

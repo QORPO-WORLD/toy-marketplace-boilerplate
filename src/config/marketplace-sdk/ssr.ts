@@ -12,6 +12,5 @@ export const ssrClient = () => {
     config: {
       ...config,
     },
-    queryClient: new QueryClient(),
   });
 };
