@@ -8,6 +8,7 @@ export const ssrClient = () => {
 
   return createSSRClient({
     cookie: headersList.get('cookie') || '',
+    queryClient: new QueryClient(),
     config: {
       ...config,
     },

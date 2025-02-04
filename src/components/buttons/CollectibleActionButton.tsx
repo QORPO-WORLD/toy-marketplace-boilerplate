@@ -3,7 +3,6 @@
 import { env } from '~/env';
 
 import { Button, toast } from '$ui';
-import { OrderbookKind } from '@0xsequence/marketplace-sdk';
 import {
   useBalanceOfCollectible,
   useBuyModal,
@@ -35,9 +34,6 @@ export const CollectibleActionButton = ({
   collectibleName,
   collectionChainId,
 }: CollectibleActionButtonProps) => {
-  const orderbookKind =
-    env.NEXT_PUBLIC_ORDERBOOK_KIND ||
-    (OrderbookKind.sequence_marketplace_v2 as OrderbookKind);
   const { address } = useAccount();
   const pathname = usePathname();
 
@@ -157,7 +153,6 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
-          orderbookKind: orderbookKind as OrderbookKind,
         });
       },
     },
@@ -168,7 +163,6 @@ export const CollectibleActionButton = ({
           collectionAddress,
           chainId: collectionChainId,
           collectibleId: tokenId,
-          orderbookKind: orderbookKind as OrderbookKind,
         });
       },
     },

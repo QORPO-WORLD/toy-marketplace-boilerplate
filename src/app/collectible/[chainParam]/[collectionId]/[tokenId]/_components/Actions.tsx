@@ -10,7 +10,7 @@ import {
   useBuyModal,
   useCreateListingModal,
   useCurrencies,
-  useFloorOrder,
+  useCurrencyOptions,
   useHighestOffer,
   useLowestListing,
   useMakeOfferModal,
@@ -31,9 +31,6 @@ export const CollectibleTradeActions = ({
   tokenId,
   collectionAddress,
 }: CollectibleTradeActionsProps) => {
-  const orderbookKind =
-    env.NEXT_PUBLIC_ORDERBOOK_KIND ||
-    (OrderbookKind.sequence_marketplace_v2 as OrderbookKind);
   const onError = (error: Error) => {
     toast.error(error.message);
   };
@@ -53,9 +50,12 @@ export const CollectibleTradeActions = ({
     },
     onError,
   });
-
+  const currencyOptions = useCurrencyOptions({
+    collectionAddress,
+  });
   const { data: currencies } = useCurrencies({
     chainId,
+    currencyOptions,
   });
 
   const currencyAddresses = currencies?.map((c) => c.contractAddress) || [];
@@ -132,7 +132,6 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
-      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 
@@ -141,7 +140,6 @@ export const CollectibleTradeActions = ({
       collectionAddress,
       chainId: String(chainId),
       collectibleId: tokenId,
-      orderbookKind: orderbookKind as OrderbookKind,
     });
   };
 
