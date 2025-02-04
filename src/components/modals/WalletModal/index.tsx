@@ -5,16 +5,7 @@ import { useState } from 'react';
 import ENSName from '~/components/ENSName';
 
 import { sequence } from '0xsequence';
-import {
-  Button,
-  CheckmarkIcon,
-  CopyIcon,
-  Dialog,
-  DisconnectIcon,
-  Flex,
-  Text,
-  WalletIcon,
-} from '$ui';
+import { Button, CheckmarkIcon, CopyIcon, Flex, Text, WalletIcon } from '$ui';
 import { useAccount, useDisconnect } from 'wagmi';
 
 export const WalletModalContent = () => {
