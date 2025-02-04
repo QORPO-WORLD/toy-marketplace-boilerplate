@@ -16,7 +16,7 @@ import '@0xsequence/marketplace-sdk/styles';
 import { enableReactComponents } from '@legendapp/state/config/enableReactComponents';
 import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { type State, WagmiProvider } from 'wagmi';
+import { Config, type State, WagmiProvider } from 'wagmi';
 
 const queryClient = getQueryClient();
 
@@ -49,7 +49,8 @@ export default function Providers({
     },
   };
 
-  const wagmiConfig = createWagmiConfig(
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment 
+  const wagmiConfig:Config = createWagmiConfig(
     marketplaceConfig,
     sdkConfig,
     !!sdkInitialState,
