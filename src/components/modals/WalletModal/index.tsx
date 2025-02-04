@@ -88,15 +88,14 @@ export const WalletModalContent = () => {
             Open Wallet
           </Button>
         )}
-        <Dialog.Close asChild>
-          <button
-            className="w-full justify-center bg-white text-[#DC5378] text-2xl font-main rounded-[2.6875rem] h-14 hover:opacity-70 transition-all transition-duration-200"
-            onClick={onDisconnectClick}
-          >
-            {/* <DisconnectIcon /> */}
-            Disconnect
-          </button>
-        </Dialog.Close>
+
+        <button
+          className="w-full justify-center bg-white text-[#DC5378] text-2xl font-main rounded-[2.6875rem] h-14 hover:opacity-70 transition-all transition-duration-200"
+          onClick={onDisconnectClick}
+        >
+          {/* <DisconnectIcon /> */}
+          Disconnect
+        </button>
       </Flex>
     </>
   );

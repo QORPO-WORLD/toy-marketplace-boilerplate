@@ -127,7 +127,7 @@ const CollectionSidebarContent = ({
           'h-full w-full flex-col gap-y-4',
         )}
       >
-        {filterSwitches.length ? (
+        {filterSwitches.length && !isBuy ? (
           <Flex className={'flex-col gap-3 p-3 pl-1'}>
             <Flex className="flex-col gap-2">
               {filterSwitches.map((f) => (

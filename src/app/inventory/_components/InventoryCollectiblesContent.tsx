@@ -88,12 +88,8 @@ const CollectionSection = ({
     }
   }, [collectionBalances]);
 
-  const findAssetBalance = (contractAddress: string) => {
-    return balancesData.find(
-      (c) =>
-        c.contractAddress.toLocaleLowerCase() ===
-        contractAddress.toLocaleLowerCase(),
-    );
+  const findAssetBalance = (tokenID: string) => {
+    return balancesData.find((c) => c.tokenID === tokenID);
   };
 
   const isGridView = true;
@@ -187,7 +183,8 @@ const CollectionSection = ({
             {collectibles.map((c) => {
               return isGridView ? (
                 <CollectibleCard
-                  balance={findAssetBalance(c.contractAddress)}
+                  key={c.tokenID}
+                  balance={findAssetBalance(c.tokenID!)}
                   isInventory
                   collectionAddress={collectionAddress as Hex}
                   tokenId={c.tokenID!}
@@ -247,34 +244,3 @@ const ContentWrapper = ({
   );
 };
 const InventoryRow = () => null;
-// TODO: Implement InventoryRow
-// {
-//   data,
-// }: {
-//   data: Exclude<CollectibleCardData, undefined | null>;
-// }) => {
-//   const badge = data.badges![0];
-//   return (
-//     <Flex className="justify-between border-b border-b-border py-3">
-//       <Flex className="gap-3">
-//         <PoolAvatar
-//           src={data.image || ''}
-//           name={data.name || ''}
-//           chainId={data.addToCartButtonProps?.addToCartData.item.chainId}
-//           tokenId={data.tokenId}
-//           link={data.link}
-//         />
-//         <Badge variant="muted" title={String(badge.title)}>
-//           {badge.label}:<span className="ml-1">{badge.value}</span>
-//         </Badge>
-//       </Flex>
-//       {data.addToCartButtonProps?.addToCartData && (
-//         <AddToCartButton
-//           isAvailable={true}
-//           addToCartData={data.addToCartButtonProps?.addToCartData}
-//           itemType={OrderItemType.TRANSFER}
-//         />
-//       )}
-//     </Flex>
-//   );
-// };
