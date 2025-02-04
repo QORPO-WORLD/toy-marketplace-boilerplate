@@ -132,6 +132,7 @@ export const InventoryTabs = ({
   }
 
   const balances = balancesData?.pages[0];
+
   const isEmptyInventory = !balances || balances.balances.length === 0;
 
   // collectible balances and counts

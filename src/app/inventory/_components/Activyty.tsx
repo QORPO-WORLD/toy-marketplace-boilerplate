@@ -3,15 +3,19 @@
 import { useFetchActivity } from '../../../hooks/utils/useActivity';
 import { TokenBalance, TokenMetadata } from '@0xsequence/indexer';
 import { useTokenMetadata } from '@0xsequence/kit';
+import { MarketplaceKind } from '@0xsequence/marketplace-sdk';
 import {
   useCollection,
   useListBalances,
-  useFloorOrder,
+  useCancelOrder,
+  useListListingsForCollectible,
 } from '@0xsequence/marketplace-sdk/react';
+import { useAccount } from 'wagmi';
 
 interface ActivityWrapperProps {
   filteredCollecionBalances: TokenBalance[];
 }
+
 function ActivityWrapper({ filteredCollecionBalances }: ActivityWrapperProps) {
   if (!filteredCollecionBalances.length) {
     return (
@@ -49,11 +53,6 @@ function Activity({ chainId, accountAddress, contractAddress }: TokenBalance) {
     chainId,
     accountAddress,
     contractAddress,
-  });
-
-  const { data: collectionMetadata } = useCollection({
-    chainId,
-    collectionAddress: `0x${contractAddress.replace(/^0x/, '')}`,
   });
 
   const tokenIDs = collectionBalances
@@ -97,7 +96,7 @@ function Activity({ chainId, accountAddress, contractAddress }: TokenBalance) {
 
   return (
     <>
-      {activityData?.orders.length &&
+      {/* {activityData?.orders.length &&
         activityData.orders.map((order) => (
           <tr
             className="font-DMSans border-t border-[#FFFFFF3A]"
@@ -120,13 +119,97 @@ function Activity({ chainId, accountAddress, contractAddress }: TokenBalance) {
             <td className="p-6 text-center">{order.quantity}</td>
             <td className=" p-6 text-center">{formatExpiry(order.expiry)}</td>
             <td className=" p-6 text-center">{order.orderStatus}</td>
+            <td className=" p-6 text-center">
+              <CancelListing
+                orderId={order.orderId}
+                chainId={chainId}
+                collectionAddress={contractAddress}
+                tokenId={order.tokenId}
+              />
+            </td>
           </tr>
+        ))} */}
+      {tokensMetadata?.length &&
+        tokensMetadata.map((asset) => (
+          <AssetList
+            key={asset.name}
+            tokenId={asset.tokenId}
+            chainId={chainId}
+            contractAddress={contractAddress}
+          />
         ))}
     </>
   );
 }
 
 export default ActivityWrapper;
+
+function AssetList({
+  tokenId,
+  chainId,
+  contractAddress,
+}: {
+  tokenId: string;
+  chainId: number;
+  contractAddress: string;
+}) {
+  const { address } = useAccount();
+  const { data: listings } = useListListingsForCollectible({
+    chainId: chainId + '',
+    collectionAddress: contractAddress,
+    collectibleId: tokenId,
+    filter: {
+      createdBy: [address + ''],
+    },
+  });
+  const { data: collectionMetadata } = useCollection({
+    chainId,
+    collectionAddress: `0x${contractAddress.replace(/^0x/, '')}`,
+  });
+
+  const { data: tokensMetadata } = useTokenMetadata(chainId, contractAddress, [
+    tokenId,
+  ]);
+
+  console.log(listings);
+  return (
+    <>
+      {listings?.listings.map((order) => (
+        <tr
+          className="font-DMSans border-t border-[#FFFFFF3A]"
+          key={order.tokenId}
+        >
+          <td className="p-6 flex items-center gap-4">
+            <p>{order.status}</p>
+            <AssetCard
+              collectionName={collectionMetadata?.name}
+              tokenMetadata={
+                tokensMetadata?.find(
+                  (token) => token.tokenId === order.tokenId,
+                ) as TokenMetadata
+              }
+            />
+          </td>
+          <td className=" p-6 text-center font-DMSans">
+            {order.priceAmountNetFormatted}
+          </td>
+          <td className="p-6 text-center">{order.quantityAvailable}</td>
+          <td className=" p-6 text-center">{order.validUntil}</td>
+          <td className=" p-6 text-center">{order.status}</td>
+          <td className=" p-6 text-center">
+            <CancelListing
+              orderId={order.orderId}
+              chainId={chainId}
+              collectionAddress={contractAddress}
+              tokenId={order.tokenId}
+              marketPlace={order.marketplace}
+            />
+          </td>
+        </tr>
+      ))}
+    </>
+  );
+}
 
 function AssetCard({
   tokenMetadata,
@@ -158,3 +241,32 @@ function AssetCard({
     </div>
   );
 }
+
+const CancelListing = ({
+  orderId,
+  chainId,
+  collectionAddress,
+  marketPlace,
+}: {
+  orderId: string;
+  chainId: number;
+  collectionAddress: string;
+  tokenId: string;
+  marketPlace: MarketplaceKind;
+}) => {
+  const { cancelOrder, isExecuting } = useCancelOrder({
+    collectionAddress,
+    chainId: chainId + '',
+  });
+
+  // const marketplace = listings?.pages[0].listings[0].marketplace;
+
+  return (
+    <button
+      className="py-2 px-4 rounded-[2.3rem] bg-main-gradient hover:opacity-80"
+      onClick={() => cancelOrder({ orderId, marketplace: marketPlace })}
+    >
+      {isExecuting ? 'Pending' : 'Cancel'}
+    </button>
+  );
+};

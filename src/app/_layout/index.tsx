@@ -1,6 +1,4 @@
-import { classNames } from '~/config/classNames';
-
-import { Grid, cn } from '$ui';
+import { Grid } from '$ui';
 import { Footer } from './Footer';
 import { Header } from './Header';
 

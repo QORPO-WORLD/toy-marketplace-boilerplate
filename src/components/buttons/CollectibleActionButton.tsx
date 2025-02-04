@@ -1,7 +1,5 @@
 'use client';
 
-import { env } from '~/env';
-
 import { Button, toast } from '$ui';
 import {
   useBalanceOfCollectible,
@@ -12,6 +10,7 @@ import {
   useMakeOfferModal,
   useSellModal,
   useTransferModal,
+  useCancelOrder,
 } from '@0xsequence/marketplace-sdk/react';
 import { usePathname } from 'next/navigation';
 import type { Hex } from 'viem';
